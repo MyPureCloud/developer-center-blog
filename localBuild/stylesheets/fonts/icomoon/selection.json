@@ -1,0 +1,113 @@
+{
+	"IcoMoonType": "selection",
+	"icons": [
+		{
+			"icon": {
+				"paths": [
+					"M749.714 457.143h365.714v91.429h-365.714v-91.429z",
+					"M749.714 201.143h365.714v91.429h-365.714v-91.429z",
+					"M621.714 201.143h-420.571v457.143h420.571v-457.143zM530.286 566.857h-237.714v-274.286h237.714v274.286z",
+					"M749.714 731.429h365.714v91.429h-365.714v-91.429z",
+					"M201.143 731.429h420.571v91.429h-420.571v-91.429z",
+					"M0 0v1024h1316.571v-1024h-1316.571zM1225.143 932.571h-1133.714v-841.143h1133.714v841.143z"
+				],
+				"attrs": [
+					{
+						"visibility": false
+					},
+					{
+						"visibility": false
+					},
+					{
+						"visibility": false
+					},
+					{
+						"visibility": false
+					},
+					{
+						"visibility": false
+					},
+					{
+						"visibility": false
+					}
+				],
+				"width": 1317,
+				"grid": 0,
+				"tags": [
+					"industry-insider-icon"
+				]
+			},
+			"attrs": [
+				{
+					"visibility": false
+				},
+				{
+					"visibility": false
+				},
+				{
+					"visibility": false
+				},
+				{
+					"visibility": false
+				},
+				{
+					"visibility": false
+				},
+				{
+					"visibility": false
+				}
+			],
+			"properties": {
+				"order": 1,
+				"id": 0,
+				"prevSize": 56,
+				"code": 58880,
+				"name": "industry-insider-icon"
+			},
+			"setIdx": 0,
+			"iconIdx": 0
+		}
+	],
+	"height": 1024,
+	"metadata": {
+		"name": "icomoon"
+	},
+	"preferences": {
+		"fontPref": {
+			"prefix": "icon-",
+			"metadata": {
+				"fontFamily": "icomoon"
+			},
+			"showGlyphs": true,
+			"metrics": {
+				"emSize": 1024,
+				"baseline": 6.25,
+				"whitespace": 50
+			},
+			"resetPoint": 58880,
+			"showQuickUse": true,
+			"quickUsageToken": false,
+			"showMetrics": true,
+			"showMetadata": false
+		},
+		"imagePref": {
+			"color": 0,
+			"height": 32,
+			"columns": 16,
+			"margin": 16,
+			"png": false,
+			"sprites": true,
+			"prefix": "icon-"
+		},
+		"historySize": 100,
+		"showCodes": true,
+		"gridSize": 16,
+		"showLiga": false,
+		"showGrid": true,
+		"showGlyphs": true,
+		"showQuickUse": true,
+		"showQuickUse2": true,
+		"showSVGs": true,
+		"search": ""
+	}
+}
