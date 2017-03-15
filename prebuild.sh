@@ -45,11 +45,4 @@ gem install ffi --platform=ruby
 
 bundle install
 
-npm cache clean
-npm install
-
-npm install -g bower
-
-bower install
-
 cd $WORKSPACE
