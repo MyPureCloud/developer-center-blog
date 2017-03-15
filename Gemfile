@@ -21,5 +21,9 @@ gem 'less'
 gem "colorize"
 gem "nokogiri"
 
+gem 'json'
+gem 'io-console'
+
+
 # For feed.xml.builder
 gem "builder", "~> 3.0"
