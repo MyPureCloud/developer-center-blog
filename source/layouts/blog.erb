@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+    <%= partial "partials/head" %>
+</head>
+
+<body class = 'single single-resources blog'>
+    <%= partial "partials/header" %>
+    <section class='main-content'>
+        <div class='container container-padding-none'>
+            <div class='col-md-3 pull-right'>
+                <aside class='sidebar'>
+
+                    <h3>Posts by Tag</h3>
+                    <%= tag_cloud %>
+                </aside>
+            </div>
+            <div class='col-md-9'>
+                <%if current_page.data.title != nil %>
+                <h1><%=current_page.data.title%></h1>
+
+                <% end %>
+                <%= yield %>
+
+                <%if current_page.data.author != nil %>
+                <!-- AddToAny BEGIN -->
+                <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+
+                    <a class="a2a_button_linkedin"></a>
+                    <a class="a2a_button_copy_link"></a>
+                    <a class="a2a_button_email"></a>
+                    <a class="a2a_button_twitter"></a>
+                    <a class="a2a_button_facebook"></a>
+                    <a class="a2a_button_google_plus"></a>
+                </div>
+                <script async src="https://static.addtoany.com/menu/page.js"></script>
+                <!-- AddToAny END -->
+                
+                <%= partial "partials/authorbio" %>
+                <%= lint_page(current_page) %>
+                <% end %>
+            </div>
+
+            <br class="clear">
+        </div>
+    </section>
+    <%= partial "partials/footer" %>
+</body>
+</html>

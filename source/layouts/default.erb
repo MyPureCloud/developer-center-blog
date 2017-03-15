@@ -1,0 +1,29 @@
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+    .content-panel-has-icon > img{
+        display:none;
+    }
+    </style>
+</head>
+  <body >
+      <div style='color: red;'>
+          This is the default layout, this means you are missing the repo developer-center-common as a sibling directory to developer-center.
+      </div>
+
+      <div class='container blog' >
+          <%if current_page.data.title != nil %>
+          <h1><%=current_page.data.title%></h1>
+          <% end %>
+
+          <%= yield %>
+
+          <%if current_page.data.author != nil %>
+          <%= partial "partials/authorbio" %>
+          <%= lint_page(current_page) %>
+          <% end %>
+      </div>
+
+  </body>
+</html>
