@@ -1,7 +1,7 @@
 ---
 pageable: true
 per_page: 10
-title: Developer Blog Index
+title: Blog
 
 ---
 <% if paginate && num_pages > 1 %>
@@ -30,6 +30,9 @@ title: Developer Blog Index
 
   <div class="pull-right">
   <ul class='taglist'>
+      <li>
+          <i class="fa fa-tag" aria-hidden="true"></i>
+      </li>
       <% article.tags.each do |tag| %>
       <li>
         <%= link_to tag, 'tags/' + tag + ".html" %>

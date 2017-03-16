@@ -24,8 +24,9 @@ else
 end
 
 set :relative_links, true
-
+set :is_sub_site, true
 helpers BlogHelpers
+
 
 
 ###
@@ -81,17 +82,6 @@ set :js_dir, "javascript"
 activate :asset_host, :host => ENV["CDN_URL"] || "/"
 
 page "/feed.xml", layout: false
-# Reload the browser automatically whenever files change
-# configure :development do
-#   activate :livereload
-# end
-
-# Methods defined in the helpers block are available in templates
-# helpers do
-#   def some_helper
-#     "Helping"
-#   end
-# end
 
 # Build-specific configuration
 configure :build do
