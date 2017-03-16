@@ -1,7 +1,7 @@
 ---
 title: Example Article
 tags: example
-date: 2050-01-01
+date: 2017-01-01
 author: kevin.glinski@genesys.com
 ---
 
