@@ -5,12 +5,17 @@
     .content-panel-has-icon > img{
         display:none;
     }
+
+    .author-image>img{
+            height:100px;
+            width:100px;
+            border-radius: 50%;
+            float:left;
+
+    }
     </style>
 </head>
   <body >
-      <div style='color: red;'>
-          This is the default layout, this means you are missing the repo developer-center-common as a sibling directory to developer-center.
-      </div>
 
       <div class='container blog' >
           <%if current_page.data.title != nil %>

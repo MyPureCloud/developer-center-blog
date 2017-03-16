@@ -3,7 +3,7 @@ require 'colorize'
 require 'lib/blog_helpers'
 
 commonDirectory = File.join(File.dirname(__FILE__), "..", 'developer-center-common')
-=begin
+
 if Dir.exists? commonDirectory
     files.watch :source, path: File.join(commonDirectory, "source")
     files.watch :data, path: File.join(commonDirectory, "data")
@@ -22,8 +22,6 @@ else
 
     page "*", :layout => :default
 end
-=end
-page "*", :layout => :default
 
 set :relative_links, true
 
