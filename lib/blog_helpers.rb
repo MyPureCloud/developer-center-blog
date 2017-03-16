@@ -19,7 +19,7 @@ module BlogHelpers
    def tag_cloud(options = {})
        [].tap do |html|
            TagCloud.new(options).render(blog.tags) do |tag, size, unit|
-               html << link_to(tag, tag_path(tag), style: "font-size: #{size}#{unit}")
+               html << link_to(tag, "/blog" + tag_path(tag), style: "font-size: #{size}#{unit}")
            end
        end.join(" ")
    end
