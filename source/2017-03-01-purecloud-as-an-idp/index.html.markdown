@@ -1,9 +1,10 @@
 ---
 title: PureCloud as an Identity Provider
-date: 2017-04-01
 tags: oauth, example, howwedoit
+date: 2017-03-01
 author: kevin.glinski@genesys.com
 ---
+
 
 If you use the internet today, you have probably logged into a web site using your Facebook or Google accounts even if that web site is completely unrelated to Facebook or Google. In this scenario the web site is using Facebook and Google as an identity provider to get your basic info in their system while also letting them handle securing your password and authenticating who you are. Through the OAuth login flow, PureCloud can also be used as an identity provider for external applications, in fact, we use it ourselves in the developer forum.
 

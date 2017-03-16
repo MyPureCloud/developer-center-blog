@@ -1,7 +1,7 @@
 ---
-title: Example Article
-date: 2012-01-01
+title: Example Article FFF
 tags: example
+date: 2017-01-01
 author: kevin.glinski@genesys.com
 ---
 

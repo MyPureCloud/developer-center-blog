@@ -3,7 +3,7 @@ require 'colorize'
 require 'lib/blog_helpers'
 
 commonDirectory = File.join(File.dirname(__FILE__), "..", 'developer-center-common')
-
+=begin
 if Dir.exists? commonDirectory
     files.watch :source, path: File.join(commonDirectory, "source")
     files.watch :data, path: File.join(commonDirectory, "data")
@@ -22,6 +22,8 @@ else
 
     page "*", :layout => :default
 end
+=end
+page "*", :layout => :default
 
 set :relative_links, true
 
@@ -40,6 +42,7 @@ page '/*.json', layout: false
 page '/*.txt', layout: false
 
 activate :syntax, :wrap => 'true'
+activate :directory_indexes
 
 # Proxy pages (http://middlemanapp.com/basics/dynamic-pages/)
 # proxy "/this-page-has-no-template.html", "/template-file.html", locals: {
@@ -47,11 +50,11 @@ activate :syntax, :wrap => 'true'
 
 activate :blog do |blog|
   # This will add a prefix to all links, template references and source paths
-  # blog.prefix = "blog"
+  #blog.prefix = "blog"
 
-  blog.permalink = "{year}/{month}/{day}/{title}/"
+  #blog.permalink = "blog/{year}/{month}/{day}/{title}/"
   # Matcher for blog source files
-  blog.sources = "/{year}-{month}-{day}-{title}/index.html"
+  blog.sources = "{year}-{month}-{day}-{title}/index.html"
   # blog.taglink = "tags/{tag}.html"
   # blog.layout = "layout"
   # blog.summary_separator = /(READMORE)/
@@ -59,7 +62,7 @@ activate :blog do |blog|
   # blog.year_link = "{year}.html"
   # blog.month_link = "{year}/{month}.html"
   # blog.day_link = "{year}/{month}/{day}.html"
-  # blog.default_extension = ".markdown"
+  #blog.default_extension = ".md"
 
   blog.tag_template = "tag.html"
   blog.calendar_template = "calendar.html"
