@@ -1,0 +1,22 @@
+<div class='article-details'>
+    <div class='row'>
+        <div class='col-md-3'>
+             by: <%= get_blog_author(current_page.data.author).name %>
+        </div>
+        <div class='col-md-3'>
+            <span><%= current_page.date.strftime('%B %e, %Y') %></span>
+        </div>
+
+    </div>
+    <ul class='taglist'>
+        <li>
+            <i class="fa fa-tag" aria-hidden="true"></i>
+        </li>
+        <% current_page.tags.each do |tag| %>
+        <li>
+          <%= link_to tag, '/blog/tags/' + tag + ".html" %>
+        </li>
+
+        <% end %>
+    </ul>
+</div>

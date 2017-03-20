@@ -28,42 +28,14 @@
                 <%if current_page.data.title != nil %>
                 <h1><%=current_page.data.title%></h1>
                 <% end %>
+
                 <%if current_page.data.author != nil %>
-                <div class='article-details'>
-                    <div class='row'>
-                        <div class='col-md-3'>
-                             by: <%= get_blog_author(current_page.data.author).name %>
-                        </div>
-                        <div class='col-md-3'>
-                            <span><%= current_page.date.strftime('%B %e, %Y') %></span>
-                        </div>
-
-                    </div>
-                    <ul class='taglist'>
-                        <li>
-                            <i class="fa fa-tag" aria-hidden="true"></i>
-                        </li>
-                        <% current_page.tags.each do |tag| %>
-                        <li>
-                          <%= link_to tag, '/blog/tags/' + tag + ".html" %>
-                        </li>
-
-                        <% end %>
-                    </ul>
-                </div>
-
-                <% end %>
-
+                <%= partial "partials/articlelayouthead"%>
                 <%= yield %>
-
-                <%if current_page.data.author != nil %>
-                <div class='share'>
-                    <%= partial "partials/share" %>
-                </div>
-
-                <%= partial "partials/authorbio" %>
-                <%= lint_page(current_page) %>
-                <% end %>
+                <%= partial "partials/articlelayoutfoot"%>
+                <%else %>
+                <%= yield %>
+                <%end%>
             </div>
 
             <br class="clear">

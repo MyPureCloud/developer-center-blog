@@ -1,0 +1,20 @@
+<div class='share'>
+    <%= partial "partials/share" %>
+</div>
+
+<%= partial "partials/authorbio" %>
+<%= lint_page(current_page) %>
+
+<%= current_page.url%>
+<div id='discourse-comments'></div>
+
+<script type="text/javascript">
+  DiscourseEmbed = { discourseUrl: 'https://developer.inindca.com/forum/',
+                     discourseEmbedUrl: 'https://developer.inindca.com/blog/<%= current_page.url%>' };
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+    d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+</script>
