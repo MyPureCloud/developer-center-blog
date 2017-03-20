@@ -13,20 +13,7 @@ is_root_page: true
 <% end %>
 
 <% page_articles.each_with_index do |article, i| %>
-  <h2><%= link_to article.title, article %></h2>
-  <div class='row'>
-      <div class='col-md-3'>
-           by: <%= get_blog_author(article.data.author).name %>
-      </div>
-      <div class='col-md-3'>
-          <span><%= article.date.strftime('%B %e, %Y') %></span>
-      </div>
-
-  </div>
-<p>
-<%= article.summary(250) %>
-</p>
-
+  <%= partial(:"partials/articlesummary", :locals=>{:article => article}) %>
 
   <div class="pull-right">
   <ul class='taglist'>
