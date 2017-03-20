@@ -25,6 +25,11 @@ end
 
 set :relative_links, true
 set :is_sub_site, true
+set :sub_site_nav_root, [{
+    :title => 'Blog',
+    :url => "/blog/"
+}]
+
 helpers BlogHelpers
 
 
