@@ -2,7 +2,7 @@ require "lib/tag_cloud"
 
 module BlogHelpers
     def _get_path(current_page)
-        "https://developer.mypurecloud.com/#{current_page.path}"
+        "https://developer.mypurecloud.com/blog#{current_page.url}"
     end
     def email_share_link(current_page)
         "mailto:?&subject=#{current_page.metadata[:page][:title]}&body=#{_get_path(current_page)}"
