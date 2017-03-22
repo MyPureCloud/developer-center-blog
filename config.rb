@@ -24,6 +24,7 @@ else
 end
 
 set :relative_links, true
+
 set :is_sub_site, true
 set :sub_site_nav_root, [{
     :title => 'Blog',
@@ -44,6 +45,7 @@ helpers BlogHelpers
 page '/*.xml', layout: false
 page '/*.json', layout: false
 page '/*.txt', layout: false
+page '/javascript/search.js', layout: false
 
 activate :syntax, :wrap => 'true'
 activate :directory_indexes

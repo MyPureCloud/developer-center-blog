@@ -1,0 +1,23 @@
+---
+layout: false
+directory_index: false
+notoc: true
+---
+[
+<%
+pages = get_search_index_pages(sitemap)
+%>
+<% pages.each do |p| %>
+    {
+        "title": "<%= p.data.title %>",
+        "url": "<%=p.url.gsub('/index.html','')%>",
+        "content" : "<%= strip_tags(get_page_content_for_search(p.source_file))%>",
+        "type" : "blog"
+    },
+<% end %>
+    {
+        "title": "",
+        "url": "",
+        "content" : ""
+    }
+]
