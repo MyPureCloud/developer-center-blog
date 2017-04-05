@@ -30,6 +30,7 @@ set :sub_site_nav_root, [{
     :title => 'Blog',
     :url => "/blog/"
 }]
+set :is_blog, true
 
 helpers BlogHelpers
 
@@ -83,7 +84,7 @@ configure :development do
   activate :livereload
 end
 
-set :build_dir, 'localBuild'
+set :build_dir, 'localBuild/blog'
 set :js_dir, "javascript"
 
 activate :asset_host, :host => ENV["CDN_URL"] || "/"

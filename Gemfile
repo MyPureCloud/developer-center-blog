@@ -22,7 +22,7 @@ gem "colorize"
 gem "nokogiri"
 
 gem 'json'
-gem 'io-console'
+gem 'io-console', '>=0.4.6'
 
 
 # For feed.xml.builder
