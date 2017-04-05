@@ -2,7 +2,7 @@ require 'less'
 require 'colorize'
 require 'lib/blog_helpers'
 
-commonDirectory = File.join(File.dirname(__FILE__), "..", 'developer-center-common')
+commonDirectory = File.join(File.dirname(__FILE__), "..", 'developer-center-commonX')
 
 if Dir.exists? commonDirectory
     files.watch :source, path: File.join(commonDirectory, "source")
