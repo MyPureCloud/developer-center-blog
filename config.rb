@@ -88,7 +88,7 @@ set :build_dir, 'localBuild/blog'
 set :js_dir, "javascript"
 
 if ENV["CDN_URL"]
-    activate :asset_host, :host => ENV["CDN_URL"] + 'blog/'
+    activate :asset_host, :host => ENV["CDN_URL"] + '/blog/'
 else
     activate :asset_host, :host => "/"
 end
