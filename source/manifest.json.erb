@@ -3,7 +3,7 @@ layout: false
 directory_index: false
 notoc: true
 ---
-<% pages = sitemap.resources.find_all{|p| !p.is_a?(Middleman::Sitemap::Extensions::RedirectResource) && p.source_file.match(/\.html/) && !p.data.sitemap_noindex == true } %>
+<% pages = sitemap.resources.find_all{|p| !p.is_a?(Middleman::Sitemap::Extensions::RedirectResource) && p.source_file.match(/\.html/) && !p.source_file.match(/stylesheets/) && !p.data.sitemap_noindex == true } %>
 {
     "name": "developercenter-blog",
     "version": <%=ENV['BUILD_NUMBER']%>,
