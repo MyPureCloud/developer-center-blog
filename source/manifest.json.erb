@@ -6,7 +6,7 @@ notoc: true
 <% pages = sitemap.resources.find_all{|p| !p.is_a?(Middleman::Sitemap::Extensions::RedirectResource) &&
     p.source_file.match(/\.html/) &&
     !p.source_file.match(/stylesheets/) &&
-    !p.source_file.match(/vendor/) && 
+    !p.source_file.match(/vendor/) &&
     !p.data.sitemap_noindex == true } %>
 {
     "name": "developercenter-blog",
@@ -19,7 +19,7 @@ notoc: true
         },
         <% end %>
         {
-            "url": "/developercenter-sdk/blog/atom.xml",
+            "url": "/developercenter-blog/blog/atom.xml",
             "file": "atom.xml"
         }
     ]
