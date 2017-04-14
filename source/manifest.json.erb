@@ -10,17 +10,16 @@ notoc: true
     !p.data.sitemap_noindex == true } %>
 {
     "name": "developercenter-blog",
-    "version": <%=ENV['BUILD_NUMBER']%>,
+    "version": "<%=ENV['BUILD_NUMBER']%>",
+    "buildNumber": "<%=ENV['BUILD_NUMBER']%>",
     "indexFiles": [
         <% pages.each do |p| %>
         {
-            "url": "/developercenter-blog/blog/<%=p.destination_path%>",
-            "file":  "/<%=p.path%>"
+            "file":  "blog/<%=p.path%>"
         },
         <% end %>
         {
-            "url": "/developercenter-blog/blog/atom.xml",
-            "file": "atom.xml"
+            "file": "blog/atom.xml"
         }
     ]
 }
