@@ -13,21 +13,21 @@ task :default do
     }
 
     if ENV['BUILD_NUMBER'] != nil
-        manifest[:version] = ENV['BUILD_NUMBER'].to_s
-        manifest[:buildNumber] = ENV['BUILD_NUMBER'].to_s
+        manifest["version"] = ENV['BUILD_NUMBER'].to_s
+        manifest["buildNumber"] = ENV['BUILD_NUMBER'].to_s
     end
 
     indexFiles.each do |file|
-        manifest[:indexFiles].push( {
+        manifest["indexFiles"].push( {
             "file" => file
         })
     end
 
-    manifest[:indexFiles].push({
+    manifest["indexFiles"].push({
         "file"=> "blog/atom.xml"
     })
 
-    manifest[:indexFiles].push({
+    manifest["indexFiles"].push({
         "file"=> "blog/cdn.json"
     })
 
