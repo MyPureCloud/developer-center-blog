@@ -1,0 +1,35 @@
+require 'json'
+task :default do
+    status = system("bundle exec middleman build")
+    indexFiles = Dir.glob("localBuild/**/*").map { |x| x.sub('localBuild/', '') }.select do |file|
+        file.include?("html") && !file.include?('stylesheets') && !file.include?('vendor')
+    end
+
+    manifest = {
+        "name": "developercenter-blog",
+        "version": "",
+        "buildNumber": "",
+        "indexFiles": []
+    }
+
+    if ENV['BUILD_NUMBER'] != nil
+        manifest[:version] = ENV['BUILD_NUMBER'].to_s
+        manifest[:buildNumber] = ENV['BUILD_NUMBER'].to_s
+    end
+
+    indexFiles.each do |file|
+        manifest[:indexFiles].push( {
+            "file" => file
+        })
+    end
+
+    manifest[:indexFiles].push({
+        "file": "blog/atom.xml"
+    })
+
+    manifest[:indexFiles].push({
+        "file": "blog/cdn.json"
+    })
+
+    File.open("localBuild/manifest.json", 'w') { |file| file.write(manifest.to_json) }
+end

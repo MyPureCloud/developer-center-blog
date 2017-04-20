@@ -21,7 +21,7 @@ gem 'less'
 gem "colorize"
 gem "nokogiri"
 
-gem 'json'
+gem 'json', '1.8.6'
 gem 'io-console', '>=0.4.6'
 
 
