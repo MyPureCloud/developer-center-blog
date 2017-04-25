@@ -32,7 +32,7 @@ author: joe@example.com
 Where
 
 Parameter | Description
-========= | ===========
+--------- | -----------
 title     | Article title
 date      | YYYY-MM-DD formatted date, this date should match the date specified in the containing folder
 tags      | comma separated list of tags that apply to the article
@@ -43,14 +43,16 @@ author    | The email address of the author
 
 Author bios are injected to the bottom of the analytics page.  To add your author bio, edit data/authors.yml the valid properties that you can use are.
 
-Parameter | Description
-========= | ===========
-email     | (required) Email address of the author
-name      | (required) Author name
-title     | (optional) Job title of the author
-company   | (optional) Company of the author
-twitter   | (optional) Author's twitter handle (exclude the @)
-bio       | (required) Author bio describing who they are and what qualifications they have to be a SME.
+
+| Parameter | Description |
+| --------- | -----------|
+| email     | (required) Email address of the author |
+| name      | (required) Author name |
+| title     | (optional) Job title of the author |
+| company   | (optional) Company of the author |
+| twitter   | (optional) Author's twitter handle (exclude the @) |
+| bio       | (required) Author bio describing who they are and what qualifications they have to be a SME. |
+
 
 ## Running locally
 
