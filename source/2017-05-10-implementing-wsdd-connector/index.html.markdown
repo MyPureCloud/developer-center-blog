@@ -5,7 +5,7 @@ tags: bridge, wsdd, connector, integration
 author: tim.j.smith@genesys.com
 ---
 
-The Web Services Data Dip (WSDD) connector integrates your interactive voice response (IVR) system with a web service that you create that implements the web services data dip connector API. Your web service can call any third-party system that stores data, such as a customer relationship management (CRM) database. This blog post will cover implementing both standard and custom WSDD operations in a node.js web service.
+The Web Services Data Dip (WSDD) connector integrates your interaction flows (voice IVRs, scripts, and future implementations) with a web service that you create that implements the web services data dip connector API. Your web service can call any third-party system that stores data, such as a customer relationship management (CRM) database. This blog post will cover implementing both standard and custom WSDD operations in a node.js web service.
 
 ## Resources
 
@@ -19,7 +19,7 @@ The Web Services Data Dip (WSDD) connector integrates your interactive voice res
 
 ### Reading Materials
 
-Take a look through this documentation to complete the necessary setup of your bridge server. This blog post is intended to supplement the existing product documentation.
+Take a look through these documentation pages to complete the necessary setup of your bridge server. This blog post is intended to supplement the existing product documentation.
 
 * [How the WSDD connector works](https://help.mypurecloud.com/articles/how-web-services-data-dip-connector-works-web-service/)
 * [Jargon you should understand](https://help.mypurecloud.com/articles/concepts-web-services-data-dip-connector/)
@@ -34,7 +34,7 @@ Take a look through this documentation to complete the necessary setup of your b
 
 ## WSDD Implementation
 
-I'm assuming that you have a bridge server up and running at this point with a server and connector up and running (we'll get to the actions later). If not, go back to the reading materials above and do that now.
+I'm assuming that you have a bridge server up and running at this point with a server and connector up and running, but no actions configured. If not, go back to the reading materials above and do that now.
 
 Let's get started building an integration!
 
@@ -42,7 +42,7 @@ Let's get started building an integration!
 
 First, let's make sure we're on the same page with _what_ we're building. 
 
-When a caller is in your IVR and hits a Bridge Action, PureCloud makes a request to your bridge server. Your bridge server's WSDD connector inspects its configuration for the requested action and executes a REST request to the action's configured endpoint. That request will be handled by the service we're about to build. The service will process the request and send a response back to the bridge server, which will return the response to the IVR to continue processing the flow.
+When a customer is being processed through an interaction flow and hits a Bridge Action, PureCloud makes a request to your bridge server. Your bridge server's WSDD connector inspects its configuration for the requested action and executes a REST request to the action's configured endpoint. That request will be handled by the service we're about to build. The service will process the request and send a response back to the bridge server, which will return the response to the interaction flow to continue processing.
 
 The service that implements the action is responsible for intrepreting the request, interfacing with external systems (REST/SOAP web services, database queries, etc.), applying any necessary business logic, and returning a result consistent with the defined response contract for the action.
 
@@ -198,6 +198,6 @@ Standard request/response schemas are [documented on the dev center](https://dev
 
 ### Error handling
 
-The integration service must determine how to handle errors as well as what response to send when data is not found. It is important to understand that error information sent in a response that's anything other than 200 will not be usable by the action's consumer; non-200 responses will simply cause the failure condition to be taken and no error information is made available to the action's consumer.  However, there will be some infomration in the [Bridge Server logs](https://help.mypurecloud.com/articles/troubleshoot-web-services-data-dip-connector/) when the service sends non-200 responses that may be useful for troubleshooting failures. The examples take this approach of sending non-200 responses and failure is handled generically in Architect.
+The integration service must determine how to handle errors as well as what response to send when data is not found. It is important to understand that error information sent in a response that's anything other than 200 will not be usable by the interaction flow consuming the action; non-200 responses will simply cause the failure condition to be taken and context for the failure will be lost.  However, there will be some infomration in the [Bridge Server logs](https://help.mypurecloud.com/articles/troubleshoot-web-services-data-dip-connector/) when the service sends non-200 responses that may be useful for troubleshooting failures. The examples take this approach of sending non-200 responses and failure is handled generically in the interaction flow.
 
-An alternate approach is to define a custom contract with extra properties that can be evaluated to determine if the response was successful and if it contains data or not. This could be done by adding a boolean property for `hasError`, a string property for `errorMessage`, an integer property for `errorCode`, or any other failure data that you would find useful for the action's consumer to know. An example of how to use this would be for Architect to process the successful response with a condition to check for `errorCode == 0` and take error handling actions for the caller if the condition is false.
+An alternate approach is to define a custom contract with extra properties that can be evaluated to determine if the response was successful and if it contains data or not. This could be done by adding a boolean property for `hasError`, a string property for `errorMessage`, an integer property for `errorCode`, or any other failure data that you would find useful for the interaction flow consuming the action to know. An example of how to use this would be to process the successful response with a condition to check for `errorCode == 0` and take error handling actions for the caller if the condition is false.
