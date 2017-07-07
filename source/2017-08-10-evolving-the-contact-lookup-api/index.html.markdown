@@ -93,7 +93,7 @@ Evolving the contact lookup endpoint has been really instructive in several ways
     - Had the changes to the mid-tier required major changes for API consumers, we probably wouldn't have done them.  Putting a unifying layer between changes to backend services frees us to iterate much more quickly than we otherwise would be able.
 
 - **Purpose built solutions tend to work better than general purpose ones**
-  - Elasticsearch certainly has the feature set to satisfy the need, but isn't really what it was built for. Adding a purpose built solution designed around a particular access patterns and requirements gives a lot more flexibility now and in the future.
+  - Elasticsearch certainly has the feature set to satisfy the need, but isn't really what it was built for. Adding a purpose built solution designed around a particular access pattern and set of requirements gives a lot more flexibility now and in the future.
 
 - **Security, privacy, and compliance make everything harder - so do it up front**
   - There is no way around it, if your product fails in the area of security, it won't be a product for very long. The final implementation required security considerations to be addressed up front and the success really hinged on us doing it correctly.
