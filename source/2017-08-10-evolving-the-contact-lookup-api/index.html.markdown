@@ -19,7 +19,7 @@ One of the most fundamental questions of any customer interactions is: "Which cu
   - PureCloud takes privacy and compliance very seriously, and this feature was no different
 
 - **Eventual consistency is tolerable**
-  - A few hundred milliseconds lag between a contact update and a them appearing in the lookups API is reasonable
+  - A few hundred milliseconds lag between a contact update and them appearing in the lookups API is reasonable
 
 ---
 
@@ -63,11 +63,13 @@ PureCloud is platform composed of dozens of internal microservices behind a unif
 
 **Answer**: no.
 
-**Reason**: encryption.
+**Why?**: encryption.
 
 As mentioned above, security, privacy, and compliance are very important to us, and to meet these needs, all contact data is encrypted in code as a big blob prior to being stored in DynamoDB. Doing this is great for security, but makes it impossible to create meaningful indexes on that contact data. Our solution was to create a second table that can be updated asynchronously, just like Elasticsearch, but geared toward high volume, key-based lookups. Just like any other contact data, we couldn't simply store the raw values as hash keys or range keys. Solution? Our old pal hashing.
 
-If you have ever securely stored user passwords, you're familiar with hashing, it's a one-way cryptographic transformation of some data. In this case the we create a compound key of the identifier (phone number, email address, etc) and the organization id, apply the SHA-256 hashing algorithm and base64 encode the result. The resultant string is the hash key for our table, with the range key being the entity id. At lookup time, the same hash algorithm is applied to the value being looked up, and voila, we have a nice O(1) cost to lookup our contact.
+If you have ever securely stored user passwords, you're familiar with hashing, it's a one-way cryptographic transformation of some data. In this case we create a compound key of the identifier (phone number, email address, etc) and the organization id, apply the SHA-256 hashing algorithm and base64 encode the result. The resultant string is the hash key for our table, with the range key being the entity id. At lookup time, the same hash algorithm is applied to the value being looked up, and voila, we have a nice O(1) cost to lookup our contact.
+
+Fantastic, right?  We have a fast, scalable, reliable contact lookup mechanism.  What could go wrong?
 
 ---
 
@@ -77,7 +79,7 @@ If you have ever securely stored user passwords, you're familiar with hashing, i
 
 Anybody can have a bad day, including DynamoDB, and in PureCloud we plan for them. With two proven implementations, why not fall back to the Elasticsearch version if DynamoDB isn't feeling well?  In practice, failures talking to DynamoDB are most frequently due to throttling when we exceed our provisioned throughput on a given table. PureCloud uses the open source project called [Dynamic DyanamoDB](https://dynamic-dynamodb.readthedocs.io) which monitors the consumed and provisioned capacity and automatically adjusts provisioning accordingly. This project has been a life saver (and a $$$ saver) by helping us keep high utilization on our tables and ensuring we have enough headroom for an increase in traffic. Increasing capacity however has a somewhat delayed reaction and can't react quickly to sudden spikes in traffic. This is where our Elasticsearch fallback comes into play.
 
-In the case of sudden spike in traffic that exhausts our provisioned capacity, some of the requests to DynamoDB will fail. Using a project called [Hystrix](https://github.com/Netflix/Hystrix) created by [Netflix](https://github.com/Netflix), we can fail over traffic to Elasticsearch as a stop-gap while additional DynamoDB capacity is coming online. Hystrix is a fantastic project that provides bulk heading, circuit breakers, and retries for handling failures gracefully and predictably. PureCloud uses them extensively to fallback and recover, and limits the cascade of failures to other parts of the system.
+In the case of sudden spike in traffic that exhausts our provisioned capacity, some of the requests to DynamoDB will fail. Using a project called [Hystrix](https://github.com/Netflix/Hystrix) created by [Netflix](https://github.com/Netflix), we can fail over traffic to Elasticsearch as a stop-gap while additional DynamoDB capacity is coming online. Hystrix is a fantastic project that provides bulk heading, circuit breakers, and retries for handling failures gracefully and predictably. PureCloud uses this library extensively to fallback and recover, which helps limit the cascade of failures to other parts of the system.
 
 ---
 
@@ -101,4 +103,4 @@ Evolving the contact lookup endpoint has been really instructive in several ways
 - **Graceful fallback requires work, but not as much as you might be afraid of**
   - Our situation was somewhat unique in that we could still return accurate results in the face of a failure, but there are often scenarios where there are options to return partial results, results from a stale cache or intelligent defaults rather than fail outright. Using a project like Hystrix provides a great framework for handling and recovering from failures.
 
-I hope you have enjoyed this little peek behind the scenes to see how the sausage got made!
+I hope you have enjoyed this little peek behind the scenes to see how the sausage got made!  Go check out all the external contact APIs [here](https://developer.mypurecloud.com/api/rest/v2/externalcontacts/index.html).
