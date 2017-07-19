@@ -1,6 +1,6 @@
 ---
 title: Evolving the contact lookup API
-date: 2017-08-10
+date: 2017-07-19
 tags: contacts
 author: aaron.bickell@genesys.com
 ---
