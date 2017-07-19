@@ -34,7 +34,7 @@ Where
 Parameter | Description
 --------- | -----------
 title     | Article title
-date      | YYYY-MM-DD formatted date, this date should match the date specified in the containing folder
+date      | YYYY-MM-DD formatted date, this date should match the date specified in the containing folder. This should be the current date or earlier.
 tags      | comma separated list of tags that apply to the article
 author    | The email address of the author
 
