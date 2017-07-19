@@ -11,7 +11,7 @@ This is the repository that contains the content for blogs located at https://de
 5) Run locally to make sure formatting looks correct (Optional but recommended)
 6) Submit a pull request back to origin master
 
-# Content Guidelines
+## Content Guidelines
 
 * Blog posts must be related to PureCloud in some way
 * No private/sensitive/NDA-required information; All content will be visible publicly on the internet.
