@@ -11,6 +11,14 @@ This is the repository that contains the content for blogs located at https://de
 5) Run locally to make sure formatting looks correct (Optional but recommended)
 6) Submit a pull request back to origin master
 
+# Content Guidelines
+
+* Blog posts must be related to PureCloud in some way
+* No private/sensitive/NDA-required information; All content will be visible publicly on the internet.
+* The target audience for the blog is prospective and existing PureCloud customers with an entry-level to expert technical background. All blog posts should be at least somewhat technical in nature.
+* If appropriate, try to include 1-3 images to make the blog post more visually appealing.
+* Keep it professional; lighthearted humor is fine, but no cursing, politics, or NSFW content.
+
 ## Markdown tips
 
 * Don't use h1 headers in your article, the title is inserted as a h1 and any section headers below that should start at h2 (markdown ##)
