@@ -11,12 +11,12 @@ The PureCloud shares the data through the API. Because we are a real cloud and m
 
 ![diagram](diagram.png)
 
-## Installation
+### Installation
 In order to install the PCSD go to the [download page](https://bitbucket.org/eccemea/purecloud-stats-dispatcher/downloads/) and get the latest version of the application. Then execute the MSI installer and follow installation steps.
 
 ![installer](installer.png)
 
-## oAuth configuration
+### oAuth configuration
 PureCloud Stats Dispatcher connects to the system using oAuth integration. It means that in prior to first usage you have login to your PureCloud organisation and configure an oAuth app. To do this follow below steps:
 
 * Login to PureCloud using administrative credentials.
@@ -32,7 +32,7 @@ PureCloud Stats Dispatcher connects to the system using oAuth integration. It me
 
 ![oauth](oauth.png)
 
-## Export data to CSV
+### Export data to CSV
 
 To export the data to CSV file you have to execute PCSD.exe application with following command prompt parameters:
 
@@ -47,7 +47,7 @@ Sample command:
 "C:\Program Files (x86)\Genesys\PureCloud Stats Dispatcher\PCSD.exe" /clientid=989898 /clientsecret=767676 /environment=mypurecloud.ie /target-csv="c:\temp\output.csv"
 ```
 
-## Export data to SQL Server
+### Export data to SQL Server
 
 To export the data to SQL Server you have to execute PCSD.exe application with following command prompt parameters:
 
@@ -62,10 +62,10 @@ Sample command:
 "C:\Program Files (x86)\Genesys\PureCloud Stats Dispatcher\PCSD.exe" /clientid=989898 /clientsecret=767676 /environment=mypurecloud.ie /target-sql="Server=SQL0001; Database=PureCloudDb; User Id=sa; Password=p@ssw0rd”
 ```
 
-## Periodically exports
+### Periodically exports
 We have designed the PCSD as a console application. You can use it on an ad hoc basis as well as schedule periodically exports, for instance by adopting the Windows Task Scheduler. PureCloud Stats Dispatcher remembers the finishing date and time of last export and use it as a default start time of the next process. So, consecutive PCSD launching gives you continuity of data in the database.
 
-# Learn more
+## Learn more
 [PCSD project page](https://bitbucket.org/eccemea/purecloud-stats-dispatcher/overview)
 
 [PCSD download page](https://bitbucket.org/eccemea/purecloud-stats-dispatcher/downloads/)
