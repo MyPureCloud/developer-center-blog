@@ -32,7 +32,7 @@ The first thing we do in our authentication plugin is to register with Discourse
   end
 ~~~
 
-While this code is very specific to Discourse, the important parts are that we are telling Discourse the PureCloud login urls and the OAuth client id and secret.  When users click the "Login with PureCloud" button, Discourse uses these settings to redirect to PureCloud for the user's authentication.  A similar strategy will be required for your application, but the concept is the same, when a user wishes to login, redirect them to PureCloud for them to provide their credentials.
+While this code is very specific to Discourse, the important parts are that we are telling Discourse the PureCloud login urls and the OAuth client id and secret.  When users click the "Login with PureCloud" button, Discourse uses these settings to redirect to PureCloud for the user's authentication.  A similar strategy will be required for your application, but the concept is the same, when a user wishes to login, redirect them to PureCloud for them to provide their credentials. It should be noted that in the forum we support PureCloud logins from all global PureCloud regions, so in our code we will have a provider for each region, with its own client id, secret and login url. 
 
 After the user logs in through PureCloud, they will be redirected back to your application. At this point you will need to get the basic information about that PureCloud user to associate them with your system.  In Discourse it looks like this.
 
@@ -87,7 +87,7 @@ def after_authenticate(auth)
 
 In this method the result.user object is going to contain the Discourse user that is logging in.  If that property is null then Discourse will create a new user based on the metadata that we are supplying on the result object.
 
-There is one line here that is important to note and it is _result.email_valid = false_.  Here we are telling Discourse that it still needs to validate the user's email. At this time PureCloud does not validate email address, so it is possible for anyone to create a user with any email in their PureCloud org.  Therefore we don't trust the email that is returned back to us and require Discourse to validate the email to activate that user.
+There is one line here that is important to note and it is _result.email_valid = false_.  Here we are telling Discourse that it still needs to validate the user's email. At this time PureCloud does not validate email addresses, so it is possible for anyone to create a user with any email in their PureCloud org.  Therefore we don't trust the email that is returned back to us and require Discourse to validate the email to activate that user.
 
 Now we can lookup users using their PureCloud user Id
 
