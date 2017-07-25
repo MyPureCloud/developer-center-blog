@@ -54,7 +54,7 @@ def fetch_user_details(token)
   end
 ~~~
 
-At this point, Discourse handled the authentication flow to get the bearer token.  Using that token, we will make a call to the _/api/v2/users/me?expand=organization_ route in PureCloud.  The _expand=organization_ will tell PureCloud to return details on the user's org with the response.  Org Id can be used to validate that specific PureCloud orgs do or do not have access to your app.  In our case with Discourse, we use it to check if the org in our production Genesys org to know if the person logging in is a Genesys employee.
+At this point, Discourse handled the authentication flow to get the bearer token.  Using that token, we will make a call to the _/api/v2/users/me?expand=organization_ route in PureCloud.  The _expand=organization_ will tell PureCloud to return details on the user's org with the response.  Org Id can be used to validate that specific PureCloud orgs do or do not have access to your app.  In our case with Discourse we use it to check if the org is our production Genesys org to know if the person logging in is a Genesys employee.
 
 The last step in our login process is to map the PureCloud user to a user in Discourse.
 
@@ -111,5 +111,5 @@ and this code just setups up the mapping between the PureCloud and the Discourse
 There are the basics of how we use PureCloud as an identity provider in the Developer Center forum. When using PureCloud for an identity provider in your own solution there are a couple things to consider:
 
 1. How will you map the PureCloud user to the user in your system?   
-2. Do you need to validate the user's PureCloud, or do you not need it at all?
-3.
+2. Do you need to validate the user's PureCloud org to see if they have purchased the product they are logging into?
+3. How will you handle international support? There are multiple PureCloud regions that customers can be in, if your app is global then you will need to handle the login flows for each region. 
