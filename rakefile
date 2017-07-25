@@ -31,5 +31,13 @@ task :default do
         "file"=> "blog/cdn.json"
     })
 
+    manifest["indexFiles"].push({
+        "file"=> "blog/icon.png"
+    })
+
+    manifest["indexFiles"].push({
+        "file"=> "blog/image.png"
+    })
+
     File.open("localBuild/manifest.json", 'w') { |file| file.write(manifest.to_json) }
 end
