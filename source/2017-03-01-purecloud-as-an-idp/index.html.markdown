@@ -106,7 +106,7 @@ def after_create_account(user, auth)
 end
 ~~~
 
-and this code just setups up the mapping between the PureCloud and the Discourse user.  
+and this code just sets up the mapping between the PureCloud and the Discourse user.  
 
 There are the basics of how we use PureCloud as an identity provider in the Developer Center forum. When using PureCloud for an identity provider in your own solution there are a couple things to consider:
 
