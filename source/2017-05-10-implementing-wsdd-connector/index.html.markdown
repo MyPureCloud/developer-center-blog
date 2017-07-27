@@ -44,7 +44,7 @@ First, let's make sure we're on the same page with _what_ we're building.
 
 When a customer is being processed through an interaction flow and hits a Bridge Action, PureCloud makes a request to your bridge server. Your bridge server's WSDD connector inspects its configuration for the requested action and executes a REST request to the action's configured endpoint. That request will be handled by the service we're about to build. The service will process the request and send a response back to the bridge server, which will return the response to the interaction flow to continue processing.
 
-The service that implements the action is responsible for intrepreting the request, interfacing with external systems (REST/SOAP web services, database queries, etc.), applying any necessary business logic, and returning a result consistent with the defined response contract for the action.
+The service that implements the action is responsible for interpreting the request, interfacing with external systems (REST/SOAP web services, database queries, etc.), applying any necessary business logic, and returning a result consistent with the defined response contract for the action.
 
 ### Setting up the node app
 
