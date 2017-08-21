@@ -7,7 +7,7 @@ author: dariusz.socha@genesys.com
 
 Our Platform API and SDKs are so smart. Personally I love to work with them as they allow to access PureCloud functions from my own application just by a few lines of code. The API is also platform independent and it can be accessed from PC, mobile app or even form an IoT device. It’s really useful and it allows to create valuable customisations for our customers. However, this is only an application developer point of view. Data analysts which aren’t familiarised with C# or JavaScript can have a different opinion on this. They do prefer SQL queries instead of LINQ expressions or CSV files in place of arrays and collections. The API acronym may sound strange for them.
 
-The PureCloud shares the data through the API. Because we are a real cloud and multi-tenant solution we can’t give our customers access to a raw data in the database. Very often they ask about alternatives for accessing the data. The PureCloud Stats Dispatcher is an answer. PCSD is an open source tool created by PS team in the EMEA. It gives possibility to export the PureCloud data into external data sources. Today it supports two kinds of targets - SQL Server and CSV file, however thanks to its plugins architecture the tool can be easily extended to save the data to another source.
+The PureCloud shares the data through the API. Because we are a real cloud and multi-tenant solution we can’t give our customers access to the raw data in the database. Very often customers ask about alternatives for accessing the data. The PureCloud Stats Dispatcher is an answer. PCSD is an open source tool created by PS team in the EMEA. It allows customers to export the PureCloud data into external data sources. Today it supports two kinds of targets - SQL Server and CSV file, however thanks to its plugins architecture the tool can be easily extended to save the data to another source.
 
 ![diagram](diagram.png)
 
@@ -17,7 +17,7 @@ In order to install the PCSD go to the [download page](https://bitbucket.org/ecc
 ![installer](installer.png)
 
 ### oAuth configuration
-PureCloud Stats Dispatcher connects to the system using oAuth integration. It means that in prior to first usage you have login to your PureCloud organisation and configure an oAuth app. To do this follow below steps:
+PureCloud Stats Dispatcher connects to the system using oAuth integration. It means that prior to the first usage you have to login to your PureCloud organisation and configure an oAuth app. To do this follow steps below:
 
 * Login to PureCloud using administrative credentials.
 * Navigate to: Admin -> Integrations -> OAuth.
