@@ -1,5 +1,5 @@
 ---
-title: Accessing the PureCloud data using SQL queries or MS Excel
+title: Accessing PureCloud data using SQL queries or MS Excel
 date: 2017-07-21
 tags: pcsd, sql, excel, data, analytics api
 author: dariusz.socha@genesys.com
@@ -12,7 +12,7 @@ The PureCloud shares the data through the API. Because we are a real cloud and m
 ![diagram](diagram.png)
 
 ### Installation
-In order to install the PCSD go to the [download page](https://bitbucket.org/eccemea/purecloud-stats-dispatcher/downloads/) and get the latest version of the application. Then execute the MSI installer and follow installation steps.
+In order to install the PCSD tool go to the [download page](https://bitbucket.org/eccemea/purecloud-stats-dispatcher/downloads/) and get the latest version of the application. Then execute the MSI installer and follow installation steps.
 
 ![installer](installer.png)
 
@@ -53,7 +53,11 @@ To export the data to SQL Server you have to execute PCSD.exe application with f
 
 * **clientid**: Client ID generated during configuration of oAuth integration.
 * **clientsecret**: Client Secret generated during configuration of oAuth integration.
-* **environment**: Environment's address based on your region, e.g. mypurecloud.ie for EMEA.
+* **environment**: Environment's address based on your region:
+  * mypurecloud.com for North America,
+  * mypurecloud.ie for EMEA,
+  * mypurecloud.com.au for Australia/New Zealand,
+  * mypurecloud.jp for Japan.
 * **target-sql**: SQL Server connection string. As the tool automatically creates a database and tables you have to use an administrative account in the connection string.
 
 Sample command:
@@ -62,8 +66,8 @@ Sample command:
 "C:\Program Files (x86)\Genesys\PureCloud Stats Dispatcher\PCSD.exe" /clientid=989898 /clientsecret=767676 /environment=mypurecloud.ie /target-sql="Server=SQL0001; Database=PureCloudDb; User Id=sa; Password=p@ssw0rd”
 ```
 
-### Periodically exports
-We have designed the PCSD as a console application. You can use it on an ad hoc basis as well as schedule periodically exports, for instance by adopting the Windows Task Scheduler. PureCloud Stats Dispatcher remembers the finishing date and time of last export and use it as a default start time of the next process. So, consecutive PCSD launching gives you continuity of data in the database.
+### Periodic exports
+We have designed the PCSD as a console application. You can use it on an ad hoc basis as well as schedule periodically exports, for instance by adopting the Windows Task Scheduler. PureCloud Stats Dispatcher remembers date and time of last export and uses it as a default start time of the next process. So, launching PCSD consecutively gives you continuity of data in the database.
 
 ## Learn more
 [PCSD project page](https://bitbucket.org/eccemea/purecloud-stats-dispatcher/overview)
