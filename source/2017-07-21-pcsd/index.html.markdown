@@ -70,6 +70,4 @@ Sample command:
 We have designed the PCSD as a console application. You can use it on an ad hoc basis as well as schedule periodically exports, for instance by adopting the Windows Task Scheduler. PureCloud Stats Dispatcher remembers date and time of last export and uses it as a default start time of the next process. So, launching PCSD consecutively gives you continuity of data in the database.
 
 ## Learn more
-[PCSD project page](https://bitbucket.org/ININPSODev/purecloud-stats-dispatcher/overview)
-
-[PCSD download page](https://bitbucket.org/ININPSODev/purecloud-stats-dispatcher/downloads/)
+[PCSD project page](https://github.com/MyPureCloud/purecloud-stats-dispatcher)
