@@ -12,7 +12,7 @@ The PureCloud shares the data through the API. Because we are a real cloud and m
 ![diagram](diagram.png)
 
 ### Installation
-In order to install the PCSD tool go to the [download page](https://bitbucket.org/eccemea/purecloud-stats-dispatcher/downloads/) and get the latest version of the application. Then execute the MSI installer and follow installation steps.
+In order to install the PCSD tool, build the project and then execute the MSI installer and follow installation steps.
 
 ![installer](installer.png)
 
