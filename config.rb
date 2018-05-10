@@ -39,6 +39,7 @@ helpers BlogHelpers
 ###
 # Page options, layouts, aliases and proxies
 ###
+redirect "blog", :to => "/blog/"
 
 # Per-page layout changes:
 #
