@@ -39,5 +39,9 @@ task :default do
         "file"=> "blog/image.png"
     })
 
+    manifest["indexFiles"].push({
+        "file"=> "search.json"
+    })
+
     File.open("localBuild/manifest.json", 'w') { |file| file.write(manifest.to_json) }
 end
