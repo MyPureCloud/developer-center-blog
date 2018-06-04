@@ -40,7 +40,7 @@ task :default do
     })
 
     manifest["indexFiles"].push({
-        "file"=> "search.json"
+        "file"=> "blog/search.json"
     })
 
     File.open("localBuild/manifest.json", 'w') { |file| file.write(manifest.to_json) }
