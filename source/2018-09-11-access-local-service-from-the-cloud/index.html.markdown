@@ -42,9 +42,9 @@ service accepts http traffic.
     *  We used: https://github.com/MyPureCloud/webservice-data-dip-connector-example-node
     *  Just follow the directions under "Running the web service"
     *  Once the service is running, it automatically adds one user available for testing. You can test using this command:
-    ```bash
+    ~~~bash
     curl -X POST http://localhost:8080/searchContactsByName -H 'Content-Type: application/json' -d '{"firstName": "Test"}'
-    ```
+    ~~~
  #### Setup ngrok
  1. Install ngrock https://dashboard.ngrok.com/get-started
     * Make sure to ngrok is added your PATH
@@ -57,14 +57,14 @@ service accepts http traffic.
 2. When you start ngrok, you can configure using only command line params OR you create a config file.
    * You can configure ngrok to use proxies, basic auth, logging, etc. https://ngrok.com/docs#config-options
 3. For the sake of this example, run this command to point to the service you started above, that is listening on port 8080
-```bash
+~~~bash
 ngrok http 8080 -bind-tls=true
-```
+~~~
 ![ngrok console](screenshot1.png)
 4. Test ngrok's URL works with your test service
-```bash
+~~~bash
 curl -X POST https://478b91ce.ngrok.io/searchContactsByName -H 'Content-Type: application/json' -d '{"firstName": "Test"}'
-```
+~~~
 ####Create a PureCloud Custom Action
 1. Log into Purecloud Admin
 ![Purecloud Admin](screenshot2.png)
@@ -88,9 +88,9 @@ curl -X POST https://478b91ce.ngrok.io/searchContactsByName -H 'Content-Type: ap
         6. Once your new Action opens, go to the Setup tab
             * Contracts is setup for you. No change is needed here. This defines the request going to your service and response that will be coming back.
             * Go to Configuration section.  Find requestURLTemplate and change the value to use the ngrok url generated above. So the entry will look like:
-            ```bash
+            ~~~
             "requestUrlTemplate": "https://478b91ce.ngrok.io/searchContactsByName",
-            ```
+            ~~~
             * Go to Test section and type in "Test" for the first name and "Account" for last name.
             ![Testing Actions](screenshot6.png)
             * Uncheck Flatten output and hit Run Action
@@ -106,19 +106,19 @@ still use a Custom Action in Purecloud, but instead of fronting it with the ngro
 ---
 ## ngrok Tips
 * When you start ngrok using command line arguments, the command will begin with:
-```bash
+~~~bash
 ngrok [protocol] [options] [address]
-```
+~~~
 * When you start ngrok using file-based configurations, then you just specify the tunnel name.
-```bash
+~~~bash
 ngrok start [tunnel-name]
-```
+~~~
 * By default, ngrok will forward any http or https traffic to the port specified in your ngrok configuration. If you only 
 want listen for https traffic, set **bind_tls**: true in your configuration file, or if you are using command line, it 
 will be **bind-tls=true**. (_notice the dash instead of underscore_)
 * You can secure the ngrok address, by adding Basic Auth to it. 
   https://ngrok.com/docs#expose
-  ```bash
+  ~~~bash
   #Example ~/.ngrok2/ngrok.yml
   authtoken: xxx
   tunnels:
@@ -128,11 +128,11 @@ will be **bind-tls=true**. (_notice the dash instead of underscore_)
       bind_tls: true
       subdomain: actions
       auth: "demo:secret"
-  ```
+  ~~~
 *  ngrok does not have to run on the same machine as the service you are exposing. To forward to another service, you 
 will need to set the host header to "rewrite" or have it match the address you are going to "myservice.genesys.com". 
 https://ngrok.com/docs#host-header
-  ```bash
+  ~~~bash
   #Example ~/.ngrok2/ngrok.yml
   authtoken: xxx
   tunnels:
@@ -142,7 +142,7 @@ https://ngrok.com/docs#host-header
       subdomain: actions
       host_header: rewrite
       addr: myservice.genesys.com
-  ```    
+  ~~~    
 *  ngrok will default to using their US region cloud. If you are not in the US, you should specify the region in your config. 
   https://ngrok.com/docs#global-locations
 *  TLS/HTTPS tunnels will terminate on the ngrok servers. Because of this, there is extra work you will have to do if you want to use HTTPS between ngrok and your locally running service.  
@@ -152,7 +152,7 @@ This configuration will create a HTTPS address, that forwards traffic to your se
 TLS connection is terminated on ngrok, a new secure connection is made between ngrok and your service.  This results in 
 an "insecure certificate warning" because your local service does not know how to resolve a certificate coming from the 
 ngrok domain (ngrok.io).  If you are using something like curl, you can use the --insecure flag to ignore this warning. 
-  ```bash
+  ~~~bash
   #Example ~/.ngrok2/ngrok.yml
   authtoken: xxx
   tunnels:
@@ -160,14 +160,14 @@ ngrok domain (ngrok.io).  If you are using something like curl, you can use the 
       proto: tls
       addr: localhost:443
       subdomain: actions
-  ``` 
+  ~~~ 
 #### Secure Connection Without Certificate Warnings
 This setup will require $$$ and more setup time.  
 1. Buy a SSL (TLS) certificate for a domain name that you own 
 2. Configure your local web server to use that certificate and its private key to terminate TLS connections
 3. Create a custom domain in ngrok, that matches the domain on your certificate.  https://ngrok.com/docs#custom-domains
 4. Make sure ngrok tunnel configurations include the region you are in, and hostname 
-  ```bash
+  ~~~bash
   #Example ~/.ngrok2/ngrok.yml
   authtoken: xxx
   tunnels:
@@ -175,7 +175,7 @@ This setup will require $$$ and more setup time.
       proto: tls
       region: us
       hostname: secureService.genesys.com
-  ``` 
+  ~~~ 
 #### Best Practice
 If a company is going the distance to buy a certificate, manage a web server, etc, then their service is most likely exposed to the 
 internet. If this is the case, then you do not need ngrok and can configure your custom action(s) to use your publicly accessible endpoint.
