@@ -1,6 +1,6 @@
 ---
 title: How To Securely Access A Local Service From The Cloud
-tags: https, secure, local, localhost, bridge, connectors, action, service, ngrok
+tags: https, secure, data dip, localhost, bridge, connectors, action, service, ngrok
 date: 2018-09-11
 author: patrick.barry@genesys.com
 ---
@@ -31,7 +31,7 @@ needed. All of that is taken care of for you by ngrok.
 
 <img src="/2018-09-11-access-local-service-from-the-cloud/ngrok.png" alt="ngrok" style="display:block;margin-left: auto;margin-right: auto;width: 60%;">
 
-Pairing ngrok with PureCloud's Actions will give you the best of both worlds. It allows you to integrate local services 
+Pairing ngrok with PureCloud's Data Actions will give you the best of both worlds. It allows you to integrate local services 
 with PureCloud, without having to write any additional code or setup complex networking rules. We've proven it out and 
 this is what we did...
 
