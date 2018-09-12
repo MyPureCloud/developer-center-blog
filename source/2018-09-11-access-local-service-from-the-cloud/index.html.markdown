@@ -24,7 +24,7 @@ to be kept up with security patches, etc. Basically, it just required another "t
 Developers at Genesys set out to finder a better approach to solving the problem of exposing local services securely, 
 without the need of a Bridge Server. In our efforts, we discovered ngrok.  Ngrok is a program that you can download and 
 run locally that will instantly create a public HTTPS URL for a web service running locally.  Unlike the Bridge Server, 
-it can run on Linux, Windows or OSX.  It does not require any "Connectors" or robust hardware. Ngrock connects to the 
+it can run on Linux, Windows or OSX.  It does not require any "Connectors" or robust hardware. Ngrok connects to the 
 "ngrok cloud service" which accepts traffic on a public address and relays that traffic through to the ngrok process 
 running on your machine and then on to the local address you specified.  No SSL certificate, proxy or fancy networking 
 needed. All of that is taken care of for you by ngrok.
@@ -49,7 +49,7 @@ service accepts http traffic.
    ~~~
  
 #### Setup ngrok
- 1. Install ngrock https://dashboard.ngrok.com/get-started
+ 1. Install ngrok https://dashboard.ngrok.com/get-started
     * Make sure to ngrok is added your PATH
     * You will need a token. Explained in (step 3 on page above)
     
@@ -76,7 +76,7 @@ curl -X POST https://478b91ce.ngrok.io/searchContactsByName -H 'Content-Type: ap
 ####Create a PureCloud Custom Action
 1. Log into PureCloud Admin
 <img src="/2018-09-11-access-local-service-from-the-cloud/screenshot2.png" alt="PureCloud Admin"  style="display:block;width: 60%;padding:10px;">
-2. The custom Action we are going to setup needs to belong to a PureCloud Integration. Lets create a test Integration..
+2. The custom Action we are going to setup needs to belong to a PureCloud Integration. Let's create a test Integration..
     * **Go to Integrations > Integrations**
     <img src="/2018-09-11-access-local-service-from-the-cloud/screenshot3.png" alt="Integrations Admin Page"  style="display:block;width: 60%;padding:10px;">
     * **Add a new Integration**
