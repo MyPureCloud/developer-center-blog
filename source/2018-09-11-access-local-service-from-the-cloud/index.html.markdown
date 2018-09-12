@@ -32,7 +32,7 @@ needed. All of that is taken care of for you by ngrok.
 <img src="/2018-09-11-access-local-service-from-the-cloud/ngrok.png" alt="ngrok" style="display:block;margin-left: auto;margin-right: auto;width: 60%;">
 
 Pairing ngrok with PureCloud's Data Actions will give you the best of both worlds. It allows you to integrate local services 
-with PureCloud, without having to write any additional code or setup complex networking rules. We've proven it out and 
+with PureCloud, without having to write any additional code or setup complex networking rules. We've tested it out and 
 this is what we did...
 
 ### Quick Start
@@ -55,7 +55,7 @@ service accepts http traffic.
     
     **Production Tip:** _When running ngrok in a non-dev environment, you will need to upgrade your ngrok license to either the Pro or 
     Business plan. This will allow you to use TLS as well as use reserved domain names. When using the Free ngrok 
-    version, the URL used will change every time you restart the ngrok the process. More information can be found here: 
+    version, the URL used will change every time you restart the ngrok process. More information can be found here: 
     [https://ngrok.com/pricing](https://ngrok.com/pricing)_
     
 2. When you start ngrok, you can configure using only command line params OR you create a config file.
@@ -102,12 +102,14 @@ curl -X POST https://478b91ce.ngrok.io/searchContactsByName -H 'Content-Type: ap
            ~~~
             * Go to Test section and type in "Test" for the first name and "Account" for last name.
             <img src="/2018-09-11-access-local-service-from-the-cloud/screenshot6.png" alt="PureCloud Actions"  style="display:block;width: 80%;padding:10px;">
-            * Uncheck Flatten output and hit Run Action
+            * Uncheck **Flatten output** and hit **Run Action**
             * In the results, you can expand JSON and see the response sent back from your webservice.
+            
 ## Summary
 This demonstrates how you can expose any service that is running locally to PureCloud, so it can be used by any of our tools, 
 including Architect and Scripter.  This is a great solution for services that are behind a companies firewall and eliminates 
-the need for a Bridge Server to get to them. 
+the need for a Bridge Server to get to them.  Genesys is not affiliated with ngrok, but we did find this service extremely helpful
+and wanted to pass along the information to our customers.
 
 _**Architecture Note:** Would you use this approach to hit services that are publicly facing? No. In that scenario, you would still use a 
 [Custom Action in PureCloud](https://help.mypurecloud.com/articles/create-custom-action-integrations/), but instead of fronting it with ngrok, you would just use the service's publicly facing URL._
