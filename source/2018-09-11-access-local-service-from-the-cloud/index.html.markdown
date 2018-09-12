@@ -52,10 +52,11 @@ service accepts http traffic.
  1. Install ngrock https://dashboard.ngrok.com/get-started
     * Make sure to ngrok is added your PATH
     * You will need a token. Explained in (step 3 on page above)
-    > When running ngrok in a non-dev environment, you will need to upgrade your ngrok license to either the Pro or 
+    
+    **Production Tip:** _When running ngrok in a non-dev environment, you will need to upgrade your ngrok license to either the Pro or 
     Business plan. This will allow you to use TLS as well as use reserved domain names. When using the Free ngrok 
     version, the URL used will change every time you restart the ngrok the process. More information can be found here: 
-    https://ngrok.com/pricing
+    [https://ngrok.com/pricing](https://ngrok.com/pricing)_
     
 2. When you start ngrok, you can configure using only command line params OR you create a config file.
    * You can configure ngrok to use proxies, basic auth, logging, etc. https://ngrok.com/docs#config-options
@@ -89,7 +90,7 @@ curl -X POST https://478b91ce.ngrok.io/searchContactsByName -H 'Content-Type: ap
         1. In PureCloud Admin, go to Integrations > Actions
         <img src="/2018-09-11-access-local-service-from-the-cloud/screenshot5.png" alt="PureCloud Actions"  style="display:block;width: 70%;padding:10px;">
         2. Click Import
-        3. Import importExample.json
+        3. Import [importExample.json](importExample.json)
         4. Select the Integration you created above. _(Test Local Service Integration)_
         5. Name your Action: "Action Test With ngrok"
         6. Once your new Action opens, go to the Setup tab
