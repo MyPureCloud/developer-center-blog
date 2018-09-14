@@ -5,69 +5,68 @@ date: 2018-09-11
 author: patrick.barry@genesys.com
 ---
 
-In the past, our customers have needed to rely on our [Bridge Server](https://help.mypurecloud.com/articles/bridge-platform-overview/) 
-if they wanted to call a service that was behind their firewall and they did not want to expose it externally (to the internet). 
-The Bridge Server was nice because it prevented companies from having to figure out how to safely expose internal-only services.  
-Once a Bridge Server was installed, you could then install any number of "Connectors" that would add the functionality you need.  
-One Connector, the Web Services Data Dip, would allow our customers to hit REST endpoints behind their firewall, and send the information 
-back to their IVR.  This Connector leveraged PureCloud Admin to define the information needed to perform the data 
-retrieval (URL, request schema, response schema, etc). This configuration is known as an "Action" in the PureCloud ecosystem. 
+In the past, if our customers wanted to call a service that was behind their firewall and they did not want to expose 
+it externally (to the internet), our customers needed to use our [Bridge Server](https://help.mypurecloud.com/articles/bridge-platform-overview/).
+Using the Bridge Server prevented companies from having to figure out how to safely expose internal-only services.  
+
+Once a Bridge Server was installed, customers could then install any number of "connectors" that added the functionality that they needed. 
+One connector, the **Web Services Data Dip Connector**, allowed our customers to hit REST endpoints behind their firewall, and send the information 
+back to their IVR.  This connector leveraged PureCloud to define the information needed to perform the data 
+retrieval (URL, request schema, response schema, etc.) This configuration is known as an "action" in the PureCloud ecosystem. 
 
 <img src="/2018-09-11-access-local-service-from-the-cloud/purecloudflow.png" border="50" alt="PureCloud Workflow" style="display:block;margin-left: auto;margin-right: auto;width: 50%;border-width: 3px;   border-color: C9D5F0;   border-style: solid;">
 
 
-This setup has worked well, however, it requires our customers to keep up on the maintenance of these components.  
-For example, the Bridge and Connectors have to be updated regularly. The Bridge Server lives on a Windows server that has 
-to be kept up with security patches, etc. Basically, it just required another "thing" that required oversight.
+This setup has worked well, however, it requires our customers to maintain these components.
+For example, the Bridge Servers and connectors have to be updated regularly. Also, the Bridge Server lives on a Windows server 
+that has to be updated regularly with security patches, etc. Basically, the Bridge Server is another component that requires oversight.
+
 
 ## A Simpler Alternative
-Developers at Genesys set out to finder a better approach to solving the problem of exposing local services securely, 
-without the need of a Bridge Server. In our efforts, we discovered ngrok.  Ngrok is a program that you can download and 
-run locally that will instantly create a public HTTPS URL for a web service running locally.  Unlike the Bridge Server, 
-it can run on Linux, Windows or OSX.  It does not require any "Connectors" or robust hardware. Ngrok connects to the 
-"ngrok cloud service" which accepts traffic on a public address and relays that traffic through to the ngrok process 
-running on your machine and then on to the local address you specified.  No SSL certificate, proxy or fancy networking 
-needed. All of that is taken care of for you by ngrok.
+Developers at Genesys set out to find a better solution to the problem of exposing local services securely without the need of 
+a Bridge Server. In our efforts, we discovered ngrok. ngrok is a program that you can download and run locally that will 
+instantly create a public HTTPS URL for a locally running web service. Unlike the Bridge Server, ngrok can run on Linux, 
+Windows, or macOS. It does not require any connectors or robust hardware. ngrok connects to the "ngrok cloud service", 
+which accepts traffic on a public address and relays that traffic to the ngrok process running on your machine and then 
+to the local address that you specify. No SSL certificate, proxy, or fancy networking is needed. All of that is taken care 
+of for you by ngrok.
 
 <img src="/2018-09-11-access-local-service-from-the-cloud/ngrok.png" alt="ngrok" style="display:block;margin-left: auto;margin-right: auto;width: 60%;">
 
-Pairing ngrok with PureCloud's Data Actions will give you the best of both worlds. It allows you to integrate local services 
-with PureCloud, without having to write any additional code or setup complex networking rules. We've tested it out and 
-this is what we did...
+Pairing ngrok with PureCloud's data actions gives you the best of both worlds. You can integrate local services with PureCloud 
+and you do not need to write any additional code or set up complex networking rules. We tested it. This is what we did…
 
 ### Quick Start
 
 #### Setup A Local Test Service
-1. You can use one of your existing services or use the one we did.  If you use an existing service, just make sure the 
-service accepts http traffic.
-    *  We used: https://github.com/MyPureCloud/webservice-data-dip-connector-example-node
-    *  Just follow the directions under "Running the web service"
-    *  Once the service is running, it automatically adds one user available for testing. You can test using this command:
+1. Download and install our sample test service: [Sample Service](https://github.com/MyPureCloud/webservice-data-dip-connector-example-node)
+2. On this site, follow the directions under **Running the web service**. Once the service is running, it automatically adds one user available for testing.
+2. Test using the following command:
     
-   ~~~bash
+~~~bash
    curl -X POST http://localhost:8080/searchContactsByName -H 'Content-Type: application/json' -d '{"firstName": "Test"}'
-   ~~~
+~~~
  
 #### Setup ngrok
- 1. Install ngrok https://dashboard.ngrok.com/get-started
-    * Make sure to ngrok is added your PATH
-    * You will need a token. Explained in (step 3 on page above)
+ 1. Install ngrok [https://dashboard.ngrok.com/get-started](https://dashboard.ngrok.com/get-started)
+ 2. Make sure to ngrok is added your PATH
+ 3. You will need a token. (_See step 3 on ngrok install page_)
     
     **Production Tip:** _When running ngrok in a non-dev environment, you will need to upgrade your ngrok license to either the Pro or 
     Business plan. This will allow you to use TLS as well as use reserved domain names. When using the Free ngrok 
     version, the URL used will change every time you restart the ngrok process. More information can be found here: 
     [https://ngrok.com/pricing](https://ngrok.com/pricing)_
     
-2. When you start ngrok, you can configure using only command line params OR you create a config file.
-   * You can configure ngrok to use proxies, basic auth, logging, etc. https://ngrok.com/docs#config-options
-3. For the sake of this example, run this command to point to the service you started above, that is listening on port **8080**
+4. When you start ngrok, you can configure it by using command line params or by creating a configuration file. 
+You can configure ngrok to use proxies, Basic auth, logging, etc. For more information, see [https://ngrok.com/docs#config-options](https://ngrok.com/docs#config-options).
+5. Run this command to point to the service that you started above, which is listening on port 8080.
 
    ~~~bash
    ngrok http 8080 -bind-tls=true
    ~~~
     
 <img src="/2018-09-11-access-local-service-from-the-cloud/screenshot1.png" alt="ngrok console"  width="60%" style="display:block;margin-left: auto;margin-right: auto;width: 60%;padding:10px;">
-4. Test ngrok's URL works with your test service
+6. Test ngrok's URL works with your test service
 
 ~~~bash
 curl -X POST https://478b91ce.ngrok.io/searchContactsByName -H 'Content-Type: application/json' -d '{"firstName": "Test"}'
@@ -77,42 +76,48 @@ curl -X POST https://478b91ce.ngrok.io/searchContactsByName -H 'Content-Type: ap
 1. Log into PureCloud Admin
 <img src="/2018-09-11-access-local-service-from-the-cloud/screenshot2.png" alt="PureCloud Admin"  style="display:block;width: 60%;padding:10px;">
 2. The custom Action we are going to setup needs to belong to a PureCloud Integration. Let's create a test Integration..
-    * **Go to Integrations > Integrations**
+    * **Click Integrations > Integrations**
     <img src="/2018-09-11-access-local-service-from-the-cloud/screenshot3.png" alt="Integrations Admin Page"  style="display:block;width: 60%;padding:10px;">
     * **Add a new Integration**
         1. Install **Web Services Data Actions**
         <img src="/2018-09-11-access-local-service-from-the-cloud/screenshot4.png" alt="Install Web Service Data Actions"  style="display:block;width: 20%;padding:10px;">
-        2. Give your Integration the name **"Test Local Service Integration"**
-        3. Hit Save
-        4. Make the Integration Active  
+        2. Name the integration **"Test Local Service Integration"**
+        3. Click Save
+        4. Activate the integration by clicking the **Active** toggle.  
         ![Active](active.png)
     * **Create Custom Action**
-        1. In PureCloud Admin, go to Integrations > Actions
+        1. In PureCloud Admin, go to **Integrations > Actions**
         <img src="/2018-09-11-access-local-service-from-the-cloud/screenshot5.png" alt="PureCloud Actions"  style="display:block;width: 70%;padding:10px;">
-        2. Click Import
+        2. Click **Import**
         3. Import [importExample.json](importExample.json)
         4. Select the Integration you created above. _(Test Local Service Integration)_
-        5. Name your Action: "Action Test With ngrok"
-        6. Once your new Action opens, go to the Setup tab
-            * Contracts is setup for you. No change is needed here. This defines the request going to your service and response that will be coming back.
-            * Go to Configuration section.  Find requestURLTemplate and change the value to use the ngrok url generated above. So the entry will look like:
+        5. Name your Action: **Action Test With ngrok**
+        6. Click the **Setup** tab
+            * Contracts define the request going to your service and the response that will be coming back. No changes are needed to Contracts.
+            * Click the **Configuration** tab. Change **requestURLTemplate** to use the ngrok URL generated above. The entry will look like the following:
 
            ~~~
                  "requestUrlTemplate": "https://478b91ce.ngrok.io/searchContactsByName",
            ~~~
-            * Go to Test section and type in "Test" for the first name and "Account" for last name.
+           
+        7. To test, we are going to need to provide the values that our searchContactsByName service is going to require.
+        
+            * Click the **Test** tab and type **Test** for the first name and **Account** for last name. 
             <img src="/2018-09-11-access-local-service-from-the-cloud/screenshot6.png" alt="PureCloud Actions"  style="display:block;width: 80%;padding:10px;">
-            * Uncheck **Flatten output** and hit **Run Action**
-            * In the results, you can expand JSON and see the response sent back from your webservice.
+            * Deselect **Flatten output** 
+            * Click **Run Action**
+            * In the results, you can expand the JSON to see the response that your web service returned. 
             
 ## Summary
-This demonstrates how you can expose any service that is running locally to PureCloud, so it can be used by any of our tools, 
-including Architect and Scripter.  This is a great solution for services that are behind a companies firewall and eliminates 
-the need for a Bridge Server to get to them.  Genesys is not affiliated with ngrok, but we did find this service extremely helpful
-and wanted to pass along the information to our customers.
+This demonstrates how you can expose any local service to PureCloud. Once PureCloud can reach your service, you can access your data using
+any of our tools, such as Architect and Scripter. This is a great alternative for services that are behind companies' firewalls 
+and carries less tech burden than maintaining a Bridge Server. 
 
-_**Architecture Note:** Would you use this approach to hit services that are publicly facing? No. In that scenario, you would still use a 
-[Custom Action in PureCloud](https://help.mypurecloud.com/articles/create-custom-action-integrations/), but instead of fronting it with ngrok, you would just use the service's publicly facing URL._
+What is our relationship with ngrok?  Genesys is not affiliated with ngrok. We simply found this service extremely helpful and 
+wanted to pass along the information to our customers!
+
+_**Note**: For public-facing services, you should still use a [custom action in PureCloud](https://help.mypurecloud.com/articles/create-custom-action-integrations/), 
+but instead of using it with ngrok, use the service's public-facing URL._
 
 ------------
 
