@@ -9,11 +9,9 @@ if Dir.exists? commonDirectory
     files.watch :data, path: File.join(commonDirectory, "data")
 
     require File.join(commonDirectory, "lib/config_helpers")
-    require File.join(commonDirectory, "lib/custom_md/jsonresponse.rb")
-
+    
     set :markdown, input: "GFM" #
-    set :markdown, input: "KramdownJsonResponse"
-
+    
     page "*", :layout => :blog
 
     helpers CustomHelpers
