@@ -15,24 +15,24 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ![alt text](genesys.png "Logo Title Text 1")
 
 ## Inline code
-Where git flavored markdown uses backticks \`\`\` kramdown uses ~~~
+Where git flavored markdown uses backticks \`\`\` kramdown uses ```
 
-~~~ ruby
+```{"language":"ruby"}
 def what?
    42
 end
-~~~
+```
 
-You can also specify the language after the first ~~~ to help with syntax formatting.
+You can also specify the language after the first ``` to help with syntax formatting.
 
 ## Tables
 
-~~~
+```
 | Header One     | Header Two     |
 | :------------- | :------------- |
 | Item One       | Item Two       |
 {: class="table table-striped"}
-~~~
+```
 
 The {: class="table table-striped"} will apply the table and table-striped classes to the table.
 

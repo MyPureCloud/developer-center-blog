@@ -14,14 +14,16 @@ The webpage is in the background, and the chat widget is on the top. The web vis
 Are you wondering why did it happen? You have embedded the chat as a part of the page that was entirely reloaded. The thing is to reload the main page but do not reload the chat widget. It's easy. Make your index.html file a kind of frameset and put your webpage and the chat widget into separate iFrames. 
 
 ### All you need are a few HTML tags:
-~~~html
+
+```{"language":"html"}
 <html>
  <body>
   <iframe style="position:absolute; width:100%; height:100%; top:0px; right:0px; bottom:0px: left:0px; z-index:1;" src="{PATH TO YOUR WEBPAGE}"></iframe>
   <iframe style="position:absolute; top:20px; right:20px; height:400px; width:400px; z-index:9999999;" src="{PATH TO A CHAT HTML FILE}"></iframe>
  </body>
 </html>
-~~~
+```
+
 When you have the webpage embedded in a separate iFrame you can go through subpages of your site and it doesn't reload the chat session. It gives a much better experience for web visitors.
 
 ## Learn more

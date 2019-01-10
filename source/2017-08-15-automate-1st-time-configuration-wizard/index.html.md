@@ -26,7 +26,7 @@ Here is an overall view of the on-boarding flow that we are using:
 
 When a user launches our app from the Purecloud UI, a GET call will be made to our app entry point: /purecloud/status on our Flask server which looks like:
 
-~~~python
+```{"language":"python"}
 @app.route('/purecloud/status', methods=['GET'])
 @login_purecloud_required
 def status():
@@ -36,13 +36,13 @@ def status():
 		return render_template('manage.html', title='nGagement - Manage your company', master_admin = session['master_admin'], name = session['name'])
 	else:
 		return render_template('not_configured.html', title='nGagement - Manage your company', master_admin = session['master_admin'], name = session['name'])
-~~~
+```
 
 Since ***@login_purecloud_required*** is specified in this route, we will check (see code sample below) if the session of the user (our own session implementation, not the Purecloud one) contains an access_token. If so this means we've already got an authorization_code and there is no need to obtain a new one from Purecloud.
 
 If the session does not have an access_token, we will check if the request has 'code' as one of its arguments (if not present, we will get one from Purecloud). This code would have been generated from a previous redirect to the login page of Purecloud and sent back to nGagement through the call-back.
 
-~~~python
+```{"language":"python"}
 def login_purecloud_required(f):
 	@wraps(f)
 	def decorated_function(*args, **kwargs):
@@ -63,14 +63,14 @@ def login_purecloud_required(f):
 
 	return decorated_function
 
-~~~
+```
 
 **Important:** As long as your own Purecloud organization (the one you got with your Dev account) is located in the same region as the Purecloud Org you are trying to authenticate with, you can use your own Code Authorization Client ID and Client Secret. You do not need to obtain a new Code Authorization from each customer you are trying to integrate with.
  
  
  In the code sample below we use our own Cliend ID and Client Secret as well as the code previously obtained in the callback to obtain an access_token:
  
-~~~python 
+```{"language":"python "}
 def get_token_from_code(code):
 	# Prepare for POST /oauth/token request
 	requestHeaders = {
@@ -93,7 +93,7 @@ def get_token_from_code(code):
 	else:
 		print 'Failure: ' + str(response.status_code) + ' - ' + response.reason
 		return None
-~~~
+```
 
 This access_token is used in all the following calls in order to execute API calls to Purecloud on behalf of the logged in user.
  
@@ -101,7 +101,7 @@ This access_token is used in all the following calls in order to execute API cal
 With this token, you can now query the Purecloud API and get details about this user. Here is an example of how you can query using the **users** API with an expand parameter in order to verify if the logged in user possesses the required roles to configure your application. In this example, we are looking for the **Master Admin** role.
 
 
-~~~python
+```{"language":"python"}
 def get_logged_in_user_details():
 
 	requestHeaders = {
@@ -124,7 +124,7 @@ def get_logged_in_user_details():
 		print 'Failure: ' + str(response.status_code) + ' - ' + response.reason
 	
 	return
-~~~
+```
 
 ### 2. Creating a new role and associate permissions
 
@@ -135,7 +135,7 @@ The steps to create a new role and associate permissions are:
 1. Using a POST call on the "https://api.mypurecloud.com/api/v2/authorization/roles" API, you can create a new role and obtain the generated role ID. Make sure your role does not already exist.
 2. Then you execute a PUT on the same API and you pass your required permissions in the form of permission policies.
 
-~~~python
+```{"language":"python"}
 def update_nguvu_role_permissions(token, permissions, role_name, role_id):
 
 	requestHeaders = {
@@ -175,14 +175,14 @@ def update_nguvu_role_permissions(token, permissions, role_name, role_id):
 	else:
 		print 'Failure: ' + str(response.status_code) + ' - ' + response.reason
 		return None
-~~~
+```
 
 
 ### 3. Create OAuth client credential
 
 Provided that your logged in user has the sufficient permissions, creating OAuth client credential programmatically is relatively straight forward. In the example below we create the new OAuth by supplying the role ID previously created, hence applying only the required permissions. We then save the client ID and secret for this Purecloud Org and use it for querying the Purecloud API from our backend to periodically gather performance data from the agents.
 
-~~~python
+```{"language":"python"}
 def create_client_credentials(token, role_id):
 
 	requestHeaders = {
@@ -208,7 +208,7 @@ def create_client_credentials(token, role_id):
 	else:
 		print 'Failure: ' + str(response.status_code) + ' - ' + response.reason
 		return None
-~~~
+```
 
 ### Conclusion
 
