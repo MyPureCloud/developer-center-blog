@@ -12,7 +12,7 @@ This week we ran some stress tests in our testing environment with the goal to t
  To start, we need to find which conversations we have in queue, so we'll construct a query which will have predicates that find conversations with a segment type of interact and don't have a segment or conversation end and POST this query to ```/api/v2/analytics/conversations/details/query```.
 
 
-~~~json
+```{"language":"json"}
 {
   "paging": {
     "pageSize": 100,
@@ -57,23 +57,22 @@ This week we ran some stress tests in our testing environment with the goal to t
   ],
   "interval": "2018-01-07T19:42:31.141Z/2018-02-06T19:42:31.141Z"
 }
-~~~
+```
 
 
 You could get all conversations at once, but in my case I decided to just get the first page, disconnect those conversations and then repeat and get the first page of conversations again. My goal was to disconnect all conversations at the queue, but you may want to selectively disconnect so you may need to add additional filters or post query logic.
 
 Once I have a page of conversations I can then start disconnecting them. Do to this, I'll post the following to ```/api/v2/conversations/chats/{conversationid}```
 
-~~~json
+```{"language":"json"}
 {
     "state": "disconnected"
 }
-~~~
+```
 
 Here is my full function, it is written in [GO](https://golang.org/) and the function takes a http client that is already authenticated to PureCloud. GO has GO routines built in to handle concurrent operations, so after I get a pages of conversations, I concurrently disconnect them all at once and then wait for those requests to return before getting the next page.
 
-~~~go
-
+```
 type ConversationsResponse struct {
 	Conversations []struct {
 		ConversationID string `json:"conversationId"`
@@ -124,4 +123,4 @@ func disconnectConversations(queueId string, apiClient *http.Client) {
 		wg.Wait() // wait for all the disconnects to finish then get the next page
 	}
 }
-~~~
+```

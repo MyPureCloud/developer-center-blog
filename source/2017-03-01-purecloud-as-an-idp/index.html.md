@@ -12,7 +12,7 @@ The developer forum is an open source forum called [Discourse](http://www.discou
 
 The first thing we do in our authentication plugin is to register with Discourse
 
-~~~ruby
+```{"language":"ruby"}
   def register_middleware(omniauth)
     init_settings
 
@@ -30,13 +30,13 @@ The first thing we do in our authentication plugin is to register with Discourse
             }
           }
   end
-~~~
+```
 
 While this code is very specific to Discourse, the important parts are that we are telling Discourse the PureCloud login urls and the OAuth client id and secret.  When users click the "Login with PureCloud" button, Discourse uses these settings to redirect to PureCloud for the user's authentication.  A similar strategy will be required for your application, but the concept is the same, when a user wishes to login, redirect them to PureCloud for them to provide their credentials. It should be noted that in the forum we support PureCloud logins from all global PureCloud regions, so in our code we will have a provider for each region, with its own client id, secret and login url. 
 
 After the user logs in through PureCloud, they will be redirected back to your application. At this point you will need to get the basic information about that PureCloud user to associate them with your system.  In Discourse it looks like this.
 
-~~~ruby
+```{"language":"ruby"}
 def fetch_user_details(token)
     user_json_url = "https://api.#{@region}/api/v2/users/me?expand=organization"
     user_json = JSON.parse(open(user_json_url, 'Authorization' => "Bearer #{token}" ).read)
@@ -52,13 +52,13 @@ def fetch_user_details(token)
 
     result
   end
-~~~
+```
 
 At this point, Discourse handled the authentication flow to get the bearer token.  Using that token, we will make a call to the _/api/v2/users/me?expand=organization_ route in PureCloud.  The _expand=organization_ will tell PureCloud to return details on the user's org with the response.  Org Id can be used to validate that specific PureCloud orgs do or do not have access to your app.  In our case with Discourse we use it to check if the org is our production Genesys org to know if the person logging in is a Genesys employee.
 
 The last step in our login process is to map the PureCloud user to a user in Discourse.
 
-~~~ruby
+```{"language":"ruby"}
 def after_authenticate(auth)
     result = Auth::Result.new
     token = auth['credentials']['token']
@@ -83,7 +83,7 @@ def after_authenticate(auth)
 
     result
   end
-~~~
+```
 
 In this method the result.user object is going to contain the Discourse user that is logging in.  If that property is null then Discourse will create a new user based on the metadata that we are supplying on the result object.
 
@@ -91,20 +91,20 @@ There is one line here that is important to note and it is _result.email_valid =
 
 Now we can lookup users using their PureCloud user Id
 
-~~~ruby
+```{"language":"ruby"}
 current_info = ::PluginStore.get(@provider_name, "#{@provider_name}_user_#{user_details[:user_id]}")
 if current_info
   result.user = User.where(id: current_info[:user_id]).first
 end
-~~~
+```
 
 If result.user is null then Discourse calls one last method
 
-~~~ruby
+```{"language":"ruby"}
 def after_create_account(user, auth)
   ::PluginStore.set(@provider_name, "#{@provider_name}_user_#{auth[:extra_data][:purecloud_user_id]}", {user_id: user.id })
 end
-~~~
+```
 
 and this code just sets up the mapping between the PureCloud and the Discourse user.  
 
