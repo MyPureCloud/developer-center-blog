@@ -6,9 +6,9 @@ author: zachary.hinkle@genesys.com
 ---
 
 
-"Hello, world" is a well-known phrase and concept among software developers. The expression generally refers to an example code project meant to guide a new software developer on how to create their first application with a new product or platform. Modern platforms have come a long way since the origins of this phrase, but the essential concept remains: seamlessly onboard developers from beginner to 'Hello, world' so they can start building on a platform quickly.
+Every developer has written a "Hello, world" program when learning to program. A hello world application is a program that demonstrates basic functionality as a proof of concept. Even as programming languages, software architectures, and physical (and digital!) infrastructures change, the concept is consistent: new developers learn the basics of the environment and create a sample application demonstrating that they've learned the fundamentals.
 
-At Genesys, developing our network of builders is crucial to the health, growth and adoption of our cloud platform. The core tenants of our [PureCloud Developer Center](/) since inception are:
+Engaging the development community to drive growth and adoption of the PureCloud platform is one of Genesys' key goals. The [PureCloud Developer Center](/) follows these guidelines to deliver quality resources and enable the developer community:
 
 * Documentation by developers **for** developers
 * Built for daily use **not** as a documentation reference
