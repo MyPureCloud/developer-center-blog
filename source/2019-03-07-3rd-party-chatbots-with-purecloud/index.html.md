@@ -12,8 +12,7 @@ PureCloud in 2019 Q2 will be introducting [Guest ChatAPI's] (https://developer.m
 
 [Demo video] (https://youtu.be/ZmQDvkmd0gg) 
 
-This solution was built with the help of the Microsoft Bot Framework (hosted in Azure) used as the Web App Bot resource. 
-Microsofts Bot Framework is capable of hosting a C# or NodeJS service that implements for the actual Bot logic. Artificial Intelligence (AI) / Dialog Recognition is built using the [Bot Framework SDK v4] (https://docs.microsoft.com/en-us/azure/bot-service/?view=azure-bot-service-4.0). 
+This solution was built with the help of the Microsoft Bot Framework (hosted in Azure) used as the Web App Bot resource. Microsofts Bot Framework is capable of hosting a C# or NodeJS service that implements for the actual Bot logic. Artificial Intelligence (AI) / Dialog Recognition is built using the [Bot Framework SDK v4] (https://docs.microsoft.com/en-us/azure/bot-service/?view=azure-bot-service-4.0). 
 The Bot connection to PureCloud is also handled from the same service, thanks to the Guest Chat API from PureCloud, scheduled to be released in May 2019. Source code is available for free and you can clone it from this [BitBucket Repo] (https://bitbucket.org/eccemea/mypurecloud-bot/src/master/).
 
 Requirements:
@@ -34,14 +33,16 @@ Below is a simplified scheme of this architecture:
 
 At the beginning, the customer talks to the Bot engine directly. All answers are processed by the Bot SDK inside function onTurn() located in bot.js:
 
-```// Listen for incoming activities and route them to your bot main dialog.
+```
+// Listen for incoming activities and route them to your bot main dialog.
 server.post('/api/messages', (req, res) => {
 
     adapter.processActivity(req, res, async (context) => {
         // route to main dialog.
         await bot.onTurn(adapter, context);
     });
-});```
+});
+```
 
 This is the place where all logic / AI should take place. One additional line is required to save history for conversation between Customer and Bot. Once the call is transferred to PureCloud, we will push it as a single message.
 
@@ -114,7 +115,7 @@ webSocket = new WebSocket(info.eventStreamUri);
 
 A Jwt Token is used to send new messages to the PureCloud Chat.
 
-```POST/api/v2/webchat/guest/conversations/{conversationId}/members/{memberId}/messages```
+`POST/api/v2/webchat/guest/conversations/{conversationId}/members/{memberId}/messages`
 
 From that moment on, you should verify if PureCloud chat variable is set to true for all incoming messages and skip the Bot logic for responses and route messages directly to the PureCloud Chat.
 
