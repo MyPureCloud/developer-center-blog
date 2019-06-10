@@ -1,24 +1,33 @@
 ---
-title: Outbound and Inbound SMS messaging
+title: Outbound and Inbound SMS Messaging
 tags: sms, phones, messaging
 date: 2019-06-06
 author: russelle.carvajal@genesys.com
 ---
 
-One of the most convenient communication means today is through SMS messaging. With PureCloud an organization can handle inbound and outbound SMS messaging after very few and easy configurations. To set up SMS messaging, first [Purchase SMS Number](https://help.mypurecloud.com/articles/purchase-sms-numbers/), and for SMS pricing details, see [ACD messaging and SMS pricing](https://help.mypurecloud.com/articles/acd-messaging-pricing/). It is also important that SMS and messaging features are enabled. Contact your designated Customer Success Manager or email CloudSales@genesys.com if the features are not available.
+One convenient means of communication today is through messaging. With PureCloud ACD and SMS messaging feature an organization can handle inbound and outbound SMS messaging after a few configuration and allow communication without the holding time. If SMS and messaging features are enabled, contact your designated Customer Success Manager or email CloudSales@genesys.com if the features are not available. 
 
-## Inbound SMS messaging
-Inbound messaging uses Automate Call Distribution (ACD) to route message interaction. For a step by step instruction on how to set up the advance message routing, see below instructions:
-1.	Create a simple queue 
-2.	[Configure message flows in Architect](https://help.mypurecloud.com/?p=150191)
-3.	[Add an inbound message route](https://help.mypurecloud.com/articles/add-inbound-message-route/)
+To start setting up SMS messaging, we need to first [Purchase an SMS Number](https://help.mypurecloud.com/articles/purchase-sms-numbers/) (to see SMS pricing details, go to [ACD messaging and SMS pricing](https://help.mypurecloud.com/articles/acd-messaging-pricing/)). The number will be use as inbound and outbound number. 
 
-## Outbound SMS messaging
-For an agent to receive credit on the outbound SMS messages, the message must be sent on behalf of queue. To set up a queue for outbound SMS message, assign the purchased SMS number as an Outbound SMS Number:
-… Picture
-Create a new interaction by selecting Send Message, select the queue and providing the number you wish to contact.
-… picture
+## Inbound SMS Messaging
+Inbound messaging uses Automate Call Distribution (ACD messaging) to route message interactions to a specified queue. For a step by step instruction on how to set up the advance message routing, see below instructions:
+1.	Create a queue. 
+2.	[Configure message flows in Architect](https://help.mypurecloud.com/?p=150191).
+3.	[Add an inbound message route](https://help.mypurecloud.com/articles/add-inbound-message-route/) using the purchased number.
+
+## Outbound SMS Messaging
+For an agent to receive credit on the outbound SMS messages, the message is sent on behalf of a queue. To set up a queue for outbound SMS message, first assign the purchased SMS number as an Outbound SMS Number.
+
+**Admin > Contact Center > Queues > Message > Outbound SMS Number**
+![Outbound SMS Number](outbound-sms-number.PNG)
+
+Second, start a conversation by selecting the **+** in the interactions, select the queue and provide the number you wish to contact.
+![Create Interaction](create-interaction.PNG)
+![Queue name and phone number](create-interaction2.PNG)
+
+You can also check the article [Send an SMS message](https://help.mypurecloud.com/articles/send-an-sms-message/), to learn a way to start a new interaction window with PureCloud for Chrome, PureCloud for Firefox, PureCloud for Salesforce, and PureCloud for Zendesk.
 
 ### Automate Outbound SMS with Platform API
-For the sample code to work, a queue and Outbound SMS Number must already be set up. The below sample code will create interaction from the assigned queue and and send message using the Platform API.
+For the sample code to work, a queue and Outbound SMS Number must already be set up. The below sample code will create interaction from the assigned queue and send message using the Platform API. 
 ![Outbound SMS](outbound-sms.PNG)
+**Important:** Check [API Explorer](https://developer.mypurecloud.com/developer-tools/#/api-explorer) and [API Resources](https://developer.mypurecloud.com/api/rest/v2/) to for more details.
