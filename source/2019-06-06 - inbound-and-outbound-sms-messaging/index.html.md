@@ -11,7 +11,7 @@ To start setting up SMS messaging, we need to first [Purchase an SMS Number](htt
 
 ## Inbound SMS Messaging
 Inbound messaging uses Automate Call Distribution (ACD messaging) to route message interactions to a specified queue. For a step by step instruction on how to set up the advance message routing, see below instructions:
-1.	Create a queue. 
+1.	[Create a queue](https://help.mypurecloud.com/articles/create-queues-2/).
 2.	[Configure message flows in Architect](https://help.mypurecloud.com/?p=150191).
 3.	[Add an inbound message route](https://help.mypurecloud.com/articles/add-inbound-message-route/) using the purchased number.
 
@@ -31,5 +31,14 @@ You can also check the article [Send an SMS message](https://help.mypurecloud.co
 ### Automate Outbound SMS with Platform API
 For the sample code to work, a queue and Outbound SMS Number must already be set up. The below sample code will create interaction from the assigned queue and send message using the Platform API.  
 
-![Outbound SMS](outbound-sms.PNG)
-**Important:** Check [API Explorer](https://developer.mypurecloud.com/developer-tools/#/api-explorer) and [API Resources](https://developer.mypurecloud.com/api/rest/v2/) to for more information about Platform API.
+''' 
+  let body = {
+  "queueId": queue_id,
+  "toAddress": phone_number,
+  "toAddressMessengerType": "sms",
+  "useExistingConversation": true
+  };                
+return apiInstance.postConversationsMessages(body)//create interaction         
+'''
+
+**Important:** Check [Javascript SDK](https://developer.mypurecloud.com/api/rest/client-libraries/javascript/), [API Explorer](https://developer.mypurecloud.com/developer-tools/#/api-explorer) and [API Resources](https://developer.mypurecloud.com/api/rest/v2/) to for more information regarding Platform API.
