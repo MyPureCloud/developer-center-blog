@@ -31,7 +31,10 @@ You can also check the article [Send an SMS message](https://help.mypurecloud.co
 ### Automate Outbound SMS with Platform API
 For the sample code to work, a queue and Outbound SMS Number must already be set up. The below sample code will create interaction from the assigned queue and send message using the Platform API.  
 
-''' 
+```javascript
+client.loginImplicitGrant(client_id, redirect_uri)
+.then(() => { 
+    
   let body = {
   "queueId": queue_id,
   "toAddress": phone_number,
@@ -39,6 +42,22 @@ For the sample code to work, a queue and Outbound SMS Number must already be set
   "useExistingConversation": true
   };                
 return apiInstance.postConversationsMessages(body)//create interaction         
-'''
+})
+.then((data) => {       
+  let conversationId = data.id;
+  let communicationId = "";  
+  apiInstance.getConversation(conversationId)//get conversation data
+    .then((data) => {
+    communicationId = data.participants.find( participant => participant.purpose === 'agent' ).messages[0].id;
+    let body = {
+    "textBody": message
+    };           
+  return apiInstance.postConversationsMessageCommunicationMessages(conversationId, communicationId, body)//send message
+  })
+  .then((data) => {
+    alert("message successfully sent to: "+ data.toAddress);
+  }); 
+})
+```
 
-**Important:** Check [Javascript SDK](https://developer.mypurecloud.com/api/rest/client-libraries/javascript/), [API Explorer](https://developer.mypurecloud.com/developer-tools/#/api-explorer) and [API Resources](https://developer.mypurecloud.com/api/rest/v2/) to for more information regarding Platform API.
+**Important:** Check [Javascript SDK](https://developer.mypurecloud.com/api/rest/client-libraries/javascript/), [API Explorer](https://developer.mypurecloud.com/developer-tools/#/api-explorer) and [API Resources](https://developer.mypurecloud.com/api/rest/v2/) for more information regarding Platform API.
