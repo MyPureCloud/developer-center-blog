@@ -148,7 +148,7 @@ Create the new bot your Amazon Web Services account.
  
 5. For this Intent we will want to capture some information on the state where the haunting is happening so we will want to setup a slot to capture this information
 
-	* Slot Name: **HauntCity**
+	* Slot Name: **HauntState**
 	* Slot Type: **AMAZON.US_STATE**
 	* Slot Prompt: **So sorry to hear this, can you tell me what state you are in?**
 
