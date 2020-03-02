@@ -10,7 +10,7 @@ Last year, Genesys released the [Agent Chat API](https://developer.mypurecloud.c
 ## Connecting to an interaction
 Before we can use the Agent Chat API, first, we need to be connected to a chat interaction. We need to use the Notifications API to create a channel then subscribe to incoming chat conversations. This will enable us to actively listen to each chat message and look for keywords to suggest a response.
 
-![Chat Conversation](chat-conversation.PNG)
+![Chat Conversation](chat-conversation.png)
 
 ## Sending messages and typing indicators
 When the customer is typing, we can use the Agent Chat API's typing indicator feature to show that in the view.
@@ -30,7 +30,7 @@ POST /api/v2/conversations/chats/{conversationId}/communications/{communicationI
 }
 ```
   
-![Chat with Suggestions](chat-with-suggestions.PNG)
+![Chat with Suggestions](chat-with-suggestions.png)
 
 
 
