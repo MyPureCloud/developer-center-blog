@@ -14,7 +14,7 @@ Today, I will start with possible ways to manage custom query parameters in an A
 1.	You want to expose a web based UI (i.e. web page) to your Genesys Cloud users (Contact Center Agents, Supervisors, Administrators, ...) and you want to expose that page directly in the Genesys Cloud client (a.k.a. PureCloud).
 2.	We'll assume that the web page you want to expose needs to leverage the Platform API (to send request to the Genesys Cloud platform, or to subscribe to notifications coming from the platform).  
 And therefore this requires to have an OAuth client defined in the configuration.
-3.	Just to restrict the use case, we'll also consider that the application we want to expose is based on "static" html and javascript code and that it uses a [Token Implicit Grant approach](https://developer&#46;mypurecloud&#46;com/api/rest/authorization/use-implicit-grant.html).  
+3.	Just to restrict the use case, we'll also consider that the application we want to expose is based on "static" html and javascript code and that it uses a [Token Implicit Grant approach](/api/rest/authorization/use-implicit-grant.html).  
 By this, I mean that Login and Platform API will be requested directly from the Genesys Cloud client (your web browser) - and that no "intermediate" server is involved (i.e. NOT an Authorization Code Grant approach).
 
 **So what do we need to achieve this?**
@@ -28,23 +28,23 @@ If you are a Premium App provider, this OAuth client will have to be created in 
 
 _Note: $URL_1$ and $URL_2$ are not specific keywords/values. This is just to represent the urls, corresponding to your app, that you will need to configure. I'll come back to this later in this post._
 
-Before continuing, I suggest you take a look at the page explaining the [Implicit Grant](https://developer&#46;mypurecloud&#46;com/api/rest/authorization/use-implicit-grant.html).
+Before continuing, I suggest you take a look at the page explaining the [Implicit Grant](/api/rest/authorization/use-implicit-grant.html).
 
 ## What does that mean for my web client and the javascript code?
 
 The Genesys Cloud client (or a web browser like Chrome when you are using the Genesys Cloud Web client) requests and loads the page that corresponds the Application URL of my Client Application ($URL_1$).  
 
 When the javascript code is executed by the web client, and when it reaches the ***loginImplicitGrant*** method (from the Platform API Javascript SDK), one of the following will happen:
-*	Prior to attempting a login, your code has enabled [Access Token persistence, in the the Platform API Javascript SDK, using the setPersistSettings function](https://developer.mypurecloud.com/api/rest/client-libraries/javascript/#access_token_persistence) (assuming DOM Window localStorage is supported and available in your web client)  
+*	Prior to attempting a login, your code has enabled [Access Token persistence, in the the Platform API Javascript SDK, using the setPersistSettings function](/api/rest/client-libraries/javascript/#access_token_persistence) (assuming DOM Window localStorage is supported and available in your web client)  
 AND you already opened that page recently (authorization process was performed already),  
 AND the access token is still valid:  
--> The code execution will continue (what you write in the *then()* method of the ***loginImplicitGrant*** when called as a Promise)
+&rightarrow; The code execution will continue (what you write in the *then()* method of the ***loginImplicitGrant*** when called as a Promise)
 
 *	It is the first time you open the page (for the day)  
 OR the access token is not valid anymore (token has expired)  
-OR your code has not enabled [Access Token persistence, in the the Platform API Javascript SDK, using the setPersistSettings function](https://developer.mypurecloud.com/api/rest/client-libraries/javascript/#access_token_persistence):  
--> The code after ***loginImplicitGrant*** from your first page (corresponding to $URL_1$) will not be processed.  
--> The web client will be redirected to login&#46;mypurecloud&#46;com (or login&#46;mypurecloud&#46;ie, or ... - depending on your Genesys Cloud organization region) for authentication/authorization.
+OR your code has not enabled [Access Token persistence, in the the Platform API Javascript SDK, using the setPersistSettings function](/api/rest/client-libraries/javascript/#access_token_persistence):  
+&rightarrow; The code after ***loginImplicitGrant*** from your first page (corresponding to $URL_1$) will not be processed.  
+&rightarrow; The web client will be redirected to login&#46;mypurecloud&#46;com (or login&#46;mypurecloud&#46;ie, or ... - depending on your Genesys Cloud organization region) for authentication/authorization.
     1. 	If you then provide the correct credentials, and if (only if) the redirectUri you provided in the ***loginImplicitGrant*** is configured under the OAuth client as one of the Authorized Redirect URIs, the web client will then be authorized and will be redirected to the redirect url you have provided.  
     The Redirect URI in the ***loginImplicitGrant*** MUST ENTIRELY MATCH one of the URIs you have configured under the OAuth client as Authorized Redirect URIs.  
     Here, this would mean $URL_2$
@@ -96,21 +96,21 @@ So let's take a look at some possible solutions to manage and to keep track of m
 
 ## Possible approaches
 
-There many ways to handle this, depending on how your application is written.  
-\- enabling Access Token persistence, in the the Platform API Javascript SDK, or not  
-\- using a single url for the Application URL and the OAuth Redirect URI or distinct ones  
-\- setting a static value for the Genesys Cloud (PureCloud) region in your code (if your application is available in a single region) or not  
+There many ways to handle this, depending on how your application is written.
+* enabling Access Token persistence, in the the Platform API Javascript SDK, or not
+* using a single url for the Application URL and the OAuth Redirect URI or distinct ones
+* setting a static value for the Genesys Cloud (PureCloud) region in your code (if your application is available in a single region) or not
 
-In the next examples, I have decided to take the following approach and constraints:  
-\- use the same URI in the Application URL and in the OAuth client Redirect URI  
-\- use a single page of code to manage the 2 phases of the Authentication/Authorization process  
-\- enable Access Token persistence, in the the Platform API Javascript SDK  
+In the next examples, I have decided to take the following approach and constraints:
+* use the same URI in the Application URL and in the OAuth client Redirect URI
+* use a single page of code to manage the 2 phases of the Authentication/Authorization process
+* enable Access Token persistence, in the the Platform API Javascript SDK
 
 ### Approach 1 - Using the OAuth state parameter
 
 The [OAuth 2.0 state parameter](https://tools.ietf.org/html/rfc6749#section-4.1.1) is meant to allow an application to provide any arbitrary contextual data so it can maintain its state between redirecting the user away and when the user is redirected back after authentication is complete.
 
-The state parameter can contain multiple values, as long as it's URI encoded so it's passed as a [single string value](https://developer.mypurecloud.com/api/rest/authorization/additional-parameters.html#the_state_parameter).    
+The state parameter can contain multiple values, as long as it's URI encoded so it's passed as a [single string value](/api/rest/authorization/additional-parameters.html#the_state_parameter).    
 An application could use pipes to delimit the values, or even URI encode a JSON object.
 
 However, you don't want to pass too much data using the state parameter, or you run the risk of hitting a max URL length somewhere (your browser, cloudfront, auth server, etc.), but you can safely send a few short values.
@@ -247,11 +247,11 @@ $(document).ready(() => {
 
 ```
 
-### Approach 2 - Using javascript localStorage ([DOM Window localstorage](https://www.w3schools.com/jsref/prop_win_localstorage.asp))
+### Approach 2 - Using javascript localStorage
 
 If you are creating an application which will run in your Web browser, you could leverage the DOM window localStorage using javascript.
 
-With DOM window localStorage approach, even if I decided to have a single url for the application and the OAuth client Redirect URI (and a single page of code to manage both phases), <u>I can manage the Genesys Cloud (PureCloud) region dynamically in my code if I need to (application available in multiple PureCloud regions)</u>. This is what I'll show in the example below.
+With [DOM window localStorage](https://www.w3schools.com/jsref/prop_win_localstorage.asp) approach, even if I decided to have a single url for the application and the OAuth client Redirect URI (and a single page of code to manage both phases), <u>I can manage the Genesys Cloud (PureCloud) region dynamically in my code if I need to (application available in multiple PureCloud regions)</u>. This is what I'll show in the example below.
 
 In the Custom Client Application, I am going to define the Application URL (using pcEnvironment built-in parameter this time) as: *https://my_web_server/index.html?environment=&#123;&#123;pcEnvironment&#125;&#125;&langTag=&#123;&#123;pcLangTag&#125;&#125;&userType=agent*    
 *NB: That's what I referenced as $URL_1$ above.*
