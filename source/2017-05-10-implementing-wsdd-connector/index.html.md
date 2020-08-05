@@ -13,7 +13,7 @@ The Web Services Data Dip (WSDD) connector integrates your interaction flows (vo
 
 * Skillset to build and consume REST web services
 * Basic knowledge of JavaScript, preferably node.js with express as well (only for the purposes of understanding the examples in this blog post)
-* A PureCloud organization with the Web Services Data Dip connector enabled (if it's not enabled already, open a ticket with [PureCloud Support](https://elastictest.wpengine.com/articles/contact-purecloud-support/) and request that the  `webservices-datadip` bridge connector be enabled)
+* A Genesys Cloud organization with the Web Services Data Dip connector enabled (if it's not enabled already, open a ticket with [Genesys Cloud Support](https://elastictest.wpengine.com/articles/contact-purecloud-support/) and request that the  `webservices-datadip` bridge connector be enabled)
 * A Windows server to host the Bridge Server - [hardware/VM specs](https://help.mypurecloud.com/articles/purecloud-bridge-server-specifications/)
 * A server or cloud service to host your bridge integration web service - the requirements for this are entirely dependent on the integration you choose to build; the service is only required to conform to the REST contract for the bridge action. This service can be hosted on the same server as the Bridge Server service.
 
@@ -42,7 +42,7 @@ Let's get started building an integration!
 
 First, let's make sure we're on the same page with _what_ we're building. 
 
-When a customer is being processed through an interaction flow and hits a Bridge Action, PureCloud makes a request to your bridge server. Your bridge server's WSDD connector inspects its configuration for the requested action and executes a REST request to the action's configured endpoint. That request will be handled by the service we're about to build. The service will process the request and send a response back to the bridge server, which will return the response to the interaction flow to continue processing.
+When a customer is being processed through an interaction flow and hits a Bridge Action, Genesys Cloud makes a request to your bridge server. Your bridge server's WSDD connector inspects its configuration for the requested action and executes a REST request to the action's configured endpoint. That request will be handled by the service we're about to build. The service will process the request and send a response back to the bridge server, which will return the response to the interaction flow to continue processing.
 
 The service that implements the action is responsible for interpreting the request, interfacing with external systems (REST/SOAP web services, database queries, etc.), applying any necessary business logic, and returning a result consistent with the defined response contract for the action.
 
