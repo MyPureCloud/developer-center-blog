@@ -6,13 +6,13 @@ author: tim.j.smith@genesys.com
 ---
 
 
-The PureCloud Platform API has official SDKs for JavaScript, Java/Android, .NET, Python, and Ruby. The SDKs are dynamically generated from the API's definition each time the Platform API is deployed. After each build, the SDKs are published to package managers appropriate per language. The entire process is automated from end-to-end and is also available as an open source project to enable manual and custom builds. 
+The Genesys Cloud Platform API has official SDKs for JavaScript, Java/Android, .NET, Python, and Ruby. The SDKs are dynamically generated from the API's definition each time the Platform API is deployed. After each build, the SDKs are published to package managers appropriate per language. The entire process is automated from end-to-end and is also available as an open source project to enable manual and custom builds. 
 
 
 ## Resources
 
 * [platform-client-sdk-common](https://github.com/MyPureCloud/platform-client-sdk-common) build scripts
-* [swagger-codegen](https://github.com/MyPureCloud/swagger-codegen) fork with PureCloud "languages"
+* [swagger-codegen](https://github.com/MyPureCloud/swagger-codegen) fork with Genesys Cloud "languages"
 * [SDK documentation](https://developer.mypurecloud.com/api/rest/client-libraries/)
 
 
@@ -87,9 +87,9 @@ Using the diff data, the SDK's version is incremented according to [semantic ver
 
 ### swagger-codegen
 
-The [MyPureCloud/swagger-codegen](https://github.com/MyPureCloud/swagger-codegen) project was forked from [swagger-api/swagger-codegen](https://github.com/swagger-api/swagger-codegen). Utilizing a fork of this project allows the language generators to be customized to meet the specific needs of the PureCloud Platform API SDKs. The [SDK "languages"](https://github.com/MyPureCloud/swagger-codegen/tree/master/modules/swagger-codegen/src/main/java/io/swagger/codegen/languages) can be found in the _PureCloud*ClientCodegen.java_ language files. These files contain the fixes, changes, and overrides needed to correctly generate the source code from the Platform API's swagger definition.
+The [MyPureCloud/swagger-codegen](https://github.com/MyPureCloud/swagger-codegen) project was forked from [swagger-api/swagger-codegen](https://github.com/swagger-api/swagger-codegen). Utilizing a fork of this project allows the language generators to be customized to meet the specific needs of the Genesys Cloud Platform API SDKs. The [SDK "languages"](https://github.com/MyPureCloud/swagger-codegen/tree/master/modules/swagger-codegen/src/main/java/io/swagger/codegen/languages) can be found in the _PureCloud*ClientCodegen.java_ language files. These files contain the fixes, changes, and overrides needed to correctly generate the source code from the Platform API's swagger definition.
 
-The MyPureCloud/swagger-codegen fork is maintained solely for the purposes of maintaining the PureCloud SDKs. It was found that undesirable, low quality, and breaking changes were introduced on a regular basis, which had a negative impact on the stability of the SDKs. For this reason, the fork is intentionally not kept up to date with the parent repo; changes are pulled down only as needed for bugfixes and desirable new features.
+The MyPureCloud/swagger-codegen fork is maintained solely for the purposes of maintaining the Genesys Cloud SDKs. It was found that undesirable, low quality, and breaking changes were introduced on a regular basis, which had a negative impact on the stability of the SDKs. For this reason, the fork is intentionally not kept up to date with the parent repo; changes are pulled down only as needed for bugfixes and desirable new features.
 
 
 ### Templates
