@@ -4,11 +4,11 @@ tags: oauth, example, howwedoit
 date: 2017-08-15
 author: jacou@nguvu.com
 ---
-At nGuvu, we've recently launched the integration of nGagement with Purecloud. nGagement is a gamification solution for contact centers that automatically awards points to agents by looking at their different performance metrics and schedules. The platform supports features such as Agent vs Agent challenges, contests, quiz, leaderboard, quality monitoring, etc. Thanks to Purecloud's API and notifications, nGagement can provide points calculations in real-time.
+At nGuvu, we've recently launched the integration of nGagement with Genesys Cloud. nGagement is a gamification solution for contact centers that automatically awards points to agents by looking at their different performance metrics and schedules. The platform supports features such as Agent vs Agent challenges, contests, quiz, leaderboard, quality monitoring, etc. Thanks to Genesys Cloud's API and notifications, nGagement can provide points calculations in real-time.
 
-In this blog post, we will present the different steps we've included in our configuration flow when adding nGagement on Purecloud. Our main objective for this flow was to reduce the number of manual steps involved for the customer (hence reducing the chances of errors or misconfigurations) and provide full transparency with the different actions we are taking on their org. 
+In this blog post, we will present the different steps we've included in our configuration flow when adding nGagement on Genesys Cloud. Our main objective for this flow was to reduce the number of manual steps involved for the customer (hence reducing the chances of errors or misconfigurations) and provide full transparency with the different actions we are taking on their org. 
 
-nGagement requires different type of access and permissions to the customer's Purecloud org. We are presenting here the on-boarding flow that we've used to simplify as much as possible the interactions with the user. Obviously your flow and requirements will vary but this blog post should give you a good starting point on how you can configure new customers' org with very few manual steps involved.
+nGagement requires different type of access and permissions to the customer's Genesys Cloud org. We are presenting here the on-boarding flow that we've used to simplify as much as possible the interactions with the user. Obviously your flow and requirements will vary but this blog post should give you a good starting point on how you can configure new customers' org with very few manual steps involved.
 
 In this post we will present:
 
@@ -24,7 +24,7 @@ Here is an overall view of the on-boarding flow that we are using:
 
 ### 1. Obtaining an access token
 
-When a user launches our app from the Purecloud UI, a GET call will be made to our app entry point: /purecloud/status on our Flask server which looks like:
+When a user launches our app from the Genesys Cloud UI, a GET call will be made to our app entry point: /purecloud/status on our Flask server which looks like:
 
 ```{"language":"python"}
 @app.route('/purecloud/status', methods=['GET'])
@@ -38,9 +38,9 @@ def status():
 		return render_template('not_configured.html', title='nGagement - Manage your company', master_admin = session['master_admin'], name = session['name'])
 ```
 
-Since ***@login_purecloud_required*** is specified in this route, we will check (see code sample below) if the session of the user (our own session implementation, not the Purecloud one) contains an access_token. If so this means we've already got an authorization_code and there is no need to obtain a new one from Purecloud.
+Since ***@login_purecloud_required*** is specified in this route, we will check (see code sample below) if the session of the user (our own session implementation, not the Genesys Cloud one) contains an access_token. If so this means we've already got an authorization_code and there is no need to obtain a new one from Genesys Cloud.
 
-If the session does not have an access_token, we will check if the request has 'code' as one of its arguments (if not present, we will get one from Purecloud). This code would have been generated from a previous redirect to the login page of Purecloud and sent back to nGagement through the call-back.
+If the session does not have an access_token, we will check if the request has 'code' as one of its arguments (if not present, we will get one from Genesys Cloud). This code would have been generated from a previous redirect to the login page of Genesys Cloud and sent back to nGagement through the call-back.
 
 ```{"language":"python"}
 def login_purecloud_required(f):
@@ -65,7 +65,7 @@ def login_purecloud_required(f):
 
 ```
 
-**Important:** As long as your own Purecloud organization (the one you got with your Dev account) is located in the same region as the Purecloud Org you are trying to authenticate with, you can use your own Code Authorization Client ID and Client Secret. You do not need to obtain a new Code Authorization from each customer you are trying to integrate with.
+**Important:** As long as your own Genesys Cloud organization (the one you got with your Dev account) is located in the same region as the Genesys Cloud Org you are trying to authenticate with, you can use your own Code Authorization Client ID and Client Secret. You do not need to obtain a new Code Authorization from each customer you are trying to integrate with.
  
  
  In the code sample below we use our own Cliend ID and Client Secret as well as the code previously obtained in the callback to obtain an access_token:
@@ -95,10 +95,10 @@ def get_token_from_code(code):
 		return None
 ```
 
-This access_token is used in all the following calls in order to execute API calls to Purecloud on behalf of the logged in user.
+This access_token is used in all the following calls in order to execute API calls to Genesys Cloud on behalf of the logged in user.
  
 
-With this token, you can now query the Purecloud API and get details about this user. Here is an example of how you can query using the **users** API with an expand parameter in order to verify if the logged in user possesses the required roles to configure your application. In this example, we are looking for the **Master Admin** role.
+With this token, you can now query the Genesys Cloud API and get details about this user. Here is an example of how you can query using the **users** API with an expand parameter in order to verify if the logged in user possesses the required roles to configure your application. In this example, we are looking for the **Master Admin** role.
 
 
 ```{"language":"python"}
@@ -128,7 +128,7 @@ def get_logged_in_user_details():
 
 ### 2. Creating a new role and associate permissions
 
-If you need to call Purecloud's API directly from your backend, you will need to create an OAuth client credential. For sake of transparency with the customer and in order to restrict our exposure, we prefer to create a new role with the strict minimum permissions required for our service and then apply this role to our client credential. 
+If you need to call Genesys Cloud's API directly from your backend, you will need to create an OAuth client credential. For sake of transparency with the customer and in order to restrict our exposure, we prefer to create a new role with the strict minimum permissions required for our service and then apply this role to our client credential. 
 
 The steps to create a new role and associate permissions are:
 
@@ -180,7 +180,7 @@ def update_nguvu_role_permissions(token, permissions, role_name, role_id):
 
 ### 3. Create OAuth client credential
 
-Provided that your logged in user has the sufficient permissions, creating OAuth client credential programmatically is relatively straight forward. In the example below we create the new OAuth by supplying the role ID previously created, hence applying only the required permissions. We then save the client ID and secret for this Purecloud Org and use it for querying the Purecloud API from our backend to periodically gather performance data from the agents.
+Provided that your logged in user has the sufficient permissions, creating OAuth client credential programmatically is relatively straight forward. In the example below we create the new OAuth by supplying the role ID previously created, hence applying only the required permissions. We then save the client ID and secret for this Genesys Cloud Org and use it for querying the Genesys Cloud API from our backend to periodically gather performance data from the agents.
 
 ```{"language":"python"}
 def create_client_credentials(token, role_id):
