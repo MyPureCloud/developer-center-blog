@@ -7,9 +7,9 @@ author: xander.dumaine@genesys.com
 
 Last year, &Yet [wrote a great series](https://blog.andyet.com/2016/01/21/att-webrtc-ux-series/) of blog posts with AT&T about WebRTC UX. We love to see this kind of focus in the [WebRTC](https://webrtc.org/) community, because it shows an intersection of classic technology and modern web experience.
 
-Many of those posts, however, focus on the UX of video chat; just one feature possible with WebRTC. [PureCloud](https://www.mypurecloud.com/) offers a WebRTC soft phone for a complete telephony experience. This includes support for auto answer, ACD, IVR, DTMF, and more. This is great opportunity to experiment with redefining the experience of a classic office desk fixture: the phone.
+Many of those posts, however, focus on the UX of video chat; just one feature possible with WebRTC. [Genesys Cloud](https://www.mypurecloud.com/) offers a WebRTC soft phone for a complete telephony experience. This includes support for auto answer, ACD, IVR, DTMF, and more. This is great opportunity to experiment with redefining the experience of a classic office desk fixture: the phone.
 
-Now that the phone lives entirely in the browser, the call controls can exist in multiple places. The controls can be centralized, seamlessly integrated with the application, built into a toolbar for another application, or anything else. The call controls within PureCloud are just REST requests to our [Public API](https://developer.mypurecloud.com/), and the call audio path is WebRTC.
+Now that the phone lives entirely in the browser, the call controls can exist in multiple places. The controls can be centralized, seamlessly integrated with the application, built into a toolbar for another application, or anything else. The call controls within Genesys Cloud are just REST requests to our [Public API](https://developer.mypurecloud.com/), and the call audio path is WebRTC.
 
 There are a few sections into which we can break up the experience:
 
@@ -23,7 +23,7 @@ The next step is microphone verification. Once a user selects her preferred micr
 
 ![call settings](call-settings.png "Call Settings")
 
-PureCloud has a few helpful additions to make the user experience even better:
+Genesys Cloud has a few helpful additions to make the user experience even better:
 
 Volume controls allow the user to set the ringer volume and the audio volume discretely. Since both ringer and call audio are connected by an audio element or the WebAudio API directly, the volume for each is adjustable. This allows the user to tweak her experience for comfort. Remember, a phone ringing all day can be exhausting!
 
@@ -34,7 +34,7 @@ A complete troubleshooter allows the user to verify that her microphone works, t
 
 ### Placing and Receiving Calls
 
-Since you're building a phone app in the browser, you can augment dialing. Users may call a number, a person, or any other type of entity. Can you tie this in with searching, [external contacts](https://help.mypurecloud.com/articles/about-external-contacts/), or [internal profiles](https://help.mypurecloud.com/articles/default-profile-layout/)? PureCloud provides all of the above in a unified search + dial pad.
+Since you're building a phone app in the browser, you can augment dialing. Users may call a number, a person, or any other type of entity. Can you tie this in with searching, [external contacts](https://help.mypurecloud.com/articles/about-external-contacts/), or [internal profiles](https://help.mypurecloud.com/articles/default-profile-layout/)? Genesys Cloud provides all of the above in a unified search + dial pad.
 
 ![search](search.png)
 
@@ -54,7 +54,7 @@ Call controls critical for a complete telephony experience. Mute, hold, hangup, 
 
 ![call controls](dial-pad.png)
 
-*Note: PureCloud uses our Public API for all call controls and DTMF, and reflects the state on the WebRTC connection (i.e., removing/adding an audio stream when muted/held/resumed). This allows us to isolate control and state from audio path. Fortunately, this is all orthogonal to the UX, so you can implement it however works best for you.*
+*Note: Genesys Cloud uses our Public API for all call controls and DTMF, and reflects the state on the WebRTC connection (i.e., removing/adding an audio stream when muted/held/resumed). This allows us to isolate control and state from audio path. Fortunately, this is all orthogonal to the UX, so you can implement it however works best for you.*
 
 Phone calls allow users to speak with low friction. For business users and contact center agents alike, the phone is a natural extension for communication, and the experience must be smooth.
 
