@@ -16,7 +16,7 @@ One of the most fundamental questions of any customer interaction is: "Which cus
   - In customer service, seconds count
 
 - **Compliant**
-  - PureCloud takes privacy and compliance very seriously, and this feature was no different
+  - Genesys Cloud takes privacy and compliance very seriously, and this feature was no different
 
 - **Eventual consistency is tolerable**
   - A few hundred milliseconds lag between a contact update and them appearing in the lookups API is reasonable
@@ -27,7 +27,7 @@ One of the most fundamental questions of any customer interaction is: "Which cus
 
 ![Elasticsearch](Elasticsearch-Logo-Color-V.png)
 
-At PureCloud, we're big fans of [Elasticsearch](https://www.elastic.co/) which powers everything from the company directory, to phone configuration, to our analytics platform. We have a lot of expertise managing, securing, tuning, and growing Elasicsearch clusters to handle billions of JSON documents. And because the contacts microservice was already using Elasticsearch under the hood for its search features, it seemed like a great place to start.
+At Genesys Cloud, we're big fans of [Elasticsearch](https://www.elastic.co/) which powers everything from the company directory, to phone configuration, to our analytics platform. We have a lot of expertise managing, securing, tuning, and growing Elasicsearch clusters to handle billions of JSON documents. And because the contacts microservice was already using Elasticsearch under the hood for its search features, it seemed like a great place to start.
 
 When a contact is created or updated, the record is synchronously stored in DynamoDB, which is our system of record, then asynchronously transformed and indexed in Elasticsearch. Elasticsearch has a very robust and easy to use query language that easily supports the kind of lookups we need. To simplify the interface, the contact lookup API doesn't differentiate the source of the phone number (ie. are they calling from their home number or cell number) nor does it differentiate between email addresses or social channels. Any of these lookup values can be used to identify the customer involved in the interaction. The query as passed to Elasticsearch looks a bit like this:
 
@@ -47,9 +47,9 @@ That expression looks kinda gross, and as we add new identifiers (for other soci
 
 ---
 
-## A note about PureCloud architecture
+## A note about Genesys Cloud architecture
 
-PureCloud is a platform composed of dozens of internal microservices behind a unifying public API.  This public API can execute scatter-gather API requests to the mid-tier microservices to compose the final results returned to the API client.  This approach gives us the flexibility to refactor, rework, split, and combine mid-tier services in any way we want without changing the API contract presented to the caller.  All of the changes to mid-tier microservices in this article were 100% transparent to API clients.
+Genesys Cloud is a platform composed of dozens of internal microservices behind a unifying public API.  This public API can execute scatter-gather API requests to the mid-tier microservices to compose the final results returned to the API client.  This approach gives us the flexibility to refactor, rework, split, and combine mid-tier services in any way we want without changing the API contract presented to the caller.  All of the changes to mid-tier microservices in this article were 100% transparent to API clients.
 
 ---
 
@@ -57,7 +57,7 @@ PureCloud is a platform composed of dozens of internal microservices behind a un
 
 ![DynamoDB](DynamoDB-Amazon-Web-Services.png)
 
-[DynamoDB](https://aws.amazon.com/dynamodb) provides consistent, sub 10ms performance at virtually any scale when searching by hash key, with no infrastructure to maintain. Dozens of microservices with PureCloud use DynamoDB. If we are big fans of Elasticsearch, we're superfans of DynamoDB. As mentioned above, we are already using DynamoDB as the contacts home of record, which begs the question:
+[DynamoDB](https://aws.amazon.com/dynamodb) provides consistent, sub 10ms performance at virtually any scale when searching by hash key, with no infrastructure to maintain. Dozens of microservices with Genesys Cloud use DynamoDB. If we are big fans of Elasticsearch, we're superfans of DynamoDB. As mentioned above, we are already using DynamoDB as the contacts home of record, which begs the question:
 
 **Question**: so... could we just add a Global Secondary Index (GSI) to our existing table?
 
@@ -77,9 +77,9 @@ Fantastic, right?  We have a fast, scalable, reliable contact lookup mechanism. 
 
 ![With our powers combined](combined-logos.png)
 
-Anybody can have a bad day, including DynamoDB, and in PureCloud we plan for them. With two proven implementations, why not fall back to the Elasticsearch version if DynamoDB isn't feeling well?  In practice, failures talking to DynamoDB are most frequently due to throttling when we exceed our provisioned throughput on a given table. PureCloud uses the open source project called [Dynamic DyanamoDB](https://dynamic-dynamodb.readthedocs.io) which monitors the consumed and provisioned capacity and automatically adjusts provisioning accordingly. This project has been a life saver (and a $$$ saver) by helping us keep high utilization on our tables and ensuring we have enough headroom for an increase in traffic. Increasing capacity, however, has a somewhat delayed reaction and can't react quickly to sudden spikes in traffic. This is where our Elasticsearch fallback comes into play.
+Anybody can have a bad day, including DynamoDB, and in Genesys Cloud we plan for them. With two proven implementations, why not fall back to the Elasticsearch version if DynamoDB isn't feeling well?  In practice, failures talking to DynamoDB are most frequently due to throttling when we exceed our provisioned throughput on a given table. Genesys Cloud uses the open source project called [Dynamic DyanamoDB](https://dynamic-dynamodb.readthedocs.io) which monitors the consumed and provisioned capacity and automatically adjusts provisioning accordingly. This project has been a life saver (and a $$$ saver) by helping us keep high utilization on our tables and ensuring we have enough headroom for an increase in traffic. Increasing capacity, however, has a somewhat delayed reaction and can't react quickly to sudden spikes in traffic. This is where our Elasticsearch fallback comes into play.
 
-In the case of sudden spike in traffic that exhausts our provisioned capacity, some of the requests to DynamoDB will fail. Using a project called [Hystrix](https://github.com/Netflix/Hystrix) created by [Netflix](https://github.com/Netflix), we can fail over traffic to Elasticsearch as a stop-gap while additional DynamoDB capacity is coming online. Hystrix is a fantastic project that provides bulk heading, circuit breakers, and retries for handling failures gracefully and predictably. PureCloud uses this library extensively to fallback and recover, which helps limit the cascade of failures to other parts of the system.
+In the case of sudden spike in traffic that exhausts our provisioned capacity, some of the requests to DynamoDB will fail. Using a project called [Hystrix](https://github.com/Netflix/Hystrix) created by [Netflix](https://github.com/Netflix), we can fail over traffic to Elasticsearch as a stop-gap while additional DynamoDB capacity is coming online. Hystrix is a fantastic project that provides bulk heading, circuit breakers, and retries for handling failures gracefully and predictably. Genesys Cloud uses this library extensively to fallback and recover, which helps limit the cascade of failures to other parts of the system.
 
 ---
 
