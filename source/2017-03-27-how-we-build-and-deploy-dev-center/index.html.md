@@ -1,5 +1,5 @@
 ---
-title: How we Build and Deploy the PureCloud Developer Center
+title: How we Build and Deploy the Genesys Cloud Developer Center
 date: 2017-03-27
 tags: devcenter, howwedoit
 author: kevin.glinski@genesys.com
@@ -9,11 +9,11 @@ Back in 2015 our API documentation was launched on a Developer Center that was b
 
 ## Basic architecture
 
-Internally, for PureCloud, we use BitBucket to host our source code so most of the Developer Center source code lives there. Anyone in PureCloud development can make changes as they see fit. We try to maintain an environment where service owners are responsible for all areas of their service all the way down to documentation. Therefore, various service owners will contribute to the documentation on the Developer Center to provide clarification on their resources.
+Internally, for Genesys Cloud, we use BitBucket to host our source code so most of the Developer Center source code lives there. Anyone in Genesys Cloud development can make changes as they see fit. We try to maintain an environment where service owners are responsible for all areas of their service all the way down to documentation. Therefore, various service owners will contribute to the documentation on the Developer Center to provide clarification on their resources.
 
 At the same time, we want to open source as much as we can to be available to our partners and customers. We use [Github](https://github.com/mypurecloud/) to host these open source pieces such as the [tutorials](https://developer.mypurecloud.com/api/tutorials.html) and our [Platform API SDKs](https://developer.mypurecloud.com/api/rest/client-libraries/). We make these fully open source because the raw source code can be valuable and also so that we can accept contributions from anyone.
 
-In the Developer Center we use [Discourse](https://www.discourse.org/) for our forum and [Middleman](https://middlemanapp.com/) for the static documentation pages. Discourse is an open source forum that we picked because of how we could deploy it to AWS EC2 instances and since it was open source, we could customize it to fit our needs with custom styling and using PureCloud as a login provider. Middleman was picked so that we could author content in markdown, reuse page layouts and page content, and since it is also open source we could customize it as needed. Our Platform API is documented by the [Open API specification](https://www.openapis.org/) which defines all operations in a json file. Using this file, we can generate partial html pages using the [Mustache](https://mustache.github.io/) templating engine. At build time, we take these generated API docs and pull in content from different repos. We then let Middleman generate static HTML that has a consistent style across all pages.
+In the Developer Center we use [Discourse](https://www.discourse.org/) for our forum and [Middleman](https://middlemanapp.com/) for the static documentation pages. Discourse is an open source forum that we picked because of how we could deploy it to AWS EC2 instances and since it was open source, we could customize it to fit our needs with custom styling and using Genesys Cloud as a login provider. Middleman was picked so that we could author content in markdown, reuse page layouts and page content, and since it is also open source we could customize it as needed. Our Platform API is documented by the [Open API specification](https://www.openapis.org/) which defines all operations in a json file. Using this file, we can generate partial html pages using the [Mustache](https://mustache.github.io/) templating engine. At build time, we take these generated API docs and pull in content from different repos. We then let Middleman generate static HTML that has a consistent style across all pages.
 
  This gives us an architecture that looks similar to this diagram.
 
