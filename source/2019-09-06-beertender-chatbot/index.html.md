@@ -7,7 +7,7 @@ author: jack.nichols@genesys.com
 
 
 
-Since we released our PureCloud and Amazon Lex integration last year we have spent a lot of time with customers to explain the integration, talking about about how to best use the technology to solve their use cases, and honestly helping dispel the myths around the technology.  We decided for our Genesys EMEA G-Summit conference this year we wanted to show how easy it is to create a chatbot that could take a simple drink order in PureCloud integrated with a bot built with Amazon Lex. What better way to showcase this than to build a bot that would help expedite ordering a nice frosty beverage at the end of a long day.
+Since we released our Genesys Cloud and Amazon Lex integration last year we have spent a lot of time with customers to explain the integration, talking about about how to best use the technology to solve their use cases, and honestly helping dispel the myths around the technology.  We decided for our Genesys EMEA G-Summit conference this year we wanted to show how easy it is to create a chatbot that could take a simple drink order in Genesys Cloud integrated with a bot built with Amazon Lex. What better way to showcase this than to build a bot that would help expedite ordering a nice frosty beverage at the end of a long day.
 
 [toc]
  
@@ -58,11 +58,11 @@ Click the button to chat with the BeerTender now!
 Part 1 - Setting up the Amazon Lex Bot
 * In part 1 we will utilize Amazon Lex to build a simple chatbot that will take inbound chat requests and identify if the intent of the request information or order for routing. From there we will collect the needed customer information to place the order.
 
-Part 2 - Integrating your Amazon Lex bots into your PureCloud organization
-* In Part 2 we will learn how to integrate Amazon Lex with PureCloud for use in architect flows. 
+Part 2 - Integrating your Amazon Lex bots into your Genesys Cloud organization
+* In Part 2 we will learn how to integrate Amazon Lex with Genesys Cloud for use in architect flows. 
 
-Part 3 - Setting up the PureCloud Inbound SMS Flow
-* In Part 3 we will setup an inbound PureCloud Chat flow integrated with your Lex bot for inbound message processing.
+Part 3 - Setting up the Genesys Cloud Inbound SMS Flow
+* In Part 3 we will setup an inbound Genesys Cloud Chat flow integrated with your Lex bot for inbound message processing.
 
 Future Part 4 -  Ways to expand the logic and use case - New Blog Coming Soon.
 
@@ -216,7 +216,7 @@ Now it’s time to create our intents for the bot, for this we will create 3 mai
 	* Slot Type: **AMAZON.Person**
 	* Slot Prompt: **Who is this order for?**
 
-12. Now to finish out this intent we want to setup a "Confirmation prompt" that will confirm the order with the user before we pass it back to PureCloud.
+12. Now to finish out this intent we want to setup a "Confirmation prompt" that will confirm the order with the user before we pass it back to Genesys Cloud.
 	* Confirmation prompt: **Checked**
 	* Confirm: **{OrderName}, Would you like me a place an order for a {BeerSize} {BeerType}?**
 	* Cancel: **Okay I will not place the order at this time.**
@@ -253,7 +253,7 @@ Now it’s time to create our intents for the bot, for this we will create 3 mai
 
 ## Building and Publishing Your Bot
 
-To finalize our bot for use by PureCloud we are going to need to build the bot and publish it under one of the aliases you created. This is very easy, but it's important to remember when you publish to an alias this will be the bot that anything referring that alias will now use.
+To finalize our bot for use by Genesys Cloud we are going to need to build the bot and publish it under one of the aliases you created. This is very easy, but it's important to remember when you publish to an alias this will be the bot that anything referring that alias will now use.
 
 ### Part 1 - Build the Bot
 
@@ -264,23 +264,23 @@ After a bot is done building I always advise to do some testing with the bot and
 If everything looks to be in order it is now time to publish your bot for use. In the top right of your AWS console for the bot you will be a "Publish" button. When clicked another pop-up will come up and you will need to select the alias you with to publish the bot to. For this workshop you will want to use the "development" alias. Once you have selected this click on the "Publish" button again. Once the bot is done publishing it will alert you in the UI. 
 
 
-### Part 2 -  Integrating your Amazon Lex bots into your PureCloud organization
+### Part 2 -  Integrating your Amazon Lex bots into your Genesys Cloud organization
 
-To learn more about integrating your Amazon Lex bots with PureCloud you can go to [Integrating PureCloud with Amazon Lex](https://help.mypurecloud.com/articles/about-the-amazon-lex-integration/)
+To learn more about integrating your Amazon Lex bots with Genesys Cloud you can go to [Integrating Genesys Cloud with Amazon Lex](https://help.mypurecloud.com/articles/about-the-amazon-lex-integration/)
 
-### Part 3 - Setting up the PureCloud Inbound Chat Flow
+### Part 3 - Setting up the Genesys Cloud Inbound Chat Flow
 
-#### Log in to PureCloud and setup your user skills for the lab
+#### Log in to Genesys Cloud and setup your user skills for the lab
 
-For this part first we need to access your PureCloud organization that we will build the new Chat flow in, login to PureCloud by navigating in a chrome browser to your regional login, (login.mypurecloud.ie), (login.mypurecloud.de), (login.mypurecloud.com).
+For this part first we need to access your Genesys Cloud organization that we will build the new Chat flow in, login to Genesys Cloud by navigating in a chrome browser to your regional login, (login.mypurecloud.ie), (login.mypurecloud.de), (login.mypurecloud.com).
 
-#### Access PureCloud Architect flow builder to start building our new flow.
+#### Access Genesys Cloud Architect flow builder to start building our new flow.
 
 1. We need to now launch Architect and get to the Inbound Chat Flows.
 
 	* Click on the "Admin" menu at the top of the screen
 	* In the admin screen search for "Architect" to find the architect tool link and click on it when it comes up.
-	* This will launch a new browser tab with PureCloud architect running in it.
+	* This will launch a new browser tab with Genesys Cloud architect running in it.
 	* Once in Architect move your cursor over to the top left of the menu over the "Flows" menu and click on the "Inbound Chat" to navigate to the inbound message flows.
 
 2. Click on the "+ Add" to create a new chat flow. You can give the flow any name you wish, I will use VirtualBeerTender for this example.
@@ -330,7 +330,7 @@ For this part first we need to access your PureCloud organization that we will b
 
 ### Part 4 - Create your chat widget
 
-1. We need to open the Widgets menu in the PureCloud admin.
+1. We need to open the Widgets menu in the Genesys Cloud admin.
 
 	* Click on the "Admin" menu at the top of the screen
 	* In the admin screen search for "Widgets" to find the widgets menu link and click on it when it comes up.
@@ -344,9 +344,9 @@ For this part first we need to access your PureCloud organization that we will b
 
 3. Click "Save"
 
-### Part 5 - Testing the Chatbot with PureCloud Developer Tools
+### Part 5 - Testing the Chatbot with Genesys Cloud Developer Tools
 
-To test out your chatbot experience before deploying it to your website you can use the PureCloud Developer Center Tools at [Developer-Tools Webchat](https://developer.mypurecloud.com/developer-tools/#/webchat)
+To test out your chatbot experience before deploying it to your website you can use the Genesys Cloud Developer Center Tools at [Developer-Tools Webchat](https://developer.mypurecloud.com/developer-tools/#/webchat)
 
 ![Testing bot with Dev Tools](beerbot_devtools.png)
 
@@ -394,7 +394,7 @@ For examples on how to deploy the chat to a website see the detailed instruction
 			// http://freeiconshop.com/icon/beer-icon-outline-filled/
 			"url": "https://developer.mypurecloud.com/blog/2019-09-06-beertender-chatbot/beer.png"
 		},
-		"welcomeMessage": "Thanks for use our PureCloud Deverloper Tools and attending GSummit EMEA!.",
+		"welcomeMessage": "Thanks for use our Genesys Cloud Deverloper Tools and attending GSummit EMEA!.",
 		"cssClass": "webchat-frame",
 		"css": {
 			"width": "100%",
