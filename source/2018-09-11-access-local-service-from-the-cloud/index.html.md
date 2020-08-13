@@ -10,10 +10,10 @@ Using the Bridge Server prevented companies from having to figure out how to saf
 
 Once a Bridge Server was installed, customers could then install any number of "connectors" that added the functionality that they needed. 
 One connector, the **Web Services Data Dip Connector**, allowed our customers to hit REST endpoints behind their firewall, and send the information 
-back to their IVR.  This connector leveraged PureCloud to define the information needed to perform the data 
-retrieval (URL, request schema, response schema, etc.) This configuration is known as an "action" in the PureCloud ecosystem. 
+back to their IVR.  This connector leveraged Genesys Cloud to define the information needed to perform the data 
+retrieval (URL, request schema, response schema, etc.) This configuration is known as an "action" in the Genesys Cloud ecosystem. 
 
-<img src="purecloudflow.png" border="50" alt="PureCloud Workflow" style="display:block;margin-left: auto;margin-right: auto;width: 50%;border-width: 3px;   border-color: C9D5F0;   border-style: solid;">
+<img src="purecloudflow.png" border="50" alt="Genesys Cloud Workflow" style="display:block;margin-left: auto;margin-right: auto;width: 50%;border-width: 3px;   border-color: C9D5F0;   border-style: solid;">
 
 
 This setup has worked well, however, it requires our customers to maintain these components.
@@ -32,7 +32,7 @@ of for you by ngrok.
 
 <img src="ngrok.png" alt="ngrok" style="display:block;margin-left: auto;margin-right: auto;width: 60%;">
 
-Pairing ngrok with PureCloud's data actions gives you the best of both worlds. You can integrate local services with PureCloud 
+Pairing ngrok with Genesys Cloud's data actions gives you the best of both worlds. You can integrate local services with Genesys Cloud 
 and you do not need to write any additional code or set up complex networking rules. We tested it. This is what we did…
 
 ### Quick Start
@@ -71,10 +71,10 @@ ngrok http 8080 -bind-tls=true
 curl -X POST https://478b91ce.ngrok.io/searchContactsByName -H 'Content-Type: application/json' -d '{"firstName": "Test"}'
 ```
     
-####Create a PureCloud Custom Action
-1. Log into PureCloud Admin
-<img src="screenshot2.png" alt="PureCloud Admin"  style="display:block;width: 60%;padding:10px;">
-2. The custom Action we are going to setup needs to belong to a PureCloud Integration. Let's create a test Integration..
+####Create a Genesys Cloud Custom Action
+1. Log into Genesys Cloud Admin
+<img src="screenshot2.png" alt="Genesys Cloud Admin"  style="display:block;width: 60%;padding:10px;">
+2. The custom Action we are going to setup needs to belong to a Genesys Cloud Integration. Let's create a test Integration..
     * **Click Integrations > Integrations**
     <img src="screenshot3.png" alt="Integrations Admin Page"  style="display:block;width: 60%;padding:10px;">
     * **Add a new Integration**
@@ -85,8 +85,8 @@ curl -X POST https://478b91ce.ngrok.io/searchContactsByName -H 'Content-Type: ap
         4. Activate the integration by clicking the **Active** toggle.  
         ![Active](active.png)
     * **Create Custom Action**
-        1. In PureCloud Admin, go to **Integrations > Actions**
-        <img src="screenshot5.png" alt="PureCloud Actions"  style="display:block;width: 70%;padding:10px;">
+        1. In Genesys Cloud Admin, go to **Integrations > Actions**
+        <img src="screenshot5.png" alt="Genesys Cloud Actions"  style="display:block;width: 70%;padding:10px;">
         2. Click **Import**
         3. Import [importExample.json](./importExample.json)
         4. Select the Integration you created above. _(Test Local Service Integration)_
@@ -102,20 +102,20 @@ curl -X POST https://478b91ce.ngrok.io/searchContactsByName -H 'Content-Type: ap
         7. To test, we are going to need to provide the values that our searchContactsByName service is going to require.
         
             * Click the **Test** tab and type **Test** for the first name and **Account** for last name. 
-            <img src="screenshot6.png" alt="PureCloud Actions"  style="display:block;width: 80%;padding:10px;">
+            <img src="screenshot6.png" alt="Genesys Cloud Actions"  style="display:block;width: 80%;padding:10px;">
             * Deselect **Flatten output** 
             * Click **Run Action**
             * In the results, you can expand the JSON to see the response that your web service returned. 
             
 ## Summary
-This demonstrates how you can expose any local service to PureCloud. Once PureCloud can reach your service, you can access your data using
+This demonstrates how you can expose any local service to Genesys Cloud. Once Genesys Cloud can reach your service, you can access your data using
 any of our tools, such as Architect and Scripter. This is a great alternative for services that are behind companies' firewalls 
 and carries less tech burden than maintaining a Bridge Server. 
 
 What is our relationship with ngrok?  Genesys is not affiliated with ngrok. We simply found this service extremely helpful and 
 wanted to pass along the information to our customers!
 
-_**Note**: For public-facing services, you should still use a [custom action in PureCloud](https://help.mypurecloud.com/articles/create-custom-action-integrations/), 
+_**Note**: For public-facing services, you should still use a [custom action in Genesys Cloud](https://help.mypurecloud.com/articles/create-custom-action-integrations/), 
 but instead of using it with ngrok, use the service's public-facing URL._
 
 ------------
