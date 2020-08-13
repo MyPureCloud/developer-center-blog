@@ -5,7 +5,7 @@ date: 2019-06-06
 author: russelle.carvajal@genesys.com
 ---
 
-One convenient means of communication today is through messaging. With PureCloud ACD and SMS messaging feature an organization can handle inbound and outbound SMS messaging after a few configuration and allow communication without the holding time. If SMS and messaging features are enabled, contact your designated Customer Success Manager or email CloudSales@genesys.com if the features are not available. 
+One convenient means of communication today is through messaging. With Genesys Cloud ACD and SMS messaging feature an organization can handle inbound and outbound SMS messaging after a few configuration and allow communication without the holding time. If SMS and messaging features are enabled, contact your designated Customer Success Manager or email CloudSales@genesys.com if the features are not available. 
 
 To start setting up SMS messaging, we need to first [Purchase an SMS Number](https://help.mypurecloud.com/articles/purchase-sms-numbers/) (to see SMS pricing details, go to [ACD messaging and SMS pricing](https://help.mypurecloud.com/articles/acd-messaging-pricing/)). The number will be use as inbound and outbound number. 
 
@@ -26,7 +26,7 @@ Second, start a conversation by selecting the **+** in the interactions, select 
 ![Create Interaction](create-interaction.PNG)  
 ![Queue name and phone number](create-interaction2.PNG)  
 
-You can also check the article [Send an SMS message](https://help.mypurecloud.com/articles/send-an-sms-message/), to learn a way to start a new interaction window with PureCloud for Chrome, PureCloud for Firefox, PureCloud for Salesforce, and PureCloud for Zendesk.
+You can also check the article [Send an SMS message](https://help.mypurecloud.com/articles/send-an-sms-message/), to learn a way to start a new interaction window with Genesys Cloud for Chrome, Genesys Cloud for Firefox, Genesys Cloud for Salesforce, and Genesys Cloud for Zendesk.
 
 ### Automate Outbound SMS with Platform API
 For the sample code to work, a queue and Outbound SMS Number must already be set up. The below sample code will create interaction from the assigned queue and send message using the Platform API.  
