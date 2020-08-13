@@ -5,7 +5,7 @@ date: 2018-06-15
 author: tim.j.smith@genesys.com
 ---
 
-The Open Data Exporter is an open source configurable node.js service that executes PureCloud API requests, performs data calculations and transformations, and exports the data into templates. This application serves as a starting point for building data export integrations. Common use cases include:
+The Open Data Exporter is an open source configurable node.js service that executes Genesys Cloud API requests, performs data calculations and transformations, and exports the data into templates. This application serves as a starting point for building data export integrations. Common use cases include:
 
 * Providing historical data to an external WFM system
 * Generating contact reports to import into an external CRM system
@@ -16,7 +16,7 @@ The Open Data Exporter is an open source configurable node.js service that execu
 
 
 * Robust templating support powered by [doT](http://olado.github.io/doT/)
-* Make PureCloud Platform API requests without writing any code
+* Make Genesys Cloud Platform API requests without writing any code
 * All post-processing data calculations are fully configurable and programmable
 * Ability to execute multiple queries and multiple transformations and use the resulting data in one or more templates
 * Write output to dynamically determined locations and files
@@ -37,7 +37,7 @@ The Open Data Exporter processes the [configuration file](https://github.com/MyP
 
 The configuration file contains data for:
 
-* PureCloud - settings for connecting to PureCloud
+* Genesys Cloud - settings for connecting to Genesys Cloud
 * requests - settings for how and which API requests should be made
 * transforms - settings for how API responses should be manipulated
 * templates - settings to define templates that will be used to format the data for ouput
