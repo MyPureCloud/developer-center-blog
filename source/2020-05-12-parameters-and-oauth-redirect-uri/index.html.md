@@ -119,7 +119,7 @@ If you have a ton of info that you need to track, consider using DOM Window loca
 
 As I decided here to have a single url for the Application and the OAuth client Redirect URI (and a single page of code to manage both phases), <u>in this this example, I will have to define the Genesys Cloud (PureCloud) region statically in my code</u>.
 
-_NB: If you want your application to handle multiple PureCloud regions dynamically, and to use the recommended OAuth state parameter approach, you would have to implement this a bit differently.  
+_NB: If you want your application to handle multiple Genesys Cloud regions dynamically, and to use the recommended OAuth state parameter approach, you would have to implement this a bit differently.  
 One possible way would be to have a specific URI for the Application URL (like *https://my_web_server/index.html?environment=&#123;&#123;pcEnvironment&#125;&#125;&langTag=&#123;&#123;pcLangTag&#125;&#125;&userType=agent*) and one entry for each region you want to support in the OAuth client Redirect URIs (like *https://my_web_server/oauthcallback/us-east-1*, *https://my_web_server/oauthcallback/eu-west-1*, ...). The page attached to the Redirect URIs could then extract the region name from the URI.  
 This use case is not covered in the following example._
 
@@ -154,7 +154,7 @@ const clientId = "abcdefgh12345678 - replace with your OAuth clientId"
 // This is because my $URL_1$ and my $URL_2$ have same origin and path (only difference is the query parameters)
 const redirectUri = window.location.origin + window.location.pathname;
 
-// Set purecloud objects
+// Set Genesys Cloud objects
 const platformClient = require('platformClient');
 const apiClient = platformClient.ApiClient.instance;
 
@@ -189,7 +189,7 @@ for (let i = 0; i < pairs.length; i++) {
   }
 }
 
-// Set PureCloud settings
+// Set Genesys Cloud settings
 // Calling setEnvironment to set the current organization region (mypurecloud.ie)
 apiClient.setEnvironment("mypurecloud.ie");
 // Calling setPersistSettings to keep and to store authorization data locally (in my web browser)
@@ -197,7 +197,7 @@ apiClient.setEnvironment("mypurecloud.ie");
 apiClient.setPersistSettings(true, appName);
 
 
-// Accessing purecloud objects
+// Accessing Genesys Cloud objects
 $(document).ready(() => {
 
     // The next lines will be executed in the 2 phases
@@ -251,7 +251,7 @@ $(document).ready(() => {
 
 If you are creating an application which will run in your Web browser, you could leverage the DOM window localStorage using javascript.
 
-With [DOM window localStorage](https://www.w3schools.com/jsref/prop_win_localstorage.asp) approach, even if I decided to have a single url for the application and the OAuth client Redirect URI (and a single page of code to manage both phases), <u>I can manage the Genesys Cloud (PureCloud) region dynamically in my code if I need to (application available in multiple PureCloud regions)</u>. This is what I'll show in the example below.
+With [DOM window localStorage](https://www.w3schools.com/jsref/prop_win_localstorage.asp) approach, even if I decided to have a single url for the application and the OAuth client Redirect URI (and a single page of code to manage both phases), <u>I can manage the Genesys Cloud (PureCloud) region dynamically in my code if I need to (application available in multiple Genesys Cloud regions)</u>. This is what I'll show in the example below.
 
 In the Custom Client Application, I am going to define the Application URL (using pcEnvironment built-in parameter this time) as: *https://my_web_server/index.html?environment=&#123;&#123;pcEnvironment&#125;&#125;&langTag=&#123;&#123;pcLangTag&#125;&#125;&userType=agent*    
 *NB: That's what I referenced as $URL_1$ above.*
@@ -306,7 +306,7 @@ const clientId = "abcdefgh12345678 - replace with your OAuth clientId"
 // This is because my $URL_1$ and my $URL_2$ have same origin and path (only difference is the query parameters)
 const redirectUri = window.location.origin + window.location.pathname;
 
-// Set purecloud objects
+// Set Genesys Cloud objects
 const platformClient = require('platformClient');
 const apiClient = platformClient.ApiClient.instance;
 
@@ -347,7 +347,7 @@ let environment = _processQueryParameters(tmpEnvironment, appName + ":environmen
 let langTag = _processQueryParameters(tmpLangTag, appName + ":langTag", DEFAULT_LANG_TAG);
 let userType = _processQueryParameters(tmpUserType, appName + ":userType", DEFAULT_USER_TYPE);
 
-// Set PureCloud settings
+// Set Genesys Cloud settings
 // Calling setEnvironment to set the current organization region (mypurecloud.ie - taken from the pcEnvironment custom query parameter)
 apiClient.setEnvironment(environment);
 // Calling setPersistSettings to keep and to store authorization data locally (in my web browser)
@@ -355,7 +355,7 @@ apiClient.setEnvironment(environment);
 apiClient.setPersistSettings(true, appName);
 
 
-// Accessing purecloud objects
+// Accessing Genesys Cloud objects
 $(document).ready(() => {
 
     // The next line will be executed in the 2 phases
