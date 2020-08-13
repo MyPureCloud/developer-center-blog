@@ -7,7 +7,7 @@ author: jack.nichols@genesys.com
 
 
 
-Since we released our PureCloud and Amazon Lex integration last year we have spent a lot of time with customers to explain the integration, talking about about how to best use the technology to solve their use cases, and honestly helping dispel the myths around the technology.  Thus we decided for our Genesys Xperience19 conference this year we wanted to show how easy it is to create an interaction flow in PureCloud integrated with a bot built with Amazon Lex. What better way to showcase this than to build a bot for one of our favorite 80’s small businesses, the Ghostbusters! 
+Since we released our Genesys Cloud and Amazon Lex integration last year we have spent a lot of time with customers to explain the integration, talking about about how to best use the technology to solve their use cases, and honestly helping dispel the myths around the technology.  Thus we decided for our Genesys Xperience19 conference this year we wanted to show how easy it is to create an interaction flow in Genesys Cloud integrated with a bot built with Amazon Lex. What better way to showcase this than to build a bot for one of our favorite 80’s small businesses, the Ghostbusters! 
 
 Like any growing business the Ghostbusters are dealing with some of the common issues:
 * trying to keep up with the growing ways people want to communicate with them
@@ -39,14 +39,14 @@ Part 1 - Setting up the Amazon Lex Bot
 
 * In part 1 we will utilize Amazon Lex to build a simple SMS bot that will take inbound SMS requests and identify if the intent of the request is urgent or non-urgent for routing. From there we will collect the needed customer information to continue to route the request to the correct end department.
 
-Part 2 - Integrating your Amazon Lex bots into your PureCloud organization
+Part 2 - Integrating your Amazon Lex bots into your Genesys Cloud organization
 
-* In Part 2 we will learn how to integrate Amazon Lex with PureCloud for use in architect flows. 
+* In Part 2 we will learn how to integrate Amazon Lex with Genesys Cloud for use in architect flows. 
 * _Note for the in person workshop this part will already be done_
 
-Part 3 - Setting up the PureCloud Inbound SMS Flow
+Part 3 - Setting up the Genesys Cloud Inbound SMS Flow
 
-* In Part 3 we will setup an inbound PureCloud SMS Messaging flow integrated with your Lex bot for inbound message processing.
+* In Part 3 we will setup an inbound Genesys Cloud SMS Messaging flow integrated with your Lex bot for inbound message processing.
 
 Part 4 -  Ways to expand the logic and use case
 
@@ -209,21 +209,21 @@ Slot Prompt: **What is the best email for us to contact you on?**
 
 ![Bot Request](Bot_HauntingRequest.png)
 
-## Part 2 -  Integrating your Amazon Lex bots into your PureCloud organization
+## Part 2 -  Integrating your Amazon Lex bots into your Genesys Cloud organization
 
-As this part of the in in person Xperience19 workshop has already been completed for you. To learn more about this you can go to [Integrating PureCloud with Amazon Lex](https://help.mypurecloud.com/articles/about-the-amazon-lex-integration/)
+As this part of the in in person Xperience19 workshop has already been completed for you. To learn more about this you can go to [Integrating Genesys Cloud with Amazon Lex](https://help.mypurecloud.com/articles/about-the-amazon-lex-integration/)
 
 
 
-## Part 3 - Setting up the PureCloud Inbound SMS Flow
+## Part 3 - Setting up the Genesys Cloud Inbound SMS Flow
 
-In this part of the workshop we are going to access PureCloud, build out an inbound SMS flow and and integrate your bot into the flow for use.
+In this part of the workshop we are going to access Genesys Cloud, build out an inbound SMS flow and and integrate your bot into the flow for use.
 
-### Login to PureCloud and setup your user skills for the lab
+### Login to Genesys Cloud and setup your user skills for the lab
 
-For this part first we need to access your PureCloud organization that we will build the new SMS flow in. Once in the organization will then add a skill that we will use for testing the routing of a haunting SMS to your team queue. _Note you should login to your own organization if not part of the in person Xperience19 workshop_
+For this part first we need to access your Genesys Cloud organization that we will build the new SMS flow in. Once in the organization will then add a skill that we will use for testing the routing of a haunting SMS to your team queue. _Note you should login to your own organization if not part of the in person Xperience19 workshop_
 
-1.) First we need to login to PureCloud by navigating in a chrome browser to (https://login.mypurecloud.com)
+1.) First we need to login to Genesys Cloud by navigating in a chrome browser to (https://login.mypurecloud.com)
 Next we will need to make sure we are accessing the correct organization:
 * Click on the “change organization” on the right side of the screen
 * Once on the organization page you will need to input the lab organization name provided in the workshop. Then click “Next”
@@ -236,7 +236,7 @@ Next we will need to make sure we are accessing the correct organization:
 4.) Once you are logged in its now time for us to  add some additional skills to your user.
 * Click on the “Admin” menu at the top of your screen
 * Once you are in the admin menu you will want to select the “People” option under People and Permissions.
-* This will bring up a list of users and you will want to select the user you logged into PureCloud with for your team from the list.
+* This will bring up a list of users and you will want to select the user you logged into Genesys Cloud with for your team from the list.
 * This will bring you to the main setup page for your user and you will need to navigate over to the “ACD Skills” menu so we can add the skills.
 * Once on the ACD Skills menu you will want to click into the box the reads “Select Skill” and type in a US State. When it shows up in the list click on the state name to add the skill. 
 * Lastly, once the skills have been added to the user make sure to click “Save” to save the new skills for the user.
@@ -244,12 +244,12 @@ Next we will need to make sure we are accessing the correct organization:
 ![PC Admin](PC_Admin.png)
 ![PC User Skill](PC_User.png)
 
-### Access PureCloud Architect flow builder to start building our new flow.
+### Access Genesys Cloud Architect flow builder to start building our new flow.
 
 We need to now launch Architect and get to the Inbound Messaging Flows.
 * Click on the “Admin” menu at the top of the screen
 * In the admin screen search for “Architect” to find the architect tool link and click on it when it comes up.
-* This will launch a new browser tab with PureCloud architect running in it.
+* This will launch a new browser tab with Genesys Cloud architect running in it.
 * Once in Architect move your cursor over to the top left of the menu over the “Flows” menu and click on the “Inbound Message” to navigate to the inbound message flows.
 
 2.) Next you need to find the flow in the list that matches your table number and click on it to go into the flow editor mode.
