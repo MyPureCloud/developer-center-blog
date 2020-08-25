@@ -70,7 +70,7 @@ Once I have a page of conversations I can then start disconnecting them. Do to t
 }
 ```
 
-Here is my full function, it is written in [GO](https://golang.org/) and the function takes a http client that is already authenticated to PureCloud. GO has GO routines built in to handle concurrent operations, so after I get a pages of conversations, I concurrently disconnect them all at once and then wait for those requests to return before getting the next page.
+Here is my full function, it is written in [GO](https://golang.org/) and the function takes a http client that is already authenticated to Genesys Cloud. GO has GO routines built in to handle concurrent operations, so after I get a pages of conversations, I concurrently disconnect them all at once and then wait for those requests to return before getting the next page.
 
 ```
 type ConversationsResponse struct {
