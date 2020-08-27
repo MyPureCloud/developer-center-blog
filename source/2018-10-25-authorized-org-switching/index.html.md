@@ -42,7 +42,7 @@ Here you can see that organization and home organization have different values, 
 
 ## Switching back to home organization
 
-When logged into an organization that isn't the user's home org, you might want to provide the option to switch back to their home organization. This is done in both the Genesys Cloud client and Developer Tools by providing a button in the top right corner to switch.
+When logged into an organization that isn't the user's home org, you might want to provide the option to switch back to their home organization. This is done in both the Genesys Cloud client and Developer Tools by clicking the current user profile and Switch to Org Trust.
 
 ![Developer Tools](homeorg.jpg)
 
