@@ -57,7 +57,7 @@ def login_purecloud_required(f):
 				session['status'] = "Valid"
 				return f(*args, **kwargs)
 			else:
-				return redirect("https://login.mypurecloud.com/oauth/authorize?client_id=" + PURECLOUD_MASTER_CLIENT_ID + "&response_type=code&redirect_uri=" + SERVER_URL + "/purecloud/oauth/callback", code=302)
+				return redirect("https://login.mypurecloud.com/oauth/authorize?client_id=" + GENESYS_CLOUD_MASTER_CLIENT_ID + "&response_type=code&redirect_uri=" + SERVER_URL + "/purecloud/oauth/callback", code=302)
 		else:
 			return f(*args, **kwargs)
 
@@ -74,7 +74,7 @@ def login_purecloud_required(f):
 def get_token_from_code(code):
 	# Prepare for POST /oauth/token request
 	requestHeaders = {
-		'Authorization': 'Basic ' + base64.b64encode(PURECLOUD_MASTER_CLIENT_ID + ':' + PURECLOUD_MASTER_CLIENT_SECRET),
+		'Authorization': 'Basic ' + base64.b64encode(GENESYS_CLOUD_MASTER_CLIENT_ID + ':' + GENESYS_CLOUD_MASTER_CLIENT_SECRET),
 		'Content-Type': 'application/x-www-form-urlencoded'
 	}
 	requestBody = {
