@@ -2,7 +2,7 @@
 title: Introducing the Genesys Cloud Developer Engagement Team
 tags: Genesys Cloud, Developer Engagement
 date: 2020-10-12
-author: John Carnell
+author: john.carnell@genesys.com
 ---
 
 Greetings.  I hope everyone is safe and healthy in these challenging times. Genesys Cloud has seen a tremendous amount of growth in the last three years.  As more and more organizations have seen the power of the Genesys Cloud platform and have embraced our open API approach to delivering a comprehensive customer experience, the Genesys Cloud leadership team has committed to continually invest in our development community and make sure their experiences with our product are unforgettable.  This investment includes the launching of a new team, the Genesys Cloud Developer Engagement team.
