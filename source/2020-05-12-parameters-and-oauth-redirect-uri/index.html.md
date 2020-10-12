@@ -11,7 +11,7 @@ So I thought it could be useful to focus on certain parts and to share what I ha
 Today, I will start with possible ways to manage custom query parameters in an Application URL, for [Custom Client Applications](https://help.mypurecloud.com/articles/about-custom-client-application-integrations/), and the Authorized Redirect URIs of an associated [OAuth client](https://help.mypurecloud.com/articles/create-an-oauth-client/).
 
 **Here is the use case:**
-1.	You want to expose a web based UI (i.e. web page) to your Genesys Cloud users (Contact Center Agents, Supervisors, Administrators, ...) and you want to expose that page directly in the Genesys Cloud client (a.k.a. PureCloud).
+1.	You want to expose a web based UI (i.e. web page) to your Genesys Cloud users (Contact Center Agents, Supervisors, Administrators, ...) and you want to expose that page directly in the Genesys Cloud client.
 2.	We'll assume that the web page you want to expose needs to leverage the Platform API (to send request to the Genesys Cloud platform, or to subscribe to notifications coming from the platform).  
 And therefore this requires to have an OAuth client defined in the configuration.
 3.	Just to restrict the use case, we'll also consider that the application we want to expose is based on "static" html and javascript code and that it uses a [Token Implicit Grant approach](/api/rest/authorization/use-implicit-grant.html).  
@@ -99,7 +99,7 @@ So let's take a look at some possible solutions to manage and to keep track of m
 There many ways to handle this, depending on how your application is written.
 * enabling Access Token persistence, in the the Platform API Javascript SDK, or not
 * using a single url for the Application URL and the OAuth Redirect URI or distinct ones
-* setting a static value for the Genesys Cloud (PureCloud) region in your code (if your application is available in a single region) or not
+* setting a static value for the Genesys Cloud region in your code (if your application is available in a single region) or not
 
 In the next examples, I have decided to take the following approach and constraints:
 * use the same URI in the Application URL and in the OAuth client Redirect URI
@@ -117,7 +117,7 @@ However, you don't want to pass too much data using the state parameter, or you 
 
 If you have a ton of info that you need to track, consider using DOM Window localStorage (if applicable - i.e. Web browser executing the javascript code - see details in next section), or keeping the data server-side on your web server somewhere.
 
-As I decided here to have a single url for the Application and the OAuth client Redirect URI (and a single page of code to manage both phases), <u>in this this example, I will have to define the Genesys Cloud (PureCloud) region statically in my code</u>.
+As I decided here to have a single url for the Application and the OAuth client Redirect URI (and a single page of code to manage both phases), <u>in this this example, I will have to define the Genesys Cloud region statically in my code</u>.
 
 _NB: If you want your application to handle multiple Genesys Cloud regions dynamically, and to use the recommended OAuth state parameter approach, you would have to implement this a bit differently.  
 One possible way would be to have a specific URI for the Application URL (like *https://my_web_server/index.html?environment=&#123;&#123;pcEnvironment&#125;&#125;&langTag=&#123;&#123;pcLangTag&#125;&#125;&userType=agent*) and one entry for each region you want to support in the OAuth client Redirect URIs (like *https://my_web_server/oauthcallback/us-east-1*, *https://my_web_server/oauthcallback/eu-west-1*, ...). The page attached to the Redirect URIs could then extract the region name from the URI.  
@@ -251,7 +251,9 @@ $(document).ready(() => {
 
 If you are creating an application which will run in your Web browser, you could leverage the DOM window localStorage using javascript.
 
+
 With [DOM window localStorage](https://www.w3schools.com/jsref/prop_win_localstorage.asp) approach, even if I decided to have a single url for the application and the OAuth client Redirect URI (and a single page of code to manage both phases), <u>I can manage the Genesys Cloud (PureCloud) region dynamically in my code if I need to (application available in multiple Genesys Cloud regions)</u>. This is what I'll show in the example below.
+
 
 In the Custom Client Application, I am going to define the Application URL (using pcEnvironment built-in parameter this time) as: *https://my_web_server/index.html?environment=&#123;&#123;pcEnvironment&#125;&#125;&langTag=&#123;&#123;pcLangTag&#125;&#125;&userType=agent*    
 *NB: That's what I referenced as $URL_1$ above.*

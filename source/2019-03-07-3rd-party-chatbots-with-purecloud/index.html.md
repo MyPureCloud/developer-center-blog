@@ -3,10 +3,17 @@ title: 3rd Party Chatbots with Genesys Cloud
 tags: devcenter, howwedoit
 date: 2019-03-07
 author: daniel.szlaski@genesys.com
+stale: true
 ---
 
 
 Genesys Cloud will be introducting [Guest Chat APIs](/api/webchat/guestchat.html) in an upcoming update. They are currently in beta as of this writing. Using these Guest Chat APIs and a little bit of development you can create a fully functional Chat Bot integrated with Genesys Cloud. This will provide a seamless experience for the end Customer (capability: switching between the Bot engine and a real Agent) along with access to multiple channels like Skype, Facebook Messenger, Slack and more.
+
+:::warning
+**Stale Content Notice**
+
+This page has been flagged as containing outdated information. Some portions of the content or referenced resources have been identified as being no longer accurate. The page has been determined to provide value even though some parts are outdated, and will remain in place until the content is no longer relevant.
+:::
 
 ![Bot and Agent View](side-by-side.png)
 
