@@ -17,7 +17,7 @@ In this blog post, we want to share some of the things you will be seeing throug
 
 ## Developer Content
 
-**Content is king**.  We have a lot of really good content on our [Genesys Cloud developer center](https://developer.mypurecloud.com) site, but we can make it even better.  Starting now and throughout 2021, we are focused on building `Developer Starting Guides` that will comprehensively cover key development topics within Genesys Cloud.  These `Developer Starting Guides` will demonstrate in depth how to use the Genesys Cloud APIs to carry out tasks in such areas as:  User Provisioning, Analytics, Integration and Conversations.  These guides will not be the tightly focused tutorials we currently have, but will instead be, much broader in their purview, showing developers how to leverage our APIs to "connect" the dots across all of our services.  
+**Content is king**.  We have a lot of really good content on our [Genesys Cloud developer center](https://developer.mypurecloud.com) site, but we can make it even better.  Starting now and throughout 2021, we are focused on building `Developer Starting Guides` that will comprehensively cover key development topics within Genesys Cloud.  These `Developer Starting Guides` will demonstrate in depth how to use the Genesys Cloud APIs to carry out tasks in such areas as:  User Provisioning, Analytics, Integration and Conversations.  These guides will not be the tightly focused tutorials we currently have, but will instead be much broader in their purview, showing developers how to leverage our APIs to "connect" the dots across all of our services.  
 
 Our first `Developer Starting Guide` will cover user provisioning and will be available in the next month.  
 
@@ -31,7 +31,7 @@ In next 9 months, you are going to see a reorganization and relaunch of our [Gen
 
 ## Developer Tooling 
 
-We get a lot of positive feedback on our developments tools.  We want to continue to build out these capabilities, by integrating them directly into our content and APIs. Our goal is to provide a seamless experience so that you can access the development tools while reading the content on the site.  In addition, we want to be able to expand our tool set by including new debugging and monitoring tools that will give you greater insight into how your applications are interacting with Genesys Cloud.
+We get a lot of positive feedback on our developer tools.  We want to continue to build out these capabilities, by integrating them directly into our content and APIs. Our goal is to provide a seamless experience so that you can access the developer tools while reading and working through the content on the site.  In addition, we want to be able to expand our toolset by including new debugging and monitoring tools that will give you greater insight into how your applications are interacting with Genesys Cloud.
 
 ## Closing Thoughts
 
@@ -39,7 +39,7 @@ I am extremely excited with the formation of this new team.  Our team is conside
 
 I would love to hear from you and get your thoughts about our team and our mission.  Please feel to free to leave questions and comments in the discussion forum link at the bottom of this post. 
  
- **Let's build something cool together.**
+ **Let's build something great together.**
 
 
 John Carnell <br/>
