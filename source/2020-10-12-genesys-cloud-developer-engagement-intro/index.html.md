@@ -1,7 +1,7 @@
 ---
 title: Introducing the Genesys Cloud Developer Engagement Team
 tags: Genesys Cloud, Developer Engagement
-date: 2020-10-09
+date: 2020-10-12
 author: John Carnell
 ---
 
