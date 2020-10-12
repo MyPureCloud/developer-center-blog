@@ -54,7 +54,7 @@
   name: Daniel Szlaski
   title: Cloud Solutions Architect
   company: Genesys
-  bio: Daniel is a Cloud Solutions Architect at Genesys hailing from Poland. He has been with Genesys since 2016. 
+  bio: Daniel is a Cloud Solutions Architect at Genesys hailing from Poland. He has been with Genesys since 2016.
 - email: russelle.carvajal@genesys.com
   name: Russelle Carvajal
   title: Development Support Associate
@@ -80,3 +80,8 @@
   title: Sr Development Support Engineer (Dev Ecosystem)
   company: Genesys
   bio: Jerome has been with Genesys since 1999 holding different positions across the company (Professional Services, Pre-Sales, Product Management, Solutions Architect and now Support in Dev Ecosystem).
+- email: john.carnell@genesys.com
+  name: John Carnell
+  title: Architect, Team Lead - Developer Engagement
+  company: Genesys
+  bio: John has been with Genesys since 2015.  He spent the last 5 years working within the Edge Infrastructure Team and recently took on the job of launching the Genesys Cloud Developer Engagement team.  John is a prolific speaker and writer. He regularly speaks at conferences and industry user groups. Over the last 20 years, John has authored, co-authored and been a technical reviewer for a number of Java-based technology books and industry publications.
