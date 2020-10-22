@@ -9,7 +9,7 @@ Integration. It's not the most fun part of software development, but it is one o
 
 This article is going to walk through what are the different styles of cloud integration and talk specifically about which Genesys Cloud technologies are available for each integration style.  
 
-:::Some thoughts on integration styles
+:::{"alert":"info","title":"On building distributed applications","autoCollapse":true}
 The integration styles defined in this article are meant to be a very broad-based definition of integration types. I have not many any direct attempt to tie these broad styles into the more traditional enterprise integration patterns found in Gregor Hohope and Bobby Wolfe's seminal book on integration: [Enterprise Integration Patterns](https://www.amazon.com/o/asin/0321200683/ref=nosim/enterpriseint-20). The patterns defined in this book are still very relevant, but tend to be more fine-grained and focused on integration patterns of systems within the four-walls of an organization. If you are interested in finding out more about these patterns, I also recommend visiting the [companion web-site](https://www.enterpriseintegrationpatterns.com/) for the book.  
 :::
 
@@ -50,7 +50,7 @@ Michael covers the challenges of building distributed systems in detail and also
 :::
 
 
-The second thing you need to consider is how quickly you are going consume the Genesys Cloud APIs and at what volume. As a general policy, Genesys does not try to monetize the invocation of their APIs. However, we do implement [API rate limiting](/api/rest/rate_limits.html) and [API fair usage](https://help.mypurecloud.com/articles/routing-usage/) policies to protect the overall integrity of the Genesys Cloud platform and ensure that Genesys Cloud consumers are consuming APIs responsibly. Make sure before you undertake a new integration you understand:
+The second thing you need to consider is how quickly you are going consume the Genesys Cloud APIs and at what volume. As a general policy, Genesys does not try to monetize the invocation of their APIs. However, we do implement [API rate limiting](/api/rest/rate_limits.html) and [API fair usage](https://help.mypurecloud.com/articles/routing-usage/) policies to protect the overall integrity of the Genesys Cloud platform and ensure that Genesys Cloud consumers are consuming APIs responsibly. Before you undertake a new integration, make sure you understand:
 
 1.  The criticality of the API call within your workflow and protect your application appropriately.
 2.  The API invocation density of your integration. How quickly will your integration invoke an API?
@@ -60,7 +60,7 @@ Additional information about the Genesys Cloud platform API can be found [here](
 
 ### Data Actions
 
-[Data actions](https://help.mypurecloud.com/articles/about-genesys-cloud-data-actions-integration/) allow you to declaratively invoke a third-party web service or even a Genesys platform API from within a Genesys Cloud script, dialer flow, or  pre-call rule. Genesys Cloud data actions are not invoked like the Genesys Cloud REST APIs. Instead they are configured through the Genesys Cloud UI and the mapping of the request and response for the invocation is performed through JSON-Path transformations. Genesys Cloud offers a number of predefined data actions for third-party vendors including:  SalesForce, ZenDesk and Adobe. In addition, if a predefined data action does not exist within Genesys Cloud, you can configure a generic action to invoke a webservice or an AWS Lambda.
+[Data actions](https://help.mypurecloud.com/articles/about-genesys-cloud-data-actions-integration/) allow you to declaratively invoke a third-party web service or even a Genesys platform API from within a Genesys Cloud script, dialer flow, or  pre-call rule. Genesys Cloud data actions are not invoked like the Genesys Cloud REST APIs. Instead they are configured through the Genesys Cloud UI and the mapping of the request and response for the invocation is performed through JSON-Path transformations. Genesys Cloud offers a number of predefined data actions for third-party vendors including:  SalesForce, ZenDesk and Adobe. In addition, if a predefined data action does not exist within Genesys Cloud, you can configure a generic action to invoke a web service or an AWS Lambda.
 
 ### Webhooks
 There is a third class of API-integrations supported within Genesys Cloud: web hooks. A webhook is a user-defined callback where the a user of a cloud-based platform registers an HTTP-based (usually JSON-based) web service that will be called by the cloud-service provider back into the user's application. This is the reverse of what normally happens so rather then user calling an API on the cloud-provider, the cloud-provider calls a web service within the user's data center. Webhooks are most commonly used when you are integrating system-to-system and you want to post the results of a workflow over to another workflow.
@@ -79,7 +79,7 @@ There are a lot of different mechanisms for pulling data out of a cloud provider
 
 The Analytics API is not a monolithic API, but rather encompasses three levels of data detail:
 
-1. [Observations](api/rest/v2/analytics/overview.html#instantaneous_observations_metrics).  The Observation APIs return information about the current state of objects within Genesys Cloud. Observation queries are meant to be a point in time snapshot of what is going on in your contact center. They offer limited filtering and no date-based queries.
+1. [Observations](/api/rest/v2/analytics/overview.html#instantaneous_observations_metrics).  The Observation APIs return information about the current state of objects within Genesys Cloud. Observation queries are meant to be a point in time snapshot of what is going on in your contact center. They offer limited filtering and no date-based queries.
 2. [Aggregate](/api/rest/v2/analytics/overview.html#aggregate_metrics). The Aggregate APIs return a summarized view of your call center data over time with the ability to collect the data in time buckets. This API has a rich query language which allows you to "slice-and-dice" the data across different dimensions.
 3. [Detail](/api/rest/v2/analytics/overview.html#detail_record_metrics). The Details APIs offer a fine-grained level of detail of the user and conversation details. It acts as a ledger of all activity associated with conversations and users. The detail records represent the building a block of a conversation which means there can be multiple pieces of data being retrieved for the same conversation.
 
@@ -95,7 +95,7 @@ So how do you deal with situations where you have low-data latency data requirem
 1. The WebSocket-Based Notification Services
 2. AWS EventBridge
 
-The WebSocket-based [Notifications](/api/rest/v2/notifications/notification_service.html) service allows you to open a web socket to Genesys Cloud and subscribe to events as they occur. Events will be published to the WebSocket. This web socket does not guarantee message delivery and if the web socket is disconnected at the time message is published, it will be lost. This puts the onus on you as the developer to maintain socket state and to build data recovery code if the socket becomes unavailable. This is usually done by using the `Details` API to retrieve any data that was missed from when the web socket went down and when a new one was established.
+The WebSocket-based [Notifications](/api/rest/v2/notifications/notification_service.html) service allows you to open a web socket to Genesys Cloud and subscribe to events as they occur. Events will be published to the WebSocket. This web socket does not guarantee message delivery and if the web socket is disconnected at the time message is published, it will be lost. This puts the onus on you as the developer to maintain socket state and to build data recovery code if the socket becomes unavailable. For example, if you are building an application that is listening for conversation details event over a web socket and you lose the web socket connection, when you re-establish the connection, you would need to use the Analytics `Details` API to retrieve any conversation data that was missed from when the web socket went down and a new socket was established.
 
 The second approach for consuming events is using the AWS EventBridge. Using AWS EventBridge, notifications from Genesys Cloud are published to AWS and then forwarded to a target object within the customer's AWS account. This target can be a Kinesis stream that can fire a Lambda or write the data to S3.  While using AWS EventBridge requires an AWS account, Genesys Cloud will attempt to deliver a message to EventBridge 7 times during a 24 hour period.  Once the message hits Kinesis, you as the integrator can configure your Kinesis stream to persist the data for up to 7 days. The AWS EventBridge is about to enter beta - watch for new documentation on this integration technology shortly.
 
@@ -108,12 +108,12 @@ The last integration style is presentation integration. This type of integration
 1. Agent based UI integrations
 2. End User based UI integrations
 
-For agent-based UI, Genesys cloud offers a number of different capabilities. For embedding custom applications within Genesys Cloud, you can leverage the [Client Apps](/api/client-apps/) framework. This framework allows you to embed an entire application as a sidebar or full frame application within the Genesys Cloud user interface. For embedding Genesys Cloud functionality inside your own applications, you can leverage the [Embeddable](/api/embeddable-framework/). In addition, if you want to embed Genesys Cloud phone controls via WebRTC into your own applications, you can leverage the [WebRTC SDK](/api/webrtcsdk/).
+For agent-based UI, Genesys cloud offers a number of different capabilities. For embedding custom applications within Genesys Cloud, you can leverage the [Client Apps](/api/client-apps/) framework. This framework allows you to embed an entire application as a sidebar or full frame application within the Genesys Cloud user interface. For embedding Genesys Cloud functionality inside your own applications, you can leverage the [Embeddable Framework](/api/embeddable-framework/). In addition, if you want to embed Genesys Cloud phone controls via WebRTC into your own applications, you can leverage the [WebRTC SDK](/api/webrtcsdk/).
 
 The above technologies specifically focus on building presentation capabilities for agents. For end-user integrations, Genesys Cloud provides our chat SDKs. Our current [chat](/api/webchat/) SDK provides the ability to embed chat integrations with Genesys Cloud-based agents directly in your customer facing applications. This chat API provides basic chat capabilities. The Genesys Cloud chat team is working on a next-generation Web Messaging that will provide rich-media capabilities for your chat integrations and will be hitting beta shortly.
 
 ## Closing thoughts
-Wow!  I know I have thrown a lot of information at you, but the reality is that the topic of integration is a broad and deep one. In this article we covered the three major styles of cloud-based integration:
+Wow!  I know I have thrown a lot of information at you, but the reality is that the topic of integration is a broad and deep one. In this article the three major styles of cloud-based integration were covered.  These integration styles are:
 
 1. Behavioral
 2. Data
