@@ -9,7 +9,7 @@ Integration. It's not the most fun part of software development, but it is one o
 
 This article is going to walk through what are the different styles of cloud integration and talk specifically about which Genesys Cloud technologies are available for each integration style.  
 
-:::{"alert":"info","title":"On building distributed applications","autoCollapse":true}
+:::{"alert":"info","title":"On building distributed applications","autoCollapse":false}
 The integration styles defined in this article are meant to be a very broad-based definition of integration types. I have not many any direct attempt to tie these broad styles into the more traditional enterprise integration patterns found in Gregor Hohope and Bobby Wolfe's seminal book on integration: [Enterprise Integration Patterns](https://www.amazon.com/o/asin/0321200683/ref=nosim/enterpriseint-20). The patterns defined in this book are still very relevant, but tend to be more fine-grained and focused on integration patterns of systems within the four-walls of an organization. If you are interested in finding out more about these patterns, I also recommend visiting the [companion web-site](https://www.enterpriseintegrationpatterns.com/) for the book.  
 :::
 
@@ -43,7 +43,7 @@ Genesys Cloud Offers three different mechanisms for carrying out behavioral inte
 
 Genesys Cloud is an API-first platform. All of the business logic, workflows, and processes carried out in Genesys Cloud are exposed as REST-based web services. The Genesys Cloud UI is built on the same APIs that we expose to our customers. We offer a very wide variety of APIs to carry out common business tasks and we even have had some customers who have completely forgone the use of the Genesys Cloud UI and instead have completely built end-user facing applications on Genesys Cloud APIs. Most of our APIs are built around a synchronous request-response model. There are several things you need to keep in mind when looking at using our API.  First, you are integrating over the internet using a distributed web protocol. You need to take into account that failures can occur and you need to build into your application common API invocation best practices like timeouts, retry, circuit breakers, bulkheads, fallback calls, and caching when calling Genesys Cloud APIs. 
 
-:::{"alert":"info","title":"On building distributed applications","autoCollapse":true}
+:::{"alert":"info","title":"On building distributed applications","autoCollapse":false}
 Cloud-based applications are distributed applications and the integrations built for them must take failure into account. If you are not familiar with the concepts of timeouts, retry, circuit breakers, bulkheads, etc., I highly recommend you take a look Michael Nygard's book [Release It!: Design and Deploy Production-Ready software](https://www.amazon.com/Release-Design-Deploy-Production-Ready-Software-ebook/dp/B079YWMY2V/ref=sr_1_2?dchild=1&gclid=CjwKCAjwz6_8BRBkEiwA3p02Vf8U0Mcz2-JXH9NlvRRKU5UE_NzqqEl879lei8Ln9opK-wZBaAld2BoC_loQAvD_BwE&hvadid=250075996547&hvdev=c&hvlocphy=9009669&hvnetw=g&hvqmt=e&hvrand=6812719388737011366&hvtargid=kwd-404904995006&hydadcr=22562_10354930&keywords=release+it+2nd+edition&qid=1603059694&sr=8-2&tag=googhydr-20) 
 
 Michael covers the challenges of building distributed systems in detail and also walks through many of the techniques I have referenced above.
