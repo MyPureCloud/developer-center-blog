@@ -35,9 +35,8 @@ In the next year we will be writing a number of additional Developer Starting gu
 
 Even if you are an experienced Genesys Cloud developer, I hope you take the time to the look this first guide.  Your feedback is always welcome.
 
-Lets build something together.
+Lets build something great together.
 
-Thanks,
-   John Carnell 
-   Manager, Developer Engagement
+John Carnell 
+Manager, Developer Engagement
 
