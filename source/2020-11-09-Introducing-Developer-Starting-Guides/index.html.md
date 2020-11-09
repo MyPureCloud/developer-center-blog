@@ -1,5 +1,5 @@
 ---
-title: Introducing our first developer starting guide
+title: Introducing our first Developer Starting Guide
 tags: Genesys Cloud, Developer Engagement
 date: 2020-11-09
 author: john.carnell@genesys.com
