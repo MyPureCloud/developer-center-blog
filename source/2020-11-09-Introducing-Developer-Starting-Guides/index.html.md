@@ -7,7 +7,7 @@ author: john.carnell@genesys.com
 
 Greetings. I hope everyone continues to stay safe and healthy in these challenging times. The Developer Engagement team has been busy at work, laying the foundation for the relaunch of the Genesys Cloud Developer Center.  Expect next year to see a new look and feel for the site, new developer tools and most importantly new content.  Genesys Cloud is a big platform and while we have a deep repository of API-level documentation, we do not have a lot of content that helps developers who are new to Genesys Cloud "connect" the dots with our APIs.  As a result, new developers have to piece together things through developer forum posts, experimentation and yes, fits of "rage" coding.  
 
-We want change that.  I am pleased to announce the release of our first in a series of new content: [Developer Starting Guides](Developer Starting Guide](/startingguides/).  These guides take a use-case driven approach that focuses on a real-world problem a Genesys Cloud developer might encounter.  Every Developer Starting Guide includes:
+We want change that.  I am pleased to announce the release of our first in a series of new content: [Developer Starting Guides](/startingguides/).  These guides take a use-case driven approach that focuses on a real-world problem a Genesys Cloud developer might encounter.  Every Developer Starting Guide includes:
 
 1. A full-length tutorial that covers significantly more detail then what has been found in our more traditional tutorials.
 2. Insights about developing with Genesys Cloud APIs and an examination of when our APIs can be used inefficiently or inappropriately.
