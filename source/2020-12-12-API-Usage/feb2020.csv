@@ -50,7 +50,7 @@
 "2020-02-11T00:00:00Z","Client Creds","api/v2/users/{userId}",37,32,0,0,0,5
 "2020-02-11T00:00:00Z","Client Creds","api/v2/users/{userId}/profileskills",4,4,0,0,0,0
 "2020-02-11T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",39,39,0,0,0,0
-"2020-02-12T00:00:00Z","API Central","api/v2/users/me",2,2,0,0,0,0
+"2020-02-12T00:00:00Z","Mike Implicit Grant,"api/v2/users/me",2,2,0,0,0,0
 "2020-02-12T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",7,7,0,0,0,0
 "2020-02-12T00:00:00Z","Client Creds","api/v2/users/{userId}",35,35,0,0,0,0
 "2020-02-12T00:00:00Z","Client Creds","api/v2/users/{userId}/profileskills",15,15,0,0,0,0
@@ -64,7 +64,7 @@
 "2020-02-18T00:00:00Z","Client Creds","api/v2/users/me",1,0,0,1,0,0
 "2020-02-18T00:00:00Z","Client Creds","api/v2/authorization/permissions",1,1,0,0,0,0
 "2020-02-18T00:00:00Z","Client Creds","api/v2/users",1,1,0,0,0,0
-"2020-02-19T00:00:00Z","API Central","api/v2/users/me",4,4,0,0,0,0
+"2020-02-19T00:00:00Z","Mikes Implicit Grant","api/v2/users/me",4,4,0,0,0,0
 "2020-02-19T00:00:00Z","Client Creds","api/v2/users",5,5,0,0,0,0
 "2020-02-19T00:00:00Z","Client Creds","api/v2/users/{userId}/presences/{sourceId}",4,4,0,0,0,0
 "2020-02-19T00:00:00Z","Client Creds","api/v2/notifications/channels",2,2,0,0,0,0
@@ -119,7 +119,7 @@
 "2020-02-27T00:00:00Z","Prince Implicit Grant","api/v2/notifications/channels",2,2,0,0,0,0
 "2020-02-27T00:00:00Z","Prince Implicit Grant","api/v2/users/me",2,2,0,0,0,0
 "2020-02-27T00:00:00Z","Prince Implicit Grant","api/v2/tokens/me",2,2,0,0,0,0
-"2020-02-28T00:00:00Z","API Central","api/v2/users/me",2,2,0,0,0,0
+"2020-02-28T00:00:00Z","Mikes Implicit Grant","api/v2/users/me",2,2,0,0,0,0
 "2020-02-28T00:00:00Z","Client Creds","api/v2/users/{userId}/profileskills",2,2,0,0,0,0
 "2020-02-28T00:00:00Z","Client Creds","api/v2/users/{userId}/presences/{sourceId}",4,4,0,0,0,0
 "2020-02-28T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",55,55,0,0,0,0

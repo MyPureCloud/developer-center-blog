@@ -95,7 +95,6 @@ If you take the ```executionId``` returned above and now call the *GET /api/v2/u
 
 *Note*: Remember the data you are querying on is 24 hours old and updated once a day. This means you should not pull the *GET /api/v2/usage/query/{executionId}/results* endpoint aggressively after you have issue a query.  Once every 1-2 minutes should be more then adequate for many queries.  If you are overly aggressive (e.g. polling the endpoint every 20ms, you can end up rate limiting the OAuth2 client) 
 
-
 For the above query your returned payload from the *Usage API* call would look something like this:
 
 ```json
@@ -130,8 +129,8 @@ For the above query your returned payload from the *Usage API* call would look s
       "requests": 10
     },
     {
-      "clientId": "739d8216-307f-42c1-ac51-5dc332f83114",
-      "clientName": "API Central",
+      "clientId": "739d8216-307f-42c1-ac51-5dc1112f83114",
+      "clientName": "Mikes Implicit Grant Example",
       "organizationId": "",
       "userId": "",
       "templateUri": "",
@@ -221,8 +220,8 @@ Whoa! Now we get a lot more data back from our API requests. That is because eac
 by OAuth2 client and the individual Genesys Cloud APIs invoked by the client.
 
 ## Breaking out API calls by Days, Week, and Month
-The last thing we are going to look at is how we can further refine the API usage numbers retrieved by breaking the returned data down into time buckets. This is done via the ```granularity``` field. 
-This field will allow you to break your numbers down into time buckets of ```Day```,```Week```, or ```Month```. Let's continue to build out our query using the *Usage API* to 
+The last thing we are going to look at is how we can further refine the API usage numbers retrieved by breaking the returned data down into time buckets. This is done via the `granularity` field. 
+This field will allow you to break your numbers down into time buckets of `Day`,`Week`, or `Month`. Let's continue to build out our query using the *Usage API* to 
 show all API usage for the month of Feb. 2020, broken out by OAuth2 Client and the URI called by the OAuth2 client. The query issued would 
 look this:
 
@@ -302,7 +301,7 @@ data for org presented in an Excel pivot table.
 
 ![Excel Pivot Table](excel_pivot.png)
 
-**Note:** In the additional resources section of this blog post, I have added links to the sample data files I used so you can download them and experiment with them.
+**Note:** In the additional resources section of this blog post, I have added links to the sample data files I used so you can download them and experiment with them.  I have also include a copy of the jq command I used to transform the data.
 
 # Closing Thoughts
 I often tell developers that writing an integration is only half the effort. The other half is operationalizing it so that it can be monitored and tuned as the environment in runs in changes. 
@@ -317,5 +316,6 @@ a nasty interruption in your business operations in the future.
 3. [jq](https://stedolan.github.io/jq/) 
 4. [Sample JSON output](feb2020.json)
 5. [Sample CSV file](feb2020.csv)
+7. [JQ Command for Transforming data](jq-transformation.txt)
 6. [Sample Excel Pivot Table](feb2020.xls)
 
