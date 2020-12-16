@@ -154,7 +154,7 @@ There are a three things that you need to remember with data retrieved from the 
 
 1. All data is 24 hours old. The Usage API does not provide real-time API statistics.
 2. The data statistics are usually updated at midnight in the Genesys Cloud region you are retrieving the data from. 
-3. Currently, you can query back to 2018 for your API data. How far back you can query API data may change in the future.
+3. You can query back to 2018 for your API data.
 
 ## Retrieving total Genesys Cloud API calls grouped by OAuth2 client and the endpoints the client calls
 Remember, a single OAuth2 client can call multiple Genesys Cloud APIs. The *Usage API* allows you to breakdown the metrics returned into more fine-grained numbers via 
