@@ -289,12 +289,13 @@ cat feb2020.json| jq -r '.results | sort_by(.date,.clientName)'| jq -r '. | map(
 
 This a big blob of command line text but if you break it apart it is doing the following work:
 
-`cat feb2020.json                                                <-- Display the contents of the file. The data is piped to jq.
+```
+cat feb2020.json                                                <-- Display the contents of the file. The data is piped to jq.
 | jq -r '.results  |   sort_by(.date,.clientName)'              <-- Extract the results field from the JSON returned and then sort it by date and clientName
 | jq -r '. | map({date: .date, clientName: .clientName, .....'  <-- Transform the JSON into a new json body where the date is the first field returned and all the status fields are extracted
 | jq -r '(.[0] | keys_unsorted) as $keys | ([$keys] + map([.[ $keys[] ]])) [] | @csv' <-- Build the data into a a CSV 
 > feb2020.csv                                                   <-- Redirects the output from jq into a CSV file.
-`
+```
 
 Once I have all of the data in a CSV format, I can import it into Excel spreadsheet, build a pivot table and do all sorts of analysis on it. The image below shows the Feb-2020 CSV 
 data for org presented in an Excel pivot table.
@@ -304,7 +305,7 @@ data for org presented in an Excel pivot table.
 **Note:** In the additional resources section of this blog post, I have added links to the sample data files I used so you can download them and experiment with them.  I have also include a copy of the jq command I used to transform the data.
 
 # Closing Thoughts
-I often tell developers that writing an integration is only half the effort. The other half is operationalizing it so that it can be monitored and tuned as the environment it runs in changes. 
+I often tell developers that writing an integration is only half the effort. The other half is operationalizing it so that it can be monitored and tuned as the environment in runs in changes. 
 Changes always happen within a call center, it is often just a matter of the velocity of that change and the impact it has on the underlying systems that support it.
 
 Have a plan in place for how you are going to monitor the API usage before deploying an integration. Thinking about your integrations API usage ahead of time can prevent 
