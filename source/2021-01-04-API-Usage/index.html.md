@@ -83,7 +83,7 @@ link called *POST Query organization API Usage*. The image below shows the navig
 
 ![Usage API](usage_field.png)
 
-You can then execute your query based on the data shown below,in the API Explorer.
+You can then execute your query based on the data shown below in the API Explorer.
 
 ![Simple Query Request](./simple_query_request.png)
 
@@ -93,7 +93,7 @@ Once the call is made you will get the ```executionId``` back of the submitted q
 
 If you take the ```executionId``` returned above and now call the *GET /api/v2/usage/query/{executionId}/results* endpoint you will get back one of two results. 
 
-*Note*: Remember the data you are querying on is 24 hours old and updated once a day. This means you should not pull the *GET /api/v2/usage/query/{executionId}/results* endpoint aggressively after you have issue a query.  Once every 1-2 minutes should be more then adequate for many queries.  If you are overly aggressive (e.g. polling the endpoint every 20ms, you can end up rate limiting the OAuth2 client) 
+*Note*: Remember the data you are querying on is up to 24 hours old and updated once a day. This means you should not pull the *GET /api/v2/usage/query/{executionId}/results* endpoint aggressively after you have issue a query.  Once every 1-2 minutes should be more then adequate for many queries.  If you are overly aggressive (e.g. polling the endpoint every 20ms, you can end up rate limiting the OAuth2 client) 
 
 For the above query your returned payload from the *Usage API* call would look something like this:
 
@@ -152,7 +152,7 @@ In the query above you can see that the *Usage API* return count metrics for the
 
 There are a three things that you need to remember with data retrieved from the *Usage API*:
 
-1. All data is 24 hours old. The Usage API does not provide real-time API statistics.
+1. All data is up to 24 hours old and updated once per day. The Usage API does not provide real-time API statistics.
 2. The data statistics are usually updated at midnight in the Genesys Cloud region you are retrieving the data from. 
 3. You can query back to 2018 for your API data.
 
