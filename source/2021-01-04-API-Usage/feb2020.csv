@@ -1,0 +1,129 @@
+"date","clientName","templateUri","requests","status200","status300","status400","status429","status500"
+"2020-02-02T00:00:00Z","Client Creds","api/v2/users/{userId}",16,16,0,0,0,0
+"2020-02-02T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",6,6,0,0,0,0
+"2020-02-02T00:00:00Z","Client Creds","api/v2/notifications/channels/{channelId}/subscriptions",2,2,0,0,0,0
+"2020-02-02T00:00:00Z","Client Creds","api/v2/users",5,5,0,0,0,0
+"2020-02-02T00:00:00Z","Client Creds","api/v2/users/{userId}/presences/{sourceId}",4,4,0,0,0,0
+"2020-02-02T00:00:00Z","Client Creds","api/v2/notifications/channels",2,2,0,0,0,0
+"2020-02-02T00:00:00Z","Client Creds","api/v2/users/{userId}/profileskills",5,5,0,0,0,0
+"2020-02-04T00:00:00Z","Client Creds","api/v2/notifications/channels/{channelId}/subscriptions",2,2,0,0,0,0
+"2020-02-04T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",6,6,0,0,0,0
+"2020-02-04T00:00:00Z","Client Creds","api/v2/notifications/channels",2,2,0,0,0,0
+"2020-02-04T00:00:00Z","Client Creds","api/v2/users/{userId}",16,16,0,0,0,0
+"2020-02-04T00:00:00Z","Client Creds","api/v2/users/{userId}/profileskills",5,5,0,0,0,0
+"2020-02-04T00:00:00Z","Client Creds","api/v2/users",5,5,0,0,0,0
+"2020-02-04T00:00:00Z","Client Creds","api/v2/users/{userId}/presences/{sourceId}",4,4,0,0,0,0
+"2020-02-05T00:00:00Z","Client Creds","api/v2/users/{userId}/profileskills",3,3,0,0,0,0
+"2020-02-05T00:00:00Z","Client Creds","api/v2/users/{userId}/presences/{sourceId}",6,6,0,0,0,0
+"2020-02-05T00:00:00Z","Client Creds","api/v2/users/{userId}",9,9,0,0,0,0
+"2020-02-05T00:00:00Z","Client Creds","api/v2/notifications/channels/{channelId}/subscriptions",3,3,0,0,0,0
+"2020-02-05T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",1,1,0,0,0,0
+"2020-02-05T00:00:00Z","Client Creds","api/v2/notifications/channels",3,3,0,0,0,0
+"2020-02-05T00:00:00Z","Client Creds","api/v2/users",3,3,0,0,0,0
+"2020-02-06T00:00:00Z","Client Creds","api/v2/authorization/permissions",2,2,0,0,0,0
+"2020-02-06T00:00:00Z","Client Creds","api/v2/users/me",8,0,0,8,0,0
+"2020-02-06T00:00:00Z","Client Creds","api/v2/notifications/channels/{channelId}/subscriptions",3,3,0,0,0,0
+"2020-02-06T00:00:00Z","Client Creds","api/v2/users/{userId}",9,9,0,0,0,0
+"2020-02-06T00:00:00Z","Client Creds","api/v2/users/{userId}/presences/{sourceId}",6,6,0,0,0,0
+"2020-02-06T00:00:00Z","Client Creds","api/v2/notifications/channels",3,3,0,0,0,0
+"2020-02-06T00:00:00Z","Client Creds","api/v2/users",19,19,0,0,0,0
+"2020-02-06T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",2,2,0,0,0,0
+"2020-02-06T00:00:00Z","Client Creds","api/v2/users/{userId}/profileskills",3,3,0,0,0,0
+"2020-02-07T00:00:00Z","Client Creds","api/v2/notifications/channels",3,3,0,0,0,0
+"2020-02-07T00:00:00Z","Client Creds","api/v2/users/{userId}/presences/{sourceId}",6,6,0,0,0,0
+"2020-02-07T00:00:00Z","Client Creds","api/v2/users/{userId}/profileskills",3,3,0,0,0,0
+"2020-02-07T00:00:00Z","Client Creds","api/v2/users",3,3,0,0,0,0
+"2020-02-07T00:00:00Z","Client Creds","api/v2/notifications/channels/{channelId}/subscriptions",3,3,0,0,0,0
+"2020-02-07T00:00:00Z","Client Creds","api/v2/users/{userId}",18,15,0,3,0,0
+"2020-02-07T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",3,3,0,0,0,0
+"2020-02-10T00:00:00Z","Client Creds","api/v2/notifications/channels/{channelId}/subscriptions",3,3,0,0,0,0
+"2020-02-10T00:00:00Z","Client Creds","api/v2/users/{userId}",12,12,0,0,0,0
+"2020-02-10T00:00:00Z","Client Creds","api/v2/users/{userId}/presences/{sourceId}",6,6,0,0,0,0
+"2020-02-10T00:00:00Z","Client Creds","api/v2/users",4,4,0,0,0,0
+"2020-02-10T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",25,25,0,0,0,0
+"2020-02-10T00:00:00Z","Client Creds","api/v2/notifications/channels",3,3,0,0,0,0
+"2020-02-10T00:00:00Z","Client Creds","api/v2/users/{userId}/profileskills",4,4,0,0,0,0
+"2020-02-11T00:00:00Z","Client Creds","api/v2/notifications/channels",3,3,0,0,0,0
+"2020-02-11T00:00:00Z","Client Creds","api/v2/users/{userId}/presences/{sourceId}",6,6,0,0,0,0
+"2020-02-11T00:00:00Z","Client Creds","api/v2/users",43,39,0,4,0,0
+"2020-02-11T00:00:00Z","Client Creds","api/v2/notifications/channels/{channelId}/subscriptions",3,3,0,0,0,0
+"2020-02-11T00:00:00Z","Client Creds","api/v2/users/{userId}",37,32,0,0,0,5
+"2020-02-11T00:00:00Z","Client Creds","api/v2/users/{userId}/profileskills",4,4,0,0,0,0
+"2020-02-11T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",39,39,0,0,0,0
+"2020-02-12T00:00:00Z","Mike Implicit Grant,"api/v2/users/me",2,2,0,0,0,0
+"2020-02-12T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",7,7,0,0,0,0
+"2020-02-12T00:00:00Z","Client Creds","api/v2/users/{userId}",35,35,0,0,0,0
+"2020-02-12T00:00:00Z","Client Creds","api/v2/users/{userId}/profileskills",15,15,0,0,0,0
+"2020-02-12T00:00:00Z","Client Creds","api/v2/users",15,15,0,0,0,0
+"2020-02-13T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",19,19,0,0,0,0
+"2020-02-14T00:00:00Z","Client Creds","api/v2/users/{userId}/profileskills",3,3,0,0,0,0
+"2020-02-14T00:00:00Z","Client Creds","api/v2/users/{userId}",9,9,0,0,0,0
+"2020-02-14T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",11,11,0,0,0,0
+"2020-02-14T00:00:00Z","Client Creds","api/v2/users",6,6,0,0,0,0
+"2020-02-16T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",1,1,0,0,0,0
+"2020-02-18T00:00:00Z","Client Creds","api/v2/users/me",1,0,0,1,0,0
+"2020-02-18T00:00:00Z","Client Creds","api/v2/authorization/permissions",1,1,0,0,0,0
+"2020-02-18T00:00:00Z","Client Creds","api/v2/users",1,1,0,0,0,0
+"2020-02-19T00:00:00Z","Mikes Implicit Grant","api/v2/users/me",4,4,0,0,0,0
+"2020-02-19T00:00:00Z","Client Creds","api/v2/users",5,5,0,0,0,0
+"2020-02-19T00:00:00Z","Client Creds","api/v2/users/{userId}/presences/{sourceId}",4,4,0,0,0,0
+"2020-02-19T00:00:00Z","Client Creds","api/v2/notifications/channels",2,2,0,0,0,0
+"2020-02-19T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",34,34,0,0,0,0
+"2020-02-19T00:00:00Z","Client Creds","api/v2/users/{userId}/profileskills",5,5,0,0,0,0
+"2020-02-19T00:00:00Z","Client Creds","api/v2/users/{userId}",16,16,0,0,0,0
+"2020-02-19T00:00:00Z","Client Creds","api/v2/notifications/channels/{channelId}/subscriptions",2,2,0,0,0,0
+"2020-02-19T00:00:00Z","Client Creds","api/v2/authorization/permissions",4,4,0,0,0,0
+"2020-02-20T00:00:00Z","Client Creds","api/v2/users/{userId}/presences/{sourceId}",4,4,0,0,0,0
+"2020-02-20T00:00:00Z","Client Creds","api/v2/users/{userId}",26,25,0,1,0,0
+"2020-02-20T00:00:00Z","Client Creds","api/v2/users/{userId}/profileskills",5,5,0,0,0,0
+"2020-02-20T00:00:00Z","Client Creds","api/v2/notifications/channels/{channelId}/subscriptions",2,2,0,0,0,0
+"2020-02-20T00:00:00Z","Client Creds","api/v2/authorization/permissions",2,2,0,0,0,0
+"2020-02-20T00:00:00Z","Client Creds","api/v2/notifications/channels",2,2,0,0,0,0
+"2020-02-20T00:00:00Z","Client Creds","api/v2/authorization/roles",1,1,0,0,0,0
+"2020-02-20T00:00:00Z","Client Creds","api/v2/routing/queues",13,13,0,0,0,0
+"2020-02-20T00:00:00Z","Client Creds","api/v2/users",27,27,0,0,0,0
+"2020-02-20T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",10,10,0,0,0,0
+"2020-02-20T00:00:00Z","Client Creds","api/v2/analytics/conversations/aggregates/query",16,16,0,0,0,0
+"2020-02-21T00:00:00Z","Client Creds","api/v2/users/{userId}",7,2,0,5,0,0
+"2020-02-21T00:00:00Z","Client Creds","api/v2/users",3,3,0,0,0,0
+"2020-02-21T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",39,39,0,0,0,0
+"2020-02-21T00:00:00Z","Client Creds","api/v2/telephony/providers/edges/phones",1,1,0,0,0,0
+"2020-02-23T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",24,24,0,0,0,0
+"2020-02-24T00:00:00Z","Client Creds","api/v2/users/{userId}",2,2,0,0,0,0
+"2020-02-24T00:00:00Z","Client Creds","api/v2/telephony/providers/edges/phones",2,2,0,0,0,0
+"2020-02-24T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",41,41,0,0,0,0
+"2020-02-24T00:00:00Z","Github Pages (implicit)","api/v2/authorization/permissions",4,4,0,0,0,0
+"2020-02-24T00:00:00Z","Github Pages (implicit)","api/v2/users/me",4,4,0,0,0,0
+"2020-02-24T00:00:00Z","Prince Implicit Grant","api/v2/conversations/chats",4,4,0,0,0,0
+"2020-02-24T00:00:00Z","Prince Implicit Grant","api/v2/notifications/channels",4,4,0,0,0,0
+"2020-02-24T00:00:00Z","Prince Implicit Grant","api/v2/notifications/channels/{channelId}/subscriptions",8,8,0,0,0,0
+"2020-02-24T00:00:00Z","Prince Implicit Grant","api/v2/conversations/{conversationId}",4,4,0,0,0,0
+"2020-02-24T00:00:00Z","Prince Implicit Grant","api/v2/tokens/me",5,5,0,0,0,0
+"2020-02-24T00:00:00Z","Prince Implicit Grant","api/v2/users/me",4,4,0,0,0,0
+"2020-02-24T00:00:00Z","Prince Implicit Grant","api/v2/conversations/chats/{conversationId}/messages",14,14,0,0,0,0
+"2020-02-25T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",31,31,0,0,0,0
+"2020-02-26T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",81,81,0,0,0,0
+"2020-02-27T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",18,18,0,0,0,0
+"2020-02-27T00:00:00Z","Client Creds","api/v2/notifications/channels/{channelId}/subscriptions",2,2,0,0,0,0
+"2020-02-27T00:00:00Z","Client Creds","api/v2/notifications/channels",2,2,0,0,0,0
+"2020-02-27T00:00:00Z","Client Creds","api/v2/users",5,5,0,0,0,0
+"2020-02-27T00:00:00Z","Client Creds","api/v2/users/{userId}/profileskills",5,5,0,0,0,0
+"2020-02-27T00:00:00Z","Client Creds","api/v2/users/{userId}/presences/{sourceId}",4,4,0,0,0,0
+"2020-02-27T00:00:00Z","Client Creds","api/v2/users/{userId}",16,16,0,0,0,0
+"2020-02-27T00:00:00Z","Github Pages (implicit)","api/v2/authorization/permissions",1,1,0,0,0,0
+"2020-02-27T00:00:00Z","Github Pages (implicit)","api/v2/users/me",1,1,0,0,0,0
+"2020-02-27T00:00:00Z","Prince Implicit Grant","api/v2/conversations/chats",2,2,0,0,0,0
+"2020-02-27T00:00:00Z","Prince Implicit Grant","api/v2/conversations/{conversationId}",1,1,0,0,0,0
+"2020-02-27T00:00:00Z","Prince Implicit Grant","api/v2/conversations/chats/{conversationId}/messages",2,2,0,0,0,0
+"2020-02-27T00:00:00Z","Prince Implicit Grant","api/v2/notifications/channels/{channelId}/subscriptions",3,3,0,0,0,0
+"2020-02-27T00:00:00Z","Prince Implicit Grant","api/v2/notifications/channels",2,2,0,0,0,0
+"2020-02-27T00:00:00Z","Prince Implicit Grant","api/v2/users/me",2,2,0,0,0,0
+"2020-02-27T00:00:00Z","Prince Implicit Grant","api/v2/tokens/me",2,2,0,0,0,0
+"2020-02-28T00:00:00Z","Mikes Implicit Grant","api/v2/users/me",2,2,0,0,0,0
+"2020-02-28T00:00:00Z","Client Creds","api/v2/users/{userId}/profileskills",2,2,0,0,0,0
+"2020-02-28T00:00:00Z","Client Creds","api/v2/users/{userId}/presences/{sourceId}",4,4,0,0,0,0
+"2020-02-28T00:00:00Z","Client Creds","api/v2/notifications/availabletopics",55,55,0,0,0,0
+"2020-02-28T00:00:00Z","Client Creds","api/v2/users",3,3,0,0,0,0
+"2020-02-28T00:00:00Z","Client Creds","api/v2/users/{userId}",6,6,0,0,0,0
+"2020-02-28T00:00:00Z","Client Creds","api/v2/notifications/channels/{channelId}/subscriptions",2,2,0,0,0,0
+"2020-02-28T00:00:00Z","Client Creds","api/v2/notifications/channels",2,2,0,0,0,0

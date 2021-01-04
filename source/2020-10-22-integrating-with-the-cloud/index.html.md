@@ -1,6 +1,6 @@
 ---
 title: Integrating with the Cloud
-tags: Genesys Cloud, Developer Engagement
+tags: Genesys Cloud, Developer Engagement, Integration
 date: 2020-10-22
 author: john.carnell@genesys.com
 ---
