@@ -304,7 +304,7 @@ data for org presented in an Excel pivot table.
 **Note:** In the additional resources section of this blog post, I have added links to the sample data files I used so you can download them and experiment with them.  I have also include a copy of the jq command I used to transform the data.
 
 # Closing Thoughts
-I often tell developers that writing an integration is only half the effort. The other half is operationalizing it so that it can be monitored and tuned as the environment in runs in changes. 
+I often tell developers that writing an integration is only half the effort. The other half is operationalizing it so that it can be monitored and tuned as the environment it runs in changes. 
 Changes always happen within a call center, it is often just a matter of the velocity of that change and the impact it has on the underlying systems that support it.
 
 Have a plan in place for how you are going to monitor the API usage before deploying an integration. Thinking about your integrations API usage ahead of time can prevent 
