@@ -1,7 +1,7 @@
 ---
 title: Understanding your Genesys Cloud API usage
 tags: Genesys Cloud, Developer Engagement, Usage API, Integration
-date: 2020-12-12
+date: 2021-01-04
 author: john.carnell@genesys.com
 ---
 
