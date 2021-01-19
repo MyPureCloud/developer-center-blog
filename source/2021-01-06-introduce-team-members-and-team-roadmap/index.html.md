@@ -34,7 +34,8 @@ Ronan Watkins, Software Engineer
 
 
 Weite Li, Associate Software Engineer
-
+![Weite](weiteligenesyscom.png)
+Weite just graduated from college in summer 2020 and joined Genesys since then. He is working within Developer Engagement team.
 
 
 
