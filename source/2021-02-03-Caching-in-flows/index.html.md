@@ -2,7 +2,7 @@
 title: Designing Architect flow data actions for resiliency
 tags: Genesys Cloud, Developer Engagement, Archy, Architect
 date: 2021-02-03
-author: john.carnell@genesys.com
+author: sam.johnson@genesys.com
 ---
 
 [Genesys Cloud Architect](https://help.mypurecloud.com/articles/about-architect/) is a feature-rich tool for developing call, chat, email, and message flows. One great feature of Architect flows is the ability to [call data actions](https://help.mypurecloud.com/articles/call-data-action/), which allow you to not only interoperate with various third-party systems and services, but also with the Genesys Cloud Platform API. This allows you to extend the functionality of your flows beyond the Architect feature set, providing a richer experience to your customers.
