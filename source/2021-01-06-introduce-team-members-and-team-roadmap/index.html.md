@@ -6,11 +6,14 @@ author: mrunal.nargunde@genesys.com
 ---
 
 
-Greetings! Wishing you all a happy and peaceful 2021! Genesys Developer Engagement team partners with customers developer and the internal teams to bring forward effective ways for utilizing Genesys cloud platform. 
-We are introducing our growing team members who help run the system smoothly. We hope to also give you guys some insight into what it is like to be working on our team and at Genesys along the way.
+Greetings! Wishing you all a happy and peaceful 2021! Genesys Developer Engagement team is driven to connect with external customers developer with the collective knowledge of the internal teams to bring forward effective ways for utilizing Genesys cloud platform. 
+We are introducing our growing team members who help run the system smoothly on day to day basis. We hope to also give you guys some insight into who we are as a team and the features that the team plans to deliver in the upcoming year.
+
 
 ### Team Introduction
-Developer Engagement team of five engineers and is growing each day. Our goal as a team is to connect the developers using the platform to the experts within the company that will help with great experiences working with the APIs and using and customizing the platform for business needs.
+Developer Engagement team of five engineers and is growing each day. Our goal as a team is to connect the developers using the platform so that they can be delighted about
+using our APIs and work together with the developers who build the APIS. We are excited to be on this journey with you to customize the platform for your business needs.
+
 
 John Carnell, Architect, Team Lead - Developer Engagement 
 ![John](johncarnellgenesyscom.png)
@@ -36,7 +39,7 @@ Weite Li, Associate Software Engineer
 
 
 ### Upcoming exciting project on the road map
-The developer engagement team has been working hard to bring some exciting engineering tools and projects. 
+The developer engagement team is working hard to bring some exciting engineering tools and projects throughout 2021. Here are a few that are ready to be launched! 
 
 1. Genesys Cloud CLI
 A beta version of command line interface will be released in the first quarter of 2021. Developers can use the CLI to play around the API and learn how it behaves.
@@ -44,12 +47,13 @@ A beta version of command line interface will be released in the first quarter o
 The team has been putting together lightening talks that aim at briefly guiding the users of the API about any topic. These will serve as a starters to a new domain that developers want to dabble into.
 3. [Podcast series](https://www.genesys.com/podcast/series/tech-talks-in-twenty)
 We are releasing our podcast series, tech talks in 20 that are informal and playful creative outlet to share about the Genesys cloud platform along with the philosophy and the culture within the company.
-4. Developer center V2
-We are soon releasing interactive developer center website that handles dynamic content with a refreshed look. 
+4. Relaunch Developer center
+We are releasing interactive developer center website that handles dynamic content with a refreshed look. This will be our launchpad to deliver our newly baked features in pipeline that deliver personalized content to the individuals involved.
 
 
-Our team plays a unique role in helping the developers do their work effectively and creatively. We are a diverse group driven with a common goal to deliver high quality projects and help teams thrive.
-We are looking forward to bring a wide spread of tools and technologies at your disposal! 
+We hope this line up of new releases are exciting start to 2021. We are looking forward to bring a wide spread of tools and technologies at your disposal! 
+Lets create together!
+
 
 Mrunal Nargunde
 Senior Software Engineer, Developer Engagement
