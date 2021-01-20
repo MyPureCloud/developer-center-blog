@@ -31,6 +31,8 @@ Mrunal has been with Genesys since 2015. She spent the last 5 years working with
 
 
 Ronan Watkins, Software Engineer
+![Ronan](ronanwatkinsgenesyscom.png)
+Ronan has been with Genesys since 2020 and began working on the newly created Developer Engagement team as a software engineer. Outside of work he likes tag rugby, travelling (when possible) and playing guitar.
 
 
 Weite Li, Associate Software Engineer
