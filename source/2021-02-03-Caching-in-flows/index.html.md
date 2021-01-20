@@ -5,22 +5,29 @@ date: 2021-02-03
 author: sam.johnson@genesys.com
 ---
 
-[Genesys Cloud Architect](https://help.mypurecloud.com/articles/about-architect/) is a feature-rich tool for developing call, chat, email, and message flows. One great feature of Architect flows is the ability to [call data actions](https://help.mypurecloud.com/articles/call-data-action/), which allow you to not only interoperate with various third-party systems and services, but also with the Genesys Cloud Platform API. This allows you to extend the functionality of your flows beyond the Architect feature set, providing a richer experience to your customers.
+[Genesys Cloud Architect](https://help.mypurecloud.com/articles/about-architect/) is a feature-rich tool for developing voice, chat, email, and message flows. One great feature of Architect flows is the ability to [call data actions](https://help.mypurecloud.com/articles/call-data-action/), which allow you to not only interoperate with various third-party systems and services, but also with the Genesys Cloud Platform API. This allows you to extend the functionality of your flows beyond the Architect feature set, providing a richer experience to your customers.
 
-While augmenting your flows with data actions can provide a great customer experience, Architect cannot guarantee that data action execution will succeed. What happens when the service the data action is referencing is unavailable? What if you experience a high volume of interactions, causing the service to rate limit your requests? Correctly handling these scenarios in your flow design can help provide continuity for your business.
+While augmenting your flows with data actions can provide a great customer experience, data actions are still requests to a distributed service. Distributed services can occasionally fail and you need be prepared in your call flows for when this happens.  Ask yourself these questions: 
+
+1. What happens when the service the data action is referencing is unavailable? 
+2. What if you experience a high volume of interactions, causing the service to rate limit your requests? 
+
+Correctly handling these scenarios in your flow design can help provide continuity for your business.
 
 In this post, we will:
 1. Explore various data action failure scenarios and how to handle them
 2. Understand the scalability concerns from data action usage
-3. Design and implement a data action response cache to improve flow scalability
+3. Design and implement a data action response cache to improve flow scalability using data tables
+4. Implement the data table cache in your call flow
+5. Deploy the data table and call flows
 
 ## Handling failure scenarios
-While data action calls may succeed most of the time, in a distributed cloud-driven world failures can happen. Therefore, it is important to consider various failure modes of the service the data action is communicating with and how you are calling it.  In general failure modes can fall into three different categories:
+While data action request succeed most of the time, in a distributed service world failures can happen. Therefore, it is important to consider various failure modes of the service the data action is communicating with and how you are calling it.  In general failure modes can fall into three different categories:
 
-1.  Failure do handle bad user input. For example, a user entering an incorrect account number and the downstream service rejects it.  
-2.  Failure of the service being called.  For example, the downstream services returns an unexpected error, the service times outs or there are network connectivity problems to the service.
-3.  Failure due to flow logic in the Call Data Action step or a misconfigured data action.  An example of this might include referencing a potentially unset variable, or out-of-bounds access to a collection.
-4.  Failure due to service imposing rate limits.
+1.  Failure to handle bad user input. For example, a user entering an incorrect account number and the downstream service rejects it.  
+2.  Failure of the service being called.  For example, the downstream services returns an unexpected error, the service times out or there are network connectivity problems to the service.
+3.  Failure due to flow logic in the Call Data Action step or a misconfigured data action.  An example of this might include referencing a potentially unset variable or out-of-bounds access to a collection.
+4.  Failure due to service imposed rate limits.
 
 Using some basic error handling logic within your Architect flow can help in handling these scenarios:
 
@@ -39,7 +46,12 @@ Using some basic error handling logic within your Architect flow can help in han
 ## Designing for scalability
 While it is easy to add Call Data Action steps to a flow for retrieving data, doing so should be done with care: Genesys Cloud does not cache data action responses, so each time each interaction encounters a Call Data Action step, the data action will be executed. This can add up to a large number of requests rather quickly--for example, if a call flow executes three data actions for every call, and that flow receives 400 calls in a minute, that flow would be responsible for around 1,200 data action executions per minute, or 20 times per second.
 
-If you expect more than a couple hundred interactions per minute that will call at least one data action each, data action execution may be affected by rate limits in place on the remote service, in addition to [limits in place within Genesys Cloud](/api/rest/v2/organization/limits.html). Rate limits are used in cloud services to increase service availability and reduce the possibility of a single entity causing an outage. For services that do not implement rate limits, high volume could impact the stability of that service.
+If you expect more than a couple hundred interactions per minute that will call at least one data action each, data action execution may be affected by rate limits in place on the remote service, in addition to limits within Genesys Cloud. Rate limits are used in cloud services to increase service availability and reduce the possibility of a single entity causing an outage. For services that do not implement rate limits, high volume could impact the stability of that service. Review these two documents to familiarize yourself with Genesys Cloud's rate limits:
+
+1. [Handling rate limits on Genesys Cloud platform API requests](/api/rest/rate_limits.html)
+2. [Rate Limits by services in Genesys Cloud](/api/rest/v2/organization/limits.html) 
+
+**Note:** Rate limits are subject to change. Please review the documents above on a regular basis to keep yourself apprised of changes.
 
 Genesys Cloud imposes some limits with regards to data action execution. Exceeding these limits will cause data action executions to fail, and without proper handling, your flow could also fail. If you are using the Genesys Cloud Data Actions integration to enhance your flow using actions that invoke the Genesys Cloud Platform API, there are additional limits to be aware of. Some default Genesys Cloud rate limits to keep in mind are:
 * 15 concurrent data action executions
@@ -48,7 +60,7 @@ Genesys Cloud imposes some limits with regards to data action execution. Exceedi
 
 **Note:** While you can make make 900 data actions executions per minute, if you are using the data action to call a Genesys Cloud API, you can only make 300 requests per OAuth2 token before the public API starts rate limiting calls for that token.  Sometimes developers will try to get around these rate limits by having multiple OAuth2 clients or generating additional OAuth2 client tokens (each OAuth2 client can have up to 10 active tokens with 300 API call per token limit). In Genesys Cloud rate limits are a signal that you are not using our APIs correctly (e.g. no caching, excessive polling). Individual services within Genesys Cloud can have their own rate limits that are enforced at an organization level. If you try to circumvent the rate limits in the Public API you can inadvertently begin impacting your entire organization's ability as crucial services further in the Genesys Cloud stack will begin rate-limiting.  This could result in a partial or complete outage for your call center.  The best advice I can give, is respect the 300 API call limit per token and use a single token.  Finally, Genesys Cloud does reserve the right shutdown an OAuth2 client that is causing platform instability.
 
-As scary as the above comment sounds, implementing a caching mechanism for data action responses within your call flows will help avoid rate-limiting problems. In the sections below, we will implement the["Get On Queue Agent Counts" Genesys Cloud Data Action](https://appfoundry.mypurecloud.com/filter/genesyscloud/listing/13074443-4ffc-46b6-82c7-c3f4af51861f) from the [Genesys Cloud AppFoundry](https://appfoundry.mypurecloud.com/) in a call flow and cache its response in a data table.
+Implementing a caching mechanism for data action responses within your call flows will help avoid rate-limiting problems, make your requests more efficient and are straightforward to implement. In the sections below, we will implement the["Get On Queue Agent Counts" Genesys Cloud Data Action](https://appfoundry.mypurecloud.com/filter/genesyscloud/listing/13074443-4ffc-46b6-82c7-c3f4af51861f) from the [Genesys Cloud AppFoundry](https://appfoundry.mypurecloud.com/) in a call flow and cache its response in a data table.
 
 ### Caching mechanism design
 In our example scenario, we will be using the "Get On Queue Agent Counts" data action to check if there are any idle agents on queue. This data action has a single input, the queue ID, and outputs the number of agents in each routing status.
@@ -58,7 +70,7 @@ In our example scenario, we will be using the "Get On Queue Agent Counts" data a
 The goal of the cache is to avoid excessive requests with the same parameters to the action endpoint. To accomplish this we need: 
 
 1. A caching mechanism that has a separate entry for each unique set of request parameters.
-2. A mechanism to determine when the cache data is stale and should be reload.  In our example, each entry will include a timestamp.
+2. A mechanism to determine when the cached data is stale and should be reloaded.  In our example, each entry will include a timestamp.
 3. A cache implementation that is performant, highly available, and not subject to rate limiting when used from a flow.
 
 The [data tables](https://help.mypurecloud.com/articles/work-with-data-tables/) feature in Genesys Cloud meets these requirements, so we will be using it as the backing store for the cache. The cache will consist of a single data table, with the key column containing the queue ID as the unique identifier, a second column containing the cache update timestamp, and a third column containing the cached value (a boolean value indicating if any agents are on queue and idle).
@@ -76,7 +88,13 @@ If the value of the lookup result variable indicates we need to execute the data
 With these pieces in place, we now have a call flow that uses cached data instead of calling a data action when possible, and automatically updates the cached data when it is more than 5 minutes old. In the following sections, we will implement this example solution step-by-step.
 
 ### Creating the data table
-To create the data table, navigate to _Admin > Architect > Data Tables_ in the Genesys Cloud user interface, and click the _+_ button. Then, configure the data table as follows:
+To create the data table take the following actions:
+
+1.  Navigate to the Admin page Genesys Cloud by locating the Admin link at the top of the Genesys Cloud user interface.
+2.  Locate the Architect section on the page.  Click on the Data Tables link in this section of the doc. 
+3.  Click the _+_ button on the upper right of the screen.
+4.  Populate the name (IVR Cache), Notes (Contains) and Reference Key label (Queue Id). 
+5.  Add two custom fields in the form: `Updated` and `AgentsIdle`.  The `Updated` field will hold the date/time of the record and the `AgentIdle` field will hold the metrics for the number of idle agents.
 
 ![Data table configuration parameters](data_table_configuration_parameters.png)
 
@@ -102,11 +120,12 @@ There are three different mechanisms that are used to deploy flows and data acti
 
 ![Data action configuration with data table ID highlighted](data_action_configuration_with_data_table.png)
 
-5. Save and publish the data actions.
+7. Save and publish the data actions.
 
 ### Importing the example flow using Architect
 1. [Download the example flow.](CacheExample.i3InboundFlow)
-2. Navigate to _Architect > Flows: Inbound Call_
+2. Navigate to Architect section of the Admin page. 
+3. Select the Flows: Inbound Call
 3. Add a new flow.
 4. When the editor opens, import the example flow.
 5. Update the `Task.Queue` variable in the first step to reference a queue in your organization.
