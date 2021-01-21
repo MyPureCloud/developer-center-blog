@@ -58,7 +58,13 @@ Genesys Cloud imposes some limits with regards to data action execution. Exceedi
 * 900 data action executions per minute
 * 300 platform API requests per OAuth2 token per minute
 
-**Note:** While you can make make 900 data actions executions per minute, if you are using the data action to call a Genesys Cloud API, you can only make 300 requests per OAuth2 token before the public API starts rate limiting calls for that token.  Sometimes developers will try to get around these rate limits by having multiple OAuth2 clients or generating additional OAuth2 client tokens (each OAuth2 client can have up to 10 active tokens with 300 API call per token limit). In Genesys Cloud rate limits are a signal that you are not using our APIs correctly (e.g. no caching, excessive polling). Individual services within Genesys Cloud can have their own rate limits that are enforced at an organization level. If you try to circumvent the rate limits in the Public API you can inadvertently begin impacting your entire organization's ability as crucial services further in the Genesys Cloud stack will begin rate-limiting.  This could result in a partial or complete outage for your call center.  The best advice I can give, is respect the 300 API call limit per token and use a single token.  Finally, Genesys Cloud does reserve the right shutdown an OAuth2 client that is causing platform instability.
+:::{"alert":"info","title":"Rate Limits with Call Flows, Data Actions and Platform APIs","autoCollapse":false}
+While you can make make 900 data actions executions per minute, if you are using the data action to call a Genesys Cloud API, you can only make 300 requests per OAuth2 token before the public API starts rate limiting calls for that token.  
+
+Sometimes developers will try to get around these rate limits by having multiple OAuth2 clients or generating additional OAuth2 client tokens (each OAuth2 client can have up to 10 active tokens with 300 API call per token limit). In Genesys Cloud rate limits are a signal that you are not using our APIs correctly (e.g. no caching, excessive polling). Individual services within Genesys Cloud can have their own rate limits that are enforced at an organization level. If you try to circumvent the rate limits in the Public API you can inadvertently begin impacting your entire organization's ability to use Genesys Cloud as crucial services further in the Genesys Cloud stack will begin rate-limiting. This could result in a partial or complete outage of your contact center.  
+
+The best advice I can give, is respect the 300 API call limit per token and use a single token in your integration. Finally, Genesys Cloud does reserve, per our [Terms of Service](https://help.mypurecloud.com/wp-content/uploads/2020/10/Genesys-Cloud-TCs-Global.pdf) the right to shutdown an OAuth2 client organization that is causing platform instability.
+:::
 
 Implementing a caching mechanism for data action responses within your call flows will help avoid rate-limiting problems, make your requests more efficient and are straightforward to implement. In the sections below, we will implement the["Get On Queue Agent Counts" Genesys Cloud Data Action](https://appfoundry.mypurecloud.com/filter/genesyscloud/listing/13074443-4ffc-46b6-82c7-c3f4af51861f) from the [Genesys Cloud AppFoundry](https://appfoundry.mypurecloud.com/) in a call flow and cache its response in a data table.
 
@@ -73,7 +79,9 @@ The goal of the cache is to avoid excessive requests with the same parameters to
 2. A mechanism to determine when the cached data is stale and should be reloaded.  In our example, each entry will include a timestamp.
 3. A cache implementation that is performant, highly available, and not subject to rate limiting when used from a flow.
 
-**Note:** There are no rate limits imposed when reading data from a data table. However, writes to the table are made through data actions and the Genesys Cloud Platform API. These write calls fall under our Public API rate limits. Honestly, for this scenario your data can still be 1-5 minutes old and you will still be able to hit your organization's customer experience objectives.
+:::{"alert":"info","title":"Rate Limits with Data Tables","autoCollapse":false}
+There are no rate limits imposed when reading data from a data table. However, writes to the table are made through data actions and the Genesys Cloud Platform API. These write calls fall under our Public API rate limits. Honestly, for this scenario your data can still be 1-5 minutes old with your data being cached and still be able to hit your organization's customer experience objectives.
+::: 
 
 The [data tables](https://help.mypurecloud.com/articles/work-with-data-tables/) feature in Genesys Cloud meets these requirements, so we will be using it as the backing store for the cache. The cache will consist of a single data table, with the key column containing the queue ID as the unique identifier, a second column containing the cache update timestamp, and a third column containing the cached value (a boolean value indicating if any agents are on queue and idle).
 
@@ -148,12 +156,13 @@ Genesys Cloud includes a rich feature set that allows you to enhance your custom
 Using the guidance and examples above, you can significantly increase the reliability and scalability of your data-action-enabled flows. Adding various forms of error handling can improve reliability during a service outage or due to unexpected input, and adding a caching mechanism can dramatically increase scalability by reducing the number of data action executions.
 
 ## Resources
-1. [Handling rate limits on Genesys Cloud platform API requests](/api/rest/rate_limits.html)
-2. [Rate Limits by services in Genesys Cloud](/api/rest/v2/organization/limits.html) 
-3. [Caching example - Architect call flow](CacheExample.i3InboundFlow)
-4. [Caching example - Archy call flow](CacheExampleFlow.yaml)
-5. ["Insert IVR Cache Entry" data action templates](Insert-IVR-Cache-Entry.json)
-6. ["Update IVR Cache Entry" data action templates](Update-IVR-Cache-Entry.json)
-7. ["Get On Queue Agent Counts" data action templates](Get-On-Queue-Agent-Counts.json)
-8. [Archy, the Genesys Cloud Call Flow CLI](/devapps/archy/)
-9. [More Genesys Cloud Data Actions on the AppFoundry](https://appfoundry.mypurecloud.com/filter/genesyscloud/listing/13074443-4ffc-46b6-82c7-c3f4af51861f)
+1. [Caching example - Architect call flow](CacheExample.i3InboundFlow)
+2. [Caching example - Archy call flow](CacheExampleFlow.yaml)
+3. ["Insert IVR Cache Entry" data action templates](Insert-IVR-Cache-Entry.json)
+4. ["Update IVR Cache Entry" data action templates](Update-IVR-Cache-Entry.json)
+5. ["Get On Queue Agent Counts" data action templates](Get-On-Queue-Agent-Counts.json)
+6. [Archy, the Genesys Cloud Call Flow CLI](/devapps/archy/)
+7. [More Genesys Cloud Data Actions on the AppFoundry](https://appfoundry.mypurecloud.com/filter/genesyscloud/listing/13074443-4ffc-46b6-82c7-c3f4af51861f)
+8. [Handling rate limits on Genesys Cloud platform API requests](/api/rest/rate_limits.html)
+9. [Rate Limits by services in Genesys Cloud](/api/rest/v2/organization/limits.html) 
+10. [Genesys Cloud Terms of Service](https://help.mypurecloud.com/wp-content/uploads/2020/10/Genesys-Cloud-TCs-Global.pdf)
