@@ -103,7 +103,7 @@ To create the data table take the following actions:
 1.  Navigate to the Admin page Genesys Cloud by locating the Admin link at the top of the Genesys Cloud user interface.
 2.  Locate the Architect section on the page.  Click on the Data Tables link in this section of the doc. 
 3.  Click the _+_ button on the upper right of the screen.
-4.  Populate the name (IVR Cache), Notes (Contains) and Reference Key label (Queue Id). 
+4.  Populate the Name (IVR Cache), Notes (Description of the data table) and Reference Key label (Queue Id). 
 5.  Add two custom fields in the form: `Updated` and `AgentsIdle`.  The `Updated` field will hold the date/time of the record and the `AgentIdle` field will hold the metrics for the number of idle agents.
 
 ![Data table configuration parameters](data_table_configuration_parameters.png)
