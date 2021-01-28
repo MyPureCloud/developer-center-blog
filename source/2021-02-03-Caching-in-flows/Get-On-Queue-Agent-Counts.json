@@ -1,0 +1,66 @@
+{
+  "name": "Get On Queue Agent Counts",
+  "integrationType": "purecloud-data-actions",
+  "actionType": "custom",
+  "config": {
+    "request": {
+      "requestUrlTemplate": "/api/v2/analytics/queues/observations/query",
+      "requestType": "POST",
+      "headers": {
+        "UserAgent": "PureCloudIntegrations/1.0",
+        "Content-Type": "application/json"
+      },
+      "requestTemplate": "{\n \"filter\": {\n  \"type\": \"or\",\n  \"predicates\": [\n   {\n    \"type\": \"dimension\",\n    \"dimension\": \"queueId\",\n    \"operator\": \"matches\",\n    \"value\": \"${input.queueId}\"\n   }\n  ]\n },\n \"metrics\": [\n  \"oOnQueueUsers\"\n ]\n}"
+    },
+    "response": {
+      "translationMap": {
+        "statuses": "$.results[0].data..qualifier",
+        "counts": "$.results[0].data..stats.count"
+      },
+      "translationMapDefaults": {
+        "statuses": "[\"Error\"]",
+        "counts": "[0]"
+      },
+      "successTemplate": "{\"counts\": ${counts}, \"statuses\": ${statuses}}"
+    }
+  },
+  "contract": {
+    "input": {
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "queueId"
+        ],
+        "properties": {
+          "queueId": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "output": {
+      "successSchema": {
+        "type": "object",
+        "properties": {
+          "counts": {
+            "description": "Integer array of on queue agent counts for each routing status. Wrap this variable in a sum() expression to get the total number of on queue agents.",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "statuses": {
+            "description": "String array of on queue agent routing statuses for matching up to the counts array.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "secure": false
+}

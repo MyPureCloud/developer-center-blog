@@ -1,0 +1,182 @@
+inboundCall:
+  name: Cache Example
+  defaultLanguage: en-us
+  startUpRef: ./tasks/task[startingTask]
+  initialGreeting:
+    exp: ToAudioBlank(1)
+  tasks:
+    - task:
+        name: IVR cache example
+        refId: startingTask
+        variables:
+          - durationVariable:
+              name: Task.CacheDuration
+              initialValue:
+                lit: # Set this value to the desired cache invalidation duration.
+                  minutes: 5
+          - queueVariable:
+              name: Task.Queue
+              initialValue:
+                lit: # Set this value to the desired queue name.
+                  name: Services
+          - booleanVariable:
+              name: Task.AgentsIdle
+              initialValue:
+                lit: true
+          - stringVariable:
+              name: Task.CacheUpdated
+          - stringVariable:
+              name: Task.LookupResult
+              initialValue:
+                lit: failure
+          - integerVariable:
+              name: Task.NumIdle
+          - integerCollectionVariable:
+              name: Task.QueueCounts
+          - stringCollectionVariable:
+              name: Task.StatusList
+        actions:
+          - dataTableLookup:
+              dataTable:
+                IVR Cache:
+                  foundOutputs:
+                    AgentsIdle:
+                      var: Task.AgentsIdle
+                    Updated:
+                      var: Task.CacheUpdated
+              lookupValue:
+                exp: Task.Queue.id
+              outputs:
+                found:
+                  actions:
+                    - decision:
+                        name: Needs update?
+                        condition:
+                          exp: DateTimeDiff(GetCurrentDateTimeUtc(), ToDateTime(Task.CacheUpdated)) >= Task.CacheDuration
+                        outputs:
+                          yes:
+                            actions:
+                              - updateData:
+                                  statements:
+                                    - string:
+                                        variable: Task.LookupResult
+                                        value:
+                                          lit: update
+                          no:
+                            actions:
+                              - updateData:
+                                  statements:
+                                    - string:
+                                        variable: Task.LookupResult
+                                        value:
+                                          lit: existing
+                notFound:
+                  actions:
+                    - updateData:
+                        statements:
+                          - string:
+                              variable: Task.LookupResult
+                              value:
+                                lit: insert
+          - decision:
+              condition:
+                exp: 'Task.LookupResult == "insert" or Task.LookupResult == "update"'
+              outputs:
+                yes:
+                  actions:
+                    - callData:
+                        category:
+                          PureCloud Data Actions:
+                            dataAction:
+                              Get On Queue Agent Counts:
+                                inputs:
+                                  queueId:
+                                    exp: Task.Queue.id
+                                successOutputs:
+                                  counts:
+                                    var: Task.QueueCounts
+                                  statuses:
+                                    var: Task.StatusList
+                        outputs:
+                          success:
+                            actions:
+                              - updateData:
+                                  statements:
+                                    - integer:
+                                        variable: Task.NumIdle
+                                        value:
+                                          exp: 'If(FindFirst(Task.StatusList, "IDLE") >= 0, GetAt(Task.QueueCounts, FindFirst(Task.StatusList, "IDLE")), 0)'
+                              - decision:
+                                  name: Idle agents available?
+                                  condition:
+                                    exp: Task.NumIdle > 0
+                                  outputs:
+                                    yes:
+                                      actions:
+                                        - updateData:
+                                            statements:
+                                              - boolean:
+                                                  variable: Task.AgentsIdle
+                                                  value:
+                                                    lit: true
+                                    no:
+                                      actions:
+                                        - updateData:
+                                            statements:
+                                              - boolean:
+                                                  variable: Task.AgentsIdle
+                                                  value:
+                                                    lit: false
+                              - decision:
+                                  condition:
+                                    exp: 'Task.LookupResult == "insert"'
+                                  outputs:
+                                    yes:
+                                      actions:
+                                        - callData:
+                                            category:
+                                              PureCloud Data Actions:
+                                                dataAction:
+                                                  Insert IVR Cache Entry:
+                                                    inputs:
+                                                      AgentsIdle:
+                                                        exp: Task.AgentsIdle
+                                                      key:
+                                                        exp: Task.Queue.id
+                                                      Updated:
+                                                        exp: ToString(GetCurrentDateTimeUtc())
+                                    no:
+                                      actions:
+                                        - callData:
+                                            category:
+                                              PureCloud Data Actions:
+                                                dataAction:
+                                                  Update IVR Cache Entry:
+                                                    inputs:
+                                                      AgentsIdle:
+                                                        exp: Task.AgentsIdle
+                                                      key:
+                                                        exp: Task.Queue.id
+                                                      Updated:
+                                                        exp: ToString(GetCurrentDateTimeUtc())
+          - decision:
+              name: Go to queue?
+              condition:
+                exp: Task.AgentsIdle
+              outputs:
+                yes:
+                  actions:
+                    - transferToAcd:
+                        targetQueue:
+                          exp: Task.Queue
+                        preTransferAudio:
+                          tts: Please wait for the next available representative.
+                        failureTransferAudio:
+                          exp: ToAudioBlank(1)
+          - playAudio:
+              audio:
+                tts: Sorry, there are no representatives available to handle your call. Please call back at a later time.
+          - disconnect:
+              none: true
+                  
+                
