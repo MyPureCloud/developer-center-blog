@@ -6,7 +6,7 @@ This is the repository that contains the content for blogs located at https://de
 
 1) Fork this repository to your own github account.
 2) Create a new folder for your article following the pattern YYYY-MM-DD-title
-3) Create a index.html.markdown file in your new folder and write your article in this file. See below for required properties at the start of the file.
+3) Create an `index.html.md` file in your new folder and write your article in this file. See below for required properties at the start of the file.
 4) Create an author bio (see below).
 5) Run locally to make sure formatting looks correct (Optional but recommended)
 6) Submit a pull request back to origin master

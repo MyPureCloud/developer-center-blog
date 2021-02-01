@@ -11,6 +11,12 @@
   company: Genesys
   twitter: PureCloud_Dev
   bio: Tim has been with Interactive Intelligence/Genesys since 2007 and has focused on designing and developing customer-facing integrations and customizations.
+- email: jeff.beard@genesys.com
+  name: Jeff Beard
+  title: API Documentation Manager
+  company: Genesys
+  twitter:
+  bio: Jeff has been with Interactive Intelligence/Genesys since 2014 and is focused on creating API documentation.
 - email: dariusz.socha@genesys.com
   name: Dariusz Socha
   title: Sr Impl & Dev Engineer
@@ -48,7 +54,7 @@
   name: Daniel Szlaski
   title: Cloud Solutions Architect
   company: Genesys
-  bio: Daniel is a Cloud Solutions Architect at Genesys hailing from Poland. He has been with Genesys since 2016. 
+  bio: Daniel is a Cloud Solutions Architect at Genesys hailing from Poland. He has been with Genesys since 2016.
 - email: russelle.carvajal@genesys.com
   name: Russelle Carvajal
   title: Development Support Associate
@@ -69,3 +75,28 @@
   title: Development Support Engineer
   company: Genesys
   bio: Agnes is a Development Support Engineer at Genesys. She has been with Genesys since 2017.
+- email: jerome.saint-marc@genesys.com
+  name: Jerome Saint-Marc
+  title: Sr Development Support Engineer (Dev Ecosystem)
+  company: Genesys
+  bio: Jerome has been with Genesys since 1999 holding different positions across the company (Professional Services, Pre-Sales, Product Management, Solutions Architect and now Support in Dev Ecosystem).
+- email: john.carnell@genesys.com
+  name: John Carnell
+  title: Architect, Team Lead - Developer Engagement
+  company: Genesys
+  bio: John has been with Genesys since 2015.  He spent the last 5 years working within the Edge Infrastructure Team and recently took on the job of launching the Genesys Cloud Developer Engagement team.  John is a prolific speaker and writer. He regularly speaks at conferences and industry user groups. Over the last 20 years, John has authored, co-authored and been a technical reviewer for a number of Java-based technology books and industry publications.
+- email: sam.johnson@genesys.com
+  name: Sam Johnson
+  title: Senior Professional Services Consultant
+  company: Genesys
+  bio: Sam is a member of the Genesys Cloud Professional Services practice, specializing in Genesys Cloud API and integrations. He joined Genesys in 2015 after receiving his bachelor’s degree in Computer and Information Technology from Purdue University. During his time at Genesys, Sam has designed and implemented Genesys solutions for organizations of diverse size and complexity, delivering improved customer experiences around the globe. Outside of work, Sam enjoys coffee, sushi, and traveling.
+- email: weite.li@genesys.com
+  name: Weite Li
+  title: Associate Software Engineer
+  company: Genesys
+  bio: Weite just graduated from college in summer 2020 and joined Genesys since then. He is working within Developer Engagement team.
+- email: ronan.watkins@genesys.com
+  name: Ronan Watkins
+  title: Software Engineer
+  company: Genesys
+  bio: Ronan has been with Genesys since 2020 and began working on the newly created Developer Engagement team as a software engineer. Outside of work he likes tag rugby, travelling (when possible) and playing guitar.
