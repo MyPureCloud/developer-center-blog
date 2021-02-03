@@ -28,18 +28,21 @@ There were a lot of internal discussions about how should we build the Genesys C
 3. **Easily deployable and performant.** We want to make the CLI as simple as possible to deploy and fast in execution. To this end we decided to build the API using GO. All of our code for the CLI is open source and we currently compile the CLI as a single binary. We pre-compiled binaries for OS X, Linux and Windows. To install the CLI, you just need to drop the binary into a directory that is in your path.
 
 ## How to get the CLI
-We are opening up the customer beta for the CLI at the beginning of February. While this beta will be open to all customers, there will be limited support for the CLI until we exit the beta.  To download the Genesys Cloud CLI and see instructions on how to setup the CLI, please visit the Genesys Cloud CLI page in the [Developer Center]()(TODO - need the final link.)
+We are opening up the customer beta for the CLI at the beginning of February. While this beta will be open to all customers, there will be limited support for the CLI until we exit the beta.To download the Genesys Cloud CLI and see instructions on how to setup the CLI, please visit the Genesys Cloud CLI page in the [Developer Center](/api/rest/command-line-interface/).
 
 ## Our CLI in Action
 Rather then walk through all of the basics of the CLI in written form, we have decided to launch our new video series **Developer Drop** with the first video being an overview of our Genesys Cloud CLI. The **Developer Drop** series is a 10-15 minutes series done by developers for developers. It is meant to be extremely informal and covers a single API or topic. The Genesys Cloud CLI **Developer Drop** video can be found [here](https://www.youtube.com/watch?v=OnYDs5NsLpU&list=PL01cVFOkuN70Rk8xgI8pk_tKMcTW4FesF). In this video we demonstrate the CLI to carry out basic tasks and how to combine the CLI with [jq](https://github.com/mikefarah/yq), a JSON transformation, query and filtering command line tool and [yq](https://github.com/mikefarah/yq) a YAML-JSON conversion tool to carry out some pretty standard administration tasks.
 
+In addition, the team has been building a repository of Genesys Cloud CLI [recipes](https://github.com/MyPureCloud/quick-hits-cli). This repository provides several examples of how to use the Genesys Cloud CLI. Right now the examples are very *nix oriented, but we would love to see some PowerShell examples. Pull Requests are welcome.
+
 ## Closing Thoughts
-We want our Genesys Cloud CLI follow the Unix principles around CLIs and have it be a small sharp tool that can be combined with other command line tools to carry out tasks. As we move forward in our CLI journey, I welcome feedback on this tool. I am specifically looking for areas we might have missed or overlook. Also, in the coming months the Developer Engagement team will be building a repository where you can find common CLI recipes that you can download and use or contribute your own ideas to them.  In addition, we will begin working on another set of features for the CLI. Specifically, we are looking at adding commands for performing analytic queries using our APIs and handling the ability to process multiple files of data on a single CLI call.
+We want our Genesys Cloud CLI follow the Unix principles around CLIs and have it be a small sharp tool that can be combined with other command line tools to carry out tasks. As we move forward in our CLI journey, I welcome feedback on this tool. I am specifically looking for areas we might have missed or overlook. Also, in the coming months the Developer Engagement team will be building a repository where you can find common CLI recipes that you can download and use or contribute your own ideas to them. In addition, we will begin working on another set of features for the CLI. Specifically, we are looking at adding commands for performing analytic queries using our APIs and handling the ability to process multiple files of data on a single CLI call.
 
 ## Additional Resources
-1. [Genesys Cloud CLI]()(TODO - NEED THE LINK)
-1. [Genesys Cloud CLI Developer Drop](https://www.youtube.com/watch?v=OnYDs5NsLpU&list=PL01cVFOkuN70Rk8xgI8pk_tKMcTW4FesF)
-2. [jq](https://stedolan.github.io/jq/) 
-3. [yq](https://github.com/mikefarah/yq)
+1. [Genesys Cloud CLI](/api/rest/command-line-interface/)
+2. [Genesys Cloud CLI Recipes]((https://github.com/MyPureCloud/quick-hits-cli))
+3. [Genesys Cloud CLI Developer Drop](https://www.youtube.com/watch?v=OnYDs5NsLpU&list=PL01cVFOkuN70Rk8xgI8pk_tKMcTW4FesF)
+4. [jq](https://stedolan.github.io/jq/) 
+5. [yq](https://github.com/mikefarah/yq)
 
 
