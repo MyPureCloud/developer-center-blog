@@ -3,6 +3,7 @@ title: PureCloud Screen Recording Powered by WebRTC
 tags: webrtc, screen-recording, howwedoit
 date: 2018-02-01
 author: xander.dumaine@genesys.com
+category: 0
 ---
 
 PureCloud [recently announced the availability of Screen Recording](http://blog.genesys.com/announcing-purecloud-screen-recording/). The new functionality enables the recording of agent desktop activity. Synchronized playback of audio and screen recording enhances quality management capabilities and provides a 360-degree view of agent activity.

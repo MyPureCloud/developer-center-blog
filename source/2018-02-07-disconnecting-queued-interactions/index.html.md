@@ -3,6 +3,7 @@ title: Disconnecting Queued Interactions
 tags: routing
 date: 2018-02-07
 author: kevin.glinski@genesys.com
+category: 7
 ---
 
 This week we ran some stress tests in our testing environment with the goal to try and break the system to test how well we would recover. During one portion we were all allowed to hit the public API as hard as we could to try and get something to break. I decided to throw what I could at our ACD and conversation services by creating 50k [3rd Party Chats](/api/rest/v2/conversations/third-party-object-routing.html) as fast as I could. To my disappointment the system handled the load fine, but since I was borrowing an org to do my testing I now had to cleanup my mess.

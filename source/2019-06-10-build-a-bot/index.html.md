@@ -3,6 +3,8 @@ title: Build-a-Bot Workshop - Ghostbusters SMS Bot
 tags: bots, build-a-bot, ghostbusters, AWS, LEX, SMS
 date: 2019-06-10
 author: jack.nichols@genesys.com
+image: PC_SMSFLOW.png
+category: 7
 ---
 
 

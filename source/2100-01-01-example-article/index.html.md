@@ -3,6 +3,8 @@ title: Example Article
 tags: example
 date: 2100-01-01
 author: kevin.glinski@genesys.com
+image: genesys.png
+category: 0
 ---
 
 This example article will outline some of the markdown that is available.  

@@ -3,6 +3,8 @@ title: Evolving the contact lookup API
 date: 2017-07-19
 tags: contacts
 author: aaron.bickell@genesys.com
+image: combined-logos.png
+category: 5
 ---
 
 One of the most fundamental questions of any customer interaction is: "Which customer am I talking with?" In March of 2017, we released a revamped external contacts system geared toward answering that question. One of the most important APIs when dealing with external contacts is the contact lookup API, which identifies contacts by normalized phone numbers, email addresses, twitter handles, etc. This article will take you through the design and evolution of that API from its initial implementation to where it is today.

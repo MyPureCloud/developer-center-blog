@@ -3,6 +3,7 @@ title: Go through sites's subpages but do not reload the web chat
 date: 2017-07-18
 tags: chat, webchat, ACD chat
 author: dariusz.socha@genesys.com
+category: 7
 ---
 
 Following [the PureCloud documentation](https://developer.mypurecloud.ie/api/webchat/) you can choose one of two methods of embedding a chat widget into a customer’s webpage. The first method opens the widget in a pop-up window and the second one renders it in a dedicated div element inside the webpage. The pop-up chat option has its challenges. However, often the web visitor forgets about the pop-up as it gets covered up by the main browser window, and when he is finally connected to an agent he is no longer responding. This leads to a frustrating experience and also wastes the agent's time. The widget embedded directly in the page seems to be a much better solution as it stays in front of the customer's eyes. It can be rendered on the top of most div sections as a sliding or draggable page element in accordance to the latest web design trends.

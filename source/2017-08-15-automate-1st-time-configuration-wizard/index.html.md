@@ -3,6 +3,8 @@ title: Automate your on-boarding flow
 tags: oauth, example, howwedoit
 date: 2017-08-15
 author: jacou@nguvu.com
+image: onboarding.png
+category: 2
 ---
 At nGuvu, we've recently launched the integration of nGagement with Purecloud. nGagement is a gamification solution for contact centers that automatically awards points to agents by looking at their different performance metrics and schedules. The platform supports features such as Agent vs Agent challenges, contests, quiz, leaderboard, quality monitoring, etc. Thanks to Purecloud's API and notifications, nGagement can provide points calculations in real-time.
 

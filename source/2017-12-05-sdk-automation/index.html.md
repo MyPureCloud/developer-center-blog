@@ -3,6 +3,7 @@ title: Platform API SDK Automation
 date: 2017-12-05
 tags: platform, api, sdk, automation, build, process, how we do it
 author: tim.j.smith@genesys.com
+category: 6
 ---
 
 

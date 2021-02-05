@@ -3,6 +3,8 @@ title: WebRTC Phone User Experience
 tags: webrtc, phones, howwedoit
 date: 2017-09-15
 author: xander.dumaine@genesys.com
+image: dial-pad.png
+category: 3
 ---
 
 Last year, &Yet [wrote a great series](https://blog.andyet.com/2016/01/21/att-webrtc-ux-series/) of blog posts with AT&T about WebRTC UX. We love to see this kind of focus in the [WebRTC](https://webrtc.org/) community, because it shows an intersection of classic technology and modern web experience.

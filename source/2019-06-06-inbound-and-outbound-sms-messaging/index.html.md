@@ -3,6 +3,8 @@ title: Outbound and Inbound SMS Messaging
 tags: sms, phones, messaging
 date: 2019-06-06
 author: russelle.carvajal@genesys.com
+image: create-interaction.PNG
+category: 7
 ---
 
 One convenient means of communication today is through messaging. With PureCloud ACD and SMS messaging feature an organization can handle inbound and outbound SMS messaging after a few configuration and allow communication without the holding time. If SMS and messaging features are enabled, contact your designated Customer Success Manager or email CloudSales@genesys.com if the features are not available. 

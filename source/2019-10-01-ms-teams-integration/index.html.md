@@ -3,6 +3,8 @@ title: MS Teams Telephony Integration
 tags: integrations, Microsoft, UC
 date: 2019-10-01
 author: trey.buck@genesys.com
+image: Leg1.png
+category: 6
 ---
 
 [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software) (also called MS Teams) is a collaboration and business communications platform that provides chat, video, and calling capabilities as well as integrations with other Microsoft cloud productivity tools like OneDrive, Office365, and Sharepoint.  Microsoft [announced in 2017](https://www.microsoft.com/en-us/microsoft-365/blog/2017/09/25/a-new-vision-for-intelligent-communications-in-office-365/) that Skype for Business would eventually be replaced by MS Teams as the go-to product for business communication, including telephony as well as collaboration tools.  Since then, Microsoft has continued to provide additional details over time as MS Teams capabilities have been iterated and enhanced.  MS Teams is [reportedly](https://www.cnbc.com/2019/07/11/microsoft-teams-passes-slack-in-daily-users-rajesh-jha-explains-why.html) now more widely used than Slack, another leading collaboration app. 

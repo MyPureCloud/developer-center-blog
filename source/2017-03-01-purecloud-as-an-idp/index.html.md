@@ -3,6 +3,7 @@ title: PureCloud as an Identity Provider
 tags: oauth, example, howwedoit
 date: 2017-03-01
 author: kevin.glinski@genesys.com
+category: 1
 ---
 
 

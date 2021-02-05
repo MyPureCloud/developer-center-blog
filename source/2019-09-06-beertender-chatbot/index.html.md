@@ -3,6 +3,8 @@ title: Build-a-Bot Workshop - Virtual BeerTender Chatbot
 tags: bots, build-a-bot, AWS, LEX, Chatbot
 date: 2019-09-09
 author: jack.nichols@genesys.com
+image: beerbot_chatflow.png
+category: 7
 ---
 
 

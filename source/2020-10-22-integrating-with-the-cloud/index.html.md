@@ -3,6 +3,7 @@ title: Integrating with the Cloud
 tags: Genesys Cloud, Developer Engagement, Integration
 date: 2020-10-22
 author: john.carnell@genesys.com
+category: 6
 ---
 
 Integration. It's not the most fun part of software development, but it is one of the more critical things you need to think about as you are looking at purchasing a cloud-based product. Cloud products are great in the sense that you don't have to manage the infrastructure yourself, you get new features quickly, and you are able to convert a fixed capital cost over to a variable expense (for the MBAs in the audience). However, the success or failure of your cloud acquisition is going to be tied to how successful you are in integrating your new cloud platform into your overall business processes/workflows and the IT ecosystem of your organization. You need to understand that there are different styles of integrations and every cloud provider will give you different technologies to use with these styles. 

@@ -3,6 +3,7 @@ title: Managing custom query parameters in your Application URL with an OAuth Im
 tags: custom client application, oauth implicit grant, redirecturi, query parameters
 date: 2020-05-12
 author: jerome.saint-marc@genesys.com
+category: 1
 ---
 
 When you approach a platform or a topic you are not familiar with, it is sometimes difficult, at least for me, to start with a full sample which covers many topics at once.  

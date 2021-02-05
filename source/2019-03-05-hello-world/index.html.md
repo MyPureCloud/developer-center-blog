@@ -3,6 +3,8 @@ title: Hello, World!
 tags: devcenter, howwedoit
 date: 2019-03-05
 author: zachary.hinkle@genesys.com
+image: devcenter.png
+category: 6
 ---
 
 

@@ -3,6 +3,8 @@ title: How To Securely Access A Local Service From The Cloud
 tags: https, secure, data dip, localhost, bridge, connectors, action, service, ngrok
 date: 2018-09-11
 author: patrick.barry@genesys.com
+image: ngrok.png
+category: 6
 ---
 
 In the past, if our customers wanted to call a service that was behind their firewall and they did not want to expose it externally (to the internet), our customers needed to use our [Bridge Server](https://help.mypurecloud.com/articles/bridge-platform-overview/).

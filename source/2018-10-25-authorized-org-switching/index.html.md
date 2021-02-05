@@ -3,6 +3,8 @@ title: Adding Authorized Organization Switching to your Custom Applications
 tags: example, oauth
 date: 2018-10-25
 author: kevin.glinski@genesys.com
+image: homeorg.jpg
+category: 1
 ---
 
 [Authorized organizations](https://help.mypurecloud.com/articles/about-authorized-organizations/) are a best practice when dealing with access to other organizations besides a user's home organization. A use case would be a Genesys partner who has their own PureCloud org but needs access to one of their customer's orgs to do setup and configuration. You can create a new user in the customer org for that person, but now they have to remember not only the password to the other organization but also the name of the organization and have to specify the name when logging in. 

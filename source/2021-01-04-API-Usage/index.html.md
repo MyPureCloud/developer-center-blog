@@ -3,6 +3,8 @@ title: Understanding your Genesys Cloud API usage
 tags: Genesys Cloud, Developer Engagement, Usage API, Integration
 date: 2021-01-04
 author: john.carnell@genesys.com
+image: excel_pivot.png
+category: 6
 ---
 
 Greetings. I hope everyone continues to stay safe and healthy in these challenging times. Last week, I was pulled into an emergency situation with a customer where they suddenly 

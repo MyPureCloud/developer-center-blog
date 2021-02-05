@@ -3,6 +3,8 @@ title: Agent Chat Assistant
 tags: chat, agentchat, example
 date: 2020-02-19
 author: catherine_agnes.corpuz@genesys.com
+image: chat-conversation.png
+category: 7
 ---
 
 Last year, Genesys released the [Agent Chat API](https://developer.mypurecloud.com/api/webchat/agentchat.html). One use case for this API is an agent chat assistant that will actively listen to the chat interaction and suggest responses based on keywords. Sending messages and the typing indicator features of the Chat API will be convenient in this scenario.

@@ -3,6 +3,7 @@ title: Implementing a Web Services Data Dip Connector
 date: 2017-05-10
 tags: bridge, wsdd, connector, integration
 author: tim.j.smith@genesys.com
+category: 6
 ---
 
 The Web Services Data Dip (WSDD) connector integrates your interaction flows (voice IVRs, scripts, and future implementations) with a web service that you create that implements the web services data dip connector API. Your web service can call any third-party system that stores data, such as a customer relationship management (CRM) database. This blog post will cover implementing both standard and custom WSDD operations in a node.js web service.

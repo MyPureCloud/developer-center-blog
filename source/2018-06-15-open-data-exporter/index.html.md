@@ -3,6 +3,8 @@ title: Open Data Exporter
 tags: open source, wfm, analytics api, example
 date: 2018-06-15
 author: tim.j.smith@genesys.com
+image: cdr.png
+category: 6
 ---
 
 The Open Data Exporter is an open source configurable node.js service that executes PureCloud API requests, performs data calculations and transformations, and exports the data into templates. This application serves as a starting point for building data export integrations. Common use cases include:

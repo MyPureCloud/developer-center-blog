@@ -4,6 +4,8 @@ tags: devcenter, howwedoit
 date: 2019-03-07
 author: daniel.szlaski@genesys.com
 stale: true
+image: architecture.png
+category: 7
 ---
 
 

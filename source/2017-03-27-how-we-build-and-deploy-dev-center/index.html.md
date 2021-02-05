@@ -3,6 +3,8 @@ title: How we Build and Deploy the PureCloud Developer Center
 date: 2017-03-27
 tags: devcenter, howwedoit
 author: kevin.glinski@genesys.com
+image: highlevelarchitecture.png
+category: 6
 ---
 
 Back in 2015 our API documentation was launched on a Developer Center that was built on Wordpress. We quickly realized that while Wordpress is good a what it was designed to do, our requirements were quickly outgrowing that functionality. Today, the Developer Center is comprised of a number of different pieces deployed to Amazon Web Services, and the goal of this article is to explain how those pieces come together and why we chose the architecture that we did.
