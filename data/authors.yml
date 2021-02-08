@@ -84,7 +84,7 @@
   name: John Carnell
   title: Architect, Team Lead - Developer Engagement
   company: Genesys
-  bio: John has been with Genesys since 2015.  He spent the last 5 years working within the Edge Infrastructure Team and recently took on the job of launching the Genesys Cloud Developer Engagement team.  John is a prolific speaker and writer. He regularly speaks at conferences and industry user groups. Over the last 20 years, John has authored, co-authored and been a technical reviewer for a number of Java-based technology books and industry publications.
+  bio: John has been with Genesys since 2015. He spent the last 5 years working within the Edge Infrastructure Team and recently took on the job of launching the Genesys Cloud Developer Engagement team.  John is a prolific speaker and writer. He regularly speaks at conferences and industry user groups. Over the last 20 years, John has authored, co-authored and been a technical reviewer for a number of Java-based technology books and industry publications.
 - email: sam.johnson@genesys.com
   name: Sam Johnson
   title: Senior Professional Services Consultant
@@ -100,3 +100,8 @@
   title: Software Engineer
   company: Genesys
   bio: Ronan has been with Genesys since 2020 and began working on the newly created Developer Engagement team as a software engineer. Outside of work he likes tag rugby, travelling (when possible) and playing guitar.
+- email: chad.hansen@genesys.com
+  name: Chad Hansen
+  title: Product Manager
+  company: Genesys
+  bio: Chad is a Product Manager in Genesys Cloud covering our Digital Messaging channels. Before joining Genesys in 2020, he spent six years designing and growing enterprise SaaS solutions. In his free time you will find Chad playing with his dog Zoey, relaxing at the beach, or watching a basketball game.
