@@ -40,7 +40,7 @@ We want our Genesys Cloud CLI follow the Unix principles around CLIs and have it
 
 ## Additional Resources
 1. [Genesys Cloud CLI](/api/rest/command-line-interface/)
-2. [Genesys Cloud CLI Recipes]((https://github.com/MyPureCloud/quick-hits-cli))
+2. [Genesys Cloud CLI Recipes]((https://github.com/MyPureCloud/quick-hits-cli)
 3. [Genesys Cloud CLI Developer Drop](https://www.youtube.com/watch?v=OnYDs5NsLpU&list=PL01cVFOkuN70Rk8xgI8pk_tKMcTW4FesF)
 4. [jq](https://stedolan.github.io/jq/) 
 5. [yq](https://github.com/mikefarah/yq)
