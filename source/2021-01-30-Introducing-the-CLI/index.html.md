@@ -1,7 +1,7 @@
 ---
 title: Introducing the Genesys Cloud CLI 
 tags: Genesys Cloud, Developer Engagement, CLI, Integration
-date: 2021-01-30
+date: 2021-02-11
 author: john.carnell@genesys.com
 ---
 
