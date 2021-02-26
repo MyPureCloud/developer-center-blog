@@ -1,7 +1,7 @@
 ---
 title: Accessing and using collected Chat v2 information
 tags: chat v2, widget v2
-date: 2021-03-01
+date: 2021-03-08
 author: jerome.saint-marc@genesys.com
 ---
 
