@@ -181,9 +181,9 @@ An agent [script](https://help.mypurecloud.com/articles/about-scripting/) is a m
 ### Using Script built-in variables for chat
 The [Script built-in variables](https://help.mypurecloud.com/articles/built-in-script-variables/) approach relies on specific chat attributes (same than with interaction details). There is one exception to be aware of, the `customer email` built-in variable.  This variable is not supported with Chat v2.  Instead you will have to use the script variables approach if you want access to this information.
 
-Script built-in variable | Widget v2 attribute | Conversation Participant Attribute
---- | --- | ---
-{{Chat.Customer Email}} | Not supported | Not supported 
+|Script built-in variable |Widget v2 attribute | Conversation Participant Attribute|
+|-------------------------|------------------- |-----------------------------------|
+{{Chat.Customer Email}}   | Not supported      | Not supported 
 {{Chat.Customer First Name}} | firstname | context.firstname 
 {{Chat.Customer Last Name}} | lastname | context.lastname 
 {{Chat.Customer Street}} | addressStreet | context.addressStreet 
@@ -192,8 +192,7 @@ Script built-in variable | Widget v2 attribute | Conversation Participant Attrib
 {{Chat.Customer State}} | addressState | context.addressState 
 {{Chat.Customer Phone Number}} | phoneNumber | context.phoneNumber 
 {{Chat.Customer Phone Type}} | phoneType | context.phoneType 
-{{Chat.Customer ID}} | customerId | context.customerId 
- |  | 
+{{Chat.Customer ID}} | customerId | context.customerId |  | 
 
 ### Using Script variables
 You can get all of this data, including `email` and other custom chat attributes, by defining a [script variable](https://help.mypurecloud.com/articles/add-script-variable/), with  the `Input toggle/property` enabled. This means that when the script loads, the agent script will extract participant attributes with the corresponding variable `Name` from the conversation context and store their value in the script variable.
