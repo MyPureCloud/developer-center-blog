@@ -70,15 +70,15 @@ If you use the Genesys Cloud Data Actions integration to enhance your flow with 
 **Important:** Exceeding these limits will cause data action executions to fail, and without proper handling, your flow could also fail.
 
 :::{"alert":"info","title":"Rate Limits with Call Flows, Data Actions and Platform APIs","autoCollapse":false}
-While you can make 900 data actions executions per minute, if you are using a data action to call a Genesys Cloud API, you can only make 300 requests per OAuth2 token before the public API starts rate limiting calls for that token.  
+While you can perform 900 data actions executions per minute, if you are using a data action to call a Genesys Cloud API, you can only make 300 requests per OAuth2 token before the platform API starts rate limiting requests from that token.  
 
-Some developers try to get around these rate limits by having multiple OAuth2 clients or generating additional OAuth2 client tokens (each OAuth2 client can have up to 10 active tokens with 300 API call per token limit). In Genesys Cloud hitting rate limits is a signal that you are not using our APIs correctly. For example, you are not using caching, or you are doing excessive polling.
+Some developers try to get around these rate limits by having multiple OAuth2 clients or generating additional OAuth2 client tokens. In Genesys Cloud, hitting rate limits is a signal that you are not using our APIs correctly. For example, you are not using caching, or you are doing excessive polling.
 
- Individual services within Genesys Cloud can have their own rate limits that are enforced at an organization level.
+Individual services within Genesys Cloud can have their own rate limits that are enforced at an organization level.
 
- **Important** If you try to circumvent the rate limits in the Public API, you can inadvertently begin impacting your entire organization's ability to use Genesys Cloud;  crucial services further in the Genesys Cloud stack will begin rate-limiting. This could result in a partial or complete outage of your contact center.  
+**Important** If you try to circumvent the rate limits in the platform API, you can inadvertently begin impacting your entire organization's ability to use Genesys Cloud, as crucial services further down the Genesys Cloud stack will begin rate-limiting. This could result in a partial or complete outage of your contact center.  
 
-The best advice I can give is to respect the 300-API call limit per token and use a single token in your integration. Finally, Genesys Cloud does reserve, per our [Terms of Service](https://help.mypurecloud.com/wp-content/uploads/2020/10/Genesys-Cloud-TCs-Global.pdf) the right to shut down an OAuth2 client organization that is causing platform instability.
+The best advice I can give is to respect the 300 requests per minute limit per token, and to use a single token in your integration. Finally, Genesys Cloud does reserve, per our [Terms of Service](https://help.mypurecloud.com/wp-content/uploads/2020/10/Genesys-Cloud-TCs-Global.pdf) the right to shut down an OAuth2 client that is causing platform instability.
 :::
 
 ##  Design and implement a data action response cache
