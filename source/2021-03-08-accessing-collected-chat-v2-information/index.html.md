@@ -44,7 +44,7 @@ You can retrieve a conversation context by doing either of the following:
 
 There are a few things to remember about the names of participant attributes:
 
-1. When a chat is created, Genesys Cloud (server/cloud side) automatically prepends chat attribute names with `context`. You will find these key/value pairs, starting with `context.prefix`, under the participant attributes on the customer participant.
+1. When a chat is created, Genesys Cloud (server/cloud side) automatically prepends chat attribute names with `context`. You will find these key/value pairs, starting with the `context` prefix, under the participant attributes on the customer participant.
 
   For example, if you use `key1` as an attribute name (as part of a registration form or as `userData`), this piece of data will become a participant attribute named `context.key1`.
 
@@ -204,7 +204,7 @@ You can also include up to 3 `customField` attributes, along with their correspo
 - `customField3Label`
 - `customField3`
 
-The interaction details for a chat conversation also includes the following derived attributes:
+The interaction details for a chat conversation includes the following derived attributes:
 
 - `Customer Name`: based on `firstname` and `lastname`
 - `Customer Address`: based on `addressStreet`, `addressCity`, `addressPostalCode` and `addressState`
@@ -241,33 +241,28 @@ The `customer email` built-in variable is not supported with web chat widget ver
 
 |Script built-in variable |Web chat widget - version 2 attribute | Conversation participant attribute|
 |-------------------------|------------------- |-----------------------------------|
-{{Chat.Customer Email}}   | Not supported      | Not supported
-{{Chat.Customer First Name}} | firstname | context.firstname
-{{Chat.Customer Last Name}} | lastname | context.lastname
-{{Chat.Customer Street}} | addressStreet | context.addressStreet
-{{Chat.Customer City}} | addressCity | context.addressCity
-{{Chat.Customer Postal Code}} | addressPostalCode | context.addressPostalCode
-{{Chat.Customer State}} | addressState | context.addressState
-{{Chat.Customer Phone Number}} | phoneNumber | context.phoneNumber
-{{Chat.Customer Phone Type}} | phoneType | context.phoneType
-{{Chat.Customer ID}} | customerId | context.customerId |  |
+Chat.Customer Email   | Not supported      | Not supported |
+Chat.Customer First Name | firstname | context.firstname |
+Chat.Customer Last Name | lastname | context.lastname |
+Chat.Customer Street | addressStreet | context.addressStreet |
+Chat.Customer City | addressCity | context.addressCity |
+Chat.Customer Postal Code | addressPostalCode | context.addressPostalCode |
+Chat.Customer State | addressState | context.addressState |
+Chat.Customer Phone Number | phoneNumber | context.phoneNumber |
+Chat.Customer Phone Type | phoneType | context.phoneType |
+Chat.Customer ID | customerId | context.customerId |  |
 
 ### Use script variables
 
 To use chat data that is not included in a built-in variable, [add a script variable](https://rcstaging.wpengine.com/?p=35478). With a script variable, you can get all of your chat data, including `email` and other custom chat attributes. Remember to turn on the **Input property** toggle. This allows the value to be assigned from an external source, such as an Architect flow. When the script loads, the script extracts participant attributes with the corresponding variable `Name` from the conversation context and stores their values in the appropriate script variables.
 
-:::secondary
-**Tip** Remember [Genesys Cloud renames your participant attributes](#how_Genesys_Cloud_renames_your_participant_attributes), such as `Name`,`email`,`subject`, `\_genesys\_pageTitle`. Build your script variables accordingly.
-:::
-
-:::primary
-**Important:**
-Scripts do not support attribute names with a "." (dot).
-:::
-
 ![Chat Script Email](ChatScriptEmail.png)
 ![Chat Script Subject](ChatScriptSubject.png)
 ![Chat Script PageTitle](ChatScriptPageTitle.png)
+
+Remember the following points:
+- [Genesys Cloud renames your participant attributes](#how_Genesys_Cloud_renames_your_participant_attributes), such as `Name`,`email`,`subject`, `_genesys_pageTitle`. Build your script variables accordingly.
+- Scripts do not support attribute names with a "." (dot). Therefore, you cannot use "context.email", which is the name of the participant attribute as it is stored in the Conversation context. Instead, you can specify the variable name as "email" and the script will automatically look for the participant attribute name, "context.email". The same goes for any other participant attributes starting with "context".
 
 :::primary
 **Important**
