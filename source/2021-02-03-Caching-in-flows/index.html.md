@@ -5,7 +5,7 @@ date: 2021-02-03
 author: sam.johnson@genesys.com
 ---
 
-[Genesys Cloud Architect](https://help.mypurecloud.com/articles/about-architect/) is a feature-rich tool for developing voice, chat, email, and message flows. One great feature of Architect flows is the ability to [call data actions](https://help.mypurecloud.com/articles/call-data-action/). Call data actions allow you to interoperate with various third-party systems and services and also with the Genesys Cloud Platform API. You can use call data actions to extend the functionality of your flows beyond the Architect feature set and provide a richer experience to your customers.
+[Genesys Cloud Architect](https://help.mypurecloud.com/articles/about-architect/) is a feature-rich tool for developing voice, chat, email, and message flows. One great feature of Architect flows is the ability to call [data actions](https://help.mypurecloud.com/articles/call-data-action/). Data actions allow you to interoperate with various third-party systems and services and also with the Genesys Cloud Platform API. You can use data actions to extend the functionality of your flows beyond the Architect feature set and provide a richer experience to your customers.
 
 While augmenting your flows with data actions can provide a great customer experience, data actions are still requests to a distributed service, and distributed services can occasionally fail. To prepare your call flows for the possibility of failure, ask yourself these questions:
 
@@ -22,9 +22,9 @@ In this post, we will:
 5. Deploy the data table and call flows
 
 ## Handle failure scenarios
-While data action requests succeed most of the time, distributed services can fail. Therefore, it is important to understand the failure modes of the distribute service you are using, as well as how to call the service in a way that minimizes the risk of failure.    
+While data action requests succeed most of the time, distributed services can fail. Therefore, it is important to understand the failure modes of the distributed service you are using, as well as how to call the service in a way that minimizes the risk of failure.    
 
-In general failure modes fall into these categories:
+In general, failure modes fall into these categories:
 
 1.  Failure to handle bad user input. For example, a user enters an incorrect account number and the downstream service rejects it.  
 2.  Failure of the service to respond. For example, a downstream service returns an unexpected error, the service times out, or there are network connectivity problems.
@@ -37,11 +37,11 @@ To handle these scenarios, be sure to include some basic error handling logic in
 
 **Set guardrails.** When you implement retry logic, whether automated or via caller input, it is extremely important that you set a reasonable upper-limit on retry requests. Retry limits prevent infinite failure loops, which cause customer frustration and excessive data action requests. If you have locally deployed edge servers for handling calls, call flows without an upper-limit of retries can "spike" the CPU on your edge server. The resulting performance hit will impact all customers served by the edge device.
 
-**Validate input data.** When you pass inputs to a data action, first check the validity of the inputs before you execute the data action. A step that accesses unset variables or an out-of-bounds collection causes the flow to use its error handling logic, which generally results in an undesirable user experience. In addition, verify that the actual input values match the data action requirements. For example, if an account number must be 10 digits, check that the input actually has 10 digits before executing the data action. This verification results in better feedback to the customer and reduces unnecessary requests.
+**Validate data.** When you pass inputs to a data action, first check the validity of the inputs before you execute the data action. A step that accesses unset variables or an out-of-bounds collection causes the flow to use its error handling logic, which generally results in an undesirable user experience. In addition, verify that the actual input values match the data action requirements. For example, if an account number must be 10 digits, check that the input actually has 10 digits before executing the data action. These principles apply to outputs as well. This verification results in better feedback to the customer and reduces unnecessary requests.
 
 **Configure flow error event handling.** By default, when a fatal flow execution error occurs, the call flow error event handling plays a message and disconnects the call. To provide a better customer experience, customize the error event handling to route the call to a queue or another task.
 
-**Sanitize data action inputs.** When you create your own data action, consider how the values passed to the action inputs will be used in the request URL and/or body. Where appropriate, escape your inputs. Also, to maintain proper syntax, use silent formal notation for non-required string inputs in a JSON request body. Consider using [Velocity macros](https://help.mypurecloud.com/articles/velocity-macros-data-actions/) in your data action request configuration to escape inputs, use conditional logic based on input values, handle missing inputs, and more.
+**Sanitize data action inputs.** When you create your own data action, consider how the values passed to the action inputs will be used in the request URL and/or body. Where appropriate, escape your inputs. Also, to maintain proper syntax, use silent formal notation `$!{variableName}` for non-required string inputs in a JSON request body. Consider using [Velocity macros](https://help.mypurecloud.com/articles/velocity-macros-data-actions/) in your data action request configuration to escape inputs, use conditional logic based on input values, handle missing inputs, and more.
 
 **Be flexible in the data action response translation.** When you create your own data actions, the response translation maps the response from the service to the data action output contract. If the response translation encounters an error, the data action takes the failure path. To give your flow logic a higher chance of success, ensure that your response translation can successfully handle all scenarios, such as when some properties are missing from the response.
 
@@ -70,19 +70,19 @@ If you use the Genesys Cloud Data Actions integration to enhance your flow with 
 **Important:** Exceeding these limits will cause data action executions to fail, and without proper handling, your flow could also fail.
 
 :::{"alert":"info","title":"Rate Limits with Call Flows, Data Actions and Platform APIs","autoCollapse":false}
-While you can make 900 data actions executions per minute, if you are using a data action to call a Genesys Cloud API, you can only make 300 requests per OAuth2 token before the public API starts rate limiting calls for that token.  
+While you can perform 900 data actions executions per minute, if you are using a data action to call a Genesys Cloud API, you can only make 300 requests per OAuth2 token before the platform API starts rate limiting requests from that token.  
 
-Some developers try to get around these rate limits by having multiple OAuth2 clients or generating additional OAuth2 client tokens (each OAuth2 client can have up to 10 active tokens with 300 API call per token limit). In Genesys Cloud hitting rate limits is a signal that you are not using our APIs correctly. For example, you are not using caching, or you are doing excessive polling.
+Some developers try to get around these rate limits by having multiple OAuth2 clients or generating additional OAuth2 client tokens. In Genesys Cloud, hitting rate limits is a signal that you are not using our APIs correctly. For example, you are not using caching, or you are doing excessive polling.
 
- Individual services within Genesys Cloud can have their own rate limits that are enforced at an organization level.
+Individual services within Genesys Cloud can have their own rate limits that are enforced at an organization level.
 
- **Important** If you try to circumvent the rate limits in the Public API, you can inadvertently begin impacting your entire organization's ability to use Genesys Cloud;  crucial services further in the Genesys Cloud stack will begin rate-limiting. This could result in a partial or complete outage of your contact center.  
+**Important** If you try to circumvent the rate limits in the platform API, you can inadvertently begin impacting your entire organization's ability to use Genesys Cloud, as crucial services further down the Genesys Cloud stack will begin rate-limiting. This could result in a partial or complete outage of your contact center.  
 
-The best advice I can give is to respect the 300-API call limit per token and use a single token in your integration. Finally, Genesys Cloud does reserve, per our [Terms of Service](https://help.mypurecloud.com/wp-content/uploads/2020/10/Genesys-Cloud-TCs-Global.pdf) the right to shut down an OAuth2 client organization that is causing platform instability.
+The best advice I can give is to respect the 300 requests per minute limit per token, and to use a single token in your integration. Finally, Genesys Cloud does reserve, per our [Terms of Service](https://help.mypurecloud.com/wp-content/uploads/2020/10/Genesys-Cloud-TCs-Global.pdf) the right to shut down an OAuth2 client that is causing platform instability.
 :::
 
 ##  Design and implement a data action response cache
-Implement a caching mechanism for data action responses within your call flows will help avoid rate-limiting problems, make your requests more efficient, and make your requests more straightforward to implement.
+Implementing a caching mechanism for data action responses within your call flows will help avoid rate-limiting problems, make your requests more efficient, and make your requests more straightforward to implement.
 
 To illustrate caching, the following scenario shows how to implement the ["Get On Queue Agent Counts" Genesys Cloud Data Action](https://appfoundry.mypurecloud.com/filter/genesyscloud/listing/13074443-4ffc-46b6-82c7-c3f4af51861f) from the [Genesys Cloud AppFoundry](https://appfoundry.mypurecloud.com/) in a call flow and cache its response in a data table.
 
@@ -131,7 +131,7 @@ After we publish this flow, we are ready to implement it. The following sections
 4. In the `Notes` field, type a description of the data table.
 5. In the `Reference Key label` field, type the queue ID.
 6. Add a custom field called `Updated` that holds the DateTime of the record.
-7. Add a custom field called `AgentsIdle` that holds the number of idle agents.
+7. Add a custom field called `AgentsIdle` that indicates whether or not there are idle agents.
 
 ![Data table configuration parameters](data_table_configuration_parameters.png)
 
@@ -152,9 +152,9 @@ The following sections provide step-by-step instructions on how to complete each
 
 ### Import the data actions
 1. Configure the [Genesys Cloud Data Actions integration](https://help.mypurecloud.com/articles/about-genesys-cloud-data-actions-integration/) if it is not already configured.
-2. [Download the "Insert IVR Cache Entry" data action templates](Insert-IVR-Cache-Entry.json).
-3. [Download the "Update IVR Cache Entry" data action templates](Update-IVR-Cache-Entry.json).
-4. [Download the "Get On Queue Agent Counts" data action templates](Get-On-Queue-Agent-Counts.json).
+2. [Download the "Insert IVR Cache Entry" data action template](Insert-IVR-Cache-Entry.json).
+3. [Download the "Update IVR Cache Entry" data action template](Update-IVR-Cache-Entry.json).
+4. [Download the "Get On Queue Agent Counts" data action template](Get-On-Queue-Agent-Counts.json).
 5. Navigate to _Admin > Integrations > Actions_ and import all 3 data actions.
 6. For the _Insert_ and _Update IVR Cache Entry_ actions, update the request URL with the data table ID you noted in the previous section.
 
@@ -187,9 +187,9 @@ Using the guidance and examples above, you can significantly increase the reliab
 ## Resources
 1. [Caching example - Architect call flow](CacheExample.i3InboundFlow)
 2. [Caching example - Archy call flow](CacheExampleFlow.yaml)
-3. ["Insert IVR Cache Entry" data action templates](Insert-IVR-Cache-Entry.json)
-4. ["Update IVR Cache Entry" data action templates](Update-IVR-Cache-Entry.json)
-5. ["Get On Queue Agent Counts" data action templates](Get-On-Queue-Agent-Counts.json)
+3. ["Insert IVR Cache Entry" data action template](Insert-IVR-Cache-Entry.json)
+4. ["Update IVR Cache Entry" data action template](Update-IVR-Cache-Entry.json)
+5. ["Get On Queue Agent Counts" data action template](Get-On-Queue-Agent-Counts.json)
 6. [Archy, the Genesys Cloud Call Flow CLI](/devapps/archy/)
 7. [More Genesys Cloud Data Actions on the AppFoundry](https://appfoundry.mypurecloud.com/filter/genesyscloud/listing/13074443-4ffc-46b6-82c7-c3f4af51861f)
 8. [Handling rate limits on Genesys Cloud platform API requests](/api/rest/rate_limits.html)
