@@ -7,7 +7,7 @@ author: jerome.saint-marc@genesys.com
 
 In this blog, I will explain how to retrieve and leverage chat data in Genesys Cloud by using [web chat widget - version 2](/api/webchat/widget-version2.html).
 
-When you expose chat capabilities on your website, you can collect data about your customer and send that information to Genesys Cloud. You can then leverage this data in your Architect Inbound Chat flow to make routing decisions. You can also expose this data as [interaction details](https://rcstaging.wpengine.com/?p=126054) or in an agent [script](https://rcstaging.wpengine.com/?p=54284) to provide more details about the customer's experience to the contact center agent.  
+When you expose chat capabilities on your website, you can collect data about your customer and send that information to Genesys Cloud. You can then leverage this data in your Architect Inbound Chat flow to make routing decisions. You can also expose this data as [interaction details](https://help.mypurecloud.com/?p=126054) or in an agent [script](https://help.mypurecloud.com/?p=54284) to provide more details about the customer's experience to the contact center agent.  
 
 First, let's make sure we're on the same page with some key definitions. In Genesys Cloud:
 
@@ -75,11 +75,11 @@ In addition to whatever participant attributes you define, web chat widget versi
 
 If you set a `Queue` as a `targetAddress` in your [widget configuration](/api/webchat/widget-version2.html#create_a_widget_configuration_object), the following participant data will become available to you in your Architect inbound chat flow: `context.genesys.legacyRoutingTargetQueueAddress`.  
 
-If you want to leverage this input in your **Transfer to ACD** action, you will first need to transform the retrieved queue name into a queue object/variable. For information about how to do this see, [Find Queue action](https://rcstaging.wpengine.com/?p=185741).
+If you want to leverage this input in your **Transfer to ACD** action, you will first need to transform the retrieved queue name into a queue object/variable. For information about how to do this see, [Find Queue action](https://help.mypurecloud.com/?p=185741).
 
 ## What the conversation service returns
 
-We have walked through a description of the participant attributes you can add as well as those that are automatically included with every chat. Now let's look at the what the Conversation service returns when we make a request to [GET /api/v2/conversations/{conversationId}](https://developer.mypurecloud.com/api/rest/v2/conversations/#get-api-v2-conversations--conversationId-).
+We have walked through a description of the participant attributes you can add as well as those that are automatically included with every chat. Now let's look at the what the Conversation service returns when we make a request to [GET /api/v2/conversations/{conversationId}](/api/rest/v2/conversations/#get-api-v2-conversations--conversationId-).
 
 ```{"title":"Conversation service return payload", "language":"json"}
 {
@@ -182,7 +182,7 @@ Now that we've seen how to collect chat data and return it with the API, let's l
 
 
 ### Chat data in the Interaction Details panel
-To populate the [Interaction Details panel](https://rcstaging.wpengine.com/?p=126054) for a chat conversation, Genesys Cloud uses the values of these fields:
+To populate the [Interaction Details panel](https://help.mypurecloud.com/?p=126054) for a chat conversation, Genesys Cloud uses the values of these fields:
 
 - `firstname`
 - `lastname`
@@ -218,13 +218,13 @@ The following image shows how the conversation context shown above appears in th
 
 ## Use chat attributes with an Architect Inbound Chat flow
 
-As I mentioned earlier, chat-related information can be used with Architect to route inbound chats to the appropriate agent. To retrieve chat data for use with Architect, use a [Get Participant Data action](https://rcstaging.wpengine.com/?p=20576). Be sure to use `context.<<your keyname>>` as the attribute name.
+As I mentioned earlier, chat-related information can be used with Architect to route inbound chats to the appropriate agent. To retrieve chat data for use with Architect, use a [Get Participant Data action](https://help.mypurecloud.com/?p=20576). Be sure to use `context.<<your keyname>>` as the attribute name.
 
 ![Get Participant Data](ChatGetParticipantData.png)
 
 ## Use scripts for maximum flexibility and control
 
-For more control over the chat data that you display to agents, use a [script](https://rcstaging.wpengine.com/?p=54284). With a script, you are not limited to a specific set of keynames (unlike with Interaction Details). Instead, you can retrieve and expose any of the chat data that you have collected.
+For more control over the chat data that you display to agents, use a [script](https://help.mypurecloud.com/?p=54284). With a script, you are not limited to a specific set of keynames (unlike with Interaction Details). Instead, you can retrieve and expose any of the chat data that you have collected.
 
 Scripts offers two ways to retrieve chat data attributes:
 
@@ -232,29 +232,29 @@ Scripts offers two ways to retrieve chat data attributes:
 2.	Use [script variables](#use_script_variables).
 
 ### Use built in script variables for chats
-Built-in variables are already predefined for you. For information on how to use built-in script variables, see [Script built-in variables](https://rcstaging.wpengine.com/?p=70896).
+Built-in variables are already predefined for you. For information on how to use built-in script variables, see [Script built-in variables](https://help.mypurecloud.com/?p=70896).
 
 :::primary
 **Note**
 The `customer email` built-in variable is not supported with web chat widget version 2. To access this variable, use the script variables approach.
 :::
 
-|Script built-in variable |Web chat widget - version 2 attribute | Conversation participant attribute|
+| Script built-in variable | Web chat widget - version 2 attribute | Conversation participant attribute|
 |-------------------------|------------------- |-----------------------------------|
-Chat.Customer Email   | Not supported      | Not supported |
-Chat.Customer First Name | firstname | context.firstname |
-Chat.Customer Last Name | lastname | context.lastname |
-Chat.Customer Street | addressStreet | context.addressStreet |
-Chat.Customer City | addressCity | context.addressCity |
-Chat.Customer Postal Code | addressPostalCode | context.addressPostalCode |
-Chat.Customer State | addressState | context.addressState |
-Chat.Customer Phone Number | phoneNumber | context.phoneNumber |
-Chat.Customer Phone Type | phoneType | context.phoneType |
-Chat.Customer ID | customerId | context.customerId |  |
+| Chat.Customer Email   | Not supported      | Not supported |
+| Chat.Customer First Name | firstname | context.firstname |
+| Chat.Customer Last Name | lastname | context.lastname |
+| Chat.Customer Street | addressStreet | context.addressStreet |
+| Chat.Customer City | addressCity | context.addressCity |
+| Chat.Customer Postal Code | addressPostalCode | context.addressPostalCode |
+| Chat.Customer State | addressState | context.addressState |
+| Chat.Customer Phone Number | phoneNumber | context.phoneNumber |
+| Chat.Customer Phone Type | phoneType | context.phoneType |
+| Chat.Customer ID | customerId | context.customerId |  |
 
 ### Use script variables
 
-To use chat data that is not included in a built-in variable, [add a script variable](https://rcstaging.wpengine.com/?p=35478). With a script variable, you can get all of your chat data, including `email` and other custom chat attributes. Remember to turn on the **Input property** toggle. This allows the value to be assigned from an external source, such as an Architect flow. When the script loads, the script extracts participant attributes with the corresponding variable `Name` from the conversation context and stores their values in the appropriate script variables.
+To use chat data that is not included in a built-in variable, [add a script variable](https://help.mypurecloud.com/?p=35478). With a script variable, you can get all of your chat data, including `email` and other custom chat attributes. Remember to turn on the **Input property** toggle. This allows the value to be assigned from an external source, such as an Architect flow. When the script loads, the script extracts participant attributes with the corresponding variable `Name` from the conversation context and stores their values in the appropriate script variables.
 
 ![Chat Script Email](ChatScriptEmail.png)
 ![Chat Script Subject](ChatScriptSubject.png)
@@ -272,4 +272,4 @@ Don't forget to enable chat in your script properties!
 ![Chat Script Properties](ChatScriptProperties.png)
 
 ## Closing thoughts
-This article was written in response to the number of questions we get from our developers who are building with the web chat widget version - 2 chat components and APIs. In first quarter of 2021, Genesys Cloud launched the beta version of our next generation Web Messaging platform. This new Web Messaging platform will become the recommended approach for customers looking to build user-to-agent chat capabilities within their own applications. For more information on our new Web Messaging platform, see [Web messaging and Messenger](https://developer.mypurecloud.com/api/webmessaging).
+This article was written in response to the number of questions we get from our developers who are building with the web chat widget version - 2 chat components and APIs. In first quarter of 2021, Genesys Cloud launched the beta version of our next generation Web Messaging platform. This new Web Messaging platform will become the recommended approach for customers looking to build user-to-agent chat capabilities within their own applications. For more information on our new Web Messaging platform, see [Web messaging and Messenger](/api/webmessaging).
