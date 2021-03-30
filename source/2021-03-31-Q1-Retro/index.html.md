@@ -5,16 +5,16 @@ date: 2021-04-01
 author: john.carnell@genesys.com
 ---
 
-Greetings everyone. I hope everyone is keeping safe and healthy in this challenging times. Wow! 2021 is flying by and the first quarter of the year is already in the bag. I wanted to take a moment and reflect on whats going on in the Developer Engagement team, what we have delivered this year and what you can plan to see over the course of the rest of the year.
+Greetings everyone. I hope everyone is keeping safe and healthy in these challenging times. Wow! 2021 is flying by and the first quarter of the year is already in the bag. I wanted to take a moment and reflect on whats going on in the Developer Engagement team, what we have delivered this year and what you can plan to see over the course of the rest of the year.
 
 # We are growing as a team
 
-Our Senior leadership recognizes that one of the keys to a vibrant, development platform is a vibrant development community. With the launch of the Developer Engagement team we in Q2 of 2020, we have grown from a team of two engineers to a team of 5 full-time engineers and evangelists.  I would like to introduce our team and put some faces with the names you see on our forums:
+Our Senior leadership recognizes that one of the keys to a vibrant development platform is a vibrant development community. With the launch of the Developer Engagement team in Q2 of 2020, we have grown from a team of two engineers to a team of 5 full-time engineers and evangelists.  I would like to introduce our team and put some faces with the names you see on our forums:
 
 |        |      |            |
 |--------|------|------------|
 |<img src="johncarnellgenesyscom.png" alt="John Carnell" width="100"/>|John Carnell| John has been with Genesys since 2015 and is currently the architect and team lead for the Genesys Cloud Developer Engagement team. John is a prolific speaker and writer. He regularly speaks at conferences and industry user groups. John's most recent book [Spring Microservices in Action](https://www.manning.com/books/spring-microservices-in-action-second-edition?utm_source=google&utm_medium=search&utm_campaign=dynamicsearch&gclid=Cj0KCQjwjPaCBhDkARIsAISZN7TThRZBnEPrb-FkhQwlFHEbExCIHI2lo70DvP28Rtr2lxf9AFkVvn8aAhmiEALw_wcB) is about to be released in its second edition. John is based out of our Raleigh, North Carolina office.
-|<img src="timjsmithgenesyscom.png" alt="Tim Smith" width="100"/>     |Tim Smith   | Tim, is a Senior Developer Evangelist and has been with Genesys since 2007. Tim's focus in the team is designing and developing customer-facing integrations and customizations. Tim is based out of our Denver, Colorado office.|
+|<img src="timjsmithgenesyscom.png" alt="Tim Smith" width="100"/>     |Tim Smith   | Tim is a Senior Developer Evangelist and has been with Genesys since 2007. Tim's focus in the team is designing and developing customer-facing integrations and customizations. Tim is based out of our Denver, Colorado office.|
 |<img src="ronanwatkinsgenesyscom.png" alt="Ronan Watkins" width="100"/>|Ronan Watkins|Ronan has been with Genesys since 2020 and is a software engineer within the Developer Engagement team. Ronan has worked extensively with our SDKs and is a core contribute to the Genesys Cloud Command Line Interface (CLI). Ronan is based out of our Galway, Ireland office.|
 |<img src="weiteligenesyscom.png" alt="Weite Li" width="100"/>|Weite Li|Weite just graduated from college in summer 2020 and joined Genesys since then. He is working within Developer Engagement team. Weite is heavily involved with our Developer Center portal and supporting our Developer tools. Weite is based out of our Indianapolis office.|
 |<img src="jacobshawgenesyscom.png" alt="Jacob Shaw" width="100"/>|Jacob Shaw|Jacob is the newest member of our team. He just recently joined the Developer Engagement team is based out of Atlanta, Georgia. Jacob has degree in computer systems engineering. Jacob will be help the team build out their content management tools.|
@@ -23,9 +23,9 @@ We are still looking at growing the team beyond our current capacity. We are add
 
 # More Content
 
-Our focus this is year is on delivering more content to our developers across multiple delivery channels. Our goal with our content is to deliver new content with a regular cadence and with different levels of consumption. We want timely, relevant and consumable content for all the developers who use our site.  We currently have 5 channels for delivering information about the Genesys Cloud development platform:
+Our focus this is year is on delivering more content to our developers across multiple delivery channels. Our goal with our content is to deliver new content with a regular cadence and with different levels of consumption. We want timely, relevant, and consumable content for all the developers who use our site.  We currently have 5 channels for delivering information about the Genesys Cloud development platform:
 
-1. [__Developer Center__](https://developer.mypurecloud.com). Our developer center is the main portal for finding documentation around the Genesys Cloud APIs. It has a wide variety of topics dealing not only with the individual API calls, but also development guides on API integration, data integration and Genesys Cloud development best practices. The developer center is the starting point for all developer content within Genesys Cloud.
+1. [__Developer Center__](https://developer.mypurecloud.com). Our developer center is the main portal for finding documentation around the Genesys Cloud APIs. It has a wide variety of topics dealing not only with the individual API calls, but also development guides on API integration, data integration, and Genesys Cloud development best practices. The developer center is the starting point for all developer content within Genesys Cloud.
 
 2. [__Genesys Cloud Developer Blog__](/blogs). The blog contains articles on various Genesys Cloud development topics. It covers a wide range of topics, including new developer tool announcements, best practices for building your contact center within Genesys Cloud and hands-on articles on how to use the Genesys Cloud APIs.
 
@@ -60,7 +60,7 @@ The engineers in the Developer Engagement team have beens heads down this quarte
 |-|-|
 |[Genesys Cloud CLI](/api/rest/command-line-interface/)|The Genesys Cloud CLI lets you perform administrative, ad-hoc queries and bulk changes from the command-line. Written in Go, it allows you to install the CLI as a single-binary (no dependencies) easily within Windows, Linux and OS X |
 |[CLI Recipes](https://github.com/MyPureCloud/quick-hits-cli)|A GitHub repository containing recipes for the Genesys Cloud CLI|
-|Developer Center V2|__Coming soon__. We are within weeks of delivering a new Developer Center experience, that will include improved search capabilities and user interactions. In addition, the new Developer Center will provide foundations for to deliver a more personalized developer services. |
+|Developer Center V2|__Coming soon__. We are within weeks of delivering a new Developer Center experience that will include improved search capabilities and user interactions. In addition, the new Developer Center will provide foundations for to deliver a more personalized developer services. |
 |Logging capabilities|__Coming soon__. The SDK team has been building a more consistent logging experience across all of our SDKs so that developers can more easily (and consistently) log what is being executed in our SDKs. These new logging capabilities will make it easier for the Developer Engagement and support teams to provide more context on when errors are encountered while coding with our SDKs.
 
 # What's coming next
@@ -76,4 +76,4 @@ This is only the beginning of the year! For the rest of the year, the Developer 
 
 4. __A more personalized experience in the Developer Center__. This one is really important to me. We want to allow developers to personalize the Developer Center to meet their individual needs. We are currently exploring how we can let developers subscribe to individual page notifications so they can be notified of the APIs that are important to them. We are also looking at building out a "favorites" capability so that the APIs you work with the most are available right at the beginning of the site rather then buried below multiple pages.
 
-We are off to a busy year, but we are excited with the support and feedback we have been getting from the Genesys Cloud developer community. It's going to be an exciting year. Let's build something cool together.
+We are off to a busy year, but we are excited with the support and feedback we have been getting from the Genesys Cloud developer community. It's going to be an exciting year. Let's build something great together.
