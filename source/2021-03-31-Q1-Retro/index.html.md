@@ -13,8 +13,8 @@ Our Senior leadership recognizes that one of the keys to a vibrant development p
 
 |        |      |            |
 |--------|------|------------|
-|<img src="johncarnellgenesyscom.png" alt="John Carnell" width="100"/>|John Carnell| John has been with Genesys since 2015 and is currently the architect and team lead for the Genesys Cloud Developer Engagement team. John is a prolific speaker and writer. He regularly speaks at conferences and industry user groups. John's most recent book [Spring Microservices in Action](https://www.manning.com/books/spring-microservices-in-action-second-edition?utm_source=google&utm_medium=search&utm_campaign=dynamicsearch&gclid=Cj0KCQjwjPaCBhDkARIsAISZN7TThRZBnEPrb-FkhQwlFHEbExCIHI2lo70DvP28Rtr2lxf9AFkVvn8aAhmiEALw_wcB) is about to be released in its second edition. John is based out of our Raleigh, North Carolina office.
-|<img src="timjsmithgenesyscom.png" alt="Tim Smith" width="100"/>     |Tim Smith   | Tim is a Senior Developer Evangelist and has been with Genesys since 2007. Tim's focus in the team is designing and developing customer-facing integrations and customizations. Tim is based out of our Denver, Colorado office.|
+|<img src="johncarnellgenesyscom.png" alt="John Carnell" width="100"/>|John Carnell| John has been with Genesys since 2015 and is currently the architect and team lead for the Genesys Cloud Developer Engagement team. John is a prolific speaker and writer. He regularly speaks at conferences and industry user groups. John's most recent book [Spring Microservices in Action](https://www.manning.com/books/spring-microservices-in-action-second-edition?utm_source=google&utm_medium=search&utm_campaign=dynamicsearch&gclid=Cj0KCQjwjPaCBhDkARIsAISZN7TThRZBnEPrb-FkhQwlFHEbExCIHI2lo70DvP28Rtr2lxf9AFkVvn8aAhmiEALw_wcB) is about to be released in its second edition. John is based out of our Raleigh, North Carolina office.|
+|<img src="timjsmithgenesyscom.png" alt="Tim Smith" width="100"/>     |Tim Smith   | Tim is a Senior Developer Evangelist and has been with Genesys since 2007. Tim's focus in the team is designing and developing customer-facing integrations and customizations. Tim is based out of Denver, Colorado.|
 |<img src="ronanwatkinsgenesyscom.png" alt="Ronan Watkins" width="100"/>|Ronan Watkins|Ronan has been with Genesys since 2020 and is a software engineer within the Developer Engagement team. Ronan has worked extensively with our SDKs and is a core contribute to the Genesys Cloud Command Line Interface (CLI). Ronan is based out of our Galway, Ireland office.|
 |<img src="weiteligenesyscom.png" alt="Weite Li" width="100"/>|Weite Li|Weite just graduated from college in summer 2020 and joined Genesys since then. He is working within Developer Engagement team. Weite is heavily involved with our Developer Center portal and supporting our Developer tools. Weite is based out of our Indianapolis office.|
 |<img src="jacobshawgenesyscom.png" alt="Jacob Shaw" width="100"/>|Jacob Shaw|Jacob is the newest member of our team. He just recently joined the Developer Engagement team is based out of Atlanta, Georgia. Jacob has degree in computer systems engineering. Jacob will be help the team build out their content management tools.|
@@ -22,19 +22,19 @@ Our Senior leadership recognizes that one of the keys to a vibrant development p
 We are still looking at growing the team beyond our current capacity. We are adding another 2 positions later this year. In addition, the Developer Engagement team now includes dedicated testing resources and technical writers to help improve the quality of our code and our documentation. We are extremely excited about the opportunity to build out a team that can support our growing development community.
 
 # More Content
-Our focus this is year is on delivering more content to our developers across multiple delivery channels. Our goal with our content is to deliver new content with a regular cadence and with different levels of consumption. We want timely, relevant, and consumable content for all the developers who use our site.  We currently have 5 channels for delivering information about the Genesys Cloud development platform:
+Our goal is to deliver timely, relevant, and consumable content for all the developers who use our site. We currently have 5 channels for delivering information about the Genesys Cloud development platform:
 
 1. [__Developer Center__](https://developer.mypurecloud.com). Our developer center is the main portal for finding documentation around the Genesys Cloud APIs. It has a wide variety of topics dealing not only with the individual API calls, but also development guides on API integration, data integration, and Genesys Cloud development best practices. The developer center is the starting point for all developer content within Genesys Cloud.
 
-2. [__Genesys Cloud Developer Blog__](/blogs). The blog contains articles on various Genesys Cloud development topics. It covers a wide range of topics, including new developer tool announcements, best practices for building your contact center within Genesys Cloud and hands-on articles on how to use the Genesys Cloud APIs.
+2. [__Genesys Cloud Developer Blog__](/blog/). The blog contains articles on various Genesys Cloud development topics. It covers a wide range of topics, including new developer tool announcements, best practices for building your contact center within Genesys Cloud and hands-on articles on how to use the Genesys Cloud APIs.
 
 3. [__DevDrops__](/video/devdrops/). Our DevDrop series is a new video series that we released this year. Its focus is on delivering short, consumable videos (10-20 minutes in length) that are meant to be "developer-to-developer" conversations.
 
 4. [__DevCasts__](/video/devcasts/). Our DevCasts are our more traditional Webinar topics that are approximately 45-60 minutes in lengths and allow for audience participation. They cover a wide variety of development topics and are not just limited to discussions related to platform APIs.
 
-5. [__Blueprints__](/blueprints). Blueprints are hands-on examples of how to integrate and extend Genesys Cloud functionality with other vendor products and technologies. Blueprints are meant to showcase the art of the possible.
+5. [__Blueprints__](/blueprints/). Blueprints are hands-on examples of how to integrate and extend Genesys Cloud functionality with other vendor products and technologies. Blueprints are meant to showcase the art of the possible.
 
-With that overview here, is a summary of the content we delivered this quarter:
+Here is a summary of the content we delivered or are close to delivering this quarter:
 
 | Content Name | Type | Description|
 |--------------|------|------------|
@@ -48,10 +48,10 @@ With that overview here, is a summary of the content we delivered this quarter:
 |[Using the CLI to move users to different queues](https://www.youtube.com/watch?v=VmrBhVc6n1U&t=1s)|DevDrop|John Carnell, the head of Developer Engagement, walks through how to use the CLI and Python to build a simple script to move a group of users from one queue to another.|
 |[Adding features to the Genesys Cloud SDK](https://www.youtube.com/watch?v=NqaIykM7r30)|DevDrop|In this DevDrop, Ronan Watkins, in a follow up to his blog on extending Genesys Cloud SDKs, shows you how to add a new feature to the SDK.|
 |[Genesys Dialog Engine](https://www.youtube.com/watch?v=mjMsy_a2WdE&t=6s)|DevCast|Jim Crespino, Director of Developer Evangelism, does an in-depth walkthrough of the Genesys Cloud Dialog Engine.|
-|[The Genesys Cloud CLI: A Deep Dive](none.TODO.need.final.link)|DevCast|John Carnell, the head of Developer Engagement, does a detailed walkthrough of the Genesys Cloud CLI, its architecture, philosophy and capabilities.| 
+|[The Genesys Cloud CLI: A Deep Dive](https://www.youtube.com/watch?v=rb2xqZU5vNc)|DevCast|John Carnell, the head of Developer Engagement, does a detailed walkthrough of the Genesys Cloud CLI, its architecture, philosophy and capabilities.| 
 |[Update a Genesys Cloud Do Not Contact list with the Genesys Cloud for Salesforce SDK](/blueprints/genesys-cloud-for-salesforce-sdk-dnclist-example/)|Blueprint|This blueprint demonstrates how add the primary phone number from Salesforce to a Genesys Cloud "Do not call blueprint."|
 |Build a chat translation assistant with the AWS Translate service|Blueprint|__Coming Soon__. This new blueprint demonstrates how to build an embedded application within Genesys Cloud and use the AWS Translate service to provide "on-the fly" translation services to a conversation between a customer and a Genesys Cloud agent.|
-|Embedding Applications with Genesys Cloud|Developer Starting Guide|__Coming Soon__. This starting guide will demonstrate how to embed a third party application within Genesys Cloud. It includes a detailed walkthrough of the code from the Chat/AWS Translate blueprint and demonstrates how to send messages to and from an agent's chat window.|
+|Embedding Applications with Genesys Cloud|Developer Starting Guide|__Coming Soon__. This starting guide will demonstrate how to embed a third-party application within Genesys Cloud. It includes a detailed walkthrough of the code from the Chat/AWS Translate blueprint and demonstrates how to send messages to and from an agent's chat window.|
 
 
 # More Tools
