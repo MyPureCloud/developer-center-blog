@@ -22,7 +22,6 @@ Our Senior leadership recognizes that one of the keys to a vibrant development p
 We are still looking at growing the team beyond our current capacity. We are adding another 2 positions later this year. In addition, the Developer Engagement team now includes dedicated testing resources and technical writers to help improve the quality of our code and our documentation. We are extremely excited about the opportunity to build out a team that can support our growing development community.
 
 # More Content
-
 Our focus this is year is on delivering more content to our developers across multiple delivery channels. Our goal with our content is to deliver new content with a regular cadence and with different levels of consumption. We want timely, relevant, and consumable content for all the developers who use our site.  We currently have 5 channels for delivering information about the Genesys Cloud development platform:
 
 1. [__Developer Center__](https://developer.mypurecloud.com). Our developer center is the main portal for finding documentation around the Genesys Cloud APIs. It has a wide variety of topics dealing not only with the individual API calls, but also development guides on API integration, data integration, and Genesys Cloud development best practices. The developer center is the starting point for all developer content within Genesys Cloud.
@@ -51,7 +50,9 @@ With that overview here, is a summary of the content we delivered this quarter:
 |[Genesys Dialog Engine](https://www.youtube.com/watch?v=mjMsy_a2WdE&t=6s)|DevCast|Jim Crespino, Director of Developer Evangelism, does an in-depth walkthrough of the Genesys Cloud Dialog Engine.|
 |[The Genesys Cloud CLI: A Deep Dive](none.TODO.need.final.link)|DevCast|John Carnell, the head of Developer Engagement, does a detailed walkthrough of the Genesys Cloud CLI, its architecture, philosophy and capabilities.| 
 |[Update a Genesys Cloud Do Not Contact list with the Genesys Cloud for Salesforce SDK](/blueprints/genesys-cloud-for-salesforce-sdk-dnclist-example/)|Blueprint|This blueprint demonstrates how add the primary phone number from Salesforce to a Genesys Cloud "Do not call blueprint."|
-|[Build a chat translation assistant with the AWS Translate service](TODO.NEED.FINAL.LINK)|Blueprint|This blueprint demonstrates how to build an embedded application within Genesys Cloud and use the AWS Translate service to provide "on-the fly" translation services to a conversation between a customer and a Genesys Cloud agent.|
+|Build a chat translation assistant with the AWS Translate service|Blueprint|__Coming Soon__. This new blueprint demonstrates how to build an embedded application within Genesys Cloud and use the AWS Translate service to provide "on-the fly" translation services to a conversation between a customer and a Genesys Cloud agent.|
+|Embedding Applications with Genesys Cloud|Developer Starting Guide|__Coming Soon__. This starting guide will demonstrate how to embed a third party application within Genesys Cloud. It includes a detailed walkthrough of the code from the Chat/AWS Translate blueprint and demonstrates how to send messages to and from an agent's chat window.|
+
 
 # More Tools
 The engineers in the Developer Engagement team have beens heads down this quarter and have delivered several new capabilities. They are looking at delivering several new development tools and capabilities. These new capabilities include:
