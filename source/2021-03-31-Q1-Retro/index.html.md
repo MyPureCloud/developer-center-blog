@@ -61,7 +61,7 @@ The engineers in the Developer Engagement team have been heads down this quarter
 |[Genesys Cloud CLI](/api/rest/command-line-interface/)|The Genesys Cloud CLI lets you perform administrative, ad-hoc queries and bulk changes from the command-line. Written in Go, it allows you to install the CLI as a single-binary (no dependencies) easily within Windows, Linux and OS X |
 |[CLI Recipes](https://github.com/MyPureCloud/quick-hits-cli)|A GitHub repository containing recipes for the Genesys Cloud CLI|
 |Developer Center V2|__Coming soon__. We are within weeks of delivering a new Developer Center experience that will include some new UI capabilities, the foundations for a better search and in many cases a new look and feel. |
-|Logging capabilities|__Coming soon__. The SDK team has been building a more consistent logging experience across all of our SDKs so that developers can more easily (and consistently) log what is being executed in our SDKs. These new logging capabilities will make it easier for developers to provide the Developer Engagement and support teams more context on when errors are encountered while coding with our SDKs.
+|Logging capabilities|__Coming soon__. The SDK team has been building a more consistent logging experience across all of our SDKs so that developers can more easily (and consistently) log what is being executed in our SDKs. These new logging capabilities will make it easier for developers to provide the Developer Engagement and support teams more context when errors are encountered while coding with our SDKs.
 
 # What's coming next
 This is only the beginning of the year! For the rest of the year, the Developer Engagement team has a large number of projects in the works, including:
