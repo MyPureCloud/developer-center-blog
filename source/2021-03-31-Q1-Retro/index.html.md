@@ -11,11 +11,14 @@ Greetings everyone. I hope everyone is keeping safe and healthy in these challen
 
 Our senior leadership recognizes that one of the keys to a vibrant development platform is to have the right people in place to support the needs of a rapidly growing and ever changing development community. With the launch of the Developer Engagement team in Q2 of 2020, we have grown from a team of two engineers to a team of 5 full-time engineers and evangelists.  I would like to introduce our team and put some faces with the names you see posting on our forums:
 
+| | | |
+|-|-|-|
 |<img src="johncarnellgenesyscom.png" alt="John Carnell" width="100"/>|John Carnell| John has been with Genesys since 2015 and is currently the architect and team lead for the Genesys Cloud Developer Engagement team. John is a prolific speaker and writer. He regularly speaks at conferences and industry user groups. John's most recent book [Spring Microservices in Action](https://www.manning.com/books/spring-microservices-in-action-second-edition?utm_source=google&utm_medium=search&utm_campaign=dynamicsearch&gclid=Cj0KCQjwjPaCBhDkARIsAISZN7TThRZBnEPrb-FkhQwlFHEbExCIHI2lo70DvP28Rtr2lxf9AFkVvn8aAhmiEALw_wcB) is about to be released in its second edition. John is based out of our Raleigh, North Carolina office.|
-|<img src="timjsmithgenesyscom.png" alt="Tim Smith" width="100"/>     |Tim Smith   | Tim is a Senior Developer Evangelist and has been with Genesys since 2007. Tim's focus in the team is designing and developing customer-facing integrations and customizations. Tim is based out of Denver, Colorado.|
+|<img src="timjsmithgenesyscom.png" alt="Tim Smith" width="100"/> |Tim Smith| Tim is a Senior Developer Evangelist and has been with Genesys since 2007. Tim's focus in the team is designing and developing customer-facing integrations and customizations. Tim is based out of Denver, Colorado.|
 |<img src="ronanwatkinsgenesyscom.png" alt="Ronan Watkins" width="100"/>|Ronan Watkins|Ronan has been with Genesys since 2020 and is a software engineer within the Developer Engagement team. Ronan has worked extensively with our SDKs and is a core contributor to the Genesys Cloud Command Line Interface (CLI). Ronan is based out of our Galway, Ireland office.|
 |<img src="weiteligenesyscom.png" alt="Weite Li" width="100"/>|Weite Li|Weite just graduated from college in summer 2020 and joined Genesys right after graduation. Weite is heavily involved with our Developer Center portal and supporting our Developer tools. Weite is based out of our Indianapolis office.|
 |<img src="jacobshawgenesyscom.png" alt="Jacob Shaw" width="100"/>|Jacob Shaw|Jacob is the newest member of our team. Jacob is based out of Atlanta, Georgia. Jacob has a degree in computer systems engineering. Jacob will be helping the Developer Engagement team build out their content management tools.|
+
 
 We are still looking at growing the team beyond our current capacity. We are adding another 2 positions later this year. In addition, the Developer Engagement team now includes dedicated testing resources and technical writers to help improve the quality of our code and our documentation. We are extremely excited about the opportunity to build out a team that can support our growing development community.
 
@@ -54,6 +57,8 @@ Here is a summary of the content we delivered or are close to delivering this qu
 # More Tools
 The engineers in the Developer Engagement team have been heads down this quarter and have delivered several new capabilities. These new capabilities include:
 
+| | | |
+|-|-|-|
 |[Genesys Cloud CLI](/api/rest/command-line-interface/)|The Genesys Cloud CLI lets you perform administrative, ad-hoc queries and bulk changes from the command-line. Written in Go, it allows you to install the CLI as a single-binary (no dependencies) easily within Windows, Linux and OS X |
 |[CLI Recipes](https://github.com/MyPureCloud/quick-hits-cli)|A GitHub repository containing recipes for the Genesys Cloud CLI|
 |Developer Center V2|__Coming soon__. We are within weeks of delivering a new Developer Center experience that will include some new UI capabilities, the foundations for a better search and in many cases a new look and feel. |
