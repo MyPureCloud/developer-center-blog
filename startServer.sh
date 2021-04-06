@@ -1,2 +1,0 @@
- bundle exec middleman server
- 
