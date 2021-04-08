@@ -5,7 +5,7 @@ date: 2021-03-08
 author: jerome.saint-marc@genesys.com
 ---
 
-In this blog, I will explain how to retrieve and leverage chat data in Genesys Cloud by using [web chat widget - version 2](/api/webchat/widget-version2.html).
+In this blog, I will explain how to retrieve and leverage chat data in Genesys Cloud by using [web chat widget - version 2](/api/digital/webchat/widget-version2.html).
 
 When you expose chat capabilities on your website, you can collect data about your customer and send that information to Genesys Cloud. You can then leverage this data in your Architect Inbound Chat flow to make routing decisions. You can also expose this data as [interaction details](https://help.mypurecloud.com/?p=126054) or in an agent [script](https://help.mypurecloud.com/?p=54284) to provide more details about the customer's experience to the contact center agent.  
 
@@ -25,7 +25,7 @@ Both standard forms and custom forms allow customers to provide information abou
 
 In addition to data that you capture via a standard or custom form, you can also send ***static*** data to Genesys Cloud. Static data is anything you retrieve from your backend system about the customer's browsing history or the customer's account. For example, the customer's address and the customer's account number are types of static data.  
 
-To send static data to Genesys Cloud, you define the `userData` structure in the [widgets configuration](/api/webchat/widget-version2.html#custom__userdata_). Alternatively, if you use the [WebChat.open command](https://all.docs.genesys.com/WID/Current/SDK/WebChat-combined#open) to open and to start a chat, you can set `userData` as a parameter.
+To send static data to Genesys Cloud, you define the `userData` structure in the [widgets configuration](/api/digital/webchat/widget-version2.html#custom__userdata_). Alternatively, if you use the [WebChat.open command](https://all.docs.genesys.com/WID/Current/SDK/WebChat-combined#open) to open and to start a chat, you can set `userData` as a parameter.
 
 The data you collect in the chat registration form (standard or custom) and any data you define as `userData` are sent to Genesys Cloud as part of the initial **create chat** request. In addition, this data is automatically added as conversation participant attributes for the conversation, which I will explain next.
 
@@ -48,11 +48,13 @@ There are a few things to remember about the names of participant attributes:
 
   For example, if you use `key1` as an attribute name (as part of a registration form or as `userData`), this piece of data will become a participant attribute named `context.key1`.
 
+  `firstname` and `lastname` (standard and custom registration forms) are managed specifically. The corresponding participant attributes in the Genesys Cloud conversation are `context.firstName` and `context.lastName`.
+
 2. When you use a custom registration form with a set of fields, the "name" attribute of the field defines the keyname of your corresponding participant data.
 
-  For example, if you [use a custom registration form](/api/webchat/widget-version2.html#customize_input_fields_through_configuration_object), `firstname`, `Page`, `Today` are used. The corresponding participant attributes in the Genesys Cloud conversation are `context.firstname`, `context.Page`, and `context.Today`.
+  For example, if you [use a custom registration form](/api/digital/webchat/widget-version2.html#customize_input_fields_through_configuration_object), `Page` and `Today` are used. The corresponding participant attributes in the Genesys Cloud conversation are `context.Page`, and `context.Today`.
 
-3. If you use the standard chat registration form, four input fields are exposed: `FirstName`, `LastName`, `Email`, and `Subject`. The corresponding web chat widget - version 2 attribute names (keynames) are: `firstname`, `lastname`, `email`, `subject`. With the "context." prefix added by Genesys Cloud, these become participant attributes named: `context.firstname`, `context.lastname`, `context.email` and `context.subject`.
+3. If you use the standard chat registration form, four input fields are exposed: `FirstName`, `LastName`, `Email`, and `Subject`. The corresponding web chat widget - version 2 attribute names (keynames) are: `firstname`, `lastname`, `email`, `subject`. With the "context." prefix added by Genesys Cloud, these become participant attributes named: `context.firstName`, `context.lastName`, `context.email` and `context.subject`.
 
 ## Built-in participant attributes
 In addition to whatever participant attributes you define, web chat widget version - 2 also automatically collects and sends the following participant attributes as part of the Genesys Cloud conversation.
@@ -73,7 +75,7 @@ In addition to whatever participant attributes you define, web chat widget versi
 
 ### Participant attributes for queues
 
-If you set a `Queue` as a `targetAddress` in your [widget configuration](/api/webchat/widget-version2.html#create_a_widget_configuration_object), the following participant data will become available to you in your Architect inbound chat flow: `context.genesys.legacyRoutingTargetQueueAddress`.  
+If you set a `Queue` as a `targetAddress` in your [widget configuration](/api/digital/webchat/widget-version2.html#create_a_widget_configuration_object), the following participant data will become available to you in your Architect inbound chat flow: `context.genesys.legacyRoutingTargetQueueAddress`.  
 
 If you want to leverage this input in your **Transfer to ACD** action, you will first need to transform the retrieved queue name into a queue object/variable. For information about how to do this see, [Find Queue action](https://help.mypurecloud.com/?p=185741).
 
@@ -176,16 +178,16 @@ We have walked through a description of the participant attributes you can add a
 
 Now that we've seen how to collect chat data and return it with the API, let's look at how to use chat data in Genesys Cloud. Specifically:
 
-- Agents see it in the [Interaction Details panel](#chat_data_in_the_Interaction_Details_panel).
-- You can use chat data with an [Architect inbound chat flow](#Use_chat_attributes_with_an_architect_inbound_chat_flow).
+- Agents see it in the [Interaction Details panel](#chat_data_in_the_interaction_details_panel).
+- You can use chat data with an [Architect inbound chat flow](#use_chat_attributes_with_an_architect_inbound_chat_flow).
 - You can use chat data with [scripts](#use_scripts_for_maximum_flexibility_and_control).
 
 
 ### Chat data in the Interaction Details panel
 To populate the [Interaction Details panel](https://help.mypurecloud.com/?p=126054) for a chat conversation, Genesys Cloud uses the values of these fields:
 
-- `firstname`
-- `lastname`
+- `firstName`
+- `lastName`
 - `email`
 - `addressStreet`
 - `addressCity`
@@ -206,7 +208,7 @@ You can also include up to 3 `customField` attributes, along with their correspo
 
 The interaction details for a chat conversation includes the following derived attributes:
 
-- `Customer Name`: based on `firstname` and `lastname`
+- `Customer Name`: based on `firstName` and `lastName`
 - `Customer Address`: based on `addressStreet`, `addressCity`, `addressPostalCode` and `addressState`
 - `Customer Phone Number`: based on `phoneNumber` and `phoneType`
 - `Customer Email`: based on `email`
@@ -228,7 +230,7 @@ For more control over the chat data that you display to agents, use a [script](h
 
 Scripts offers two ways to retrieve chat data attributes:
 
-1.	Use [built-in script variables for chats](#use_built_in_script_variables).
+1.	Use [built-in script variables for chats](#use_built_in_script_variables_for_chats).
 2.	Use [script variables](#use_script_variables).
 
 ### Use built in script variables for chats
@@ -242,8 +244,8 @@ The `customer email` built-in variable is not supported with web chat widget ver
 | Script built-in variable | Web chat widget - version 2 attribute | Conversation participant attribute|
 |-------------------------|------------------- |-----------------------------------|
 | Chat.Customer Email   | Not supported      | Not supported |
-| Chat.Customer First Name | firstname | context.firstname |
-| Chat.Customer Last Name | lastname | context.lastname |
+| Chat.Customer First Name | firstname | context.firstName |
+| Chat.Customer Last Name | lastname | context.lastName |
 | Chat.Customer Street | addressStreet | context.addressStreet |
 | Chat.Customer City | addressCity | context.addressCity |
 | Chat.Customer Postal Code | addressPostalCode | context.addressPostalCode |
@@ -261,7 +263,7 @@ To use chat data that is not included in a built-in variable, [add a script vari
 ![Chat Script PageTitle](ChatScriptPageTitle.png)
 
 Remember the following points:
-- [Genesys Cloud renames your participant attributes](#how_Genesys_Cloud_renames_your_participant_attributes), such as `Name`,`email`,`subject`, `_genesys_pageTitle`. Build your script variables accordingly.
+- [Genesys Cloud renames your participant attributes](#how_genesys_cloud_renames_your_participant_attributes), such as `Name`,`email`,`subject`, `_genesys_pageTitle`. Build your script variables accordingly.
 - Scripts do not support attribute names with a "." (dot). Therefore, you cannot use "context.email", which is the name of the participant attribute as it is stored in the Conversation context. Instead, you can specify the variable name as "email" and the script will automatically look for the participant attribute name, "context.email". The same goes for any other participant attributes starting with "context".
 
 :::primary
@@ -272,4 +274,4 @@ Don't forget to enable chat in your script properties!
 ![Chat Script Properties](ChatScriptProperties.png)
 
 ## Closing thoughts
-This article was written in response to the number of questions we get from our developers who are building with the web chat widget version - 2 chat components and APIs. In first quarter of 2021, Genesys Cloud launched the beta version of our next generation Web Messaging platform. This new Web Messaging platform will become the recommended approach for customers looking to build user-to-agent chat capabilities within their own applications. For more information on our new Web Messaging platform, see [Web messaging and Messenger](/api/webmessaging).
+This article was written in response to the number of questions we get from our developers who are building with the web chat widget version - 2 chat components and APIs. In first quarter of 2021, Genesys Cloud launched the beta version of our next generation Web Messaging platform. This new Web Messaging platform will become the recommended approach for customers looking to build user-to-agent chat capabilities within their own applications. For more information on our new Web Messaging platform, see [Web messaging and Messenger](/api/digital/webmessaging).
