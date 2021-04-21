@@ -1,0 +1,19 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/trusty64"
+
+  config.vm.synced_folder "src/", "/home/vagrant/work", create: true
+  config.vm.provision "file", source: "~/.gc", destination: ".gc"
+
+  config.vm.provider "virtualbox" do |vb|
+     vb.memory = "8096"
+   end
+
+   config.vm.provision "shell", inline: <<-SHELL
+     apt-get update
+     apt-get install unzip
+     wget https://releases.hashicorp.com/terraform/0.14.10/terraform_0.14.10_linux_amd64.zip
+     unzip terraform_0.14.10_linux_amd64.zip
+     mv terraform /usr/local/bin
+     curl -s https://sdk-cdn.mypurecloud.com/external/go-cli/linux/dl/install.sh | sudo bash
+   SHELL
+end
