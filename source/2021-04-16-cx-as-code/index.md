@@ -6,7 +6,7 @@ author: john.carnell
 category: 0
 ---
 
-Greetings everyone. I am excited today to introduce the newest tool to the Genesys Cloud developer ecosystem: **CX as Code**. **CX as Code** is a configuration management tool that allows you to define Genesys Cloud configuration objects (e.g. Queues, Skills, Users, etc) in plain old text files AND then apply that configuration across multiple Genesys Cloud organizations. It is ideally suited for use in a CI/CD (Continuous Integration/Continuous Deployment) deployment pipeline.
+Greetings everyone. I am excited today to introduce the newest tool to the Genesys Cloud developer ecosystem: **CX as Code**. **CX as Code** is a configuration management tool that allows you to define Genesys Cloud configuration objects (e.g. Queues, Skills, Users, etc) in plain old text files and then apply that configuration across multiple Genesys Cloud organizations. It is ideally suited for use in a CI/CD (Continuous Integration/Continuous Deployment) deployment pipeline.
 
 Using the **CX as Code** tool promotes a number of DevOps best practices, including:
 
@@ -19,7 +19,7 @@ Using the **CX as Code** tool promotes a number of DevOps best practices, includ
 # What is **CX as Code** built on
 One of the key lessons our own Genesys Cloud DevOps team has learned is that you should not try to build all of your DevOps tools from scratch. Instead, when feasible, leverage open source frameworks that encompass industry best practices. To this end the **CX as Code** tool is built on top of HashiCorp's Terraform [[1](https://www.terraform.io/)] tool. Terraform is a cloud provisioning tool that was originally designed to provide a common language and framework for cloud-based providers like AWS, Azure and Google Cloud. Terraform exposes provisioning functionality through plugins (called providers) that implement "how" individual cloud objects (called resources) are created, updated and deleted.
 
-The **CX as Code** team has built a Genesys Cloud provider and has registered it in the Terraform Provider's Registry [[2](https://registry.terraform.io/providers/MyPureCloud/genesyscloud/latest)]. All of the documentation for the Genesys Cloud provider along with all of the objects currently exposed as resources in the provider can be seen in the Genesys Cloud provider's documentation [[3](https://registry.terraform.io/providers/MyPureCloud/genesyscloud/latest/docs)].
+The **CX as Code** team has built a Genesys Cloud provider and has registered it in the Terraform provider's registry [[2](https://registry.terraform.io/providers/MyPureCloud/genesyscloud/latest)]. All of the documentation for the Genesys Cloud provider along with all of the objects currently exposed as resources in the provider can be seen in the Genesys Cloud provider's documentation [[3](https://registry.terraform.io/providers/MyPureCloud/genesyscloud/latest/docs)].
 
 **Note: The Terraform registry for **CX as Code** lists all of the Genesys Cloud objects currently available as resources in  the Genesys Cloud Terraform provider. The CX as Code team is still building additional objects so please check back with the registry for additional updates.**
 
@@ -60,11 +60,11 @@ I am not going to walkthrough how to run this example in this blog. Instead, I a
 **Note**: The beginning of the DevDrop covers some of the introductory material we already cover in this blog post. The actual demo of the provider begins at ~7:15 in the video.
 
 # How does **CX as Code** fit into the Genesys Cloud ecosystem
-Before I close this blog post, I want to spend a little bit of time talking about how **CX as Code** fits into the overall Genesys Cloud ecosystem. Specifically, when should you consider using **CX as Code** vs. using the Genesys Cloud APIs, SDK or CLI? With cloud-based platforms, you are going to usually need to perform three core development tasks: integrations, administration and provisioning (e.g. CI/CD) tasks.  The table below highlights these three tasks, the Genesys Cloud technologies used to execute them, along with their characteristics and use cases:
+Before I close this blog post, I want to spend a little bit of time talking about how **CX as Code** fits into the overall Genesys Cloud ecosystem. Specifically, when should you consider using **CX as Code** vs. using the Genesys Cloud APIs, SDK or CLI? With cloud-based platforms, you are going to usually need to perform three core development tasks: integration, administration and provisioning (e.g. CI/CD).  The table below highlights these three tasks, the Genesys Cloud technologies used to execute them, along with their characteristics and use cases:
 
 ![API vs. SDK vs. CLI vs. CX as Code](comparison.png)
 
-This wraps up our introduction to **CX as Code**. I would encourage you to download and try it out. Its an exciting piece of technology and can change the way you think about managing your Genesys Cloud development environment. Let's build something great together.
+This wraps up our introduction to **CX as Code**. I would encourage you to download and try it out. It's an exciting piece of technology and can change the way you think about managing your Genesys Cloud organization. Try it out, don't be afraid to share your feedback, and let's build something great together.
 
 # Additional Resources
 1. [Terraform](https://www.terraform.io/)
