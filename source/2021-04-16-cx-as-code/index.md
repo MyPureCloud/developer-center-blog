@@ -2,7 +2,7 @@
 title: Introducing CX as Code
 tags: Genesys Cloud, Developer Engagement, CX as Code
 date: 2021-04-21
-author: john.carnell
+author: john.carnell@genesys.com
 category: 0
 ---
 
