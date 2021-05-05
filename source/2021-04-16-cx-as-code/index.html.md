@@ -3,7 +3,6 @@ title: Introducing CX as Code
 tags: Genesys Cloud, Developer Engagement, CX as Code
 date: 2021-04-21
 author: john.carnell@genesys.com
-category: 0
 ---
 
 Greetings everyone. I am excited today to introduce the newest tool to the Genesys Cloud developer ecosystem: **CX as Code**. **CX as Code** is a configuration management tool that allows you to define Genesys Cloud configuration objects (e.g. Queues, Skills, Users, etc) in plain old text files and then apply that configuration across multiple Genesys Cloud organizations. It is ideally suited for use in a CI/CD (Continuous Integration/Continuous Deployment) deployment pipeline.
