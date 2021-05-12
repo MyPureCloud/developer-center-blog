@@ -23,13 +23,13 @@ Add start and end dates for the query range.
 
 This is a generated query for user. This is where you can find all the details about a user's activity during a specific date.
 
-![Standard User Query](standard-user-query-result.jpg)
+![Standard User Query](standard-user-query-result.png)
 
 ## Standard conversation query result
 
 This is a sample result for conversation query. This is where you can generate every specific detail you want to get from a conversation.
 
- ![Standard Conversation Query Result](images/standard-conversation-query-result.jpg)
+ ![Standard Conversation Query Result](standard-conversation-query-result.png)
 
 ## Modify your result
 
