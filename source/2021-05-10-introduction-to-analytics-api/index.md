@@ -1,5 +1,5 @@
 ---
-title: Introducing to Analytics API
+title: Introduction to Analytics API Detail Record Metrics
 tags: Genesys Cloud, Developer Engagement, Introducing to Analytics API
 date: 2021-05-10
 author: jenissa.barrera
