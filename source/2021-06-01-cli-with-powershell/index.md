@@ -251,25 +251,7 @@ After entering the command, you will notice that you will stop getting any outpu
 
 In the following script, we manually collect each line as they're printed. Once we get a valid JSON, we then pipe it down to be converted to a PSCustomObject:
 
-```shell
-gc.exe notifications channels listen $channelId | 
-    ForEach-Object {$eventJson = ""} {
-        if ($_ -ne "}") {
-            $eventJson += $_
-        } 
-        else {
-            $eventJson += "}"
-            $eventJson | Write-Output
-            $eventJson = ""
-        }
-    } | 
-    ForEach-Object {
-        $_ | ConvertFrom-Json | 
-            Select-Object -Property topicName -ExcludeProperty eventBody -ExpandProperty eventBody
-    }
-```
-
-Full script could be found here as a quick-hits [recipe](https://github.com/MyPureCloud/quick-hits-cli/blob/main/notifications/powershell/Connect-NotificationsChannel.ps1).
+<dxui:QuickHit id="Connect-NotificationsChannel" title="Notifications API in PowerShell" />
 
 ## Closing Thoughts
 
