@@ -14,7 +14,7 @@ Earlier this year, we announced the Genesys Cloud CLI which is a tool used to pe
 :::
 
 :::primary
-**GC-CLI version**: CLI version 11.0.0 is used at the time of writing. Some commands may be different if you're using another version. To determine which one you're using, run `gc.exe version`. For the latest version, go to our [CLI documentation](/api/rest/command-line-interface/).
+**GC-CLI version**: CLI beta version 11.0.0 is used at the time of writing. Some commands may be different if you're using another version. To determine which one you're using, run `gc.exe version`. For the latest version, go to our [CLI documentation](/api/rest/command-line-interface/).
 :::
 
 ## Download the Genesys Cloud CLI
@@ -123,12 +123,12 @@ gc.exe users list -a | ConvertFrom-Json
 
 ### ConvertFrom-Json and JSON Arrays
 
-In this section, we'll briefly touch on a gotcha that needs to be considered when working with different versions of PowerShell.
+In this section, we'll briefly touch on a "gotcha" that needs to be considered when working with different versions of PowerShell.
 
 Consider the following command where we want to list the ids of all the queues in the organization:
 
 ```shell
-gc.exe queues list -a | ConvertFrom-Json | Select-Object id
+gc.exe routing queues list -a | ConvertFrom-Json | Select-Object id
 ```
 
 If you're using PowerShell 5.1 you may notice that the result is seemingly empty:
@@ -152,11 +152,11 @@ f2d5c5f8-ddd9-49c0-9bb3-852123967e6d
 This is because in PowerShell 5.1, `ConvertFrom-Json` will not automatically unwrap a JSON if the containing item is an array. In order to explicitly enumerate the array, we can either enclose the command in a parenthesis or pipe the result into a `Write-Output` before any other commands:
 
 ```shell
-(gc.exe queues list -a | ConvertFrom-Json) | Select-Object id
+(gc.exe routing queues list -a | ConvertFrom-Json) | Select-Object id
 ```
 
 ```shell
-gc.exe queues list -a | ConvertFrom-Json | Write-Output | Select-Object id
+gc.exe routing queues list -a | ConvertFrom-Json | Write-Output | Select-Object id
 ```
 
 The commands still work in newer versions of PowerShell and so you may see sample and scripts that use any of the patterns described above.
@@ -169,7 +169,7 @@ A lot of commands in the CLI requires input in the form of JSON. Let's go straig
 @{
     name = "Test Skill"   
 } | ConvertTo-Json |
-    gc.exe skills create   
+    gc.exe routing skills create   
 ```
 
 In this example, we defined a PowerShell HashTable, convert it to JSON, then pipe it as the request body for the command.
@@ -177,7 +177,7 @@ In this example, we defined a PowerShell HashTable, convert it to JSON, then pip
 If the JSON body is instead available as a file, the CLI provides a way to consume it via the `-f` / `--file` flag.
 
 ```shell
-gc.exe skills create -f new-skill.json
+gc.exe routing skills create -f new-skill.json
 ```
 
 ## (Optional) Using jq to Manage JSON Transformations
