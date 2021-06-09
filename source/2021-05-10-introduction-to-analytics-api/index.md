@@ -9,10 +9,6 @@ category: 11
 
 Greetings everyone! There are three data perspective of data in Analytics API. For this blog, we will focus on  how to get detailed records using the Analytics API. 
 
-## Open the Analytics Query Builder
-
-![Analytics Query Builder](analytics-query-builder.png)
-
 There are three perspective of data in Analytics API. Instantaneous Observations, Aggregate Metrics and Detailed Records. This blog will focus on the detailed records. Detailed Records are Audit style records that capture a very fine-grained level of detail around user (e.g. agent) and customer interactions.
 
 
@@ -34,11 +30,23 @@ This is a sample result for conversation query. This is where you can generate e
 ## Modified results
 
 The user can also modify the search and add specific filter. In this case, we will search for inbound and voice data. To do so, go to Segment filters, in the predicates section click on type and select Dimension. On the dimension select value. And on the value field type in inbound. For the voice filter add another predicate. Select dimension as type and select direction for dimension. Type voice on the value field.
-
+![Standard Conversation Query Result](standard-conversation-query-result.jpg "Standard Conversation Query Result")
  ![Voice and Inbound Conversation Query](voice-and-inbound-conversation-query.jpg "Voice and Inbound Conversation Query")
 ![Voice and Inbound Conversation Query Result](voice-and-inbound-conversation-query-result.jpg "Voice and Inbound Conversation Query Result")
 ![Generated Query](generated-query.jpg "Generated Query")
 
+To search for the available and interacting agents, go to Presence filters, in the predicates section click on dimension and choose systemPresence. Choose available as value. 
+
+![System Presence Available](/system-presence-available.jpg "Sytem Presence Available")
+
+For the Routing Status, go to Routing Status Filters. Select or as type. Under the predicates value choose dimension, on the dimension choose Routing Status. And select Interacting as Value.
+
+
+![Routing Status Interaction](images/routing-status-interacting.jpg "Routing Status Interacting")
+
+ This is the result when the filters are applied, other data will be filtered out. This will make the result straightforward depending on the user need.
+
+ ![Available and Interacting Query Result](images/available-and-interacting-query-result.jpg "Available and Interacting Query Result")
 
 ## Additional Resources
 
