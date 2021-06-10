@@ -44,12 +44,12 @@ For the Routing Status, go to Routing Status Filters. Select or as type. Under t
 
 ![Routing Status Interaction](routing-status-interacting.jpg "Routing Status Interacting")
 
- This is the result when the filters are applied, other data will be filtered out. This will make the result straightforward depending on the user need.
+This is the result when the filters are applied, other data will be filtered out. This will make the result straightforward depending on the user need.
 
  ![Available and Interacting Query Result](available-and-interacting-query-result.jpg "Available and Interacting Query Result")
 
 ## Additional Resources
 
-* [Analytics Query Builder developer tool quick start](https://developer.mypurecloud.com/gettingstarted/developer-tools-analytics-query.html)
-* [Analytics overview](https://developer.mypurecloud.com/api/rest/v2/analytics/overview.html#data_perspective)
+* [Analytics Query Builder developer tool quick start](/guides/quickstarts/developer-tools-analytics-query)
+* [Analytics overview](/api/rest/v2/analytics/overview.html#data_perspective)
 
