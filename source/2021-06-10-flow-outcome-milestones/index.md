@@ -38,7 +38,7 @@ Two new metrics have been added:
 
 **oFlowMilestone** This is the total number of times a milestone occurred in a flow execution. It allows you to determine, for example, that milestone XYZ was reached on average 2 times per flow execution.
 
-For more information refer to [Flow Aggregate query](/api/rest/v2/analytics/flow_aggregate)
+For more information refer to [Flow Aggregate query](https://protect-us.mimecast.com/s/zZ-8CDkJ0KfzDw8xu5PqCV?domain=developer.genesys.cloud)
 
 ## Can customers subscribe to Milestone stats events?
 
