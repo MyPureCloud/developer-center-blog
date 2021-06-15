@@ -30,7 +30,7 @@ There are 6 core resiliency patterns we are going to discuss in this blog post. 
 
 ![Patterns in Action](module_0_pattern_stack.png)
 
-In general, resiliency patterns can be classified into two groups of patterns:  __transient patterns__ and __proactive patterns__.  Transient patterns help an integration recover in the event of small interruptions of service where the service recovers quickly. Usually transient patterns are useful when dealing with rate-limiting (e.g 429 HTT status codes) and intermittent timeouts on the service (e.g. 502, 503 and 504s). Cloud services can often determine if they are having an issue they can recover from (e.g. rate-limit or load shedding events) and use transient patterns to signal to an invoking client that the failures is retryable.
+In general, resiliency patterns can be classified into two groups of patterns:  __transient patterns__ and __proactive patterns__.  Transient patterns help an integration recover in the event of small interruptions of service where the service recovers quickly. Usually transient patterns are useful when dealing with rate-limiting (e.g 429 HTTP status codes) and intermittent timeouts on the service (e.g. 502, 503 and 504s). Cloud services can often determine if they are having an issue they can recover from (e.g. rate-limit or load shedding events) and use transient patterns to signal to an invoking client that the failures is retryable.
 
 Proactive patterns are used when you have a service that is failing and the service can not signal to the client invoking it that its problems can be recovered from (e.g. a 500 status code). In this case, proactive patterns help your application fail fast and finding alternative paths for carrying out their tasks and stopping the cascading spread of a service failure.
 
@@ -52,7 +52,7 @@ Proactive patterns are used when you have a service that is failing and the serv
 I am not going to walkthrough each of the patterns listed above in detail in this blog post. Instead, I have created a sample project that shows how these patterns can be used with the Genesys Cloud Java SDK running with Spring Boot and Resilience4j. The sample project containing these implementations can be found [here](https://github.com/MyPureCloud/resiliency-patterns-examples).  The specific implementations for each of the resiliency patterns listed above can be found at:
 
 1. [Caching](https://github.com/MyPureCloud/resiliency-patterns-examples/tree/main/src/main/java/com/genesys/resiliency/service/QueueServiceCacheFacade.java)
-2. [Retrys](https://github.com/MyPureCloud/resiliency-patterns-examples/tree/main/src/main/java/com/genesys/resiliency/service/QueueServiceRetryFacade.java)
+2. [Retries](https://github.com/MyPureCloud/resiliency-patterns-examples/tree/main/src/main/java/com/genesys/resiliency/service/QueueServiceRetryFacade.java)
 3. [Timeouts](https://github.com/MyPureCloud/resiliency-patterns-examples/tree/main/src/main/java/com/genesys/resiliency/service/QueueServiceTimeoutFacade.java)
 4. [Circuit Breakers](https://github.com/MyPureCloud/resiliency-patterns-examples/tree/main/src/main/java/com/genesys/resiliency/service/QueueServiceCircuitBreakerFacade.java)
 5. [Fallbacks](https://github.com/MyPureCloud/resiliency-patterns-examples/tree/main/src/main/java/com/genesys/resiliency/service/QueueServiceFallbackFacade.java)
@@ -88,7 +88,7 @@ If you are not developing your code using a JVM-based language there are still r
 
 # Additional Resources
 I want to close this blog post with a few other resources related to resiliency patterns and the technologies we used in this blog post.
-|||
+|Name|Description|
 |-|-|
 |[Release IT!, 2nd Edition](https://www.amazon.com/Release-Design-Deploy-Production-Ready-Software-ebook/dp/B079YWMY2V/ref=sr_1_1?dchild=1&keywords=release+it%21&qid=1623272868&sr=8-1)| Michael Nygard's seminal book on building resiliency into your application. Any developer should have this book on their bookshelf.|
 |[Spring Microservices in Action, 2nd Edition](https://www.amazon.com/Spring-Microservices-Action-Second-Carnell/dp/1617296953/ref=sr_1_4?crid=YKNIUOMJXEE8&dchild=1&keywords=spring+microservices+in+action&qid=1623273135&sprefix=Spring+Microserv%2Caps%2C155&sr=8-4) |A comprehensive guide to building microservices using Spring Boot and Spring Cloud. This book was written by the author of this blog post. | 
