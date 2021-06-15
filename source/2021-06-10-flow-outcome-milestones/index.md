@@ -38,8 +38,8 @@ Two new metrics have been added:
 
 **oFlowMilestone** This is the total number of times a milestone occurred in a flow execution. It allows you to determine, for example, that milestone XYZ was reached on average 2 times per flow execution.
 
-For more information refer to [Flow Aggregate query](https://protect-us.mimecast.com/s/zZ-8CDkJ0KfzDw8xu5PqCV?domain=developer.genesys.cloud)
+For more information refer to [Flow Aggregate query](https://developer.genesys.cloud/api/rest/v2/analytics/flow_aggregate)
 
-## Can customers subscribe to Milestone stats events?
+## Can customers subscribe to notification service events for Milestones?
 
-Yes, indirectly. Customers can subscribe to 2 hawk topics to get flow-related metrics: v2.analytics.flow.{id}.aggregates and v2.analytics.flowoutcome.{id}.aggregates. Both contain milestone data for 30 minute intervals (by default; could also be 15 or 60 minutes based on an org setting).  You will get all flow-related metrics via those topics; there's no way to look at them by milestoneId.
+Yes, indirectly. Customers can subscribe to 2 notification service event topics to get flow-related metrics: v2.analytics.flow.{id}.aggregates and v2.analytics.flowoutcome.{id}.aggregates. Both contain milestone data for 30 minute intervals (by default; could also be 15 or 60 minutes based on an org setting).  You will get all flow-related metrics via those topics; there's no way to filter them by milestoneId.
