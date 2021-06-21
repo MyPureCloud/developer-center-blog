@@ -31,22 +31,22 @@ This is a sample result for conversation query. If you want to extract details s
 
 The user can also modify the search and add specific filter. This is to eliminate unncessary data on the generated query. In this case, we will search for inbound and voice data. To do so, go to Segment filters, in the predicates section, click on `type`, and select `Dimension`. On the dimension select `value`. And on the value field type in `inbound`. For the voice filter add another predicate. Select `dimension` as type and select `direction` for dimension. Type `voice` in the value field.
 
- ![Voice and Inbound Conversation Query](voice-and-inbound-conversation-query.jpg "Voice and Inbound Conversation Query")
-![Voice and Inbound Conversation Query Result](voice-and-inbound-conversation-query-result.jpg "Voice and Inbound Conversation Query Result")
-![Generated Query](generated-query.jpg "Generated Query")
+ ![Voice and Inbound Conversation Query](voice-and-inbound-conversation-query.png "Voice and Inbound Conversation Query")
+![Voice and Inbound Conversation Query Result](voice-and-inbound-conversation-query-result.png "Voice and Inbound Conversation Query Result")
+![Generated Query](generated-query.png "Generated Query")
 
 To search for the available and interacting agents, go to Presence filters, in the predicates section click on `dimension`. Then choose `systemPresence` as the dimension. Set the value dropdown to "available". 
 
-![System Presence Available](system-presence-available.jpg "Sytem Presence Available")
+![System Presence Available](system-presence-available.png "Sytem Presence Available")
 
 For the Routing Status, go to Routing Status Filters. Select `or` as type. Under the predicates value choose `dimension`, on the dimension choose `Routing Status`. And select `Interacting` as Value.
 
 
-![Routing Status Interaction](routing-status-interacting.jpg "Routing Status Interacting")
+![Routing Status Interaction](routing-status-interacting.png "Routing Status Interacting")
 
 This is the result when the filters are applied, other data will be filtered out. This will make the result straightforward depending on the user need.
 
- ![Available and Interacting Query Result](available-and-interacting-query-result.jpg "Available and Interacting Query Result")
+ ![Available and Interacting Query Result](available-and-interacting-query-result.png "Available and Interacting Query Result")
 
  ## Closing Thoughts
 
