@@ -1,10 +1,10 @@
 ---
 title: Xperience 21 Welcome to Truly Differentiating Your CX
+category: 0
 tags: ecosystem, xperience, integrations, getting started
-date: 2021-06-24
 author: jack.nichols
 image: "xpr21_welcome.png"
-category: 1
+date: 2021-06-24
 ---
 
 > _On a personal note, Xperience is something I typically look forward to every year as I love being able to meet with our customers and partners. So this year being virtual is a bit bittersweet as it's great to share the information on what we are doing, but I miss those personal conversations and look forward to hopefully being able to meet everyone next year!_
