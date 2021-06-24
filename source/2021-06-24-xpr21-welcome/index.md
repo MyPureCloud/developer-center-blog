@@ -7,6 +7,7 @@ image: "xpr21_welcome.png"
 date: 2021-06-24
 ---
 
+
 > _On a personal note, Xperience is something I typically look forward to every year as I love being able to meet with our customers and partners. So this year being virtual is a bit bittersweet as it's great to share the information on what we are doing, but I miss those personal conversations and look forward to hopefully being able to meet everyone next year!_
 
 I hope those of you that found this blog from my Xperience session found the session useful. For those that have not watched my breakout session this year, I had the opportunity to present the third session in our Genesys Cloud enterprise series, “Differentiation Through Extension.” In the session I had a specific ask of attendees to really challenge yourself on: “How are you truly differentiating your customer experience?” 
