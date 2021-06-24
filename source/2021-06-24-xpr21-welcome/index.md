@@ -3,7 +3,7 @@ title: Xperience 21 Welcome to Truly Differentiating Your CX
 tags: ecosystem, xperience, integrations, getting started
 date: 2021-06-24
 author: jack.nichols
-image: xpr21_welcome
+image: "xpr21_welcome.png"
 category: 0
 ---
 
