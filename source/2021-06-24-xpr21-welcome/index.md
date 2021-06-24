@@ -60,7 +60,7 @@ As Blueprints and Templates are open source community based, our team and our pa
 
 If you have made a career of managing platforms and systems, you might have already made good use of the Command Line Interface (CLI). If you haven’t, the CLI simply processes commands to a computer program in the form of lines of text. 
 
-The Genesys Cloud CLI allows you to perform administrative tasks against your Genesys Cloud organization without having to constantly access the Genesys Cloud UI as well as perform ad-hoc data extracts of common Genesys Cloud objects. As detailed in the introductory release blog, the CLI enables:
+The Genesys Cloud CLI allows you to perform administrative tasks against your Genesys Cloud organization without having to constantly access the Genesys Cloud UI as well as perform ad-hoc data extracts of common Genesys Cloud objects. As detailed in the introductory release [blog](/blog/2021-02-11-Introducing-the-CLI/), the CLI enables:
 
 * Simplification and automation of common administrative tasks
 * Ad-hoc data queries for analysis
@@ -71,4 +71,4 @@ The Genesys Cloud CLI allows you to perform administrative tasks against your Ge
 
 The newest tool in the Genesys Cloud developer ecosystem, CX as Code is a configuration management tool that allows you to define Genesys Cloud configuration objects (e.g. Queues, Skills, Users, etc) in plain old text files and then apply that configuration across multiple Genesys Cloud organizations. It’s ideally suited for use in a CI/CD deployment pipeline, which I would highly recommend if you aren’t employing such a method already. CX as Code helps ensure that the innovative CX configuration that you have perfected is applied consistently across multiple Genesys Cloud organizations. 
 
-To learn more about how to get started with CX as Code, check out this blog.
+To learn more about how to get started with CX as Code, check out this [blog](/blog/2021-04-16-cx-as-code/).
