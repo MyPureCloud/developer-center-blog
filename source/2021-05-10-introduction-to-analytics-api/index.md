@@ -29,7 +29,7 @@ This is a generated query for user. This is where you can find all the details a
 
 ## Standard conversation query result
 
-This is a sample result for conversation query. If you want to extract details such as the name of the participant in the call, the caller's phone number, and any other details. This is where you can generate every specific detail you want to get from a conversation.
+This is a sample result for a conversation query. If you want to extract details such as the name of the participant in the call, the caller's phone number, and any other details. This is where you can generate every specific detail you want to get from a conversation.
 
  ![Standard Conversation Query Result](standard-conversation-query-result.png)
 
