@@ -6,25 +6,25 @@ author: john.carnell
 category: 0
 ---
 
-Greetings everyone. I hope everyone is keeping safe and healthy in these challenging times. We are officially halfway through the year. 2021 is flying by and the second quarter of the year is in the books. The Developer Engagement team and the rest of Genesys Cloud has been busy this year. New features, new development tools and lots of new content. I wanted to take a moment and share with you a quick summary of everything the team has been working on this quarter.
+Greetings everyone. I hope everyone is keeping safe and healthy in these challenging times. We are officially halfway through the year. 2021 is flying by and the second quarter of the year is in the books. The Developer Engagement team and the rest of Genesys Cloud has been busy this year. New features, new development tools and lots of new content. I wanted to take a moment and share with you a quick summary of everything the team has been working on this second quarter of 2021.
 
-# New faces on the team 
+## New faces on the team 
 
-Our senior leadership recognizes that one of the keys to a vibrant development platform is to have the right people in place to support the needs of a rapidly growing and ever changing development community. As our developer community grows, we are growing. I am pleased to announce two new engineers have joined the developer engagement team, bringing our total engineering staff up to 7 engineers. The new engineers joining the Development Engagement team are:
+Our senior leadership recognizes that one of the keys to a vibrant development platform is to have the right people in place to support the needs of a rapidly growing and ever changing development community. As our developer community grows, we are growing. I am pleased to announce two new engineers have joined the Developer Engagement team, bringing our total engineering staff up to 8 engineers. The new engineers joining the Development Engagement team are:
 
 | | | |
 |-|-|-|
 |<img src="ebenezeroseigenesyscom.png" alt="Jacob Shaw" width="100"/>|Ebenezer Osei|Ebenzer is an international student from Ghana. Ebenezer graduated from Truman State University in spring, 2021 with a Computer Science major. His favorite technologies so far are Flutter for mobile development and React for frontend.|
 |<img src="charlieconneelygenesyscom.png" alt="Jacob Shaw" width="100"/>|Charlie Conneely|Charlie is from County Cavan in Ireland and recently graduated from the Galway-Mayo Institute of Technology with a degree in Software Development.|
 
-# More Content, More Channels of Information
+## More Content, More Channels of Information
 Our goal is to deliver timely, relevant, and consumable content for all the developers who use our site. We currently have 5 channels for delivering information about the Genesys Cloud development platform:
 
 1. [__Developer Center__](https://developer.genesys.cloud). Our developer center is the main portal for finding documentation around the Genesys Cloud APIs and development tools. It has a wide variety of topics dealing not only with the individual API calls, but also development guides on API integration, data integration, and Genesys Cloud development best practices. The developer center is the starting point for all developer content within Genesys Cloud. 
 
 2. [__Genesys Cloud Developer Blog__](/blog/). The blog contains articles on various Genesys Cloud development topics. It covers a wide range of topics, including new developer tool announcements, best practices for building your contact center within Genesys Cloud and hands-on articles on how to use the Genesys Cloud APIs.
 
-3. [__DevDrops__](/video/devdrops/). Our DevDrop series is a new video series that we released this year. Its focus is on delivering short, consumable videos (10-20 minutes in length) that are meant to be "developer-to-developer" conversations around specific developer-related topics.
+3. [__DevDrops__](/video/devdrops/). Our DevDrop series is a new video series that we released this year. Its focus is on delivering short, consumable videos (10-20 minutes in length) that are meant to be "developer-to-developer" conversations around specific developer-related topics. We are experimenting with our video formats and looking at how we can breakdown larger topics into smaller videos. 
 
 4. [__DevCasts__](/video/devcasts/). Our DevCasts are our more traditional Webinar topics that are approximately 45-60 minutes in lengths and allow for audience participation. They cover a wide variety of development topics and are not just limited to discussions related to platform APIs.
 
@@ -72,7 +72,7 @@ In addition to the content completed this quarter, here is some of the new conte
 |Consuming Genesys Cloud Event Streams with AWS Event Bridge|Blueprint|__Coming soon__. Ronan Watkins, one of our Developer Engagement engineers, will show how to use AWS Event Bridge to carry event stream data from Genesys Cloud over to your own integrations.|
 
 
-# More Tools
+## More Tools
 The engineers in the Developer Engagement team have been heads down this quarter and have delivered several new capabilities. These new capabilities include:
 
 | | | |
@@ -82,5 +82,17 @@ The engineers in the Developer Engagement team have been heads down this quarter
 |[Developer Center V2](https://developer.genesys.cloud/)|The Developer Center has a new look and feel, better performance and a new domain name. Check us out. |
 |[SDK Logging Configuration](/api/rest/client-libraries/logging)|Our Java, .NET, Python, Golang, Node and Javascript SDKs now have a unified set of logging capabilities.|
 |[New PowerShell CLI Recipes](https://github.com/MyPureCloud/quick-hits-cli)|Checkout the quick hits repository. Many of the script examples now include PowerShell examples for our Windows admins.|
+<br/>
+## Whats Coming Up?
 
-The first half of the year has come and gone, but the team is plowing ahead with new tools and new capabilities.  Let's build something great together.
+The Developer Engagement team is in full swing for this next quarter.  Some of the things coming up for this next quarter include:
+
+1. **New CX as Code capabilities**. The Developer Engagement team has been helping the CX as Code team with delivering several new Terraform resources. One of our big goals is to integrate some of the Archy flow features into CX as Code so that flow deployments can be a first class citizen. In addition, the team is working on new DID, DID Pool, Scheduling and Scheduling Group resources.
+
+2. **More CLI capabilities**. We are continuing to look at how to provide new capabilities in our CLI including support for YAML inputs/outputs to the CLI. In addition, the CLI team is looking at how they can add the ability to "templatize" the output from a CLI command and transform it into another format without the need to involve third party-tools like JQ, AWK or sed.
+
+3. **A new API Explorer**. The Developer Engagement team is in the final stages of releasing a new version of its API explorer. I just had a demonstration of it and I thought it was amazing and I think our development community will love it. Some of the new features include a redesigned wizard front end entering API data, stronger type checking and the ability to embed the API explorer directly in our technical documentation. Expect the beta to start soon and we would love feedback.
+
+4. **Account switching**. We are adding the ability to support logging into multiple Genesys Cloud organizations and then "switching" between those organizations while working within the web-based development tools. I know this is a hotly requested feature from our development community and our partners who work in multiple Genesys Cloud organizations.
+
+I am extremely excited to see these new tools rollout this next quarter. Well, the first half of the year has come and gone, but the team is plowing ahead with new tools and new capabilities.  Let's build something great together.
