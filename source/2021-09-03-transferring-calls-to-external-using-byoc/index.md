@@ -50,19 +50,19 @@ Make sure to ***Activate*** this add-on (it will then appear as ***Active***).
 
 This information will be required on Genesys Cloud side, when configuring the new BYOC Cloud trunk.
 
-1. __SIP Server/Proxy address__. Address [*IP Address(es) or FQDN(s) and IP Address(es)*], Port [*SIP port*] and Transport Protocol [*UDP/TCP/TLS*] of your SIP Server/Proxy.
+1. __SIP Server/Proxy address__. Address (*IP Address(es) or FQDN(s) and IP Address(es)*), Port (*SIP port*) and Transport Protocol (*UDP/TCP/TLS*) of your SIP Server/Proxy.
 
   We need at least one FQDN (Fully Qualified Domain Name) or a public IP address to target your SIP Server/Proxy when transferring calls from Genesys Cloud.
 
   An IP Address is also required to define the SIP Access Control List on Genesys BYOC Cloud trunk side (IP or CIDR Address(es) of your SIP Server/Proxy). The SIP Access Control List allows to control and to limit access to the SIP service.
 
-  *Ex: 10.34.12.16 on port 5060, using UDP as transport protocol for SIP*
+  *e.g. 10.34.12.16 on port 5060, using UDP as transport protocol for SIP*
 
   Note that if you plan to use TLS as Transport Protocol for SIP, it implies that your SIP Server/Proxy must leverage a FQDN (Fully Qualified Domain Name), and that you have a valid certificate, signed by a recognized Certification Authority (CA). See [__TLS trunk transport protocol specification__](https://help.mypurecloud.com/?p=197875).
 
 2. __Supported Audio codecs__. Audio codecs that your external device supports and that you want to enforce.
 
-  i.e. G.711 ulaw/alaw (PCMU/PCMA) only? Opus as well?
+  e.g. G.711 ulaw/alaw (PCMU/PCMA) only? Opus as well?
 
 3. __Expected DNIS__. If the external device expects specific numbers (i.e. destination number/DNIS/To), please provide a list (E.164 numbers or short/extension numbers).
 
@@ -109,20 +109,20 @@ As we want calls that are transferred to your SIP device to be bridged via Genes
 
 2. Click on ***Create New*** button (***External Trunks*** tab).
 
-3. Enter a name for your External Trunk (ex: MyBYOCCloudTrunkForTransferToExternalDevice).
+3. Enter a name for your External Trunk (e.g. MyBYOCCloudTrunkForTransferToExternalDevice).
 
 4. Select ***BYOC Carrier*** as Type, and ***Generic BYOC Carrier*** as sub-type.
 
-5. Select the Transport Protocol used for SIP: UDP/TCP/TLS (ex: UDP)
+5. Select the Transport Protocol used for SIP: UDP/TCP/TLS (e.g. UDP)
 
-6. Under ***Inbound / Termination***, enter a value for the ***Inbound SIP Termination Identifier*** (ex: myexternaldevicetrunk).
+6. Under ***Inbound / Termination***, enter a value for the ***Inbound SIP Termination Identifier*** (e.g. myexternaldevicetrunk).
 
-  This is the unique identifier of your trunk. It is used for inbound calls to Genesys Cloud, to uniquely identify a customer (Genesys Cloud org) and a trunk, in a specific region (ex: sip:+xxxxxxxxxxx@myexternaldevicetrunk.byoc.mypurecloud.com).  
+  This is the unique identifier of your trunk. It is used for inbound calls to Genesys Cloud, to uniquely identify a customer (Genesys Cloud org) and a trunk, in a specific region (e.g. sip:+xxxxxxxxxxx@myexternaldevicetrunk.byoc.mypurecloud.com).  
   In the scenario of call transfer from Genesys Cloud to your external system, we will not make use of the Trunk Inbound SIP Termination identifier but it must still be configured.
 
 ![Trunk step 01](Trunk01.png)
 
-7. Set the IP Address(es) or FDQN(s) and Port for SIP (to reach your device) in ***SIP Servers or Proxies***, Under ***Outbound*** (ex: 10.34.12.16 on port 5060)
+7. Set the IP Address(es) or FDQN(s) and Port for SIP (to reach your device) in ***SIP Servers or Proxies***, Under ***Outbound*** (e.g. 10.34.12.16 on port 5060)
 
 8. If you have decided to leverage Digest Authentication, under ***Outbound***, enable ***Digest Authentication*** and set the values for ***Realm***, ***User Name*** and ***Password***.
 
@@ -130,11 +130,11 @@ As we want calls that are transferred to your SIP device to be bridged via Genes
 
   This is to preserve the ANI/CLI of the caller when transferring his call from Genesys Cloud to your device (From header).
   
-  You will also need to define a ***Caller ID*** value (ex: an E.164 number - +19999990000) which will be used as a default value if the ANI/CLI of the caller can't be propagated to your system (ex: a Genesys Cloud Contact Center Agent, with no assigned number, makes a call to your device).
+  You will also need to define a ***Caller ID*** value (e.g. an E.164 number - +19999990000) which will be used as a default value if the ANI/CLI of the caller can't be propagated to your system (e.g. a Genesys Cloud Contact Center Agent, with no assigned number, makes a call to your device).
 
 ![Trunk step 02](Trunk02.png)
 
-10. Under ***SIP Access Control***, define the list of IP or CIDR addresses that your device uses for SIP (ex: 10.34.12.16)
+10. Under ***SIP Access Control***, define the list of IP or CIDR addresses that your device uses for SIP (e.g. 10.34.12.16)
 
   This list is to control access on Genesys Cloud side.
 
@@ -150,13 +150,13 @@ As we want calls that are transferred to your SIP device to be bridged via Genes
 
 ![Trunk step 05](Trunk05.png)
 
-12. Under ***Media***, define your ***Preferred Codec List*** based on the audio codecs your device supports (ex: audio/PCMU, audio/PCMA).
+12. Under ***Media***, define your ***Preferred Codec List*** based on the audio codecs your device supports (e.g. audio/PCMU, audio/PCMA).
 
 ![Trunk step 06](Trunk06.png)
 
 13. Under ***Protocol***, enable ***Take Back and Transfer*** if you want to transfer the calls back from your SIP device to Genesys Cloud, using a SIP Refer, in order to release the call and resources on your equipment.
 
-14. Under ***Protocol***, in ***Outbound***, you can define a custom SIP header and value (static) that will be added to the SIP INVITE. You can leverage this custom SIP header and value if you want to control the access to your equipment, as described in [__Controlling access to your SIP device__](#controlling-access-to-your-sip-device) section (ex: CUSTOM-DEVICE-TOKEN as header name, and 1234567 as value).
+14. Under ***Protocol***, in ***Outbound***, you can define a custom SIP header and value (static) that will be added to the SIP INVITE. You can leverage this custom SIP header and value if you want to control the access to your equipment, as described in [__Controlling access to your SIP device__](#controlling-access-to-your-sip-device) section (e.g. CUSTOM-DEVICE-TOKEN as header name, and 1234567 as value).
 
 ![Trunk step 07](Trunk07.png)
 
@@ -167,7 +167,7 @@ You can find more information on the different [External Trunk settings here](ht
 
 Now that you have created a new BYOC Cloud trunk, dedicated for your transfer of calls from Genesys Cloud to your external device, we need to make sure that this trunk will be able to co-exist with the one you are using for your PSTN connectivity (Genesys Cloud Voice or BYOC Cloud) and that it will be selected when targeting specific numbers (i.e. the numbers you have chosen as Expected DNIS in [Prepare and collect information about your external SIP device ](#step-2---prepare-and-collect-information-about-your-external-sip-device) section).
 
-1. From Genesys Desktop, in Admin, navigate to ***Sites*** in ***Telephony***, and select the site where you want to add your BYOC Cloud trunk (ex: Daly City)
+1. From Genesys Desktop, in Admin, navigate to ***Sites*** in ***Telephony***, and select the site where you want to add your BYOC Cloud trunk (e.g. Daly City)
 
 ![Site step 01](Site01.png)
 
@@ -181,7 +181,7 @@ Now that you have created a new BYOC Cloud trunk, dedicated for your transfer of
   * Number Plan Name: New Number Plan with E164
   * Match Type: E.164 Number List
   * Numbers: +19999990001 to +19999990001
-  * Classification (type a new name and type enter - it will create a new classification category) - ex: E164ToExternalDevice
+  * Classification (type a new name and type enter - it will create a new classification category) - e.g. E164ToExternalDevice
 
 ![Site step 03](Site03.png)
 
@@ -189,7 +189,7 @@ Now that you have created a new BYOC Cloud trunk, dedicated for your transfer of
   * Number Plan Name: New Number Plan with short number
   * Match Type: Number List
   * Numbers: 9991,9992
-  * Classification (type a new name and type enter - it will create a new classification category) - ex: ShortNumberToExternalDevice
+  * Classification (type a new name and type enter - it will create a new classification category) - e.g. ShortNumberToExternalDevice
 
 ![Site step 04](Site04.png)
 
@@ -230,9 +230,9 @@ Non-escaped: `Refer-To: <sip:address@ip?User-to-User=hexdata;encoding=hex>`
 *Without UUI Data:*
 `Refer-To: <sip:address@ip>`
 
-The ***ip*** portion can be anything. It is not checked and used by Genesys Cloud in this scenario. Ex: whatever_domain, locahost, ... would work.
+The ***ip*** portion can be anything. It is not checked and used by Genesys Cloud in this scenario. e.g. whatever_domain, locahost, ... would work.
 
-As we want the call to reach an Architect Inbound Call flow, the ***address*** will have to be a number (E.164 -ex: +19999999999), that has been defined as part of a [DID Range](https://help.mypurecloud.com/?p=45318) and that has been assigned to the desired Architect flow.
+As we want the call to reach an Architect Inbound Call flow, the ***address*** will have to be a number (E.164 -e.g. +19999999999), that has been defined as part of a [DID Range](https://help.mypurecloud.com/?p=45318) and that has been assigned to the desired Architect flow.
 
 
 ## Sending data from Genesys Cloud to your SIP device on transfer
@@ -276,11 +276,11 @@ In order to position the UUI data to send, you can leverage a [Script](https://h
 
 If you need to transfer the call back from your external SIP device to Genesys Cloud, and specifically to an Architect Inbound Call flow or to a Genesys Cloud user, releasing the call and resources from your device, your SIP device can issue a SIP REFER to Genesys Cloud.
 
-When your device sends this SIP REFER request, it can also pass data back to Genesys Cloud if necessary (ex: an identifier, a set of info, ...).  
+When your device sends this SIP REFER request, it can also pass data back to Genesys Cloud if necessary (e.g. an identifier, a set of info, ...).  
 This is again leveraging User to User Information (as part of the *Refer-To*).
 
 This data (decoded to ascii) will be made available to the Genesys Cloud conversation (available from an Architect flow, or at Contact Center Agent Desktop application level).  
-Ex: identifier used from Genesys Cloud to query and to retrieve information - in the Architect flow or in a Script via a [Data Action](https://help.mypurecloud.com/?p=209478) (like the Web Services Data Action integration).
+e.g. identifier used from Genesys Cloud to query and to retrieve information - in the Architect flow or in a Script via a [Data Action](https://help.mypurecloud.com/?p=209478) (like the Web Services Data Action integration).
 
 In an Architect Inbound Call flow, it is made available through the [Call.UUIData architect built-in variable](https://help.mypurecloud.com/?p=51613) (automatically decoded from hexa to ascii).
 
@@ -342,7 +342,7 @@ The Realm, User Name and Password are configured at the BYOC Cloud trunk level, 
 ### Custom SIP Header (static value) 
 
 It is possible to send a custom SIP header (with a static value) in the SIP INVITE from Genesys Cloud to your external device.  
-You could configure a token, assigned to your Genesys Cloud customer, as an additional control and verification mechanism (ex: CUSTOM-DEVICE-TOKEN as header name, and 1234567 as value).
+You could configure a token, assigned to your Genesys Cloud customer, as an additional control and verification mechanism (e.g. CUSTOM-DEVICE-TOKEN as header name, and 1234567 as value).
 
 In the trunk configuration, under ***Protocol***, in ***Outbound***, you can define the custom SIP header and the value (static) that will be added to the SIP INVITE, as described in the previous sections.
 
