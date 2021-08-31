@@ -25,11 +25,11 @@ In addition, the development team handles services deployments and operational s
 
 5. **Enforce consistency in the build and deployment process, not conformity in the development process**. Efficiency and quality do not come through standardized languages or centralized architectural control, but a standardized testing and deployment pipeline that all services flow through. Development teams pick the individual technologies that are best for their microservices. We use the deployment pipeline to enforce consistency how software is tested.
 
-So enough about high level principles, lets get into our CI/CD pipeline.
+So enough about high-level principles, lets get into our CI/CD pipeline.
 
 ## Our CI/CD pipeline
 
-Our CI/CD pipelines consist of seven steps illustrated in the diagram below:
+Our CI/CD pipelines comprise seven steps and are illustrated in the diagram below:
 
 ![The Genesys Cloud CICID Pipeline ](gc_cicd.png)
 
@@ -46,7 +46,9 @@ Genesys Cloud requires at least two people to approve a PR before it can be merg
 ## Step #3 - Developer merges PR
 Once the other service team members review and approve the PR, the developer is free to merge their change. The merging of code will kick off a build process where again the unit and integration tests are re-run. If these tests fail, the process stops and the developer who submitted the merge is notified via email and the overall development team is notified in their group chat.
 
-If the tests pass, the build pipeline runs a set of developer provided scripts (we use Ansible, Packer, and Amazon Cloudformation) that will provision an Amazon Machine Image (AMI) and then deploy the newly created AMI to our development environment. All provisioning and Cloudformation scripts are co-located in the same source control repository as the service code. Development teams do not write all of their Ansible, Packer and Cloudformation scripts from scratch. Our Genesys Cloud DevOps team has worked extremely hard to provide standard libraries and automation to carry out common deployment tasks, and Genesys Cloud service teams leverage these libraries whenever possible. Provisioning scripts not only define how the service will be deployed, but also the configuration of all monitoring and alerting policies associated with the deployed services.
+If the tests pass, the build pipeline runs a set of developer provided scripts (we use Ansible, Packer, and Amazon Cloudformation) that will provision an Amazon Machine Image (AMI) and then deploy the newly created AMI to our development environment. We follow the principles of an immutable architecture and never deploy code to an existing server. Instead, we always provision a new virtual machine image and deployt the image, not the code. 
+
+All provisioning and Cloudformation scripts are co-located in the same source control repository as the service code. Development teams do not write all of their Ansible, Packer and Cloudformation scripts from scratch. Our Genesys Cloud DevOps team has worked extremely hard to provide standard libraries and automation to carry out common deployment tasks, and Genesys Cloud service teams leverage these libraries whenever possible. Provisioning scripts not only define how the service will be deployed, but also the configuration of all monitoring and alerting policies associated with the deployed services.
 **Note:** While we use several technologies in our CI/CD pipeline (e.g. Ansible, Packer, Cloudformation) their usage here does not constitute an endorsement of these tools. You need to look at the specific requirements of your own CI/CD pipeline and determine whether these tools will meet your needs.
 
 ## Step #4 - Changes promoted to development
