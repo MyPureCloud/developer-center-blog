@@ -7,7 +7,7 @@ image: ./blog-img.png
 category: 6
 ---
 
-Hi everyone! I am excited to introduce a new experimental CLI feature: Alternative Formats. This new feature will allow you to send and receice data as an alternative format to JSON. Currently this feature supports YAML and in this blog post, I am going to demonstrate how you can use the new experimental feature in the CLI.
+Hi everyone! I am excited to introduce a new experimental CLI feature: Alternative Formats. This new feature will allow you to send and receive data as an alternative format to JSON. Currently this feature supports YAML and in this blog post I am going to demonstrate how you can use the new experimental feature in the CLI.
 
 
 ## List, Enable and Disable Experimental Features
@@ -26,15 +26,83 @@ To disable an experimental feature:
 
 ## Using Alternative Formats
 
-To use the Alternative Formats feature we can pass a supported value (e.g YAML or JSON) to the `--inputformat` flag or to the `--outputformat` flag.
+To use the Alternative Formats feature we can pass a supported value (e.g `YAML` or `JSON`) to the `--inputformat` flag or to the `--outputformat` flag.
 
-To display a request response as YAML simply include the `--outputformat=yaml` command.
+To input `YAML` data:
 
-Example Request:  
+`--inputformat=yaml`
+
+To output `YAML` data:
+
+`--outputformat=yaml`
+
+**Note:** If you do not pass a value to the `--inputformat` flag or to the `--outputformat` flag their value will default to `JSON`.
+
+**Note:** As this is an experimental feature, the feature may be removed or changed at any time.
+
+## Input Format
+
+If you want to input a `YAML` file when making a request, simply include the `--inputformat=yaml` command and pass the file to the `--file` flag.
+
+**Example Query:**
+
+`query.yaml`
+
+	---
+	interval: 2021-07-13T23:00:00.000Z/2021-07-19T23:00:00.000Z
+	order: asc
+	orderBy: conversationStart
+	paging:
+	  pageSize: 25
+	  pageNumber: 1
+
+**Example Request:**  
+
+`gc analytics conversations details query create --file=./query.yaml --inputformat=yaml`
+
+**Example Response:**
+
+	{
+	  "conversations": [
+	    {
+	      "conversationEnd": "2021-07-15T02:17:42.787Z",
+	      "conversationId": "b58e069b-ea04-4219-98ad-43de79e6dba3",
+	      "conversationStart": "2021-07-14T16:17:13.638Z",
+	      "divisionIds": ["cd28af1e-bfd8-4e24-aed1-075343054946"],
+	      "originatingDirection": "inbound",
+	      "participants": [
+	        {
+	          "participantId": "6c401d04-e997-40d3-9d81-4cb3308c2f93",
+	          "participantName": "Customer",
+	          "purpose": "customer",
+	          "sessions": [
+	            {
+	              "direction": "inbound",
+	              "mediaType": "chat",
+	              "provider": "PureCloud Webchat v2",
+	              "requestedRoutings": ["Standard"],
+	              "sessionId": "243fed6e-acbd-4bda-8c1e-a0a0177953aa",
+	              "metrics": [
+	                {
+	                  "emitDate": "2021-07-14T16:17:13.638Z",
+	                  "name": "nConnected",
+	                  "value": 1
+	                }
+	              ],
+	        
+	        response continues...
+	}
+
+	      
+## Output Format
+
+If you want to format your response as `YAML`, simply include the `--outputformat=yaml` command.
+
+**Example Request:**  
 
 `gc users get f3dc94ca-acec-4ee4-a07e-ca7503ddbd62 --outputformat=yaml`
 
-Example Output:
+**Example Response:**
 
 	acdAutoAnswer: false
 	addresses: []
@@ -56,59 +124,6 @@ Example Output:
 	username: john.doe@genesys.com
 	version: 2
 
+## Thanks for Reading
 
-If you want to input a YAML file when making a request, simply include the `--inputformat=yaml` command and pass the file to the `--file` flag.
-
-Example Query:
-
-query.yaml
-
-	---
-	interval: 2021-07-13T23:00:00.000Z/2021-07-19T23:00:00.000Z
-	order: asc
-	orderBy: conversationStart
-	paging:
-	  pageSize: 25
-	  pageNumber: 1
-
-Example Request:  
-
-`gc analytics conversations details query create --file=./query.yaml --inputformat=yaml --outputformat=yaml`
-
-Example Response:
-
-	conversations:
-	- conversationEnd: "2021-07-15T02:17:42.787Z"
-	  conversationId: 2d3db0b9-c9c1-43f3-9d4f-0c2c20fb2bb4
-	  conversationStart: "2021-07-14T16:17:13.638Z"
-	  divisionIds:
-	  - 12534f14-a63a-421f-a9de-25c8f8b614d5
-	  originatingDirection: inbound
-	  participants:
-	  - participantId: 12534f14-a63a-421f-a9de-25c8f8b614d5
-	    participantName: Customer
-	    purpose: customer
-	    sessions:
-	    - direction: inbound
-	      mediaType: chat
-	      metrics:
-	      - emitDate: "2021-07-14T16:17:13.638Z"
-	        name: nConnected
-	        value: 1
-	      provider: PureCloud Webchat v2
-	      requestedRoutings:
-	      - Standard
-	      segments:
-	      - conference: false
-	        disconnectType: timeout
-	        queueId: 12534f14-a63a-421f-a9de-25c8f8b614d5
-	        segmentEnd: "2021-07-15T02:17:42.785Z"
-	        segmentStart: "2021-07-14T16:17:13.638Z"
-	        segmentType: interact
-	      sessionId: 12534f14-a63a-421f-a9de-25c8f8b614d5x
-	      
-	      response continues...
-
-Note: If you do not pass a value to the `--inputformat` flag or to the `--outputformat` flag their value will default to JSON.
-
-Note: As this is an experimental feature, the feature may be removed or changed at any time.
+If you have any feedback or issues, please feel free to reach out to us on the [developer forum](https://developer.genesys.cloud/forum/).
