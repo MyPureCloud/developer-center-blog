@@ -307,17 +307,13 @@ Otherwise, note that the SIP Call-IDs are stored and are made available in the [
 In the *participant* structure, under *sessions*, you should see a *protocolCallId* attribute, that will contain the SIP Call-ID related to this participant's call leg.  
 Note: There are multiple SIP Call-IDs in a Genesys Cloud call conversation (one for each leg/session).
 
-The SIP Call ID can be found in the Conversation Details (Analytics).
-It is the protocolCallId attribute, in the session structure (at participant level).
-Note: There are multiple CallIDs in a call (one for each leg/session).
-
 You can get the SIP Call-ID from a ConversationId using a [GET /api/v2/analytics/conversations/{conversationId}/details](/api/rest/v2/analytics/#get-api-v2-analytics-conversations--conversationId--details).  
 Depending on your use case and flow, find the "inbound" or "outbound" participant (*purpose* = customer or external) and check the *protocolCallId* in his session.
 
 You can also find the ConversationId from a SIP Call-ID using a [query for conversation details - POST /api/v2/analytics/conversations/details/query](/api/rest/v2/analytics/#post-api-v2-analytics-conversations-details-query).  
 In your query, define a *segmentFilter* that leverages the *protocolCallId* dimension.
 
-Also note that the Analytics Conversation Details are available right after the conversation starts. You do not need to wait for the end of a conversation to perform an Analtyics query for conversation details.
+Also note that the Analytics Conversation Details are available right after the conversation starts. You do not need to wait for the end of a conversation to perform an Analytics query for conversation details.
 
 
 ## Controlling access to your SIP Device 
