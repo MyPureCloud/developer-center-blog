@@ -7,11 +7,17 @@ category: 3
 image: BYOCCloudtoExternalDevice.png
 ---
 
-The purpose of this article is to describe how to create and to configure a [BYOC Cloud Trunk](https://help.mypurecloud.com/?p=152702) (SIP Trunk):
-- to transfer and to connect calls from Genesys Cloud to an external system (that supports SIP connectivity over the public internet),
-- and to transfer these calls back to Genesys Cloud (releasing resources on the external SIP device).
+:::warning
+The following article assumes that you have setup your connectivity with the PSTN, using Genesys Cloud Voice or BYOC Cloud: *Location(s) with verified address(es); Site(s) using Cloud Media Model, one set as Default Site, and with Outbound Routes that leverage the Genesys Cloud Voice pre-defined trunk or the BYOC Cloud trunk used for PSTN connectivity*.
+:::
 
-Typically, this trunk would coexist with another trunk (i.e. Genesys Cloud Voice or BYOC Cloud Trunk), used by the Genesys Cloud org (i.e. the enterprise), to manage inbound and outbound traffic with end customers via the PSTN.
+The purpose of this article is to describe how to create and to configure a [BYOC Cloud Trunk](https://help.mypurecloud.com/?p=152702) (SIP Trunk) to:
+- Transfer and connect calls from Genesys Cloud to an external system (that supports SIP connectivity over the public internet),
+- Transfer these calls back to Genesys Cloud (releasing resources on the external SIP device).
+
+A possible use case for such configuration would be if you need to interconnect your Genesys Cloud environment with a 3rd party IVR, a 3rd party Voice Bot, or a Biometrics service.
+
+Typically, this trunk would coexist with another trunk (i.e. [Genesys Cloud Voice](https://help.mypurecloud.com/?p=60252) or [BYOC Cloud](https://help.mypurecloud.com/?p=152702) Trunk), used by the Genesys Cloud org (i.e. the enterprise), to manage inbound and outbound traffic with end customers via the PSTN. An example of this configuration can be seen in the diagram below.
 
 ![Simplified view of Genesys Cloud and Trunks](BYOCCloudtoExternalDevice.png)
 
@@ -23,12 +29,6 @@ Or the enterprise could have a BYOC Cloud Trunk (for PSTN connectivity via a PST
 **Note:** Combining Genesys Cloud Voice or BYOC Cloud with a BYOC Premise Trunk is not supported at this stage.
 Later this year, Genesys Cloud will support Hybrid environments, allowing to combine Genesys Cloud Voice, BYOC Cloud and BYOC Premise.
 :::
-
-About:
-- [__Genesys Cloud Voice__](https://help.mypurecloud.com/?p=60252)
-- [__BYOC Cloud__](https://help.mypurecloud.com/?p=152702)
-
-The following article assumes that you have setup your connectivity with the PSTN, using Genesys Cloud Voice or BYOC Cloud: *Location(s) with verified address(es); Site(s) using Cloud Media Model, one set as Default Site, and with Outbound Routes that leverage the Genesys Cloud Voice pre-defined trunk or the BYOC Cloud trunk used for PSTN connectivity*.
 
 ## Configure a new SIP Trunk (BYOC Cloud) to your external system 
 
@@ -254,7 +254,7 @@ For inbound calls (External to Genesys Cloud via BYOC Cloud), Genesys Cloud will
 
 ### Data as User to User Information 
 
-If you need to pass any additional data from Genesys Cloud to your external device, you can also leverage User to User Information (UUI).
+If you need to pass any additional data from Genesys Cloud to your external device, you can also leverage [User to User Information (UUI)](https://help.mypurecloud.com/?p=178925).
 
 You will need to enable UUI Data on your BYOC Cloud trunk.  
 Under ***Protocol***, in ***User to User Information (UUI)***, enable the ***UUI Passthrough*** toggle and select the ***Header Type*** (User-to-User, User-to-User with pd parameter, x-User-To-User) and ***Encoding Format*** (hex, ascii) you want to use.  
@@ -313,12 +313,12 @@ Depending on your use case and flow, find the "inbound" or "outbound" participan
 You can also find the ConversationId from a SIP Call-ID using a [query for conversation details - POST /api/v2/analytics/conversations/details/query](/api/rest/v2/analytics/#post-api-v2-analytics-conversations-details-query).  
 In your query, define a *segmentFilter* that leverages the *protocolCallId* dimension.
 
-Also note that the Analytics Conversation Details are available right after the conversation starts. You do not need to wait for the end of a conversation to perform an Analytics query for conversation details.
+Also note that the **Analytics Conversation Details** are available right after the conversation starts. You do not need to wait for the end of a conversation to perform an Analytics query for conversation details.
 
 
 ## Controlling access to your SIP Device 
 
-In order to control and to limit the access to your external device, which will be exposed on the public internet, you can leverage a combination of the following methods. These are up to you - nothing is mandatory!
+In order to control and to limit the access to your external device, which will be exposed on the public internet, you can leverage a combination of the following methods: *IP Address Access Control List, SIP Digest Authentication, Custom SIP Header, Token in UUI data*. These are up to you - nothing is mandatory!
 
 ### IP Address Access Control List 
 
@@ -348,4 +348,16 @@ In the trunk configuration, under ***Protocol***, in ***Outbound***, you can def
 It is also possible to leverage the UUI data, which can be set at the Architect Inbound Call flow level, to carry a token, assigned to your Genesys Cloud customer, as an additional control and verification mechanism.
 
 See [Data as User to User Information](#data-as-user-to-user-information), under [Sending data on transfer to your SIP device](#sending-data-on-transfer-to-your-sip-device), for more details.
+
+
+## Closing Thoughts
+
+You should now have the necessary information to configure and to interconnect your external system (e.g. 3rd party IVR, Voice Bot, Biometrics Service, ...) with Genesys Cloud using a [BYOC Cloud](https://help.mypurecloud.com/?p=152702) trunk, and to start transferring calls back and forth.
+
+What I would recommend if you have to implement such an integration is to always **start simple**.  
+Try to interconnect using basic and simple settings first. Once it works, you'll be able to add more complexity, if you need to. Do not forget you only have access to SIP traces (from your external system, from Genesys Cloud) and no server logs. So this can make troubleshooting more difficult if you start immediately with a complex setup.  
+E.g. Even if your end goal is to use SIP over TLS, do the initial setup with UDP or TCP if you can. You'll avoid to fight with certificates.  
+E.g. Try to use E.164 numbers and use simple dial plans (***E.164 Number List*** or ***Number List*** match types). Don't start with Regular Expressions (RegEx).
+
+Thank you and have fun!
 
