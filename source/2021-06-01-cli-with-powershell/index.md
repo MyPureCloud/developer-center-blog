@@ -1,7 +1,7 @@
 ---
 title: Using PowerShell with the Genesys Cloud CLI
 tags: Genesys Cloud, CLI, API, PowerShell, Windows
-date: 2021-05-24
+date: 2021-06-01
 author: prince.merluza
 category: 6
 image: banner.png
@@ -14,14 +14,14 @@ Earlier this year, we announced the Genesys Cloud CLI which is a tool used to pe
 :::
 
 :::primary
-**GC-CLI version**: CLI version 11.0.0 is used at the time of writing. Some commands may be different if you're using another version. To determine which one you're using, run `gc.exe version`.
+**GC-CLI version**: CLI beta version 11.0.0 is used at the time of writing. Some commands may be different if you're using another version. To determine which one you're using, run `gc.exe version`. For the latest version, go to our [CLI documentation](/api/rest/command-line-interface/).
 :::
 
 ## Download the Genesys Cloud CLI
 
-First we need to download the executable from this [page](https://developer.genesys.cloud/api/rest/command-line-interface/). If you are using Windows, then you have to manually place the file in a folder on your PATH.
+First we need to download the executable from this [page](/api/rest/command-line-interface/). If you are using Windows, then you have to manually place the file in a folder on your PATH.
 
-If you're unsure how to do the latter, then you can follow these steps to setting up the cli:
+If you're unsure how to do the latter, then you can follow these steps to setting up the CLI:
 
 1. Create a folder in your C drive and name it `GenesysCloud`. Put the downloaded `gc.exe` file inside the folder.
 ![path-1](path-1.png "Create New Folder")
@@ -34,6 +34,7 @@ If you're unsure how to do the latter, then you can follow these steps to settin
 
 4. In the "User variables" section, select the entry for `Path` then click "Edit..."
 ![path-4](path-4.png "Edit User Path")
+
 :::warning
 **Warning**: Be careful with modifying values in the PATH variable. Accidentally modifying/deleting entries may affect other applications dependent on them.
 :::
@@ -59,7 +60,7 @@ Before you can start using the CLI, you first need to create an OAuth Client fro
 
 In PowerShell, enter the following command and answer the questions to generate your profile:
 
-```powershell
+```shell
 gc.exe profiles new
 ```
 
@@ -71,7 +72,7 @@ The Genesys Cloud CLI consumes the Genesys Cloud API which is a REST API. This m
 
 Example:
 
-```powershell
+```shell
 gc.exe users list | ConvertFrom-Json
 ```
 
@@ -102,32 +103,32 @@ lastUri    : /api/v2/users?pageSize=25&pageNumber=2
 pageCount  : 2
 ```
 
-In the above example, we used the cli to ask for a list of users. Once the result is available, we pipe it into `ConvertFrom-Json` in order to convert the JSON to a PSCustomObject. If this is your first time working with the Genesys Cloud API, then you might notice that the result we got has pagination data. This is the default result of the API. If you want to learn more about the expected format of API results then you can read more on the [Platform API](https://developer.mypurecloud.com/api/rest/) documentation.
+In the above example, we used the CLI to ask for a list of users. Once the result is available, we pipe it into `ConvertFrom-Json` in order to convert the JSON to a PSCustomObject. If this is your first time working with the Genesys Cloud API, then you might notice that the result we got has pagination data. This is the default result of the API. If you want to learn more about the expected format of API results then you can read more on the [Platform API](/api/rest/) documentation.
 
 If you want to get the entities themselves, in this case the first 25 users, then you can use the `ExpandProperty` flag of the `Select-Object` cmdlet:
 
-```powershell
+```shell
 gc.exe users list | ConvertFrom-Json | Select-Object -ExpandProperty entities
 ```
 
 Aside from the paginated data, the CLI provides us with more options on listing results. For example, if you want to get all the users in the organization without manually collating results from the pages, then you can simply do:
 
-```powershell
+```shell
 gc.exe users list -a | ConvertFrom-Json
 ```
 
 :::primary
-**Note**: The `-a` flag means to autopaginate results. To learn more about different flags and options, consult the [gc-cli](https://developer.genesys.cloud/api/rest/command-line-interface/go-cli/) documentation.
+**Note**: The `-a` flag means to autopaginate results. To learn more about different flags and options, consult the [gc-cli](/api/rest/command-line-interface/go-cli/) documentation.
 :::
 
 ### ConvertFrom-Json and JSON Arrays
 
-In this section, we'll briefly touch on a gotcha that needs to be considered when working with different versions of PowerShell.
+In this section, we'll briefly touch on a "gotcha" that needs to be considered when working with different versions of PowerShell.
 
 Consider the following command where we want to list the ids of all the queues in the organization:
 
-```powershell
-gc.exe queues list -a | ConvertFrom-Json | Select-Object id
+```shell
+gc.exe routing queues list -a | ConvertFrom-Json | Select-Object id
 ```
 
 If you're using PowerShell 5.1 you may notice that the result is seemingly empty:
@@ -150,12 +151,12 @@ f2d5c5f8-ddd9-49c0-9bb3-852123967e6d
 
 This is because in PowerShell 5.1, `ConvertFrom-Json` will not automatically unwrap a JSON if the containing item is an array. In order to explicitly enumerate the array, we can either enclose the command in a parenthesis or pipe the result into a `Write-Output` before any other commands:
 
-```powershell
-(gc.exe queues list -a | ConvertFrom-Json) | Select-Object id
+```shell
+(gc.exe routing queues list -a | ConvertFrom-Json) | Select-Object id
 ```
 
-```powershell
-gc.exe queues list -a | ConvertFrom-Json | Write-Output | Select-Object id
+```shell
+gc.exe routing queues list -a | ConvertFrom-Json | Write-Output | Select-Object id
 ```
 
 The commands still work in newer versions of PowerShell and so you may see sample and scripts that use any of the patterns described above.
@@ -164,19 +165,19 @@ The commands still work in newer versions of PowerShell and so you may see sampl
 
 A lot of commands in the CLI requires input in the form of JSON. Let's go straight into an example where we need to create a new routing skill named `Test Skill`:
 
-```powershell
+```shell
 @{
     name = "Test Skill"   
 } | ConvertTo-Json |
-    gc.exe skills create   
+    gc.exe routing skills create   
 ```
 
 In this example, we defined a PowerShell HashTable, convert it to JSON, then pipe it as the request body for the command.
 
 If the JSON body is instead available as a file, the CLI provides a way to consume it via the `-f` / `--file` flag.
 
-```powershell
-gc.exe skills create -f new-skill.json
+```shell
+gc.exe routing skills create -f new-skill.json
 ```
 
 ## (Optional) Using jq to Manage JSON Transformations
@@ -187,23 +188,23 @@ First, you should download the binary from the [website](https://stedolan.github
 
 The following is an example on how to list all User Ids:
 
-```powershell
+```shell
 gc.exe users list -a | jq '.[].id' 
 ```
 
 ## Streaming Output from Notifications API
 
-The `gc.exe notifications channel listen` command is special, in that instead of a singular JSON response, the CLI indefinitely prints JSON events through the specified channel's websocket, into the standard output. If you are not familiar with the Notifications API or websockets in general, then you may want to read this [article](https://developer.genesys.cloud/api/rest/v2/notifications/notification_service.html) if you plan on using notifications for Genesys Cloud.
+The `gc.exe notifications channel listen` command is special, in that instead of a singular JSON response, the CLI indefinitely prints JSON events through the specified channel's websocket, into the standard output. If you are not familiar with the Notifications API or websockets in general, then you may want to read this [article](/api/rest/v2/notifications/notification_service.html) if you plan on using notifications for Genesys Cloud.
 
 For PowerShell 5.1, we run once again into a quirk. Take the following simple command:
 
-```powershell
+```shell
 gc.exe notifications channels listen "streaming-5-xxxxxxx"
 ```
 
 As mentioned, the CLI will now be running indefinitely and will print to standard output. Depending on the type of event, each notification may look something like this:
 
-```shell
+```json
 {
   "topicName": "v2.users.e40f28ea-fa86-493f-a5b8-d559c8533c96.activity",
   "version": "2",
@@ -242,7 +243,7 @@ As mentioned, the CLI will now be running indefinitely and will print to standar
 
 Everything seems to be in order until you try to pipe it down to certain commands. For example, let's try converting the JSON text to a PSCustomObject like what we've always been doing so far:
 
-```powershell
+```shell
 gc.exe notifications channels listen "streaming-5-xxxxxxx" | ConvertFrom-Json
 ```
 
@@ -250,31 +251,13 @@ After entering the command, you will notice that you will stop getting any outpu
 
 In the following script, we manually collect each line as they're printed. Once we get a valid JSON, we then pipe it down to be converted to a PSCustomObject:
 
-```powershell
-gc.exe notifications channels listen $channelId | 
-    ForEach-Object {$eventJson = ""} {
-        if ($_ -ne "}") {
-            $eventJson += $_
-        } 
-        else {
-            $eventJson += "}"
-            $eventJson | Write-Output
-            $eventJson = ""
-        }
-    } | 
-    ForEach-Object {
-        $_ | ConvertFrom-Json | 
-            Select-Object -Property topicName -ExcludeProperty eventBody -ExpandProperty eventBody
-    }
-```
-
-Full script could be found here as a quick-hits [recipe](https://github.com/MyPureCloud/quick-hits-cli/blob/main/notifications/powershell/Connect-NotificationsChannel.ps1).
+<dxui:QuickHit id="Connect-NotificationsChannel" title="Notifications API in PowerShell" />
 
 ## Closing Thoughts
 
-In the CLI's inception, materials have been focused more for the Unix environments. As developers, it might have been our bias towards an environment we're familiar with or with the fact that a lot of IT systems are built upon it. Regardless, we were very excited to immediately see a growing community of Windows administrators who are looking into using the tool. And while the CLI itself is still in its early development, we have received numerous request for samples and assistance to making it work with PowerShell. As the tool grows, so will the support for all platforms that use it.
+After going through the post you should now have everything you need to write your own PowerShell scripts. The next step is to check out the additional resources on the final section.
 
-All this wouldn't have been possible without the feedback and suggestions we received from you so far. We're very excited to hear more as John Carnell's team develop the CLI further.
+I should mention that our Quick-Hits repo is open for anyone wanting to contribute their own amazing scripts. So if you've written one and would like to share it with the community, feel free to drop us a PR sometime. ;)
 
 Thanks!
 
@@ -283,4 +266,4 @@ Thanks!
 1. [Genesys Cloud CLI](/api/rest/command-line-interface/)
 2. [Genesys Cloud CLI Recipes](https://github.com/MyPureCloud/quick-hits-cli)
 3. [Genesys Cloud CLI Developer Drop](https://www.youtube.com/watch?v=OnYDs5NsLpU&list=PL01cVFOkuN70Rk8xgI8pk_tKMcTW4FesF)
-4. [jq](https://stedolan.github.io/jq/) 
+4. [jq](https://stedolan.github.io/jq/)
