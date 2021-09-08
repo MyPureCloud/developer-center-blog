@@ -1,9 +1,8 @@
 ---
-title: New Experimental CLI Feature: Alternative Formats
+title: "New Experimental CLI Feature: Alternative Formats"
 date: 2021-08-26
 tags: cli, developer engagement, experimental, alternative formats, YAML, JSON
 author: michael.roddy
-image: ./blog-img.png
 category: 6
 ---
 
