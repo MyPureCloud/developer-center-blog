@@ -7,13 +7,13 @@ category: 3
 image: BYOCCloudtoExternalDevice.png
 ---
 
-:::warning
-The following article assumes that you have setup your connectivity with the PSTN, using Genesys Cloud Voice or BYOC Cloud: *Location(s) with verified address(es); Site(s) using Cloud Media Model, one set as Default Site, and with Outbound Routes that leverage the Genesys Cloud Voice pre-defined trunk or the BYOC Cloud trunk used for PSTN connectivity*.
-:::
-
 The purpose of this article is to describe how to create and to configure a [BYOC Cloud Trunk](https://help.mypurecloud.com/?p=152702) (SIP Trunk) to:
 - Transfer and connect calls from Genesys Cloud to an external system (that supports SIP connectivity over the public internet),
 - Transfer these calls back to Genesys Cloud (releasing resources on the external SIP device).
+
+:::warning
+The following article assumes that you have setup your connectivity with the PSTN, using Genesys Cloud Voice or BYOC Cloud: *Location(s) with verified address(es); Site(s) using Cloud Media Model, one set as Default Site, and with Outbound Routes that leverage the Genesys Cloud Voice pre-defined trunk or the BYOC Cloud trunk used for PSTN connectivity*.
+:::
 
 A possible use case for such configuration would be if you need to interconnect your Genesys Cloud environment with a 3rd party IVR, a 3rd party Voice Bot, or a Biometrics service.
 
