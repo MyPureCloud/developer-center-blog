@@ -28,7 +28,7 @@ For those who are new to Archy, let's start with the steps on how to set it up:
    - [Archy for Linux](https://sdk-cdn.mypurecloud.com/archy/latest/archy-linux.zip)
    - [Archy for Windows](https://sdk-cdn.mypurecloud.com/archy/latest/archy-win.zip)
 
-    Archy itself is simply a binary file that can be run via the command line. If you're not comfortable working with command line applications or want to follow a more official approach in "installing" the tool then you can use our [installation guide](https://developer.genesys.cloud/devapps/archy/install) which shows step-by-step our recommended setup for Archy.
+    Archy itself is simply a binary file that can be run via the command line. If you're not comfortable working with command line applications or want to follow a more official approach in "installing" the tool then you can use our [installation guide](/devapps/archy/install) which shows step-by-step our recommended setup for Archy.
 
 2. Run Archy setup
 
@@ -46,7 +46,7 @@ For those who are new to Archy, let's start with the steps on how to set it up:
 
     ![Archy Setup Finished](archy_setup_finish.png)
 
-    All in all, the `setup` should be an easy and straightforward process. If you want to read more about the it, please refer to the [Archy Setup](https://developer.genesys.cloud/devapps/archy/setup) documentation.
+    All in all, the `setup` should be an easy and straightforward process. If you want to read more about the it, please refer to the [Archy Setup](/devapps/archy/setup) documentation.
 
 ## Export
 
@@ -140,7 +140,7 @@ This will create a new flow in the org. If it gives you an error that a flow wit
     ```
 
 :::primary
-**Note**: You may notice that we only had one set of credentials in the Archy setup. If you're working with more than one org then you'd need to make use of Options Files to declare credentials for the other orgs. Read more about it [here](https://developer.genesys.cloud/devapps/archy/commandOverview#parameter-values-and-the-options-file)
+**Note**: You may notice that we only had one set of credentials in the Archy setup. If you're working with more than one org then you'd need to make use of Options Files to declare credentials for the other orgs. Read more about it [here](/devapps/archy/commandOverview#parameter-values-and-the-options-file)
 :::
 
 ## Resolving References
@@ -153,21 +153,21 @@ We won't go deep into each option but if you're working with Archy on production
    - Simple and straightforward. YAML is plaintext and you can simply update the values you need before importing it to the next org. This may not be the best option for scaling.
 
 2. Using Archy substitutions.
-   - Substitutions is Archy's way to define variables in a YAML flow file. This will still require manually updating a flow to replace the static values with the variables but you can use different option files to define different sets of values to replace the variables. Read more about it [here](https://developer.genesys.cloud/devapps/archy/flowAuthoring/lesson_07_substitutions).
+   - Substitutions is Archy's way to define variables in a YAML flow file. This will still require manually updating a flow to replace the static values with the variables but you can use different option files to define different sets of values to replace the variables. Read more about it [here](/devapps/archy/flowAuthoring/lesson_07_substitutions).
 
 3. Using CX as Code
-   - [CX as Code](https://developer.genesys.cloud/blog/2021-04-16-cx-as-code/) is configuration management tool that allows you to define Genesys Cloud configuration objects (e.g. Queues, Skills, Users, etc) in plain text files. At the time of writing, CX as Code is still being developed and may not work fully with Archy but the plan is to have the tools working seamlessly with each other. It doesn't hurt to know about it as early as now :)
+   - [CX as Code](/blog/2021-04-16-cx-as-code/) is configuration management tool that allows you to define Genesys Cloud configuration objects (e.g. Queues, Skills, Users, etc) in plain text files. At the time of writing, CX as Code is still being developed and may not work fully with Archy but the plan is to have the tools working seamlessly with each other. It doesn't hurt to know about it as early as now :)
 
 That's about it. I hope you enjoyed following along the steps and learned new things about Archy.
 
-If you have any questions or need assistance, please feel free to post and share your experience to our [Developer Forums](https://developer.genesys.cloud/forum/).
+If you have any questions or need assistance, please feel free to post and share your experience to our [Developer Forums](/forum/).
 
 See you.
 
 ## Additional Resources
 
 1. [DevDrop Video Series for Archy](https://www.youtube.com/watch?v=3NwGJ9X1O0s)
-2. [Archy Documentation](https://developer.genesys.cloud/devapps/archy/)
-3. [Archy Flow Authoring Tutorial](https://developer.genesys.cloud/devapps/archy/flowAuthoring/)
-4. [CX as Code](https://developer.genesys.cloud/api/rest/CX-as-Code/)
+2. [Archy Documentation](/devapps/archy/)
+3. [Archy Flow Authoring Tutorial Series](/devapps/archy/flowAuthoring/)
+4. [CX as Code](/api/rest/CX-as-Code/)
 5. [YAML File Format](https://en.wikipedia.org/wiki/YAML)
