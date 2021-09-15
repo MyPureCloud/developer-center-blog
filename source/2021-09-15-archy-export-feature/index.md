@@ -1,7 +1,7 @@
 ---
 title: Introducing the New Archy Export Feature
 tags: Genesys Cloud, CLI, Archy, Architect, DevOps
-date: 2021-09-30
+date: 2021-09-15
 author: prince.merluza
 category: 4
 image: cover.png
