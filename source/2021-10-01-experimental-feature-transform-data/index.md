@@ -1,5 +1,5 @@
 ---
-title: New Experimental CLI Feature: Transform Data
+title: 'New Experimental CLI Feature: Transform Data'
 date: 2021-10-01
 tags: cli, developer engagement, experimental, transform data, go templates
 author: michael.roddy
