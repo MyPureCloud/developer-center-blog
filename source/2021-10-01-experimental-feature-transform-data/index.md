@@ -100,7 +100,7 @@ The request above will return the following response:
 
 ***Note:*** Here I am showing just one object from the list of objects returned from a `gc users list -a` command.
 
-```
+```json
 [
   {
     "id": "a231695b-e835-4cc5-afc2-c74c1e33cea2",
@@ -177,7 +177,7 @@ The output from running the above command is as follows:
 ***Note:*** Here I am showing just one user object transformed to `CSV` format. In the case of transforming output from a `gc users list -a` command, you would have multiple objects transformed to `CSV` format.
 
 ```
-id: 3b62fe12-755a-4533-a4c0-e7815f28b848,name: John Doe,division:id: 3b62fe12-755a-4533-a4c0-e7815f28b848,name: ,selfUri: /api/v2/authorization/divisions/360e4e37-fea7-4bb1-a346-11a74dbb38ff,chat:jabberId: 360e4e37-fea7-4bb1-a346-11a74dbb38ff@genesys.com,email: john.doe@genesys.com,primaryContactInfo:address: john.doe@genesys.com,mediaType: EMAIL,type: PRIMARY,addresses:state: active,username: john.doe@genesys.com,version: 6,acdAutoAnswer: false,selfUri: /api/v2/users/9096aac0-936a-4fa5-b331-57e09f2ce09b
+id: 3b62fe12-755a-4533-a4c0-e7815f28b848,name: John Doe,division:id: 3b62fe12-755a-4533-a4c0-e7815f28b848,name: ,selfUri: /api/v2/authorization/divisions/360e4e37-fea7-4bb1-a346-11a74dbb38ff,chat:jabberId: 360e4e37-fea7-4bb1-a346-11a74dbb38ff@genesys.com,email: john.doe@genesys.com,primaryContactInfo:address: john.doe@genesys.com,mediaType: EMAIL,type: PRIMARY,addresses:state: active,username: john.doe@genesys.com,version: 6,acdAutoAnswer: false,selfUri: /api/v2/users/9096aac0-936a-4fa5-b331-57e09f2ce09b,
 ```
 
 As you can see from the example above, the output data is now in `CSV` format.
@@ -198,7 +198,7 @@ gc users get [user_id]
 
 The response from running the above command is as follows:
 
-```
+```json
 {
   "id": "f0eeb2e7-6307-46e8-bb29-f8a223d46acf",
   "name": "John Doe",
