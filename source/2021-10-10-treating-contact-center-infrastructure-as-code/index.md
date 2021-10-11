@@ -1,7 +1,7 @@
 ---
 title: How to Begin your CX as Code Journey
 tags: Genesys Cloud, CICD, CX as Code, DevOps
-date: 2021-10-07
+date: 2021-10-10
 author: john.carnell
 category: 6
 ---
