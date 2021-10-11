@@ -6,7 +6,7 @@ author: john.carnell
 category: 6
 ---
 
-Hello everyone. I hope this year has been better than last year and everyone is staying safe and healthy. Over the course of the last several months, Genesys Cloud introduced a new tool called *CX as Code*. *CX as Code* is a DevOps/configuration management tool that allows you to define Genesys Cloud objects (e.g. Queues, Skills, Users, etc) in plain old text files and then apply those objects across multiple Genesys Cloud organizations. *CX as Code* lets your define the configuration of Genesys Cloud object without caring how that configuration is actually being executed. From a technical perspective, *CX as Code* is a plugin built on top of Terraform. Terraform is open source tool created by Hashicorp that allows you provision cloud-based infrastructure in a non-vendor specific manner. 
+Hello everyone. I hope this year has been better than last year and everyone is staying safe and healthy. Over the course of the last several months, Genesys Cloud introduced a new tool called *CX as Code*. *CX as Code* is a DevOps/configuration management tool that allows you to define Genesys Cloud objects (e.g. Queues, Skills, Users, etc) in plain old text files and then apply those objects across multiple Genesys Cloud organizations. *CX as Code* lets you define the configuration of Genesys Cloud object without caring how that configuration is actually being executed. From a technical perspective, *CX as Code* is a plugin built on top of Terraform. Terraform is open tool created by Hashicorp that allows you provision cloud-based infrastructure in a non-vendor specific manner. 
 
 In this article we want to:
 
@@ -28,17 +28,17 @@ We derived the following principles from these experiences:
 
 4. **CX infrastructure components should be defined in plain text files and checked into a version control system**. Version control represents a single source of truth. Any time a change is made to a CX infrastructure component, that change should be checked into version control. Version control systems provide a natural audit record of every change that has been made to a piece of configuration and who made that change.
 
-5. **When a CX infrastructure component is deployed, it should be deployed through an automated process that involves no human interaction**. Deployments should happen every time changes are committed to your version control system. Automated Tests should run after each deployment to determine that expected functionality for the CX infrastructure is correct. In the lower environments, if a deployment to the development environment passes, it should be automatically promoted to a test environment.
+5. **When a CX infrastructure component is deployed, it should be deployed through an automated process that involves no human interaction**. Deployments should happen every time changes are committed to your version control system. Deployment pipelines can vary from organization to organization, but usually include development, test and production environments.  Automated Tests should run after deployment to any environment. Its a best to automatically deploy to a test environment after tests run and pass in a development environment.
 
 ## What are the use cases for CX as Code?
 *CX as Code* can be leveraged for a number of different use cases. However, each use case has their own design decisions that goes into them. Three common use cases we see with *CX as Code* are:
 
-1. Provisioning and teardown of disposable Genesys Cloud organizations
+1. Provisioning of a Genesys Cloud organizations
 2. Deployment of CX infrastructure across multiple Genesys Cloud organizations
 3. Replication of core CX infrastructure to a Disaster Recovery (DR) environment
 
-### Provisioning and teardown of disposable Genesys Cloud organizations
-Many organizations need the ability to provision Genesys Cloud environments for short-lived and often single use purposes. *CX as Code* gives you the ability to create and teardown and environment in a repeatable process. This is  particularly useful in a training environment where you want to set up a consistent configuration that let users learn and experiment with Genesys Cloud and then "reset" the environment after the work is done.
+### Provisioning of a Genesys Cloud organization configuration
+Many organizations need the ability to provision Genesys Cloud environments and then reset the configuration back to a baseline. *CX as Code* gives you the ability to provision an environment in a repeatable process. This is  particularly useful in a testing or training environment where you want to set up a consistent configuration that lets users learn and experiment with Genesys Cloud and then "reset" the environment after the work is done.
 
 When *CX as Code* is used in this fashion its is not uncommon to define not only your core CX infrastructure 
 (e.g. your Architect flows, queues, scripts, skills, etc...), but also your user accounts, user attributes 
@@ -104,15 +104,21 @@ are also moved to production.
 ## How do I begin working with CX as Code
 One of the biggest challenges associated with adopting *CX as Code* is knowing exactly where to start. There can be a lot of moving parts and then trying to integrate your defined flow into a CI/CD pipeline can be overwhelming. Here is where I recommend you start:
 
-1. **Don't go big**. One of the first mistakes people make in any kind of Infrastructure As Code (IAC) project is that they try to do too much upfront. Focus on one small project and give your development team time to learn. If you try to do too much, too early, the first time you run into problem, your team will not have the experience to work through it and they will more than likely get frustrated and quit.
+1. **Don't go big**. One of the first mistakes people make in any kind of Infrastructure As Code (IAC) project is that they try to do too much upfront. Focus on one small project and give your development team time to learn. If you try to do too much, too early, the first time you run into a problem, your team will not have the experience to work through it and they will more than likely get frustrated and quit.
 
   :::info
-  I also advise that you "Don't go big" with your CI/CD infrastructure for your *CX as Code* implementations. Modern cloud-based version control systems (e.g. GitHub/Bitbucket/AWS/Azure) already support the ability to build CI/CD pipelines right within the version control. Leverage cloud vendors to manage your CI/CD pipelines and Terraform (e.g. Terraform cloud). These vendors are often very inexpensive and you do not have to end building out and supporting your source control repository and build tools (e.g. Jenkins).
+  I also advise that you "Don't go big" with your CI/CD infrastructure for your *CX as Code* implementations. Modern cloud-based version control systems (e.g. GitHub/Bitbucket/AWS/Azure) already support the ability to build CI/CD pipelines right within the version control. Leverage cloud vendors to manage your CI/CD pipelines and Terraform (e.g. Terraform cloud). These vendors are often very inexpensive and you do not have to build out and support your own source control repository and build tools (e.g. Jenkins).
   ::: 
 
-2.  **Start from the top down**. I recommend you take one of your Architect flows and work your way down. Identify all the dependencies for that flow. Once you have gone through this de-composition exercise, you know have a list of target Genesys Cloud objects to build a *CX as Code* definitions.
+2.  **Start from the top down**. I recommend you take one of your Architect flows and work your way down. Identify all the dependencies for that flow. Once you have gone through this de-composition exercise, you now have a list of Genesys Cloud objects to build a *CX as Code* definitions.
 
-3.  **Create a source code repository to contain the Architect flows and the CX as Code definitions**. Many developers will be tempted to put all of their Architect flows and *CX as Code* definitions into a single repository. There are two problems with this approach. First, based on the number of flows and Genesys Cloud objects that you want to manage can be extremely large and be extremely hard to reason about or manage. Second, putting multiple flows and Genesys Cloud objects into a single repository can create artificial dependencies in your deployments, where a change to one flow can force re-deployment of all the other flows and objects.
+3.  **Create source code repositories to contain related Architect flows and the CX as Code definitions**. Many developers will be tempted to put all of their Architect flows and *CX as Code* definitions into a single repository. Instead, focus on breaking your flows into related groups and manage them across multiple repositories. For example, you might consider breaking Architect flows and their dependencies from a a single line of business (LOB) into their own source control repository.
+
+There are two problems with putting all of your flows and their dependencies into a single source control repository. First, many organizations have hundreds of Architect flows and Genesys Cloud objects. A single repository results in a single source of complexity and makes it more difficult to reason about or manage your flows. Second, putting multiple Architect flows and Genesys Cloud objects into a single repository can create artificial dependencies in your deployments, where a change to one flow can force re-deployment of all the other flows and objects.
+
+  :::info
+  I highly recommend that you incorporate automated testing into your deployment pipeline. Architect flows and their configuration are code and should be treated as such. Testing your flows immediately after a deployment helps ensure that you do not accidentally introduce defects into your code and helps minimize the opportunities for outages.
+  :::
 
 5.  **Build out the CX as Code definitions locally**. Once you have identified a flow and dependencies begin building out your Genesys Cloud definitions incrementally and iteratively. Do not build them out all at once. Instead, iteratively build out your definitions, checking that they are correct before building the flows out. Run everything locally against your Genesys Cloud organization. 
 
