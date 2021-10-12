@@ -22,6 +22,8 @@ Here is the new look:
 
 As shown above, there are 2 accounts currently signed in; the green one being the active account. You can easily switch to a different account by clicking on the account card. Once an account is selected, all operations will performed using the account's details.
 
+The signout button has been replaced with a delete button. The delete button appears on the right side of an account card when hovered. Deleting a single account does not take you back to the main login page when there are other accounts present. In order to sign out from the whole application, all accounts have to be deleted.
+
 ## Confirm Changes
 
 The confirm changes checkbox serves an important purpose. Due to the low effort in switching between accounts, some users may forget which account is currently active and perform crucial operations with the wrong account. To avoid such accidents, we included the confirm changes checkbox as a safeguard. It is totally optional for users. Once checked, you get a prompt in api-explorer whenever you try to make a non-GET request. To make this more effective, confirm changes settings get saved even after an account get deleted or a token gets expired. The settings then get reapplied once you log back in.
