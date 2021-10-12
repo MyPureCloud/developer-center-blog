@@ -1,7 +1,7 @@
 ---
 title: New Account Switcher for Developer Tools
 tags: Genesys Cloud, Developer Engagement, Developer Tools
-date: 2021-10-07
+date: 2021-10-12
 author: ebenezer.osei
 category: 6
 ---
