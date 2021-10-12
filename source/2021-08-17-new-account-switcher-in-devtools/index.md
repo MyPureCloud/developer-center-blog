@@ -1,7 +1,7 @@
 ---
 title: New Account Switcher for Developer Tools
 tags: Genesys Cloud, Developer Engagement, Developer Tools
-date: 2021-08-17
+date: 2021-10-07
 author: ebenezer.osei
 category: 6
 ---
@@ -32,8 +32,8 @@ The prompt login checkbox does exactly as the name suggests. Once checked, users
 
 ## Resources
 
-This [Developer Drop](https://youtube.com) demonstrates the functionality of this new feature.
+This [Developer Drop](https://www.youtube.com/watch?v=F0sIpIfoa0k) demonstrates the functionality of this new feature.
 
 ## Feedback
 
-If you have any feedback or issues with the new account switcher, please reach out to us on the [developer forum](/forum).
+If you have any feedback or issues with the new account switcher, please reach out to us on the [developer forum](/forum/).
