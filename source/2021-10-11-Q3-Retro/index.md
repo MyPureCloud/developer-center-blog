@@ -15,11 +15,11 @@ Our goal is to deliver timely, relevant, and consumable content for all the deve
 
 2. [__Genesys Cloud Developer Blog__](/blog/). The blog contains articles on various Genesys Cloud development topics. It covers a wide range of topics, including new developer tool announcements, best practices for building your contact center within Genesys Cloud and hands-on articles on how to use the Genesys Cloud APIs.
 
-3. [__DevDrops__](/video/devdrops/). Our DevDrop series is a new video series that we released this year. Its focus is on delivering short, consumable videos (10-20 minutes in length) that are meant to be "developer-to-developer" conversations around specific developer-related topics. We are experimenting with our video formats and looking at how we can breakdown larger topics into smaller videos. 
+3. [__DevDrops__](/video/devdrops/). Our DevDrop series is a new video series that we released this year. Its focus is on delivering short, consumable videos (10-20 minutes in length) that are meant to be "developer-to-developer" conversations around specific developer-related topics. We are experimenting with our video formats and looking at how we can break down larger topics into smaller videos. 
 
 4. [__DevCasts__](/video/devcasts/). Our DevCasts are our more traditional Webinar topics that are approximately 45-60 minutes in lengths and allow for audience participation. They cover a wide variety of development topics and are not just limited to discussions related to platform APIs.
 
-5. [__Blueprints__](/blueprints/). Blueprints are hands-on examples of how to integrate and extend Genesys Cloud functionality with other vendor products and technologies. The number of blueprints we have continue to grow in size and come from not only our development engagement team, but also our developers, solution consultants and partners.
+5. [__Blueprints__](/blueprints/). Blueprints are hands-on examples of how to integrate and extend Genesys Cloud functionality with other vendor products and technologies. The number of blueprints we have continues to grow in size and come from not only our development engagement team, but also our developers, solution consultants and partners.
 
 Here is a summary of the content we delivered or are close to delivering this quarter:
 
@@ -58,12 +58,12 @@ The engineers in the Developer Engagement team have been heads down this quarter
 |-|-|-|
 |[Genesys Cloud CLI](/api/rest/command-line-interface/)|Several new features have been added to the CLI as experimental features. These new features include the ability input and output data in a YAML format. We have also included a new transform command that will let you pass the output of a CLI command to a GO template and transform the output.|
 |[CX as Code](/api/rest/CX-as-Code/)|We continue to build out the resources and data sources within our CX as Code DevOps tool. For a complete list of the published resources take a look at the [resource documentation](https://registry.terraform.io/providers/MyPureCloud/genesyscloud/latest/docs)|
-|[Account Switcher](/guides/quickstarts/developer-tools-intro)|The developer tools now allow you to setup multiple Genesys Cloud accounts within the developer tools and switch between those accounts without having to logout.|
+|[Account Switcher](/guides/quickstarts/developer-tools-intro)|The developer tools now allow you to setup multiple Genesys Cloud accounts within the developer tools and switch between those accounts without having to log out.|
 <br/>
 
 ##Whats Coming Up?
 
-The Developer Engagement team is in full swing for this next quarter.  Some of the things coming up for this next quarter include:
+The Developer Engagement team is in full swing for this next quarter. Some of the things coming up for this next quarter include:
 
 1. **New CX as Code integrations with Archy**. It's almost here. Our goal is to have Archy be able to be integrated into Terraform without the need to install and configure the Archy CLI to deploy flows. This new integration will significantly simplify the setup work needed to be done in your CI/CD piplein.e
 
@@ -71,4 +71,4 @@ The Developer Engagement team is in full swing for this next quarter.  Some of t
 
 3. **A new API Explorer**. The Developer Engagement team is in the final stages of releasing a new version of its API explorer. I just had a demonstration of it and I thought it was amazing and I think our development community will love it. Some of the new features include a redesigned wizard front end entering API data, stronger type checking and the ability to embed the API explorer directly in our technical documentation. Expect the beta to start soon and we would love feedback.
 
-The Developer Engagement team has been roaring through this year and I am excited and proud to see the content and capabilities being produced by this team. I am also ecstatic with the developer community we continue to build out. Many of the features and content we build come directly from our day-to-day interactions with you. 2021 is almost done, but the work we have done this year is going to set 
+The Developer Engagement team has been roaring through this year and I am excited and proud to see the content and capabilities being produced by this team. I am also ecstatic with the developer community we continue to build out. Many of the features and content we build come directly from our day-to-day interactions with you. Please keep the feedback coming,use the [developer forum](https://developer.genesys.cloud/forum/), and let's build something together.
