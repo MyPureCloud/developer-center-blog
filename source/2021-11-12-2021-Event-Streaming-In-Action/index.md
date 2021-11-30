@@ -13,8 +13,8 @@ This article is going to explore:
 
 1. When to consider leveraging event-driven integrations for your own applications
 2. Using the Genesys Cloud notification service for event-driven integrations
-3. Using the Genesys Cloud AWS Event Bridge for event-driven integrations
-4. Coming Soon: The Genesys Cloud Event Orchestrattion
+3. Using the Genesys Cloud AWS EventBridge for event-driven integrations
+4. Coming Soon: Genesys Cloud Event Orchestration
 
 
 ## When to consider leveraging event-driven integrations for your own applications
@@ -38,7 +38,7 @@ In the above diagram, as call state changes, there are several advantages to usi
 5. **Events provide flexible integrations points.**  Unlike a synchronous request/response API integration model, the producer of an event has no direct knowledge of what applications downstream are going to consume it. New consumers can be easily added without significant code changes. 
 
 :::{"alert":"warning","title":"A note on message queueing","autoCollapse":false}
-Not all event-driven architectures use message queueing. Genesys Cloud provides two different message implementations:  a web-socket based solution and AWS event bridge. The web-socket based solution does not implement message queueing. Please be aware of this as you select which implementation of an event-driven architecture you are going to use here.
+Not all event-driven architectures use message queueing. Genesys Cloud provides two different message implementations:  a web-socket based solution and AWS EventBridge. The web-socket based solution does not implement message queueing. Please be aware of this as you select which implementation of an event-driven architecture you are going to use here.
 :::
 
 Event-driven architectures are extremely powerful, but they do have downsides. The biggest complaint with event-driven architectures are that they are hard to reason through and debug. With a synchronous service invocation you can walk through a very linear set of actions to determine what happens before, during and after the service invocation. Asynchronous events are harder to debug because they are coming in at different times and can be processed at different rates of speed. In a high volume, event-driven architecture debugging issues can be maddening.
@@ -68,7 +68,7 @@ This model can be leveraged in backend services to build near-time data integrat
 
 3. **Limited generalization for to subscribing topics**. When subscribing to topics, you must explicitly know the id of the Genesys Cloud object you are listening to events on. For example, to subscribe to events associated with multiple queues, you must explicitly subscribe to each individual queues. This can be painful to do and their is no mechanism to say subscribe to tell the notification service to subscribe to events from all queues.
 
-In addition to the limitations above, you need also need to manage to and respect the Genesys Cloud rate-limits associated with the Notification service.
+In addition to the limitations above, you need also need to manage to and respect the following Genesys Cloud rate-limits associated with the Notification service Websockets implementation:
 
 1. **Channels remain active for 24 hours**. To maintain a channel for longer than 24 hours, resubscribe to topics.
 
@@ -95,7 +95,7 @@ AWS EventBridge provides significant advantages over the Websocket model.  These
 
 1. **Serverless**. The Amazon EventBridge is completely serverless.  It requires no services to run and using it involves minor configuration error.
 
-2. **Message durability**. Genesys Cloud will attempt to deliver messages for up to 4 days in the event of an AWS EventBridge outage. In addition, AWS EventBridge will allow you to publish a message to Kinesis where it can be persisted for up to 7 days before it is processed.
+2. **Message durability**. Genesys Cloud will attempt to deliver messages for up to 4 days in the event of an AWS EventBridge outage. In addition, AWS EventBridge will allow you to publish a message to Kinesis where it can be persisted for up to 7 days before it is processed. In addition, AWS supports [Dead Letter Queue](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rule-dlq.html) (DLQ) configuration with the AWS EventBridge so that if a target is unavailable from the EventBridge, messages will not be lost.   
 
 3. **Strong message filtering and routing capabilities**. AWS EventBridge can subscribe to whole classes of events (e.g. no need to identify the specific item you are looking for) and can apply sophisticated routing rules to an it receives.
 
@@ -110,7 +110,7 @@ In preparation for the AWS EventBridge release, we have been building new conten
 3. [Blueprint - AWS EventBridge: Write user presence updates to DynamoDB](/blueprints/aws-eventbridge-user-presence-update-blueprint/)
 4. [CX as Code Remote Module - AWS EventBridge](https://github.com/GenesysCloudDevOps/aws-event-bridge-module)
 
-## Coming Soon: The Genesys Cloud Event orchestrator
+## Coming Soon: Genesys Cloud Event Orchestration
 
 Genesys is continuing to build out the Genesys Cloud event processing capabilities. Up until this point Genesys Cloud allows you to consume messages with your own external integrations via a WebSocket or AWS EventBridge. The Genesys Cloud development teams are currently working on a mechanism to consume Genesys Cloud events and process them without having to leave Genesys Cloud. This new capability, called Genesys Cloud Event Orchestrator is currently in beta with a target release date of Q1 2022. With the Event Orchestration you can define "triggers" that will fire when an event occurs. The trigger when invoked will use Genesys Cloud Architect Workflow to process the event.
 
