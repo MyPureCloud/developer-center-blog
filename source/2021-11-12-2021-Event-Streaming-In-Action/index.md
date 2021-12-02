@@ -38,14 +38,14 @@ In the above diagram, as call state changes, there are several advantages to usi
 5. **Events provide flexible integrations points.**  Unlike a synchronous request/response API integration model, the producer of an event has no direct knowledge of what applications downstream are going to consume it. New consumers can be easily added without significant code changes. 
 
 :::{"alert":"warning","title":"A note on message queueing","autoCollapse":false}
-Not all event-driven architectures use message queueing. Genesys Cloud provides two different message implementations:  a web-socket based solution and AWS EventBridge. The web-socket based solution does not implement message queueing. Please be aware of this as you select which implementation of an event-driven architecture you are going to use here.
+Not all event-driven architectures use message queueing. Genesys Cloud provides two different message implementations:  a WebSocket based solution and AWS EventBridge. The WebSocket based solution does not implement message queueing. Please be aware of this as you select which implementation of an event-driven architecture you are going to use here.
 :::
 
 Event-driven architectures are extremely powerful, but they do have downsides. The biggest complaint with event-driven architectures are that they are hard to reason through and debug. With a synchronous service invocation you can walk through a very linear set of actions to determine what happens before, during and after the service invocation. Asynchronous events are harder to debug because they are coming in at different times and can be processed at different rates of speed. In a high volume, event-driven architecture debugging issues can be maddening.
 
 Genesys Cloud provides two different implementations of an events-based architecture:
 
-1. A platform-agnostic, web-socket event implementation
+1. A platform-agnostic, WebSocket event implementation
 2. A message bus implementation based on the AWS EventBridge technology
 
 Lets walkthrough each of these event-based architectures in more detail.
@@ -62,13 +62,13 @@ It is important to realize that the original intent of this event-driven archite
 
 This model can be leveraged in backend services to build near-time data integrations, but as a developer you need to be aware of when using this model:
 
-1. **No message durability**. Genesys Cloud will only send events over an open WebSocket. If a WebSocket is killed, any events that are generated while the WebSocket will not be queued will not be sent or retried. This means that in the event of any kind of network interruption, once a WebSocket is re-established, the developer must use the Genesys Cloud API to "fill in" the data that is missing during the time period the socket was down.
+1. **No message durability**. Genesys Cloud will only send events over an open WebSocket. If a WebSocket is closed for any reason, any events that are generated while the WebSocket is not open will not be queued or retried when a new WebSocket is created. In the event of any kind of network interruption, once a WebSocket is re-established, the developer must use the Genesys Cloud API to "fill in" the data that is missing during the time period the socket was down.
 
-2. **WebSockets are a lower-level primitive**. With a WebSocket, you as the developer are responsible for establishing the network connection, handling network connectivity issues , scaling based on volume of messages, and processing messages. While these individual activities are not very complicated taken together they can make building message-based integrations significantly more complicated.
+2. **WebSockets are a lower-level primitive**. With a WebSocket, you as the developer are responsible for establishing the network connection, handling network connectivity issues, scaling based on volume of messages, and processing messages. While these individual activities are not very complicated on their own, taken together they can make building message-based integrations significantly more complicated.
 
-3. **Limited generalization for to subscribing topics**. When subscribing to topics, you must explicitly know the id of the Genesys Cloud object you are listening to events on. For example, to subscribe to events associated with multiple queues, you must explicitly subscribe to each individual queues. This can be painful to do and their is no mechanism to say subscribe to tell the notification service to subscribe to events from all queues.
+3. **Limited generalization for to subscribing topics**. When subscribing to topics, you must explicitly know the id of the Genesys Cloud object you are listening to events on. For example, to subscribe to events associated with multiple queues, you must explicitly subscribe to each individual queue. This can be painful to do and there is no mechanism to subscribe to events from multiple queues using a single topic.
 
-In addition to the limitations above, you need also need to manage to and respect the following Genesys Cloud rate-limits associated with the Notification service Websockets implementation:
+In addition to the limitations above, you need also need to manage to and respect the following Genesys Cloud rate-limits associated with the Notification service WebSockets implementation:
 
 1. **Channels remain active for 24 hours**. To maintain a channel for longer than 24 hours, resubscribe to topics.
 
@@ -80,10 +80,10 @@ In addition to the limitations above, you need also need to manage to and respec
 
 We are not going to do a walk through in detail how to setup a web socket using the Notification service, but I would recommend you review the following resources:
 
-1. [Using the Genesys Cloud CLI to listen to Notification service events](https://www.youtube.com/watch?v=r4Jc-Mn0ONA)
-2. [Using the Genesys Cloud Python SDK with the Notification Service](https://www.youtube.com/watch?v=z6JS12DX_pI)
-3. [Build a chat translation assistant with the AWS Translate service](/blueprints/chat-translator-blueprint/)    
-
+1. [Genesys Cloud Notification Service Documentation](api/rest/v2/notifications/notification_service )
+2. [Using the Genesys Cloud CLI to listen to Notification service events](https://www.youtube.com/watch?v=r4Jc-Mn0ONA)
+3. [Using the Genesys Cloud Python SDK with the Notification Service](https://www.youtube.com/watch?v=z6JS12DX_pI)
+4. [Build a chat translation assistant with the AWS Translate service](/blueprints/chat-translator-blueprint/)    
 
 ## Using the Genesys Cloud AWS Event Bridge for event-driven integrations
 
@@ -112,9 +112,9 @@ In preparation for the AWS EventBridge release, we have been building new conten
 
 ## Coming Soon: Genesys Cloud Event Orchestration
 
-Genesys is continuing to build out the Genesys Cloud event processing capabilities. Up until this point Genesys Cloud allows you to consume messages with your own external integrations via a WebSocket or AWS EventBridge. The Genesys Cloud development teams are currently working on a mechanism to consume Genesys Cloud events and process them without having to leave Genesys Cloud. This new capability, called Genesys Cloud Event Orchestrator is currently in beta with a target release date of Q1 2022. With the Event Orchestration you can define "triggers" that will fire when an event occurs. The trigger when invoked will use Genesys Cloud Architect Workflow to process the event.
+Genesys is continuing to build out the Genesys Cloud event processing capabilities. Currently, Genesys Cloud allows you to consume messages with your own external integrations via a WebSocket or AWS EventBridge. The Genesys Cloud development teams are currently working on a mechanism to consume Genesys Cloud events and process them without having to leave Genesys Cloud. This new capability, called Genesys Cloud Event Orchestrator, is currently in beta with a target release date of Q1 2022. With the Event Orchestration you can define "triggers" that will fire when an event occurs. The trigger when invoked will use a Genesys Cloud Architect Workflow to process the event.
 
-The Genesys Cloud EventBridge and the Genesys Cloud Event Orchestration features are properly thought of as opposite sides of the same coin; similar functionality but for very different use cases. Event Orchestration is intended to invoke workflows within Genesys Cloud in order to react to events that occur within Genesys Cloud; EventBridge is a high throughput messaging bus with specific service level guarantees for archiving information in an external system or the creation of your own process automation flows within your AWS infrastructure. The Genesys Cloud Event Orchestration do not have the same level of service level guarantees, message retries, etc. that are crucial for something like a BI pipeline, while EventBridge was specifically built to service these sorts of use case.
+The Genesys Cloud EventBridge and the Genesys Cloud Event Orchestration features are properly thought of as opposite sides of the same coin; similar functionality but for very different use cases. Event Orchestration is intended to invoke workflows within Genesys Cloud in order to react to events that occur within Genesys Cloud; EventBridge is a high throughput messaging bus that can be used to archive information in an external system or the creation of your own process automation flows within your AWS infrastructure. As a message bus, AWS EventBridge has robust message queuing and retry logic. The Genesys Cloud Event Orchestration feature does not have the same level of service level guarantees, message retries, etc. that are crucial for something like a BI pipeline, while EventBridge was specifically built to service these sorts of use case.
 
 If you are interested in finding out more about the Genesys Cloud Event Orchestration feature please reach out to Richard Schott (richard.schott@genesys.com) for more information.
 
