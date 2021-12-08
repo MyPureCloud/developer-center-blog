@@ -1,7 +1,7 @@
 ---
 title: 'Exporting all of the Architect flows in your organization'
 date: 2021-11-09
-tags: cli Archy developer engagement experimental transform data go templates
+tags: cli, Archy, developer engagement, experimental, transform, data, go, templates
 author: john.carnell
 image: ./blog-img.png
 category: 6
