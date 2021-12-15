@@ -242,7 +242,7 @@ Once again, take a look at the `for` loop at the bottom of the method. When rece
  When the `done` channel is closed the value of `ok` will be false, so we check the value of `ok` and if it is false, we log a message and return, which will in turn close the web socket connection (as the closing of the connection is deferred) and then exit the application.
 
 ```go
-unc (ns *notificationService) Listen(connectUri string) {
+func (ns *notificationService) Listen(connectUri string) {
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt)
 
