@@ -7,7 +7,7 @@ image: ./blog-img.png
 category: 9
 ---
 
-With the Genesys Cloud Notification Service, you can create a notifications channel, subscribe the channel to topics and listen for notification events from Genesys Cloud by opeing a web socket connection to the notifications channel. You can subscribe the notifications channel to user topics, conversation topics, workforce management topics and many more. Today we are going to look at building a notification service with the Go SDK and in this example we will be using the Factory Pattern and the Command Pattern to process incoming requests. 
+With the Genesys Cloud Notification Service, you can create a notifications channel, subscribe the channel to topics and listen for notification events from Genesys Cloud by opening a web socket connection to the notifications channel. You can subscribe the notifications channel to user topics, conversation topics, workforce management topics and many more. Today we are going to look at building a notification service with the Go SDK and in this example we will be using the Factory Pattern and the Command Pattern to process incoming requests. 
 
 The Factory Pattern is a creational design pattern used to determine which objects to create without exposing the object creation logic to the client or user. In the notification service, we will be using the Factory pattern to determine which command implementations to create based on the incoming message type. 
 
@@ -59,7 +59,7 @@ import "github.com/mypurecloud/platform-client-sdk-go/v61/platformclientv2"
 
 This is the basic structure of the project. 
 
-We will be using packages to organise our code with seperate packages for the **command factory**, **command implementations** and the **notification service**.
+We will be using packages to organize our code with separate packages for the **command factory**, **command implementations** and the **notification service**.
 
 ```go
 ./golang-sdk-notification-service
