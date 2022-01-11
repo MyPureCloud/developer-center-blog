@@ -11,7 +11,7 @@ With the Genesys Cloud Notification Service, you can create a notifications chan
 
 The Factory Pattern is a creational design pattern used to determine which objects to create without exposing the object creation logic to the client or user. In the notification service, we will be using the Factory pattern to determine which command implementations to create based on the incoming message type. 
 
-The Command Pattern is a behavioural design pattern that is used to decouple the object that invokes an operation from the object that actually executes the operation, achieveing abstraction. Basically, the invoker of a command does not need to know about the object that actually executes the command, all of the information needed to do so is encapsulated in the object itself.
+The Command Pattern is a behavioural design pattern that is used to decouple the object that invokes an operation from the object that actually executes the operation, achieving abstraction. Basically, the invoker of a command does not need to know about the object that actually executes the command, all of the information needed to do so is encapsulated in the object itself.
 
 ## An Overview Of The Notification Service
 
