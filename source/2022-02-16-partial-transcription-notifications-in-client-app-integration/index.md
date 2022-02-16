@@ -9,6 +9,8 @@ category: 9
 
 Have you ever wanted to access the transcripts of your Genesys Cloud voice conversations in near-real time? This can now be accomplished using the Genesys Cloud Notification service.  The potential uses for these transcripts are many, and it’s ultimately up to the client how this will fit into his or her project.  However, a recent [developer drop](https://www.youtube.com/watch?v=c6PTEMi__7E) and an upcoming [blueprint](https://github.com/GenesysCloudBlueprints/partial-transcription-blueprint) on this topic aim to shed light on the process of accessing these transcript feeds, integrating them into your project, and an example of how to leverage them.
 
+![Partial Transcript App Flowchart](flowchart.svg)
+
 ## Priming Genesys Cloud for the Partial Transcription Integration
 
 This step involves the preliminary setup of the Genesys Cloud application that should be done before adding the integration.  This covers:
