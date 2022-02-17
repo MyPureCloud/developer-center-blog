@@ -93,7 +93,7 @@ Genesys Cloud is currently beta-ing a new mechanism to publish and subscribe to 
 
 AWS EventBridge provides significant advantages over the Websocket model.  These advantages include:
 
-1. **Serverless**. The Amazon EventBridge is completely serverless.  It requires no services to run and using it involves minor configuration error.
+1. **Serverless**. The Amazon EventBridge is completely serverless.  It requires no services to run and using it involves minor configuration.
 
 2. **Message durability**. Genesys Cloud will attempt to deliver messages for up to 4 days in the event of an AWS EventBridge outage. In addition, AWS EventBridge will allow you to publish a message to Kinesis where it can be persisted for up to 7 days before it is processed. In addition, AWS supports [Dead Letter Queue](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rule-dlq.html) (DLQ) configuration with the AWS EventBridge so that if a target is unavailable from the EventBridge, messages will not be lost.   
 
