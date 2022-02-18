@@ -6,7 +6,7 @@ author: charlie.conneely
 category: 6
 ---
 
-Greetings, everyone! To configure our Genesys Cloud CLI tool, one needs to create a profile in their `config.toml` file using the command: `gc profiles new`. Previously, this operation only utilized the Client Credentials login method in which the user provides their client ID and secret in exchange for an access token. Although quick and easy, this method does not provide any user context. For this reason, in addition to the Client Credentials Grant, we have implemented the Implicit Grant (Browser) login method for the CLI. 
+Greetings, everyone! To configure our Genesys Cloud CLI tool, one needs to create a profile in their `config.toml` file using the command: `gc profiles new`. Previously, this operation only utilized the Client Credentials login method in which the user provides their client ID and secret in exchange for an access token. Although quick and easy, this method does not provide any user context, which is required for some API operations such as answering a call or managing Content Management documents. For this reason, in addition to the Client Credentials Grant, we have implemented the Implicit Grant (Browser) login method for the CLI. 
 
 Below, I will outline how to use this new feature.  
 
@@ -20,11 +20,13 @@ To authenticate a client from the CLI using an Implicit Grant, you will first ne
   - Give your client a name.
   - Select "Token Implicit Grant (Browser)" under the "Grant Types" header.
   - Provide the necessary scopes. 
-  - Enter your chosen redirect URI(s) (e.g. `http://localhost:8080`). The port number entered during the CLI profile  creation process will need to match one of these. If you want your local server instance to use a secure HTTP  connection, you will need to prepend the URI with "https". 
+  - Enter your chosen redirect URI(s) (e.g. `https://localhost:8080`). The port number entered during the CLI profile  creation process will need to match one of these. If you wish, you may also use a regular HTTP address. In this case, you will need to prepend the redirect URI with "http://".
+
+A more detailed guide to creating an OAuth client can be found [here](https://help.mypurecloud.com/articles/create-an-oauth-client/ "Opens help.mypurecloud.com") on our resource center. 
 
 ## CLI profile creation
 
-For this part, you will need to have our CLI tool installed. Installation and setup instructions can be found [here](https://developer.genesys.cloud/api/rest/command-line-interface/ "Opens developer.genesys.cloud").
+For this part, you will need to have our CLI tool installed. Installation and setup instructions can be found [here](/api/rest/command-line-interface/ "Opens developer.genesys.cloud").
 
 **Steps:**
 - From your terminal, run: `gc profiles new`.
@@ -44,10 +46,8 @@ $ gc users me get -p [profile name]
 
 Previously, you would have received the error message "This request requires a user context. Client credentials cannot be used for requests to this resource." But now, after authenticating through an implicit login, you should receive a JSON object full of user details. 
 
-**Note**: It is still safe to use a regular HTTP connection as the server instance is contained to your local machine. The secure connection serves as optional added security.
-
 Thanks for reading!
  
-## Additional Resources
-- [CLI Setup & Configuration](https://developer.genesys.cloud/api/rest/command-line-interface/ "Opens developer.genesys.cloud")
-- [Setting up and OAuth Client on Genesys Cloud](https://help.mypurecloud.com/articles/create-an-oauth-client/ "Opens help.mypurecloud.com")
+## Resources
+- [CLI Setup & Configuration](/api/rest/command-line-interface/ "Opens developer.genesys.cloud")
+- [Setting up an OAuth Client on Genesys Cloud](https://help.mypurecloud.com/articles/create-an-oauth-client/ "Opens help.mypurecloud.com")
