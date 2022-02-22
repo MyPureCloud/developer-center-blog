@@ -3,7 +3,6 @@ title: Partial Transctiion Notifications in Client App Integration
 date: 2022-02-16
 tags: javascript, developer engagement, notification service, sdk
 author: jacob.shaw
-image: ./blog-img.png
 category: 9
 ---
 
@@ -31,9 +30,8 @@ On the Speech and Text Analaytics page:
 ![Transcription Speech and Text Analytics](transcription-speech-and-text.png)
 
 ## Developing the Client App Integration
-To begin, install the Genesys Cloud Client App Integration. For help installing, see the Genesys Resource Center article ["Set up a Client Application integration
-"](https://help.mypurecloud.com/articles/set-custom-client-application-integration/). 
-The next step will depend on the client-side language you choose.  The upcoming blueprint on the subject uses a React+TypeScript base, so it requires the [Platform API Javascript Client](https://github.com/MyPureCloud/platform-client-sdk-javascript).  
+To begin, install the Genesys Cloud Client App Integration. For help installing, see the Genesys Resource Center article ["Set up a Client Application integration"](https://help.mypurecloud.com/articles/set-custom-client-application-integration/). 
+The next step will depend on the client-side language you choose.  The upcoming blueprint on the subject uses a React+TypeScript base, so it requires the [Platform API Javascript Client](https://www.npmjs.com/package/purecloud-platform-client-v2).  
 After installing the [corresponding Platform API Client dependency](https://www.npmjs.com/package/purecloud-platform-client-v2), use the Genesys Cloud Notifications service to subscribe to the partial transcription events of active conversations of your choice.  In the blueprint, the application -- titled the “Active Conversations Dashboard”  -- subscribes to all the active conversations in the organization.
 
 ## Potential Use Cases
@@ -42,3 +40,10 @@ These feeds of the transcripts of active conversations could be used in a high v
 - If an agent doesn’t tell the customer about a current special offer in the first minute of the conversation, then send the agent a notification prompting them to mention the offer.
 
 - A dashboard that gathers metrics based on call transcripts.  E.g. - If you want agents to greet all customers with a particular greeting, what is the percentage of calls where said greeting is made by the agent?
+
+## Additional Resources
+1. [DevDrop 14: Introducing Partial Transcripts](https://www.youtube.com/watch?v=c6PTEMi__7E)
+2. [Partial Transcription Blueprint Draft](https://github.com/GenesysCloudBlueprints/partial-transcription-blueprint)
+3. [Set custom client application integration](https://help.mypurecloud.com/articles/set-custom-client-application-integration/)
+3. [Transcription Notifications article on the Developer Center](https://developer.genesys.cloud/api/rest/v2/speechtextanalytics/transcription_notifications)
+4. [About voice transcription](https://help.mypurecloud.com/articles/about-voice-transcription/)
