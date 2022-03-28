@@ -1,7 +1,7 @@
 ---
 title: Automate testing Web Messenger
 date: 2022-03-23
-tags: web messenger testing automation
+tags: web, messenger, testing, automation
 author: lucas.woodward
 twitter: SketchingDev
 github: SketchingDev
