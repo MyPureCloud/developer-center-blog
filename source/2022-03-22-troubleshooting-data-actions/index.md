@@ -6,6 +6,7 @@ author: lucas.woodward
 twitter: SketchingDev
 github: SketchingDev
 linkedin: lucas-woodward-264388108
+image: flow-to-da-to-ngrok-before-after.png
 category: 6
 ---
 
