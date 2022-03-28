@@ -80,7 +80,7 @@ Individual services within Genesys Cloud can have their own rate limits that are
 
 **Important** If you try to circumvent the rate limits in the platform API, you can inadvertently begin impacting your entire organization's ability to use Genesys Cloud, as crucial services further down the Genesys Cloud stack will begin rate-limiting. This could result in a partial or complete outage of your contact center.  
 
-The best advice I can give is to respect the 300 requests per minute limit per token, and to use a single token in your integration. Finally, Genesys Cloud does reserve, per our [Terms of Service](https://help.mypurecloud.com/wp-content/uploads/2020/10/Genesys-Cloud-TCs-Global.pdf) the right to shut down an OAuth2 client that is causing platform instability.
+The best advice I can give is to respect the 300 requests per minute limit per token, and to use a single token in your integration. Finally, Genesys Cloud does reserve, per our [Terms of Service](https://help.mypurecloud.com/wp-content/uploads/2020/10/Genesys-Cloud-TCs-Global.pdf), the right to shut down an OAuth2 client that is causing platform instability.
 :::
 
 ##  Design and implement a data action response cache
@@ -100,7 +100,7 @@ The goal of the cache is to avoid excessive requests with the same parameters to
 3. A cache implementation that is performant, highly available, and not subject to rate limiting when used from a flow.
 
 :::{"alert":"info","title":"Rate Limits with Data Tables","autoCollapse":false}
-There are no rate limits imposed when reading data from a data table. However, writes to the data table are made through data actions and the Genesys Cloud Platform API. These write calls fall under our Public API rate limits. Honestly, in most cases your cached data can be 1-5 minutes old and you can still achieve your organization's customer experience objectives.
+The limits for reading from a data table are significantly higher than data action execution limits. However, writes to the data table are made through data actions and the Genesys Cloud Platform API. These write calls fall under our Public API rate limits. Honestly, in most cases your cached data can be 1-5 minutes old and you can still achieve your organization's customer experience objectives.
 :::
 
 Given this service expectation, the [data tables](https://help.mypurecloud.com/articles/work-with-data-tables/) feature in Genesys Cloud works well as the backing store for the cache. The cache consists of a single data table, with the key column containing the queue ID as the unique identifier, a second column containing the cache update time stamp, and a third column containing the cached value (a Boolean value indicating if any agents are on queue and idle).
