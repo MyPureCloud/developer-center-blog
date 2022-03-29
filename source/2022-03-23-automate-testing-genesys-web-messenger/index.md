@@ -20,7 +20,7 @@ If you want to see the tool and its code head on over to [Genesys Web Messaging 
 
 ## Writing automated tests
 
-The tool I've written uses [Web Messenger's guest API](https://developer.genesys.cloud/api/digital/webmessaging/websocketapi)
+The tool I've written uses [Web Messenger's guest API](/api/digital/webmessaging/websocketapi)
 to simulate a customer talking to a Web Messenger Deployment. Once the tool starts an interaction it follows
 instructions defined in a file called a 'test-script', which tells it what to say and what it should expect in response.
 If the response deviates from the test-script then the tool flags the test as a failure, otherwise the test passes.
