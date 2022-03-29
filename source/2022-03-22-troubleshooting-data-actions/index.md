@@ -12,8 +12,10 @@ time debugging problems around these Data Actions - the main culprit being input
 responses from a downstream API, breaking contracts/mappings. The following is how I sped up diagnosing problems by
 spying on the interaction between my Web Service Data Actions and downstream APIs.
 
-**WARNING: The tool used below should never be used to spy on Data Actions that are used by real customers. It
-terminates after a fixed period of time, has limited bandwidth and may leak secrets.**
+:::warning
+**WARNING:** The tool used below should never be used to spy on Data Actions that are used by real customers. It
+terminates after a fixed period of time, has limited bandwidth and may leak secrets.
+:::
 
 ## Overview
 
@@ -103,6 +105,8 @@ Navigate to [http://127.0.0.1:4040/inspect/http](http://127.0.0.1:4040/inspect/h
 When you close ngrok it will also close the tunnel (which is unique each time), so you'll have to revert your
 Data Action's URL after inspecting the traffic.
 
-**This article on [troubleshooting Genesys Web Service Data Actions](https://sketchingdev.co.uk/blog/genesys-troubleshooting-data-actions.html)
+:::info
+This article on [troubleshooting Genesys Web Service Data Actions](https://sketchingdev.co.uk/blog/genesys-troubleshooting-data-actions.html)
 was originally written for my personal blog, where I'll be writing more articles of this nature. If you have any
-suggestions on how I can improve it, or my writing then please let me know [@SketchingDev](https://twitter.com/sketchingdev).**
+suggestions on how I can improve it, or my writing then please let me know [@SketchingDev](https://twitter.com/sketchingdev).
+:::
