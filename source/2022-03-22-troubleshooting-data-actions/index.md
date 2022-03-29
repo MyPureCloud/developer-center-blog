@@ -3,9 +3,6 @@ title: Troubleshooting Web Service Data Actions
 date: 2022-03-22
 tags: data-actions, web service, troubleshooting
 author: lucas.woodward
-twitter: SketchingDev
-github: SketchingDev
-linkedin: lucas-woodward-264388108
 image: flow-to-da-to-ngrok-before-after.png
 category: 6
 ---

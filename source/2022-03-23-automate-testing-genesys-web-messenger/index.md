@@ -3,9 +3,6 @@ title: Automate testing Web Messenger
 date: 2022-03-23
 tags: web, messenger, testing, automation
 author: lucas.woodward
-twitter: SketchingDev
-github: SketchingDev
-linkedin: lucas-woodward-264388108
 image: diagram-of-tool-using-test-script-to-test-web-messenger.png
 category: 6
 ---
