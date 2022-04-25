@@ -103,21 +103,21 @@ func getMosScore() {
 
 ```
 
-Here is the results after runnning the code above a couple of times:
+Here is the result after runnning the code above a couple of times:
 
 ![Before](before.png)
 
 As you can see above, there is quite some difference between the initial total hits and the final one. This is because the API doesn't wait until all the data has been gathered before sending out a response but sends out what it has so far and keeps on updating on the backend until it's done.
 
-Here is the results after making some changes to query body:
+Here is the result after making some changes to query body:
 
 ![After](after.png)
 
-Notice how the difference between the total hits is smaller here. The processing time also was faster in this example. Check out how I improve the response in the next section.
+Notice how the difference between the total hits is smaller here. The processing time also was faster in this example. Check out how I improved the response in the next section.
 
-Also, notice how there were duplicates in both cases. That happens due to the indefinite update of the response on the server. For example, a record is included on the 4th page during a request but may end up on the fifth page during subsequent requests hence causing it shows up as a duplicate. This mostly happens when making requests for a recent interval like I did in both examples.
+Also, notice how there were duplicates in both cases. That happens due to the indefinite update of the response on the server. For example, a record is included on the 4th page during a request but may end up on the fifth page during subsequent requests hence causing it to show up as a duplicate. This mostly happens when making requests for a recent interval like I did in both examples.
 
-## Recommended practices to improve consistent responses
+## Recommended Practices to Improve Response Consistency
 
 - Make sure to include `conversationEnd` filter in your query. This ensures that the API does not try to include on-going conversations in the response.
 
