@@ -6,7 +6,7 @@ author: ebenezer.osei
 category: 6
 ---
 
-Greetings everyone! The `/api/v2/analytics/conversations/details/query` is a useful API endpoint for viewing or monitoring conversations' details in your org. It offers the ability to query conversations extensively based on desired metrics. Due to the nature of conversations' data, the API endpoint's responses may look unusual. ​​In this article, I will describe the irregular behavior of the endpoint and also suggest ways you can make effective API calls.
+Greetings everyone! The `/api/v2/analytics/conversations/details/query` is a useful API endpoint for viewing or monitoring conversations' details in your org. It offers the ability to query conversations extensively based on desired metrics. Due to the nature of conversations' data, the endpoint's responses may look unusual. ​​In this article, I will describe the irregular behavior of the endpoint and also suggest ways you can make effective API calls.
 
 For more information about the conversation details query endpoint, checkout the [details query documentation](https://developer.genesys.cloud/analyticsdatamanagement/analytics/detail/) on the developer center.
 
@@ -115,7 +115,7 @@ Here is the result after making some changes to query body:
 
 Notice how the difference between the total hits is smaller here. The processing time also was faster in this example. Check out how I improved the response in the next section.
 
-Also, notice how there were duplicates in both cases. That happens due to the indefinite update of the response on the server. For example, a record is included on the 4th page during a request but may end up on the fifth page during subsequent requests hence causing it to show up as a duplicate. This mostly happens when making requests for a recent interval like I did in both examples.
+Also, notice how there were duplicates in both cases. That happens due to the indefinite update of the response on the server. For example, a record is included on the 4th page during a request but may end up on the fifth page during subsequent requests hence causing it to show up as a duplicate. This mostly happens when making requests for a recent interval like I did my example.
 
 ## Recommended Practices to Improve Response Consistency
 
