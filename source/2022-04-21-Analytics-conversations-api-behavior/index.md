@@ -6,21 +6,22 @@ author: ebenezer.osei
 category: 6
 ---
 
-Greetings everyone! The `/api/v2/analytics/conversations/details/query` is a useful API endpoint for viewing or monitoring conversations' details in your org. It offers the ability to query conversations extensively based on desired metrics. Due to the nature of conversations' data, the endpoint's responses may look unusual. ​​In this article, I will describe the irregular behavior of the endpoint and also suggest ways you can make effective API calls.
+Greetings everyone! `POST /api/v2/analytics/conversations/details/query` is a useful API endpoint for viewing or monitoring conversations details in an organization. It offers the ability to query conversations extensively based on desired metrics. Due to the nature of conversation data, the endpoint's responses may seem to act unusual sometimes. ​​In this article, I will describe the irregular behavior of the endpoint and also suggest ways you can make effective API calls.
 
-For more information about the conversation details query endpoint, checkout the [details query documentation](https://developer.genesys.cloud/analyticsdatamanagement/analytics/detail/) on the developer center.
+For more information about the conversation details query endpoint, checkout the [conversations details query documentation](/analyticsdatamanagement/analytics/detail/) on the developer center.
 
 ## The Apparent Inconsistency of the Conversation Details Query Endpoint
 
-With a low volume of conversations or a small query span, the conversation query detail API seems to work fine as you get consistent responses. It is not the same case when you have a lot of conversations going on in your org or when you are trying to query for recent conversations. The first thing you may notice is the inconsistency of the `totalHits` value from the API response. The totalHits, as the name suggests, is the count of items that fit your query parameters. Normally, that figure should be consistent if you ran the API a couple of times with the same parameters but that is not the case sometimes. The totalHits is capable of changing even after a few microseconds of an initial API request and it can keep on changing for some time depending on your query and the intensity of activities going on in your org.
-There are two things that influence this behavior: Firstly, The API doesn't wait till all the requested data is accumulated before sending a response rather, it gives you what it has collected so far and keeps on updating the data at the backend. This results in the change of `totalHits` over time after the initial response. Secondly conversations may still be going on or a new one may be initiated during the processing of the query and that may cause inconsistent responses especially if your interval is recent. There is also the possibility of duplicate items because of the indefinite update of the conversations on the backend.
+When querying the `POST /api/v2/analytics/conversations/details/query`, the totalHits counter reflects the total approximate number of matching conversations for the given query body. If the interval covers a date span that contains data that’s receiving new traffic from an organization, the totalHits counter can be a constantly changing value due to data continuously being fed into the backend in real time. Consequently, if paging through result sets for an interval is necessary, deduplication of the results could be required as the contents of early pages could arrive on a subsequent page pull due to the data set continually updating. Every API request made reflects data the system is aware of at the moment the request was made. When querying an interval that is receiving new information, the totalHits count and contents of particular pages will change along with that new data.
+
+To receive data in realtime, we recommend utilizing the [Notification Service](/notificationsalerts/notifications/) by consuming data from EventBridge or WebSocket [topics](/notificationsalerts/notifications/available-topics) where applicable.
 
 ## Demonstration of API behavior
 
-To give a brief demonstration about the behavior, I have a simple code snippet that calls the conversation detail query endpoint to collect MOS scores of conversations from 10 minutes ago. See below:
+To give a brief demonstration about the behavior, I have a simple code snippet that calls the conversation detail query endpoint to collect the mean opinion score(MOS) of conversations from 10 minutes ago. [MOS](/analyticsdatamanagement/analytics/detail/call-quality#mean-opinion-score--mos-) is basically a measure of audio quality at a specific measurement point of a voice interaction.
 
-```golang
-func getMosScore() {
+```go
+func getMos() {
 	pageNumber := 1
 
 	//Maximum number of records per page
@@ -107,29 +108,28 @@ Here is the result after runnning the code above a couple of times:
 
 ![Before](before.png)
 
-As you can see above, there is quite some difference between the initial total hits and the final one. This is because the API doesn't wait until all the data has been gathered before sending out a response but sends out what it has so far and keeps on updating on the backend until it's done.
+As you can see above, there is quite some difference between the initial total hits and the final one.
 
-Here is the result after making some changes to query body:
+Here is the result after making some changes to the query body:
 
 ![After](after.png)
 
 Notice how the difference between the total hits is smaller here. The processing time also was faster in this example. Check out how I improved the response in the next section.
 
-Also, notice how there were duplicates in both cases. That happens due to the indefinite update of the response on the server. For example, a record is included on the 4th page during a request but may end up on the fifth page during subsequent requests hence causing it to show up as a duplicate. This mostly happens when making requests for a recent interval like I did my example.
+Also, notice how there were duplicates in both cases. That happens due to the indefinite update of the response on the server. For example, a record that is included on the 4th page during a request but may end up on the fifth page during subsequent requests hence causing it to show up as a duplicate.
 
 ## Recommended Practices to Improve Response Consistency
 
-- Make sure to include `conversationEnd` filter in your query. This ensures that the API does not try to include on-going conversations in the response.
-
+- Make sure to include `conversationEnd` filter in your query if you want to avoid on-going conversations.
 - Avoid including the current time in the interval. For example, when querying for conversations from the past 30 minute, make the interval `time.now()-30min/time.now()-1min`.
 
-- Try checking for duplicate items if your query interval is recent. You can utilize an array or a set like I did or skip the `/api/v2/analytics/conversations/details/query` endpoint altogether and utilize the [Notification Service](https://developer.genesys.cloud/notificationsalerts/notifications/available-topics) by directly consuming data from a topic if you are looking for very recent conversations.
-
-The main idea here is to narrow down the query request as much as possible. A specific query request results in a more consistent response and also reduces the processing time especially if you have a huge dataset.
+The main idea here is to narrow down the query request as much as possible. A specific query request results in a more consistent response and also reduces the processing time especially if you have a huge dataset. More information about performance tips can be found [here](/analyticsdatamanagement/analytics/detail/#performance-tips).
 
 ## Resources
 
-- [Query details documentation](https://developer.genesys.cloud/analyticsdatamanagement/analytics/detail/)
+- [Conversations query details documentation](/analyticsdatamanagement/analytics/detail/)
+
+- [Notification service overview](/notificationsalerts/notifications/)
 
 ## Feedback
 
