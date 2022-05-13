@@ -27,7 +27,9 @@ To this end, decompose your CX infrastructure down into small deployable units o
 
 In many Genesys Cloud environments, you need to start with your Architect flows.  Your Architect flows represent a natural division of responsibility within your organization. Take each of your Architect flows and map out the infrastructure they consume (e.g. queues, Data Actions, etc...).  Then place the Architect flow definitions along with the components they consume and map them out in CX as Code. These items should then be placed in their own source control repositories and deployed independently of one another.
 
-<<NEED DIAGRAM HERE>>
+The diagram below illustrates
+
+![alt text](decomposed-repositories.png "Decomposed repositories")
 
 This way different pieces of code (e.g. your flows) can be deployed independently of one another.
 
@@ -46,14 +48,19 @@ Here are some key things to think about:
 
 4. **Not everything in your Genesys Cloud environment should be managed with CX as Code**. Things that change multiple times a day should not be put under **CX as Code** management because those changes will need to be handled via your deployment pipeline. For example, if you work in an environment where agent queue assignments can change multiple times a day you probably want to define your queue definitions in **CX as Code**, but not map your agents to queues in your **CX as Code** definitions.  Understanding the velocity in which data changes is key to determining whether or not a configuration should be managed by **CX as Code**.
 
-## Minimize shared infrastructure components. 
-As you tease apart configurations minimize the amount of shared components between your Architect flows. Minimizing these shared dependencies avoids deployment dependencies. Also, don't be afraid to deploy redundant components like skills, groups or queues that might overlap across flows.  While you might end up with duplicate definitions and it can complicate reporting, maintaining these definitions locally makes it much easier to deploy individual flows.  A few other items to consider about shared dependencies:
+5.  **Automate, automate, automate. There should be no manual parts to your CI/CD pipeline.** Once code is committed to your source control repository, the robots (aka your deployment scripts). There should be not manual movement of files anywhere in your dev/test/production pipeline. This would seem to be a intuitive statement, but I have frequently found that many organizations will automate to 80% of their pipeline and then not finish the last 20% of automation because it is difficult to do. Avoid this temptation to not automate because every time a human being is in involved in your pipeline, there is an opportunity for mistakes. 
 
-1. **Group shared dependencies with high cohesion into the same repository**. For example, if you have skills that are used across multiple flows create a skills repository with all of your skills definitions and maintain them centrally.  Don't intermix different shared CX as Code resources together in the same repositories. This creates an artificial deployment dependencies.
+## Minimize shared infrastructure components
+As you tease apart configurations minimize the amount of shared components between your Architect flows. Minimizing these shared dependencies avoids deployment dependencies. Also, don't be afraid to deploy redundant components like skills, groups or queues that might overlap across flows. While you might end up with duplicate definitions and it can complicate reporting, maintaining these definitions locally makes it much easier to deploy individual flows.  A few other items to consider about shared dependencies:
+
+1. **Group shared dependencies with high cohesion into the same repository**. For example, if you have skills that are used across multiple flows create a skills repository with all of your skills definitions and maintain them centrally.  Don't intermix different shared CX as Code resources together in the same repositories. This creates artificial deployment dependencies.  The diagram below illustrates how to tease apart shared dependencies into their own repositories:
+
+![alt text](shared_group_decompositions.png "Shared Group Decompositions repositories")
 
 2. **Remember many shared dependencies can be deploy independently of the things consuming them and get often be deployed ahead of time with minimal risk**. So for instance, if you have a shared definition of languages, the language changes can often be deployed independently of the flows or scripts consuming them. Deploy these changes frequently and get those changes out there.
 
 3. **Use a pull request model for changes to shared resources**. Often times organizations will centralize control of shared resources and only allow those resources to be directly changed by that group. Unless the resources are extremely sensitive (e.g. credentials management), leverage your source control system's pull request system to allow the individuals who want the change to branch the code and submit a pull request. The centralized group should be responsible for reviewing the changes and merging them into the master branch. The actual work of doing the configuration should go to the team doing the work.
+
 
 ## Whenever possible, move forward, don't rollback
 **CX as Code** (and the Terraform project it is built on) does not have the concept of environmental snapshots and the ability to rollback code to a specific version. If you discover a problem in your deployments, I highly recommend a "move forward" model where you make the fix in your lower environments and then promote and deploy the fix to the production environments. If you do need to rollback to a previous version keep the following in mind:
@@ -64,11 +71,11 @@ As you tease apart configurations minimize the amount of shared components betwe
 
 3. **Leverage automated testing as part of your deployment pipeline.** Whenever possible kickoff automated tests to check your code and infrastructure after it has been deployed. This includes in production. These automated tests provide a quick feedback loop that your deployment worked and reduces the risk of making hasty decisions (e.g. using the console to make changes) because you are under pressure to fix an issue during critical business hours.
 
-## Know your CI/CD tools (CX as Code is not a DR or migration solution)
+## Know your CI/CD tools 
 **CX as Code** is a set of low-level primitives for building CI/CD deployment solutions with Genesys Cloud. It is not a shrink-wrapped Disaster Recovery (DR), backup, or migration tool. It can be used to help build these type of solutions, but this type of tooling will need to be specific to your organization, takes time to be developed and must be tested on a regular basis. Do not make assumptions about how **CX as Code** (or any CI/CD tool) works. While DevOps and CI/CD practices can provide a high-level of stability and confidence in your environment, they do not eliminate or minimize the need for IT folks. DevOps is a practice within IT, not a replacement for it.
 
 ## Start small and iterate
-This is my last piece of advice. Do not try to manage your entire infrastructure using CX as Code until you and your development staff have become comfortable with it and have experience with it. I often advise teams new to DevOps to start small and iterate with one piece of infrastructure. Get a feel for what you want to manage and figure out how to deploy that one piece of infrastructure from the development environment to production. Make sure you understand how to not only deploy a solution, but also how to roll it back. As you begin your **CX as Code**
+Do not try to manage your entire infrastructure using **CX as Code** until you and your development staff have become comfortable with it and have experience with it. I often advise teams new to DevOps to start small and iterate with one piece of infrastructure. Get a feel for what you want to manage and figure out how to deploy that one piece of infrastructure from the development environment to production. Make sure you understand how to not only deploy a solution, but also how to roll it back. As you begin your **CX as Code**
 journey iterate and learn.  Mistakes will be made, but it is better to make small mistakes along the way then try to "go big" and then find out you have created a monolith that does not add value, but instead adds complexity.
 
 ## Resources
