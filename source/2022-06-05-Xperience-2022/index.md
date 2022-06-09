@@ -1,6 +1,6 @@
 ---
 title: Xperience ‘22 What’s Next in your CX Ecosystem 
-tags: Genesys Cloud, CX 
+tags: Genesys Cloud,CX,Salesforce,8x8,Developer Center
 date: 2022-06-05
 image: cover.png
 author: jack.nichols
@@ -12,7 +12,6 @@ Xperience is something I look forward to every year as I love meeting with our c
 For those of you that found this blog from my Xperience session, I hope you found the session helpful. For those that have not watched my on-demand session this year, I had the opportunity to co-present “What’s Next in Your CX Ecosystem?” with my amazing colleague Sam Rector where we detailed the latest and greatest pre-built integrations and dev tools that your teams can leverage to co-create unique experiences at scale. 
 
 ![CX Ecosystem](cx-ecosystem.png "CX Ecosystem")
-*CX Ecosystem and Development*
 
 With the session being only 10 minutes long, I thought it would be helpful to dive a little deeper into each of these ecosystem and development tools, provide some demo videos, sneak-peak screenshots, diagrams, and helpful links. Let’s get started! 
 
@@ -21,11 +20,9 @@ With the session being only 10 minutes long, I thought it would be helpful to di
 This is a ready-to-consume, packaged integration that utilizes the Genesys Cloud CX platform to power the Service Cloud Voice agent experience and user interface. With Genesys Cloud for Salesforce BYOT, agents in Service Cloud will have a complete view of the customer and their request in conjunction with the advanced voice capabilities from Genesys Cloud CX to deliver a consistent and efficient service experience. 
 
 ![Integrated Call Controls and Customer Data](integrated_call_controls.png "Integrated Call Controls and Customer Data")
-*Integrated Call Controls and Customer Data*
 
 
 ![Presence and Field Mapping](presence_and_field_mapping.png "Presence and Field Mapping")
-*Presence and Field Mapping*
 
 Core interaction management functionality including setting status and receiving ACD calls, customized screen pops, call transfers, After Call Work (ACW), call on-behalf of queue, unified user management and Salesforce Single-Sign-On (SSO) will be included at launch. If you’re interested in participating in the beta program, apply [here](https://forms.office.com/pages/responsepage.aspx?id=nOZceM-Qx02ogurzEtHRXXSwA6VEC1xJjOIycYysvt5UQzFDUEM5TE5POU0wQks2STBVMjhDNzNMNy4u).
 
@@ -45,7 +42,7 @@ To learn more about 8x8 Work and our integration, check out the [AppFoundry list
 
 One of the newer tools in the Genesys Cloud developer ecosystem, CX as Code is a configuration management tool that allows you to define Genesys Cloud configuration objects (e.g. Queues, Skills, Users, etc) in plain old text files and then apply that configuration across multiple Genesys Cloud organizations. It’s ideally suited for use in a CI/CD deployment pipeline, which I would highly recommend if you aren’t employing such a method already. It’s been very exciting to see organization using CX as Code to help ensure that their innovative CX configurations are applied consistently across multiple Genesys Cloud organizations.  
 
-To learn more about how to get started with CX as Code, check out this [blog]. 
+To learn more about how to get started with CX as Code, check out this [blog](/blog/2021-04-16-cx-as-code/). 
 
 ## Genesys Cloud Developer Center 
 Welcome, you’re already here! On the Developer Center, you’ll find technical content for Genesys Cloud developers like new release announcements, blogs, tutorials, how-to guides, access to dev tools, and more. Recently, we gave the Developer Center a new, modern look and feel (with Dark Mode!) that we hope our technical users will love. This includes a new information architecture, improved navigation and design, integrated sign-in, dev toolbox, an integrated application inspector, and last, but certainly not least, dark mode. Just hit that toggle at the top of your screen and start exploring!  
