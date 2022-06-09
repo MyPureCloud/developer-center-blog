@@ -24,7 +24,7 @@ This is a ready-to-consume, packaged integration that utilizes the Genesys Cloud
 *Integrated Call Controls and Customer Data*
 
 
-![Presence and Field Mapping](cx-ecosystem.png "Presence and Field Mapping")
+![Presence and Field Mapping](presence_and_field_mapping.png "Presence and Field Mapping")
 *Presence and Field Mapping*
 
 Core interaction management functionality including setting status and receiving ACD calls, customized screen pops, call transfers, After Call Work (ACW), call on-behalf of queue, unified user management and Salesforce Single-Sign-On (SSO) will be included at launch. If you’re interested in participating in the beta program, apply [here](https://forms.office.com/pages/responsepage.aspx?id=nOZceM-Qx02ogurzEtHRXXSwA6VEC1xJjOIycYysvt5UQzFDUEM5TE5POU0wQks2STBVMjhDNzNMNy4u).
