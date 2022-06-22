@@ -2,20 +2,19 @@
 title: CX as Code and Remote Modules 
 tags: Genesys Cloud,CX as Code, Remote Modules, Terraform
 date: 2022-06-21
-image: cover.png
 author: john.carnell@genesys.comn
 category: 6
 ---
 
-Greetings everyone. It is June 2022, the year is half over and I hope everyone is enjoying the summer months. I know here in Raleigh, North Carolina it is a hot and humid and the heat will not stop until October. Today, I want to introduce you guys to the concept of Terraform modules and introduce you to how you can use them from within your own **CX as Code** projects to make your Terraform flows more modular and usable. In this blog post we are going to cover three major topic areas:
+Greetings everyone. It is June 2022, the year is half over and I hope everyone is enjoying the summer months. I know here in Raleigh, North Carolina it is a hot and humid. The heat will not stop until October. Today, I want to introduce you guys to the concept of Terraform modules and how you can use them from within your own **CX as Code** projects. Terraform modules allow you to make your Terraform flows more organized and reusable. In this blog post we are going to cover three major topic areas:
 
-1. What is a Terraform module?
-2. What is a Terraform remote module?
-3. Introducing the Genesys Cloud DevOps Terraform Repository?
+1. What is a Terraform module
+2. What is a Terraform remote module
+3. The Genesys Cloud DevOps Remote Module Repository
 
 ## What is a Terraform module
 
-If you have done any work with **CX as Code** and Terraform you know that what might have started as a single `.tf` can quickly grow massive as you add resource definitions to your project. Many DevOps engineers will then start decomposing their Terraform resources into multiple files that contain related definitions. There is nothing wrong with this approach, but there might be times when you want parameterize and re-use module definitions within the same Terraform code base. For example, you might want to create multiple Genesys Cloud queues with slightly different values for each queue. You could define each queue individually (like in the code block below):
+If you have done any work with **CX as Code** and Terraform you know that you often start a project using a single Terraform file (e.g. `main.tf`). However, as the size of the project grows your Terraform configuration can quickly grow massive as you add resource definitions to your project. Your single Terraform file often becomes bulky and unmanageable. Many DevOps engineers will start decomposing their Terraform resources into multiple files that contain related resource definitions. There is nothing wrong with this approach, but there might be times when you want parameterize and re-use resource definitions within the same Terraform code base. For example, you might want to create multiple Genesys Cloud queues with slightly different values for each queue. You could define each queue individually (like in the code block below):
 
 ```
 resource "genesyscloud_routing_queue" "401K_Queue" {
@@ -41,8 +40,9 @@ resource "genesyscloud_routing_queue" "IRA_Queue" {
 }
 .....
 ```
+The code above will work, but I am a dutiful follower of Dave Thomas and Andy Hunt's DRY principle. First documented in their classic book [The Pragmatic Programmer](https://www.amazon.com/Pragmatic-Programmer-journey-mastery-Anniversary-ebook/dp/B07VRS84D1/ref=sr_1_1?keywords=the+pragmatic+programmer+20th+anniversary+edition%2C+2nd+edition&qid=1655926310&sprefix=the+pragma%2Caps%2C81&sr=8-1), the DRY principle stands for: *8Don't Repeat Yourself**. Any time I start seeing repetitive code that looks almost exactly the same, I stop and take a step back and see if I can simplify the code. With Terraform and *CX as Code*, rather then defining each queue resource individually, a better approach would be to generalize and encapsulate the definition of the queue resource inside a a Terraform module. 
 
-A better approach is to generalize and encapsulate your queue object into a Terraform module. A Terraform module allows you to wrap your resource definitions inside of function-like structure that accepts input parameters and publishes outputs. Modules allow you to better organize your resources and then re-use them throughout your project. Typically, I like to setup my modules within a folder and file structure right within my Terraform project.  While this is not required by Terraform I typically use the following structure for my **CX as Code** projects.
+A Terraform module allows you to wrap your resource definitions inside of function-like structure that accepts input parameters and publishes output parameters. Modules allow you to better organize your resources and then re-use them throughout your project. Typically, I like to setup my modules within a folder and file structure right within my Terraform project. While this is not required by Terraform I typically use the following structure for my **CX as Code** projects.
 
 ```
   main.tf                # The main Terraform definitions
@@ -57,9 +57,9 @@ A better approach is to generalize and encapsulate your queue object into a Terr
      module2/
 ```
 
-So lets take and write an example queue module `inputs.tf` file. This file defines all of the input values being passed into a module. It defines each of the input parameters we want to use to parameterize the module. The goal will the input values in the `inputs.tf` is to provide just enough information to customize the resource. Modules act as containers around the resources defined within them.  This means a module can not reference a value outside of the module unless it is explicitly passed in as an Terraform input parameter, nor can values produced by the module being accessed outside of the module without explicitly being passed outside the module via a Terraform output variable.
+So let's write an example queue module using the structure above. We will begin with a `modules/queues/inputs.tf` file. This file defines all of the input values being passed into the module. Modules act as containers around the resources defined within them. This means a module can not reference a value outside of the module unless it is explicitly passed in as a Terraform input parameter, nor can values produced by the module be accessed outside of the module without explicitly passing the value outside the module via a Terraform output variable.
 
-Here is a example implementation of an `inputs.tf` file.
+Here is a example implementation of our `inputs.tf` file.
 
 ```
 variable "classifier_queue_names" {
@@ -70,12 +70,11 @@ variable "classifier_queue_names" {
 
 This module is going to allow you to parameterize 1 variable: a list of queue names.
 
-
-:::{"alert":"warning","title":"Don't get overzealous with module input parameters","autoCollapse":false}
-Be careful not to make every parameter of a resource in your own module.  Modules are meant for you to re-use the general definition of your resources with a tweak here or there context specific values. I have seen developers take the concept of modules too far to the point where everything is parameterized and made a module.  For many Terraform projects, this can make things difficult to follow.
+:::{"alert":"warning","title":"Don't get overzealous with module input variables","autoCollapse":false}
+Be careful not to make every parameter of a resource as an input variable for a module. Modules are meant for you to re-use the general definition of your resources with a tweak here or there for context specific values. I have seen developers take the concept of modules too far to the point where everything is parameterized and made a module.  For many Terraform projects, this can make things difficult to follow.
 :::
 
-The actual resource definition for the module is shown below (e.g. the main.tf):
+The actual resource definition for the module is shown below (e.g. the `modules/queues/main.tf` file):
 
 ```
 resource "genesyscloud_routing_queue" "Queues" {
@@ -91,9 +90,9 @@ resource "genesyscloud_routing_queue" "Queues" {
 }
 ```
 
-In the example above, we iterate through each of the queue names passed into the module via the `for_each= toset(var.classifier_queue_names)` line. The value read from the list passed in as bound to a variable called `each`. The `each.value` variable is used to set the `name` attribute on the **CX as Code** queue resource and also build a `description` using the `each.value` to build a string for the description. The rest of the attributes for the queue resource are kept as the same values.
+In the example above, we iterate through each of the queue names passed into the module via the `for_each=toset(var.classifier_queue_names)` line. The value read from the list passed into the module is bound to a variable called `each`. The `each.value` variable is used to set the `name` attribute on the **CX as Code** queue resource and also build a `description` using the `each.value` to build a string for the description. The rest of the attributes for the queue resource are kept as the same values.
 
-As mentioned earlier, all values generated from within a module are available only with the module unless they are explicitly mapped to an output attribute.  In our queue example there are often specific Genesys Cloud Architect flows and actions that can be associated with a queue.  In order to perform these type of mappings we need to make the queue ids of the created available out of the module. To do this, we can create a file called `output.tf` that will output a map of all of the created queue ids where the key for the map is the name of the queue. An example `output.tf` file is shown below:
+As mentioned earlier, all values generated from within a module are available only with the module unless they are explicitly mapped to an output variable.  In our queue example there are often specific Genesys Cloud Architect flows and actions that can be associated with a queue.  In order to perform these type of mappings and make the created queue's ids available for consumption, we need to define an output variable to hold the values. To do this, we can create a file called `modules/queues/output.tf` that will define a map variable (called `queue_ids`) of all of the created queue ids where the key for the map is the queue name. An example `output.tf` file is shown below:
 
 ```
 output "queue_ids" {
@@ -103,7 +102,7 @@ output "queue_ids" {
   }
 ```
 
-This will bind a variable called queue_ids to the module. We will show you how to access the output parameter shortly.
+This will bind a variable called `queue_ids` to the module. We will show you how to access the output variable shortly.
 
 At this point, you have all of the pieces defined for a module.  Now let's look at how you would include this module in one of your own Terraform projects. To use the module within your Terraform code, you can define use the `module` block within any of your Terraform files. I usually put my module configurations in the `main.tf` for the entire project.  Here is an example of how to configure our queue module we just defined:
 
@@ -114,18 +113,56 @@ module "classifier_queues" {
 }
 ```
 
-The above module definition will attempt to load the queues modules, associate the module with the names `classifie_queues` and pass in 4 queue names as input variables to the module: 401K, IRA, 529 and General Support. When you run `terraform init` for the first time, Terraform will check for the existence of the module. When a `terraform apply` is invoked, the above module will be called with each of the queues names passed in. Any output variables defined (e.g. the queue_ids) will be bound to the module name `classified queues`. Later on of my Terraform resource definitions I want to associate the 401K queue id created by this module, I could use `modules.classifier_queues.queue_ids["401K"]` to access to queue id for the created queue.
+The above module definition will attempt to load the queues modules, associate the module with the name `classifier_queues`.  Four queue names are passed in as input variables to the module: 401K, IRA, 529 and General Support. When you run `terraform init` for the first time, Terraform will check for the existence of the module. When a `terraform apply` is invoked, the above module will be called with each of the queues names passed in. Any output variables defined (e.g. the queue_ids) will be bound to the module name `classified queues`. Later on, if one of my Terraform resource definitions wanted to associate the 401K queue id created by this module to another resource, I could use the line `modules.classifier_queues.queue_ids["401K"]` to access to queue id for the created queue.
 
-## Remote modules
-## Using a CX as Code Remote Module within your own Terraform Flows
+Several of our Genesys Cloud blueprints leverage modules to help organize their Terraform code. Examples of Terraform modules being used in this projects can be found in these repositories:
 
+1. [Email AWS Comprehend blueprint](https://github.com/GenesysCloudBlueprints/email-aws-comprehend-blueprint)
+2. [Building CI/CD pipelines using GitHub Actions](https://github.com/GenesysCloudBlueprints/email-aws-comprehend-blueprint)
+3. [Emergency Group Lambda blueprint](https://github.com/GenesysCloudBlueprints/set-emergency-group-lambda-blueprint/tree/main/blueprint/terraform/modules)
 
+Terraform modules are an extremely powerful mechanism for organizing and partitioning a large Terraform project into multiple pieces. While a Terraform module can help promote code re-use throughout a single project, how can you use modules across multiple Terraform projects? The answer is Terraform remote modules. 
+
+## Terraform Remote modules
+Terraform allows you to host your remote modules outside of the local filesystem so that they can be re-used across projects. Terraform remote modules can be stored inside of GitHub, Bitbucket, HTTP, AWS S3, and Google Cloud Service (GCS) buckets. Remote modules are an extremely powerful mechanism for building higher-level abstractions on top of a provider's resource that can then be easily shared across a project.
+
+For example, here is how to configure a remote module that invokes the same `classifier_queues` resource configuration we used in the previous section of this blog post. In the configuration below, the remote module is being pulled down from a GitHub repository:
+
+```
+module "classifier_queues" {
+  source                   = "git::https://github.com/GenesysCloudDevOps/genesys-cloud-queues-demo.git?ref=main"
+  classifier_queue_names   = ["401K", "IRA", "529", "GeneralSupport", "Banking"]
+  classifier_queue_members = ["member id #1 (guid)", "member id #2 (guid)" ]    
+}
+```
+When the `terraform init` command is run with the above configuration, Terraform will pull down a local copy of the above remote module. When `terraform apply` is executed the downloaded module will be executed with the parameters defined above (e.g. the `classifier_queue_names`, `classifier_queue_members`) will be passed to locally downloaded modules. 
 
 ## Introducing the Genesys Cloud DevOps Repository
+As Genesys Cloud continues in its own Terraform journey, I am pleased to announce that the Developer Engagement team is launching a new open-source GitHub repository called [GenesysCloudDevOps](https://github.com/GenesysCloudDevOps/). This repository will house a variety of Terraform remote modules that you can use and leverage within your own **CX as Code** projects. Even with **CX as Code**, some Genesys Cloud resources can be difficult to configure because there is a great deal of meta-data that needs to be setup and configured to use it.  We hope that these remote modules will help simplify this type of configuration setup.
 
+This Github repository includes remote modules for:
+
+1. Configuring Genesys Cloud to use an [AWS Event Bridge](https://github.com/GenesysCloudDevOps/aws-event-bridge-module).
+2. Configuring AWS Lambdas with [Genesys Cloud Integrations](https://github.com/GenesysCloudDevOps/integration-lambda-module) and [Genesys Cloud Data Actions](https://github.com/GenesysCloudDevOps/data-action-lambda-module).
+3. Creating Genesys Cloud Data Actions for invoking various [Genesys Cloud APIs](https://github.com/GenesysCloudDevOps). Any repository that begins with the prefix `public-api-` is a data action that wrappers a Genesys Cloud public API call. 
+
+
+There are three ways to use the Genesys Cloud remote module repository:
+
+1.  **Directly copy the configuration into your project using these repositories as examples**. There is no requirement that you have to use these modules are remote modules. Review the resource configuration as examples and then cut and paste them directly into your Terraform project.
+2.  **Reference the remote module directly within your own Terraform project**. This is the simplest and easiest way to leverage remote modules. Just point your Terraform project to the module and use it.
+3.  **Fork the remote module repository into your own organization's repository**.  Many organizations have stringent code review processes and would prefer to manage the source code they use inside of their own GitHub repositories. You can always fork one of remote module repositories and leverage it within your own code.
+
+:::{"alert":"warning","title":"Versioning of remote modules","autoCollapse":false}
+While Terraform remote modules support the concept of versioning through the use of source control tags we do not tag our modules with a version number and the modules are always referenced off the main branch of the remote module repository. We will always make the best effort to not make a "breaking change" to a remote module, but we do not guarantee it. If you would like tighter control over the remote module source, I recommend you fork the repository you are going to use and maintain the code within your repository.
+:::
 
 ## Closing Thoughts
+
+I am a huge fan of Terraform modules. They allow me to better organize my Terraform code, reuse configuration and accelerate how quickly I can build Terraform/CX as Code configuration. The Developer Engagement team is going to continue to build out our GenesysCloudDevOps remote module repositories. We currently have 21 remote modules in our GenesysCloudDevOps repositories but plan on releasing more over the next several months. I hope you find these remote modules valuable and you can use them within your own projects. As always, we welcome Pull Requests (PR) for new submissions.
 ## Resources
 
-1.  Terraform Module Page
-2.  Genesys Cloud Repository 
+1. [Building a Terraform module](https://www.terraform.io/language/modules)
+2. [Using Remote Terraform module](https://www.terraform.io/language/modules/sources)
+3. [Genesys Cloud DevOps GitHub Repository](https://www.terraform.io/language/modules/sources)
+4. [Genesys Cloud Blueprints](https://github.com/GenesysCloudBlueprints)
