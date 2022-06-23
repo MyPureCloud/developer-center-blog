@@ -14,9 +14,17 @@ Greetings everyone. It is June 2022, the year is half over and I hope everyone i
 
 ## What is a Terraform module
 
-If you have done any work with **CX as Code** and Terraform you know that you often start a project using a single Terraform file (e.g. `main.tf`). However, as the size of the project grows your Terraform configuration can quickly grow massive as you add resource definitions to your project. Your single Terraform file often becomes bulky and unmanageable. Many DevOps engineers will start decomposing their Terraform resources into multiple files that contain related resource definitions. There is nothing wrong with this approach, but there might be times when you want parameterize and re-use resource definitions within the same Terraform code base. For example, you might want to create multiple Genesys Cloud queues with slightly different values for each queue. You could define each queue individually (like in the code block below):
+If you have done any work with **CX as Code** and Terraform you know that you often start a project using a single Terraform file (e.g. `main.tf`). However, as the size of the project grows, your your single Terraform configuration can quickly grow large as you add more and more resource definitions to your project. Many DevOps engineers will start decomposing their Terraform resources into multiple files that contain related resource definitions. 
 
-```
+:::{"alert":"warning","title":"What is the right size for a CX as Code project?","autoCollapse":false}
+One of the more common mistakes developers make with **CX as Code** and Terraform is that they try to manage their entire contact center infrastructure in a single Terraform project residing in a single source control repository using a single backing state. A better approach is to decompose your contact center into major areas of functionality and break your Terraform projects into separate repositories and backing states. I personally recommend using your Genesys Cloud Architect flows as a means to look for natural divisions within your contact center. However, even if you do decompose to align with your Genesys Cloud Architect flows, your Terraform project files can still get large because a single Genesys Cloud Architect flow can end up with dozens of dependencies that need to be deployed along with the flow. Terraform modules help you manage the size and complexity of these type of projects. 
+
+For more information on best practices in building out your **CX as Code** projects, take a look at this [best practices](/blog/2022-05-12-cx-as-code-devops-best-practices/) blog post.
+:::
+
+There is nothing wrong with breaking your resources into multiple Terraform files, but there might be times when you want parameterize and re-use resource definitions within the same Terraform code base. For example, you might want to create multiple Genesys Cloud queues with slightly different values for each queue. You could define each queue individually (like in the code block below):
+
+```hcl
 resource "genesyscloud_routing_queue" "401K_Queue" {
   name                     = 401K
   description              = "This is the 401K queues"
@@ -40,7 +48,7 @@ resource "genesyscloud_routing_queue" "IRA_Queue" {
 }
 .....
 ```
-The code above will work, but I am a dutiful follower of Dave Thomas and Andy Hunt's DRY principle. First documented in their classic book [The Pragmatic Programmer](https://www.amazon.com/Pragmatic-Programmer-journey-mastery-Anniversary-ebook/dp/B07VRS84D1/ref=sr_1_1?keywords=the+pragmatic+programmer+20th+anniversary+edition%2C+2nd+edition&qid=1655926310&sprefix=the+pragma%2Caps%2C81&sr=8-1), the DRY principle stands for: *8Don't Repeat Yourself**. Any time I start seeing repetitive code that looks almost exactly the same, I stop and take a step back and see if I can simplify the code. With Terraform and *CX as Code*, rather then defining each queue resource individually, a better approach would be to generalize and encapsulate the definition of the queue resource inside a a Terraform module. 
+The code above will work, but I am a dutiful follower of Dave Thomas and Andy Hunt's DRY principle. First documented in their classic book [The Pragmatic Programmer](https://www.amazon.com/Pragmatic-Programmer-journey-mastery-Anniversary-ebook/dp/B07VRS84D1/ref=sr_1_1?keywords=the+pragmatic+programmer+20th+anniversary+edition%2C+2nd+edition&qid=1655926310&sprefix=the+pragma%2Caps%2C81&sr=8-1), the DRY principle stands for: **Don't Repeat Yourself**. Any time I start seeing repetitive code that looks almost exactly the same, I stop and take a step back and see if I can simplify the code. With Terraform and *CX as Code*, rather then defining each queue resource individually, a better approach would be to generalize and encapsulate the definition of the queue resource inside a a Terraform module. 
 
 A Terraform module allows you to wrap your resource definitions inside of function-like structure that accepts input parameters and publishes output parameters. Modules allow you to better organize your resources and then re-use them throughout your project. Typically, I like to setup my modules within a folder and file structure right within my Terraform project. While this is not required by Terraform I typically use the following structure for my **CX as Code** projects.
 
@@ -61,7 +69,7 @@ So let's write an example queue module using the structure above. We will begin 
 
 Here is a example implementation of our `inputs.tf` file.
 
-```
+```hcl
 variable "classifier_queue_names" {
   type        = list(string)
   description = "A list of queues names that you want to have generated."
@@ -76,7 +84,7 @@ Be careful not to make every parameter of a resource as an input variable for a 
 
 The actual resource definition for the module is shown below (e.g. the `modules/queues/main.tf` file):
 
-```
+```hcl
 resource "genesyscloud_routing_queue" "Queues" {
   for_each                 = toset(var.classifier_queue_names)
   name                     = each.value
@@ -106,7 +114,7 @@ This will bind a variable called `queue_ids` to the module. We will show you how
 
 At this point, you have all of the pieces defined for a module.  Now let's look at how you would include this module in one of your own Terraform projects. To use the module within your Terraform code, you can define use the `module` block within any of your Terraform files. I usually put my module configurations in the `main.tf` for the entire project.  Here is an example of how to configure our queue module we just defined:
 
-```
+```hcl
 module "classifier_queues" {
   source                   = "../modules/queues"                                 ## Fully qualified or relative path from the main.tf
   classifier_queue_names   = ["401K", "IRA", "529", "GeneralSupport"]
@@ -128,7 +136,7 @@ Terraform allows you to host your remote modules outside of the local filesystem
 
 For example, here is how to configure a remote module that invokes the same `classifier_queues` resource configuration we used in the previous section of this blog post. In the configuration below, the remote module is being pulled down from a GitHub repository:
 
-```
+```hcl
 module "classifier_queues" {
   source                   = "git::https://github.com/GenesysCloudDevOps/genesys-cloud-queues-demo.git?ref=main"
   classifier_queue_names   = ["401K", "IRA", "529", "GeneralSupport", "Banking"]
@@ -159,10 +167,12 @@ While Terraform remote modules support the concept of versioning through the use
 
 ## Closing Thoughts
 
-I am a huge fan of Terraform modules. They allow me to better organize my Terraform code, reuse configuration and accelerate how quickly I can build Terraform/CX as Code configuration. The Developer Engagement team is going to continue to build out our GenesysCloudDevOps remote module repositories. We currently have 21 remote modules in our GenesysCloudDevOps repositories but plan on releasing more over the next several months. I hope you find these remote modules valuable and you can use them within your own projects. As always, we welcome Pull Requests (PR) for new submissions.
+I am a huge fan of Terraform modules. They allow me to better organize my Terraform code, reuse configuration and accelerate how quickly I can build Terraform/CX as Code configuration. The Developer Engagement team is going to continue to build out our GenesysCloudDevOps remote module repositories. We currently have 21 remote modules in our GenesysCloudDevOps repositories but plan on releasing more over the next several months. I hope you find these remote modules valuable and you can use them within your own projects. As always, we welcome Pull Requests ([PR](https://github.com/GenesysCloudDevOps)) for new submissions.
 ## Resources
 
-1. [Building a Terraform module](https://www.terraform.io/language/modules)
-2. [Using Remote Terraform module](https://www.terraform.io/language/modules/sources)
-3. [Genesys Cloud DevOps GitHub Repository](https://www.terraform.io/language/modules/sources)
-4. [Genesys Cloud Blueprints](https://github.com/GenesysCloudBlueprints)
+1. [Beginning your CX as Code journey](/blog/2021-10-10-treating-contact-center-infrastructure-as-code/)
+2. [Genesys Cloud CX as Code/DevOps best practices](/blog/2022-05-12-cx-as-code-devops-best-practices/)
+3. [Building a Terraform module](https://www.terraform.io/language/modules)
+4. [Using Remote Terraform module](https://www.terraform.io/language/modules/sources)
+5. [Genesys Cloud DevOps GitHub Repository](https://github.com/GenesysCloudDevOps)
+6. [Genesys Cloud Blueprints](https://github.com/GenesysCloudBlueprints)
