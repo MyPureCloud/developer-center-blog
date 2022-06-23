@@ -53,16 +53,17 @@ The code above will work, but I am a dutiful follower of Dave Thomas and Andy Hu
 A Terraform module allows you to wrap your resource definitions inside of function-like structure that accepts input parameters and publishes output parameters. Modules allow you to better organize your resources and then re-use them throughout your project. Typically, I like to setup my modules within a folder and file structure right within my Terraform project. While this is not required by Terraform I typically use the following structure for my **CX as Code** projects.
 
 ```
-  main.tf                # The main Terraform definitions
-  provider.tf            # Defines all of my providers used within my project 
-  variables.tf           # Input variables for the project
-  modules/
-     queues/
-       inputs.tf         # Input variables for the project   
-       outputs.tf        # Output variables for the project
-       main.tf           # The resource definitions
-     module1/
-     module2/
+ .
+└── main.tf                # The main Terraform definitions/
+    ├── provider.tf            # Defines all of my providers used within my project 
+    ├── variables.tf           # Input variables for the project
+    └── modules/
+        ├── queues/
+        │   ├── inputs.tf         # Input variables for the project   
+        │   ├── outputs.tf        # Output variables for the project
+        │   └── main.tf           # The resource definitions
+        ├── module1/
+        └── module2/
 ```
 
 So let's write an example queue module using the structure above. We will begin with a `modules/queues/inputs.tf` file. This file defines all of the input values being passed into the module. Modules act as containers around the resources defined within them. This means a module can not reference a value outside of the module unless it is explicitly passed in as a Terraform input parameter, nor can values produced by the module be accessed outside of the module without explicitly passing the value outside the module via a Terraform output variable.
