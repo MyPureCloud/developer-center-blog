@@ -80,7 +80,7 @@ In addition to the limitations above, you need also need to manage to and respec
 
 We are not going to do a walk through in detail how to setup a web socket using the Notification service, but I would recommend you review the following resources:
 
-1. [Genesys Cloud Notification Service Documentation](api/rest/v2/notifications/notification_service )
+1. [Genesys Cloud Notification Service Documentation](/api/rest/v2/notifications/notification_service )
 2. [Using the Genesys Cloud CLI to listen to Notification service events](https://www.youtube.com/watch?v=r4Jc-Mn0ONA)
 3. [Using the Genesys Cloud Python SDK with the Notification Service](https://www.youtube.com/watch?v=z6JS12DX_pI)
 4. [Build a chat translation assistant with the AWS Translate service](/blueprints/chat-translator-blueprint/)    
@@ -131,7 +131,7 @@ Event-based integration is incredibly powerful because it allows for real-time c
 ## Additional Resources
 
 1. [Notification Service](/api/rest/v2/notifications/notification_service)
-2. [Event topics](api/rest/v2/notifications/available_topics)
+2. [Event topics](/api/rest/v2/notifications/available_topics)
 3. [Genesys Cloud AWS EventBridge ](/api/rest/v2/notifications/event_bridge)
 4. [ Using the Genesys Cloud CLI to listen to Notification Service Events](https://www.youtube.com/watch?v=r4Jc-Mn0ONA)
 5. [Using the Genesys Cloud Python SDK with the Notification Service](https://www.youtube.com/watch?v=z6JS12DX_pI)
