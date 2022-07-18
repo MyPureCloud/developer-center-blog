@@ -3,7 +3,6 @@ title: Single Customer View
 tags: Genesys Cloud, Developer Engagement, Usage API
 date: 2022-07-15
 author: andrew.johnson
-image: genesys.png
 category: 7
 ---
 
