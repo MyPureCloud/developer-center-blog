@@ -54,11 +54,92 @@ In order to setup Genesys Cloud and AWS EventBridge, there are a number of compo
 I will not be walking through step-by-step in this blog post on how to manually setup the Genesys Cloud AWS EventBridge integration or the AWS EventBridge integration. These topics are covered in the following videos:
 
 1. [Configuring a simple AWS EventBridge with Genesys Cloud](https://www.youtube.com/watch?v=1uqEUpFtk8Q). This is a short video that walks through how to hookup Genesys Cloud and AWS EventBridge to send Genesys Cloud events to an AWS Lambda.
-2. [AWS EventBridge Overview](https://www.youtube.com/watch?v=ea9SCYDJIm4). An AWS produced video that provides an excellent overview of AWS EventBridge.
+2. [AWS EventBridge Overview](https://www.youtube.com/watch?v=ea9SCYDJIm4). An AWS produced video that provides an excellent overview of AWS EventBridge and how to configure it.
 :::
 
+## Using CX as Code and Terraform to completely setup an AWS EventBridge
 
-## Using Terraform, CX as Code and the AWS Provider
+Let's build an AWS EventBridge integration that will take all available Genesys Cloud audit events and pass them to an AWS CloudWatch log. To setup this example, we are going to use **CX as Code** and the Hashicorp AWS Provider to install all of the configuration needed for this example. We are going to walk through each of the major **CX as Code** and Hashicorp AWS provider components of this integration. For conciseness, I am not going to show the entire [main.tf](main.tf) file or the example [dev.auto.tfvars](dev.auto.tfvars) file that sets the environment variables for the Terraform script. 
+
+### Setting up the Genesys Cloud AWS EventBridge integration
+The first thing that needs to be done is to create the Genesys Cloud AWS EventBridge integration. You can use the **CX as Code** [genesyscloud_integration](https://registry.terraform.io/providers/MyPureCloud/genesyscloud/latest/docs/resources/integration) resource to setup the integration. However, the `genesyscloud_integration` is a general purpose resource for setting up any kind of Genesys Cloud integration. Each integration requires specialized meta-data that is not always clearly documented. To simplify this for the creation of an AWS EventBridge integration, we have wrapped this setup using a Terraform remote module that is stored [here](git::https://github.com/GenesysCloudDevOps/aws-event-bridge-module.git?ref=main). 
+
+```
+module "AwsEventBridgeIntegration" {
+   integration_name    = var.event_bus_name
+   source              = "git::https://github.com/GenesysCloudDevOps/aws-event-bridge-module.git?ref=main"
+   aws_account_id      = var.aws_account_id
+   aws_account_region  = var.aws_region
+   event_source_suffix = var.event_bus_name
+   topic_filters       = ["v2.audits.entitytype.{id}.entityid.{id}"]
+}
+```
+
+### Create the Cloudwatch Log Group
+Next, we need to create the Cloudwatch log watch group that will hold the Genesys Cloud audit events passed to the AWS EventBridge. To create this log group, we will use the [Hashicorp AWS provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs).
+
+```
+resource "aws_cloudwatch_log_group" "audit_log_events" {
+  name = "/aws/events/genesyscloud_audit_log_events"
+}
+```
+
+### Create the EventBus
+The creation of a Genesys Cloud EventBridge integration will create an AWS partner event source in your AWS account. Remember, though we need to associate a partner event source with an event bus. We will do by first looking up the event source that was created by Genesys Cloud.
+
+```
+data "aws_cloudwatch_event_source" "genesys_event_bridge" {
+  depends_on = [
+    module.AwsEventBridgeIntegration
+  ]
+  name_prefix = "aws.partner/genesys.com"
+}
+```
+
+:::{"alert":"warning","title":"Beware the single bus","autoCollapse":false}
+The above Terraform data lookup uses a `name_prefix` to look up a the the event source. The above example looks for an event source that begins with `aws.partner/genesys.com`. If you have more then one the Genesys Cloud EventBridge integration defined the above code will pull back more then one definition and fail. If you have more then one Genesys EventBridge integration, you will have to use the fully qualified name of the event_source (e.g. aws.partner/genesys.com/cloud/<<randomly generated-guid>>/<<sub-account-name>>)
+:::
+
+Once the partner event source is lookup, it can be used to create the event bus.
+
+```
+resource "aws_cloudwatch_event_bus" "genesys_audit_event_bridge" {
+  name              = data.aws_cloudwatch_event_source.genesys_event_bridge.name
+  event_source_name = data.aws_cloudwatch_event_source.genesys_event_bridge.name
+}
+```
+
+
+### Creating the event bus rules
+```
+resource "aws_cloudwatch_event_rule" "audit_events_rule" {
+  depends_on = [
+    aws_cloudwatch_event_bus.genesys_audit_event_bridge
+  ]
+  name        = "capture-audit-events"
+  description = "Capture audit events coming in from AWS"
+  event_bus_name = data.aws_cloudwatch_event_source.genesys_event_bridge.name
+
+  event_pattern = <<EOF
+    {
+      "source": [{
+        "prefix": "aws.partner/genesys.com"
+      }]
+ 
+    }
+EOF
+}
+
+resource "aws_cloudwatch_event_target" "audit_rule" {  
+  rule      = aws_cloudwatch_event_rule.audit_events_rule.name
+  target_id = "SendToCloudWatch"
+  arn       = aws_cloudwatch_log_group.audit_log_events.arn
+  event_bus_name = data.aws_cloudwatch_event_source.genesys_event_bridge.name
+}
+```
+
+
+
 
 
 ## Final Thoughts
