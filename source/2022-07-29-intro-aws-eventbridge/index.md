@@ -62,7 +62,7 @@ Let's build an AWS EventBridge integration that will take all available Genesys 
 3. Create a rule to be triggered on incoming messages.
 4. Configure a target so that when a message matches the rule, it will be sent to the target
 
-//TODO STOPPED GERE
+//TODO STOPPED HERE
 This is illustrated in the diagram below:
 
 ![EventBridge Implementation](eventbridge_implementation.png "A message bus implementation using AWS EventBridge")
