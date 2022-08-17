@@ -4,7 +4,7 @@ terraform {
      source = "mypurecloud/genesyscloud"
     }
 
-     aws = {
+    aws = {
       version = ">= 3.12"
       source  = "hashicorp/aws"
     }

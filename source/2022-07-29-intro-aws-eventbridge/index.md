@@ -35,6 +35,29 @@ The Genesys Cloud/AWS EventBridge integration is an extremely attractive option 
 - **Multiple integration partners**.  AWS EventBridge integrates with a large number of partner systems. This makes integrating third-party SaaS platforms like Genesys Cloud a configuration exercise rather than a custom-coding one. For a full list of AWS EventBridge integration partners,see [here](https://aws.amazon.com/eventbridge/integrations/).
 - **Multiple AWS targeting options**. Once a message hits the AWS EventBridge, you are able to process the message with a large number of AWS technologies. A full list can be found [here](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-targets.html). AWS EventBridge does not just limit you to AWS-based targets. AWS EventBridge can pass along messages to any HTTP-based API.
 
+## Why not use the Genesys Cloud Notification Service and WebSockets?
+Before the addition of the Genesys Cloud/AWS Event Bridge integration, Genesys Cloud only offered the consumption of messages from Genesys Cloud through the use of the Genesys Cloud notification service and a WebSocket. This messaging integration model was originally built for doing near-time UI based messaging integrations, with the most common use case being the building out of near-time contact center dashboards,
+
+This model can be leveraged in backend services to build near-time data integrations, particularly if you using AWS in your organization is not possible.  However <<STOPPED HERE>>but as a developer you need to be aware of the following when using this model:
+
+1. **No message durability**. Genesys Cloud will only send events over an open WebSocket. If a WebSocket is closed for any reason, any events that are generated while the WebSocket is not open will not be queued or retried when a new WebSocket is created. In the event of any kind of network interruption, once a WebSocket is re-established, the developer must use the Genesys Cloud API to "fill in" the data that is missing during the time period the socket was down.
+2. **WebSockets are a lower-level primitive**. With a WebSocket, you as the developer are responsible for establishing the network connection, handling network connectivity issues, scaling based on volume of messages, and processing messages. While these individual activities are not very complicated on their own, taken together they can make building message-based integrations significantly more complicated.
+3. **Limited generalization for to subscribing topics**. When subscribing to topics, you must explicitly know the id of the Genesys Cloud object you are listening to events on. For example, to subscribe to events associated with multiple queues, you must explicitly subscribe to each individual queue. This can be painful to do and there is no mechanism to subscribe to events from multiple queues using a single topic.
+
+In addition to the limitations above, you need also need to manage to and respect the following Genesys Cloud rate-limits associated with the Notification service WebSockets implementation:
+
+1. **Channels remain active for 24 hours**. To maintain a channel for longer than 24 hours, resubscribe to topics.
+2. **You can create up to 20 channels per user and application**. When the channel limit is reached, then the new channel replaces the oldest channel that does not have an active connection.
+3. **Each WebSocket connection is limited to 1,000 topics**. If you subscribe to more than 1,000 topics, then the notification service returns a 400 error code.
+4. **Each channel can only be used by one WebSocket at a time**. If you connect a second WebSocket with the same channel ID, the first WebSocket disconnects.
+
+We are not going to do a walk through in detail how to setup a web socket using the Notification service, but I would recommend you review the following resources:
+
+1. [Genesys Cloud Notification Service Documentation](/api/rest/v2/notifications/notification_service )
+2. [Using the Genesys Cloud CLI to listen to Notification service events](https://www.youtube.com/watch?v=r4Jc-Mn0ONA)
+3. [Using the Genesys Cloud Python SDK with the Notification Service](https://www.youtube.com/watch?v=z6JS12DX_pI)
+4. [Build a chat translation assistant with the AWS Translate service](/blueprints/chat-translator-blueprint/)    
+
 ## Setting up the Genesys Cloud and AWS EventBridge
 In order to set up Genesys Cloud and AWS EventBridge, there are a number of components in both Genesys Cloud and AWS that need to be configured.  The diagram below illustrates these components:
 

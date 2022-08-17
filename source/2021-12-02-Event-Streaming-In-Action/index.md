@@ -60,7 +60,7 @@ The diagram below illustrates this flow and behavior.
 
 It is important to realize that the original intent of this event-driven architecture was to allow developers to build real-time dashboards without having to constantly poll the Genesys Cloud API to retrieve data.
 
-This model can be leveraged in backend services to build near-time data integrations, but as a developer you need to be aware of when using this model:
+This model can be leveraged in backend services to build near-time data integrations, but as a developer you need to be aware of the following when using this model:
 
 1. **No message durability**. Genesys Cloud will only send events over an open WebSocket. If a WebSocket is closed for any reason, any events that are generated while the WebSocket is not open will not be queued or retried when a new WebSocket is created. In the event of any kind of network interruption, once a WebSocket is re-established, the developer must use the Genesys Cloud API to "fill in" the data that is missing during the time period the socket was down.
 
