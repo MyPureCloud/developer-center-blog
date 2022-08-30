@@ -2,7 +2,7 @@
 title: CX as Code and Remote Modules 
 tags: Genesys Cloud,CX as Code, Remote Modules, Terraform
 date: 2022-06-21
-author: john.carnell@genesys.comn
+author: john.carnell
 category: 6
 ---
 
