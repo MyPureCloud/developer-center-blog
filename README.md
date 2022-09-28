@@ -15,7 +15,7 @@ The Genesys Cloud Developer Center Blog repository, https://developer.genesys.cl
 4. Submit a pull request to merge the changes to the origin/master.
   
 :::primary
-**Note**: If you are a first-time author, include your bio and image in a comment in the Pull Request (PR). For more information, see the Content Guidelines section.
+**Note**: If a first-time author, include your bio and image in a comment in the Pull Request (PR). For more information, see the Content Guidelines section.
 :::
 
 ## Content Guidelines
