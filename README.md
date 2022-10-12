@@ -1,4 +1,4 @@
-# Genesys Cloud Developer Center Blog
+# Genesys Cloud Developer Center blog
 
 The Genesys Cloud Developer Center Blog repository, https://developer.genesys.cloud/blog/, contains blog content; new blogs are accepted through pull requests.
 
@@ -18,7 +18,7 @@ The Genesys Cloud Developer Center Blog repository, https://developer.genesys.cl
 **Note**: If a first-time author, include your bio and image in a comment in the Pull Request (PR). For more information, see the Content Guidelines section.
 :::
 
-## Content Guidelines
+## Content guidelines
 
 * Blog posts must be related to Genesys Cloud
 * No private/sensitive/NDA information; All content will be visible publicly on the internet.
@@ -33,7 +33,7 @@ The Genesys Cloud Developer Center Blog repository, https://developer.genesys.cl
 * Images can be included in your article folder and markdown using `![alt text](image.png "Logo Title Text 1")`
 * Blog posts will not be published until the date in the folder name has elapsed (on or after)
 
-## Required Properties
+## Required properties
 
 Each index.md file starts with a frontmatter section that contains metadata about the article. The following properties must be specified:
 
@@ -59,7 +59,7 @@ category: 6
 ---
 ```
 
-## Taxonomy Categories
+## Taxonomy categories
 
 Choose from the following options to categorize your blog post:
 
@@ -79,7 +79,7 @@ Choose from the following options to categorize your blog post:
 | 11 | Data Reporting and Quality |
 | 12 | Workforce Management |
 
-## Author Bios
+## Author bios
 
 Author bios are displayed at the bottom of the blog post. First-time authors should provide the following information when submitting their initial post:
 
