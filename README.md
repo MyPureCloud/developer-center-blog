@@ -15,7 +15,7 @@ The Genesys Cloud Developer Center Blog repository, https://developer.genesys.cl
 4. Submit a pull request to merge the changes to the origin/master.
   
 :::primary
-**Note**: If a first-time author, include your bio and image in a comment in the Pull Request (PR). For more information, see the Content Guidelines section.
+**Note**: If you are a first-time author, include your bio and image in a comment in the Pull Request (PR). For more information, see the Content Guidelines section.
 :::
 
 ## Content guidelines
@@ -40,11 +40,11 @@ Each index.md file starts with a frontmatter section that contains metadata abou
 | Parameter | Description |
 | --------- | ----------- |
 | title     | Article title |
-| date      | YYYY-MM-DD formatted date, this date should match the date specified in the containing folder and reflect the intended publication date for the post. |
+| date      | YYYY-MM-DD formatted date; this date should match the date specified in the containing folder and reflect the intended publication date for the post. |
 | tags      | comma-separated list of tags that apply to the article |
 | author    | The name key of the author. The recommended format is `first.last`, but it can be anything if there are no spaces or special characters. |
-| image     | The image's filename displays as the header image in the blog listing. This path must be relative to the directory the index.md file is in and must not be an absolute path. |
-| category  | The taxonomy category number. The following is an example for mappings. |
+| image     | The image's filename displays as the header image in the blog listing. This path must be relative to the directory of the index.md file is in and must not be an absolute path. |
+| category  | The taxonomy category number. The following is an example of mappings. |
 
 Example:
 
