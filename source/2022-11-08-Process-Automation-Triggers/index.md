@@ -1,4 +1,4 @@
-We have had many customers ask us to be able to do things in response to events in the system. For example, ensuring that attributes on a call always make it to an external system even if the customer abandons the conversation at an unanticipated time. Process automation allows customers to replace logic throughout the IVR with a single process automation Trigger. 
+We have had many customers that ask us to do things in response to events in the system. For example, ensuring that attributes on a call always make it to an external system even if the customer abandons the conversation at an unanticipated time. Process automation allows customers to replace logic throughout the IVR with a single process automation Trigger. 
 
 
 Related Developer Center overview of triggers: https://developer.genesys.cloud/platform/process-automation/
