@@ -33,7 +33,7 @@ There is a single API for returning all of the Skill Expression Groups currently
 
 <dxui:OpenAPIExplorer verb="get" path="/api/v2/routing/skillgroups"/>
 
-Remember this API is paginated so if you have more than 25 skill groups defined, you will need to call this API endpoint for the page of data returned.
+Remember this API is paginated so if you have more than 25 skill groups defined, you will need to call to account for pagination in your code. The `GET /api/v2/routing/skillsgroup` API does pagination a little bit differently from the previous APIs in that the API does not allow you to directly access the next page of data by incrementing the page number. Instead, you need to use the URI presented in the `nextUri` attribute to retrieve the next page of data. The `nextUri` contains an `after` token which is passed as a query parameter in the API uri.
 
 You can also use the Genesys Cloud CLI to retrieve all of the skill groups by using the following Genesys Cloud CLI:
 
@@ -62,7 +62,7 @@ data "genesyscloud_routing_skill_group" "skill_group" {
 ### Creating a Skill Expression Group
 To create a Skill Expression Group you can use the following API:
 
-<dxui:OpenAPIExplorer verb="post" path="/api/v2/routing/skillgroups/{skillGroupId}" source="https://api.mypurecloud.com/api/v2/docs/swagger"/>
+<dxui:OpenAPIExplorer verb="post" path="/api/v2/routing/skillgroups/{skillGroupId}"/>
 
 Let's use the API above to define a Skill Expression Group where we want to capture all agents with `Series 6` skills greater than 2 and who have a language skill of `Spanish` greater than 3. To create this skill group using the Genesys Cloud API shown above you need to define a POST body that looks like this:
 
@@ -173,11 +173,11 @@ The corresponding CLI command is:
 `gc routing skillgroups members list {skillGroupId} -a`
 
 ### Divisions and Skill Expression Group
-Genesys Cloud divisions are often one of the most understood capabilities within the platform. Most people think divisions are mechanisms for segmenting your Genesys Cloud organization so that you can cleanly delineate and group various Genesys Cloud assets into groups that can only be accessed by members of that division. A Genesys Cloud division is really a filtering mechanism. When a division is applied to a Genesys Cloud asset (e.g. a Queue, Flow, etc..), it means that a resource is only "visible" to members of that division. However, it should be not thought of as an access control mechanism. It is used in coordination with the Genesys Cloud roles permissions. 
+Genesys Cloud divisions are often one of the most misunderstood capabilities within the platform. Most people think divisions are mechanisms for segmenting your Genesys Cloud organization so that you can cleanly delineate and group various Genesys Cloud assets into groups that can only be accessed by members of that division. A Genesys Cloud division is really a filtering mechanism. When a division is applied to a Genesys Cloud asset (e.g. a Queue, Flow, etc..), it means that a resource is only "visible" to members of that division. However, it should be not thought of as an access control mechanism. It is used in coordination with the Genesys Cloud roles permissions. 
 
 Here are a few additional things to keep in mind about Genesys Cloud divisions:
 
-1. Every Genesys Cloud organization has a default organization. That division is called the Home division.
+1. Every Genesys Cloud organization has a default division That division is called the Home division.
 2. Every "division-aware" asset in Genesys Cloud will be assigned to the division of the user creating it.  
 3. An asset in Genesys Cloud can be assigned to one and only one division at a time.
 4. A role can be assigned to multiple divisions and any user assigned that role can see assets in any division defined in the role. However, a user that is assigned that role can still only be assigned to one division.
