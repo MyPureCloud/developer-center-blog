@@ -1,19 +1,33 @@
-We have had many customers that ask us to do things in response to events in the system. For example, ensuring that attributes on a call always make it to an external system even if the customer abandons the conversation at an unanticipated time. Process automation allows customers to replace logic throughout the IVR with a single process automation Trigger. 
+---
+Title: Process Automation Triggers
+tags: Genesys Cloud, Developer Engagement, Triggers
+date: 2022-11-08
+author: tyler.bath
+category: 6
+---
+
+Many customers ask us to do things regarding system events. For example, ensuring that attributes on a call always make it to an external system even if the customer abandons the conversation at an unanticipated time. Process automation allows customers to replace logic throughout the IVR with a single process automation trigger. 
+
+## What is a trigger?
+Process automation is a service that allows you to invoke workflows based on Genesys Cloud events. This post introduces services and how to configure triggers using the associated API endpoints [APIExplorer](https://developer.genesys.cloud/devapps/api-explorer#get-api-v2-processautomation-triggers "API Explorer page") in the Genesys Cloud Developer Center.
 
 
-Related Developer Center overview of triggers: https://developer.genesys.cloud/platform/process-automation/
+Triggers allow you to define what circumstances you can invoke workflows.
 
+For the latest overview on Triggers, see [Triggers overview](https://developer.genesys.cloud/platform/process-automation/ "Goes to the Triggers overview page") in the Genesys Cloud Developer Center.
 
-Process automation is a service that will allow you to invoke workflows based on events happening in Genesys Cloud. This post is to give an introduction to the service and how to configure triggers using the associated API endpoints: https://developer.genesys.cloud/devapps/api-explorer#get-api-v2-processautomation-triggers
+Triggers consist of three parts: 
 
-Triggers allow you to define under what circumstances you would like to invoke workflows.
+1. Event type (topicName)
+2. Invoke workflow (target)
+3. Using conditions to filter events with (matchCriteria).
 
-Triggers consist of 3 main parts: the type of event (topicName), the workflow to invoke (target), and conditions to filter the events with (matchCriteria).
+## Create a trigger
 
+To create a trigger - run a POST request against /api/v2/processautomation/triggers that supply a body (for example,
+the UI [APIExplorer]( https://developer.genesys.cloud/devapps/api-explorer#post-api-v2-processautomation-triggers "API Explorer page") in the Genesys Cloud Developer Center.
 
-Creating triggers:
-To create a trigger - run a POST request against /api/v2/processautomation/triggers supplying a body like an example below. UI example: https://developer.genesys.cloud/devapps/api-explorer#post-api-v2-processautomation-triggers
-
+```json
 {
     "topicName":"v2.detail.events.conversation.{id}.customer.end",
     "name": "Send SMS message after chats with odd disconnects",
@@ -37,49 +51,54 @@ To create a trigger - run a POST request against /api/v2/processautomation/trigg
     "eventTTLSeconds": "120",
     "enabled": true
 }
+```
+## Json fields
 
+* topicName: The topic the trigger should listen to from the list of available topics for process automation, which is found [here]( https://developer.genesys.cloud/notificationsalerts/notifications/available-topics "Available topics page") in the Genesys Cloud Developer Center.
 
+:::primary
+**Note**: Make sure you apply the process automation filter check box. Topic names must include the wildcard {id} and cannot be replaced with an actual id.
+:::
 
-topicName - The topic the trigger should listen to from the list of available topics for processes automation, which can be found here: https://developer.genesys.cloud/notificationsalerts/notifications/available-topics (make sure to apply the process automation filter check box). The topic names must include the wildcard {id} and can not be replaced with an actual id.
+* name: Trigger name.
 
-name - Name of the trigger
+* description (optional): The trigger description
 
-description (optional) - A description of the trigger
+* target id: This workflow id invokes when the criteria successfully match. The workflow id can be retrieved from the URL in the workflow UI.
 
-target
+The diagram illustrates the UI with the highlighted workflow ID from the URL.
 
-id - The id of the workflow to invoke when the match criteria match successfully. The id of a workflow can be retrieved from the URL in the workflow UI.
+![Example of Workflow ID](../../../../../../../../C:/Users/toallen/OneDrive%20-%20Genesys%20Telecommunications%20Laboratories,%20Inc/Documents/developer-center-blog/source/2022-11-08-Process-Automation-Triggers/Example%20workflow%20ID.png "Example of Workflow ID")
 
-Example from UI with workflow ID highlighted in URL:
+* type: The target type to invoke. Currently, workflow is the only possibility.
 
+* matchCriteria (optional): These filter the events to those that interest you. These criteria run against the event body. The event bodies schema for each topic can be found [here](https://developer.genesys.cloud/notificationsalerts/notifications/available-topics "Available topics page") in the Genesys Cloud Developer Center.
 
-type - The type of target to invoke. Currently, the only possibility is Workflow
+* jsonPath: Defines how to parse the JSON documents, that is the event payload as defined by the topic, and find the specific elements. Express the condition using JsonPath, the language used to traverse and parse JSON documents, to find specific elements. You can also use the Jayway JsonPath Evaluator, the JSONPath test utility tool, to check the response for your JSON payload and JSONPath statements.
 
-matchCriteria (optional) - These filter events to only those you are interested in. These criteria are run against the event body. The schema for the event bodies can be found for each topic here: https://developer.genesys.cloud/notificationsalerts/notifications/available-topics
+* operator: Defines the comparison type that is used to filter the jsonPath output with the user-defined value. Refer the table for supported operators for filter.
 
-jsonPath - The json path to the field to use in the match comparison
+* value or values: Value for comparison. As shown above, a "value" or "values" field should be set in the two-match criteria based on the operator type. For example, 'Equal' would expect a 'value' while 'In' would expect a list in the 'values' field.
 
-operator - The operator used when comparing the jsonPath result to the value or values
+* eventTTLSeconds (optional): Triggers are typically processed in a few seconds. Event processing can be delayed due to rate limiting or infrastructure issues, and this field allows you to discard events if they are no longer useful. For example, you only want to send an SMS to a customer within two minutes of disconnecting.
 
-value or values - Value for comparison. As shown in the 2 match criteria above, a "value" or "values" field should be set based on the type of operator. For example, 'Equal' would expect a 'value' while 'In' would expect a list in the 'values' field
+*  enabled: Controls whether the trigger is evaluated for real events. You can test your trigger while it is disabled or disable a false trigger.
 
-eventTTLSeconds (optional) - Triggers are typically processed in a few seconds. Event processing can be delayed due to rate limiting or infrastructure issues, and this field allows you to discard events if they are no longer useful. For example, you only want to send an SMS to a customer within 2 minutes of a disconnect.
+## Testing triggers
 
-enabled - Controls whether the trigger is evaluated for real events. You can test your trigger while it is disabled or disable a misbehaving trigger
-
-Testing triggers:
-
-When creating a trigger, you may want to check different event bodies to see that your trigger will invoke your expected target for the correct cases. You can accomplish this by running any created trigger against the testing endpoint
-
+When you create a trigger, you may want to check different event bodies to see that your trigger invokes your expected target for the correct cases. You can accomplish this by running any created trigger against the testing endpoint.
 
 To test a trigger, run a POST request against /api/v2/processautomation/triggers/{id}/test where the {id} is replaced with the id of the trigger you would like to test.
 
-The POST will also have to include a body that matches the schema of the configured topicName.
+The POST has to include a body that matches the schema of the configured topicName.
 
-An online 3rd party tool that might help create sample bodies from the schema is https://json-schema-faker.js.org/. 
+A third-party tool that might help create sample bodies from the schema is: 
+[JSON Schema Faker]( https://json-schema-faker.js.org/ 
+"JSON Schema Faker page") on the JSON Schema Faker website.
 
-The example below is for a "v2.detail.events.conversation.{id}.customer.end" topic:
+The following example is for a "v2.detail.events.conversation.{id}.customer.end" topic.
 
+```json
 {
   "eventTime": 10000,
   "conversationId": "conversationId",
@@ -106,7 +125,7 @@ The example below is for a "v2.detail.events.conversation.{id}.customer.end" top
   "interactingDurationMs": 500
 }
 
-Example response from the test endpoint:
+Example of the response from the test endpoint:
 
 {
     "schemaValidation": {
@@ -115,7 +134,7 @@ Example response from the test endpoint:
         "matches": true
     },
     "targetValidation": {
-        "name": "Verify trigger target is configured correctly",
+        "name": "Verify that trigger target is configured correctly",
         "step": 2,
         "matches": true
     },
@@ -154,25 +173,34 @@ Example response from the test endpoint:
     },
     "triggerMatches": true
 }
+```
+## Response fields
 
-schemaValidation - This shows if the body provided in the request was valid for the topic and if not will show an error message for what is incorrectly configured.
+* SchemaValidation: This shows if the body provided in the request was valid for the topic and, if not, will show an error message for what is incorrectly configured.
 
-targetValidation - Shows whether or not the provided targetId is valid. It will verify the workflow exists and is active.
+* targetValidation: This shows whether the provided targetId is valid. This verifies that the workflow exists and is active.
 
-jsonPathValidation - This shows the results of evaluating each match criteria.
+* jsonPathValidation: This shows the results of evaluating each match criteria.
 
-triggerMatches - Indicates whether or not the event would have caused the trigger to fire.
+* triggerMatches: This indicates whether the event would have caused the trigger to fire.
 
+Using the information in this response should help ensure that your trigger fires for your scheduled events. 
 
-Using the information in this response should help ensure that your trigger will fire for your scheduled events. 
+## Additional factors
 
-
-Other considerations:
-Currently, when we execute a workflow, only the top-level non-complex attributes on the event are available for use as input variables to the workflow. So in the above example for test mode, the "callbackNumbers" field would not be provided to the workflow as input as it is a complex array object.
+When a workflow is executed, only the top-level non-complex attributes on the event are available as input variables to the workflow. So, for the test mode example above, the "callbackNumbers" field would not be provided to the workflow as input as it is a complex array object.
 Triggers are updated by running a PUT against the /api/v2/processautomation/triggers/{id} route using the same body as a create request.
-TopicName cannot be updated; instead, a new trigger should be created, and the old trigger deleted.
+The topicName cannot be updated; instead, a new trigger is created, and the old trigger deleted.
 
-Example uses:
-Use triggers to process participant attributes - https://github.com/GenesysCloudBlueprints/process-participant-attributes-event-triggers-blueprint
+## Use Examples
 
-Implement an automated SMS message when a callback is not answered - https://github.com/GenesysCloudBlueprints/sms-followup-on-missed-callback-blueprint
+Use triggers to process participant attributes 
+[Use triggers to process participant attributes](https://github.com/GenesysCloudBlueprints/process-participant-attributes-event-triggers-blueprint "Goes to the Use triggers to process participant attributes repository") in GitHub.
+
+Implement an automated SMS message when a callback is not answered 
+[Implement an automated SMS message when a callback is not answered](https://github.com/GenesysCloudBlueprints/sms-followup-on-missed-callback-blueprint "Goes to the Implement an automated SMS message when a callback is not answered repository") in GitHub.
+
+## Additional Resources
+
+1. [Triggers overview](https://developer.genesys.cloud/platform/process-automation/)
+2. [Example of a Trigger](https://developer.genesys.cloud/platform/process-automation/example-trigger)
