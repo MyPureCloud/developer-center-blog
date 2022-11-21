@@ -192,15 +192,13 @@ When a workflow is executed, only the top-level non-complex attributes on the ev
 Triggers are updated by running a PUT against the /api/v2/processautomation/triggers/{id} route using the same body as a create request.
 The topicName cannot be updated; instead, a new trigger is created, and the old trigger deleted.
 
-## Use Examples
+## Use trigger examples
 
-Use triggers to process participant attributes 
-[Use triggers to process participant attributes](https://github.com/GenesysCloudBlueprints/process-participant-attributes-event-triggers-blueprint "Goes to the Use triggers to process participant attributes repository") in GitHub.
+ * [Use triggers to process participant attributes](https://github.com/GenesysCloudBlueprints/process-participant-attributes-event-triggers-blueprint "Goes to the Use triggers to process participant attributes repository") in GitHub.
 
-Implement an automated SMS message when a callback is not answered 
-[Implement an automated SMS message when a callback is not answered](https://github.com/GenesysCloudBlueprints/sms-followup-on-missed-callback-blueprint "Goes to the Implement an automated SMS message when a callback is not answered repository") in GitHub.
+* [Implement an automated SMS message when a callback is not answered](https://github.com/GenesysCloudBlueprints/sms-followup-on-missed-callback-blueprint "Goes to the Implement an automated SMS message when a callback is not answered repository") in GitHub.
 
 ## Additional Resources
 
-1. [Triggers overview](https://developer.genesys.cloud/platform/process-automation/)
-2. [Example of a Trigger](https://developer.genesys.cloud/platform/process-automation/example-trigger)
+* [Triggers overview](https://developer.genesys.cloud/platform/process-automation/)
+* [Example of a Trigger](https://developer.genesys.cloud/platform/process-automation/example-trigger)
