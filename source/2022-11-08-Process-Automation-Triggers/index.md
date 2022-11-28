@@ -9,6 +9,7 @@ category: 6
 Many customers ask us to do things regarding system events. For example, ensuring that attributes on a call always make it to an external system even if the customer abandons the conversation at an unanticipated time. Process automation allows customers to replace logic throughout the IVR with a single process automation trigger. 
 
 ## What is a trigger?
+
 Process automation is a service that allows you to invoke workflows based on Genesys Cloud events. This post introduces services and how to configure triggers using the associated API endpoints [APIExplorer](https://developer.genesys.cloud/devapps/api-explorer#get-api-v2-processautomation-triggers "API Explorer page") in the Genesys Cloud Developer Center.
 
 
