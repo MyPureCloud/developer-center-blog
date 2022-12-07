@@ -69,7 +69,7 @@ the UI [APIExplorer]( https://developer.genesys.cloud/devapps/api-explorer#post-
 
 The diagram illustrates the UI with the highlighted workflow ID from the URL.
 
-![Example of Workflow ID](../../../../../../../../C:/Users/toallen/OneDrive%20-%20Genesys%20Telecommunications%20Laboratories,%20Inc/Documents/developer-center-blog/source/2022-11-08-Process-Automation-Triggers/Example%20workflow%20ID.png "Example of Workflow ID")
+![Example of Workflow ID](Example_workflow_ID.png "Example of Workflow ID")
 
 * type: The target type to invoke. Currently, workflow is the only possibility.
 
