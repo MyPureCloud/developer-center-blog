@@ -148,7 +148,7 @@ When setting up your test environment, consider using a dedicated test queue wit
 ## Additional Resources
 Thanks for reading! If this piqued your interest or left you with unanswered questions, check out these links for more.
 
-1. [Priority and skill modification DevDrop](http://youtube.com)
+1. [Priority and skill modification DevDrop](https://www.youtube.com/watch?v=RWeDL1IDrkE)
 2. [Resource Center - Set Priority action](https://help.mypurecloud.com/articles/set-priority-action/)
 3. [Resource Center - Set Skills action](https://help.mypurecloud.com/articles/set-skills-action/)
 4. [Work with in-queue flows](https://help.mypurecloud.com/articles/work-with-in-queue-flows/)
