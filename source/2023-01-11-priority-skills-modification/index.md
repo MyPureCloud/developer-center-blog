@@ -36,10 +36,14 @@ A separate DTMF task will be needed to handle each menu option. The tasks will l
 
 ![DTMF Spanish task](dtmf-task-2.png "DTMF Spanish task")  
 
-Now, the key operation takes place -- setting the language skill.    
-The expression editor helps achieve this.  
+Now, the key operation takes place -- setting the language skill.   
+The simplest way to do this is to set the value using the editor's "literal" mode, which will provide a dropdown.
 
-![Spanish skill expression](language-skill-expression-spanish.png "Spanish language skill")  
+![Spanish skill literal](transfer-skill-literal.png "Spanish skill literal")
+
+However, you can also use the expression editor to do this.  
+
+![Spanish skill expression](language-skill-expression-spanish.png "Spanish skill expression")  
 
 ### In-Queue call flow
 The next step is to wait. The nice thing about Architect's hold music is that it also serves as a timer.  In this case, the timer is set for 15 minutes.  
@@ -51,7 +55,12 @@ The Architect actions to accomplish this can be found in the toolbox under the "
 
 ![Actions navigation view](actions-nav-view.png "Actions navigation view")  
 
-Now, the expression editor is used to set the language, but this time the English is skill is set. English speaking agents are now eligible to answer the call, so all that's left to do is play more hold music until the call is answered.
+Now, the Set Skills action is used to set the language skill, but this time the English skill is set. 
+Again, this can be done using the editor's literal mode or the expression mode.  The literal mode provides a dropdown.
+
+![English skill literal](set-skills-literal.png "English skill literal")
+
+English speaking agents are now eligible to answer the call, so all that's left to do is play more hold music until the call is answered.
 
 ## API approach
 This approach is made possible first and foremost by this API resource:  
@@ -149,6 +158,6 @@ When setting up your test environment, consider using a dedicated test queue wit
 Thanks for reading! If this piqued your interest or left you with unanswered questions, check out these links for more.
 
 1. [Priority and skill modification DevDrop](https://www.youtube.com/watch?v=RWeDL1IDrkE)
-2. [Resource Center - Set Priority action](https://help.mypurecloud.com/articles/set-priority-action/)
-3. [Resource Center - Set Skills action](https://help.mypurecloud.com/articles/set-skills-action/)
-4. [Work with in-queue flows](https://help.mypurecloud.com/articles/work-with-in-queue-flows/)
+2. [Resource Center - Set Priority action](https://help.mypurecloud.com/?p=260380)
+3. [Resource Center - Set Skills action](https://help.mypurecloud.com/?p=260382)
+4. [Work with in-queue flows](https://help.mypurecloud.com/?p=146063)
