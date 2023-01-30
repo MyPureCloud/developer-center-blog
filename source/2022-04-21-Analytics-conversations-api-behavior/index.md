@@ -20,7 +20,7 @@ To receive data in real-time, we recommend using the [Notifications](https://dev
 
 ## Demonstration of API behavior
 
-To demonstrate the behavior briefly, I have a simple code snippet that calls the conversation detail query endpoint to collect the mean opinion score(MOS) of conversations from 10 minutes ago. [Mean Opinion Score (MOS)](https://developer.genesys.cloud/analyticsdatamanagement/analytics/detail/call-quality#mean-opinion-score--mos- "Goes to the Mean Opinion Score (MOS) page") is a measure of audio quality at a specific measurement point of voice interaction.
+To demonstrate the behavior, I have a simple code snippet that calls the conversation detail query endpoint to collect the mean opinion score(MOS) of conversations from 10 minutes ago. [Mean Opinion Score (MOS)](https://developer.genesys.cloud/analyticsdatamanagement/analytics/detail/call-quality#mean-opinion-score--mos- "Goes to the Mean Opinion Score (MOS) page") is a measure of audio quality at a specific measurement point of voice interaction.
 
 ```go
 func getMos() {
