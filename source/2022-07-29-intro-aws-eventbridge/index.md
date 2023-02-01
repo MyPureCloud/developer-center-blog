@@ -177,14 +177,14 @@ resource "aws_cloudwatch_event_target" "audit_rule" {
 The Amazon EventBridge integration offers a new and powerful tool for integrating Genesys Cloud with other internal applications and SaaS platforms. The tool allows you to build resilient and scalable backend integrations without dealing with many low-level complexities using the Genesys Cloud Notification service and a WebSocket. Furthermore, when you use **CX as Code** and Terraform, you easily automate the configuration and configuration of Genesys Cloud and Amazon EventBridge into a simple, declarative format that can be quickly processed with a CI/CD pipeline.
 
 ## Additional resources
-1. [Amazon EventBridge Documentation](https://docs.aws.amazon.com/eventbridge/?id=docs_gateway "Goes to Amazon EventBridge Documentation page") on the AWS website
-2. [About the Amazon EventBridge integration](https://help.mypurecloud.com/articles/about-the-amazon-eventbridge-integration/ "Goes to the About the Amazon EventBridge integration page") in the Genesys Cloud Resource Center
-3. [Genesys Cloud/Amazon EventBridge Technical Notes](/notificationsalerts/notifications/event-bridge)
-4. [Genesys Cloud EventBridge topics](/notificationsalerts/notifications/available-topics)
-5. [Genesys Cloud CX as Code](https://developer.genesys.cloud/devapps/cx-as-code/ "Goes to the Genesys Cloud CX as Code page") in the Genesys Cloud Developer Center
-6. [Genesys Cloud Remote Modules](https://github.com/GenesysCloudDevOps)
-7. [Genesys Cloud EventBridge remote module](https://github.com/GenesysCloudDevOps/aws-event-bridge-module)
-8. [Introducing the Genesys Cloud Amazon EventBridge Integration](https://www.youtube.com/watch?v=1uqEUpFtk8Q "Goes to the DevDrop 15: Introducing the Genesys Cloud Amazon EventBridge Integration video") in YouTube.
-9. [Video - How To Get Started With Amazon EventBridge](https://www.youtube.com/watch?v=ea9SCYDJIm4 "Goes to How To Get Started With Amazon EventBridge video") in YouTube.
-10. [Blueprint - Amazon EventBridge - Create a PagerDuty incident in response to OAuth client deletes](https://developer.genesys.cloud/blueprints/aws-eventbridge-oauth-client-delete-blueprint/ "Goes to the Amazon EventBridge - Create a PagerDuty incident in response to OAuth client deletes page") in the Genesys Cloud Developer Center
-11. [Blueprint - Amazon EventBridge - Write user presence updates to DynamoDB](https://developer.genesys.cloud/blueprints/aws-eventbridge-user-presence-update-blueprint/ "Goes to the Amazon EventBridge - Write user presence updates to DynamoDB page") in the Genesys Cloud Developer Center
+* [Amazon EventBridge Documentation](https://docs.aws.amazon.com/eventbridge/?id=docs_gateway "Goes to Amazon EventBridge Documentation page") on the AWS website
+* [About the Amazon EventBridge integration](https://help.mypurecloud.com/articles/about-the-amazon-eventbridge-integration/ "Goes to the About the Amazon EventBridge integration page") in the Genesys Cloud Resource Center
+* [Genesys Cloud/Amazon EventBridge Technical Notes](/notificationsalerts/notifications/event-bridge)
+* [Genesys Cloud EventBridge topics](/notificationsalerts/notifications/available-topics)
+* [Genesys Cloud CX as Code](https://developer.genesys.cloud/devapps/cx-as-code/ "Goes to the Genesys Cloud CX as Code page") in the Genesys Cloud Developer Center
+* [Genesys Cloud Remote Modules](https://github.com/GenesysCloudDevOps)
+* [Genesys Cloud EventBridge remote module](https://github.com/GenesysCloudDevOps/aws-event-bridge-module)
+* [Introducing the Genesys Cloud Amazon EventBridge Integration](https://www.youtube.com/watch?v=1uqEUpFtk8Q "Goes to the DevDrop 15: Introducing the Genesys Cloud Amazon EventBridge Integration video") in YouTube.
+* [Video - How To Get Started With Amazon EventBridge](https://www.youtube.com/watch?v=ea9SCYDJIm4 "Goes to How To Get Started With Amazon EventBridge video") in YouTube.
+* [Blueprint - Amazon EventBridge - Create a PagerDuty incident in response to OAuth client deletes](https://developer.genesys.cloud/blueprints/aws-eventbridge-oauth-client-delete-blueprint/ "Goes to the Amazon EventBridge - Create a PagerDuty incident in response to OAuth client deletes page") in the Genesys Cloud Developer Center
+* [Blueprint - Amazon EventBridge - Write user presence updates to DynamoDB](https://developer.genesys.cloud/blueprints/aws-eventbridge-user-presence-update-blueprint/ "Goes to the Amazon EventBridge - Write user presence updates to DynamoDB page") in the Genesys Cloud Developer Center
