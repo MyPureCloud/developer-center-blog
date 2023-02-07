@@ -6,19 +6,19 @@ author: ebenezer.osei
 category: 6
 ---
 
-Greetings everyone! `POST /api/v2/analytics/conversations/details/query` is a useful API endpoint for viewing or monitoring conversations details in an organization. It offers the ability to query conversations extensively based on desired metrics. Due to the nature of conversation data, the endpoint's responses may seem to act unusual sometimes. In this article, I will describe the endpoint's irregular behavior and suggest ways you can make effective API calls.
+Greetings everyone! `POST /api/v2/analytics/conversations/details/query` is a valid API endpoint for viewing or monitoring conversation details in an organization. It offers the ability to query conversations extensively based on wanted metrics. Because of the nature of conversation data, the endpoint's responses may sometimes seem unusual. In this article, I describe the endpoint's irregular behavior and suggest ways you can make effective API calls.
 
 For more information about the conversation details query endpoint, see the [conversations detail query](https://developer.genesys.cloud/analyticsdatamanagement/analytics/detail/conversation-query "Goes to the Conversation details query page") in the Genesys Cloud Developer Center.
 
-If you have any feedback or questions, please reach out to us on the [Genesys Cloud developer forum](https://developer.genesys.cloud/forum/ "Goes to the Genesys Cloud developer forum") in the Genesys Cloud Developer Center.
+If you have any feedback or questions, please reach out to us on the [Genesys Cloud Developer Forum](https://developer.genesys.cloud/forum/ "Goes to the Genesys Cloud Developer Forum") in the Genesys Cloud Developer Center.
 
-## Apparent inconsistency of the Conversation Details Query endpoint
-When querying the `POST /api/v2/analytics/conversations/details/query`, the totalHits counter reflects the approximate number of matching conversations for the given query body. If the interval covers a date span that contains data that's receiving new traffic from an organization, the totalHits counter can be a constantly changing value due to continuous data that is fed into the backend in real-time. Consequently, if paging through result sets for an interval is necessary, deduplication of the results could be required as the contents of early pages could arrive on a subsequent page pull due to the data set continually updating. Every API request reflects data the system is aware of when the request was made. When querying an interval receiving new information, the totalHits count and contents of particular pages change along with the new data.
+## Obvious inconsistency of the Conversation Details Query endpoint
+When querying the `POST /api/v2/analytics/conversations/details/query`, the totalHits counter reflects the approximate number of matching conversations for the specified query body.If the interval covers a date span that contains data that’s receiving new traffic from an organization, the totalHits counter can be a constantly changing value due to data continuously being fed into the backend in real time. Therefore, if paging through result sets for an interval is necessary, deduplication of the results could be required as the contents of early pages could arrive on a subsequent page pull because the dataset is constantly updating. Every API request made reflects data the system is aware of at the moment the request was made. When querying an interval that is receiving new information, the totalHits count and contents of particular pages change along with the new data.
 
 To receive data in real-time, we recommend using the [Notifications](https://developer.genesys.cloud/analyticsdatamanagement/analytics/notifications "Goes to the Notifications page") where applicable.
 
 ## Demonstration of API behavior
-To demonstrate the behavior, I have a simple code snippet that calls the conversation detail query endpoint to collect the mean opinion score(MOS) of conversations from 10 minutes ago. [Mean Opinion Score (MOS)](https://developer.genesys.cloud/analyticsdatamanagement/analytics/detail/call-quality#mean-opinion-score--mos- "Goes to the Mean Opinion Score (MOS) page") is a measure of audio quality at a specific measurement point of voice interaction.
+To give a brief demonstration about the behavior, I have a simple code snippet that calls the conversation detail query endpoint to collect the Mean Opinion Score (MOS) of conversations from 10 minutes ago. [MOS](https://developer.genesys.cloud/analyticsdatamanagement/analytics/detail/call-quality#mean-opinion-score--mos- "Goes to the MOS page") is a measure of audio quality at a specific measurement point of voice interaction.
 
 ```go
 func getMos() {
@@ -103,25 +103,25 @@ func getMos() {
 
 ```
 
-Listed is the result after running the code a couple of times.
+Here is the result after running the code a couple of times.
 
 ![Before](before.png)
 
-Above, you can see some differences between the initial total hits and the final ones.
+As you can see,  there are quite some differences between the initial total hits and the final ones.
 
 Here is the result after making some changes to the query body.
 
 ![After](after.png)
 
-Notice the total hits are smaller here. The processing time also was faster in this example. Check out how I improved the response in the next section.
+Notice how the difference between the total hits is smaller here. The processing time also was faster in this example. Check out how I improved the response in the next section.
 
-Also, notice how there were duplicates in both cases. For example, a record included on the fourth page during a request may end up on the fifth page during subsequent requests, causing it to show up as a duplicate. That happens due to the indefinite update of the response on the server.
+Also, notice how there were duplicates in both cases. For example, a record included on the fourth page during a request may end up on the fifth page during a later request, hence causing it to appear as a duplicate. That happened because of the indefinite update of the response on the server.
 
 ## Recommended practices to improve response consistency
 - Make sure to include `conversationEnd` filter in your query if you want to avoid ongoing conversations.
 - Avoid including the current time in the interval. For example, when querying for conversations from the past 30 minutes, make the interval `time.now()-30min/time.now()-1min`.
 
-The main idea is to narrow the query request as much as possible. A specific query request results in a more consistent response and reduces processing time, especially if you have a huge dataset. For more performance tips, see [here](https://developer.genesys.cloud/analyticsdatamanagement/analytics/detail/#performance-tips "Goes to the Introduction page") in the Genesys Cloud Developer Center.
+The main idea is to narrow the query request as much as possible. A specific query request results in a more consistent response and also reduces the processing time, especially if you have a huge dataset. For more performance tips, see [here](https://developer.genesys.cloud/analyticsdatamanagement/analytics/detail/#performance-tips "Goes to the Introduction page") in the Genesys Cloud Developer Center.
 
 ## Additional resources
 - [Conversations Detail Query](https://developer.genesys.cloud/analyticsdatamanagement/analytics/detail/conversation-query "Goes to the Conversations Detail Query page") in the Genesys Cloud Developer Center.
