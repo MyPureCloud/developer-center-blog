@@ -146,7 +146,7 @@ module "classifier_queues" {
 ```
 When the `terraform init` command is run with the above configuration, Terraform will pull down a local copy of the above remote module. When `terraform apply` is executed the downloaded module will be executed with the parameters defined above (e.g. the `classifier_queue_names`, `classifier_queue_members`) will be passed to locally downloaded modules. 
 
-## Introducing the Genesys Cloud DevOps Repository
+## Introducing the Genesys Cloud DevOps repository
 As Genesys Cloud continues in its own Terraform journey, I am pleased to announce that the Developer Engagement team is launching a new open-source GitHub repository called [GenesysCloudDevOps](https://github.com/GenesysCloudDevOps/). This repository will house a variety of Terraform remote modules that you can use and leverage within your own **CX as Code** projects. Even with **CX as Code**, some Genesys Cloud resources can be difficult to configure because there is a great deal of meta-data that needs to be setup and configured to use it.  We hope that these remote modules will help simplify this type of configuration setup.
 
 This Github repository includes remote modules for:
@@ -166,14 +166,15 @@ There are three ways to use the Genesys Cloud remote module repository:
 While Terraform remote modules support the concept of versioning through the use of source control tags we do not tag our modules with a version number and the modules are always referenced off the main branch of the remote module repository. We will always make the best effort to not make a "breaking change" to a remote module, but we do not guarantee it. If you would like tighter control over the remote module source, I recommend you fork the repository you are going to use and maintain the code within your repository.
 :::
 
-## Closing Thoughts
+## Closing thoughts
 
 I am a huge fan of Terraform modules. They allow me to better organize my Terraform code, reuse configuration and accelerate how quickly I can build Terraform/CX as Code configuration. The Developer Engagement team is going to continue to build out our GenesysCloudDevOps remote module repositories. We currently have 21 remote modules in our GenesysCloudDevOps repositories but plan on releasing more over the next several months. I hope you find these remote modules valuable and you can use them within your own projects. As always, we welcome Pull Requests ([PR](https://github.com/GenesysCloudDevOps)) for new submissions.
-## Resources
 
-1. [Beginning your CX as Code journey](/blog/2021-10-10-treating-contact-center-infrastructure-as-code/)
-2. [Genesys Cloud CX as Code/DevOps best practices](/blog/2022-05-12-cx-as-code-devops-best-practices/)
-3. [Building a Terraform module](https://www.terraform.io/language/modules)
-4. [Using Remote Terraform module](https://www.terraform.io/language/modules/sources)
-5. [Genesys Cloud DevOps GitHub Repository](https://github.com/GenesysCloudDevOps)
-6. [Genesys Cloud Blueprints](https://github.com/GenesysCloudBlueprints)
+## Additional resources
+
+* [Beginning your CX as Code journey](/blog/2021-10-10-treating-contact-center-infrastructure-as-code/)
+* [Genesys Cloud CX as Code/DevOps best practices](/blog/2022-05-12-cx-as-code-devops-best-practices/)
+* [Building a Terraform module](https://www.terraform.io/language/modules)
+* [Using Remote Terraform module](https://www.terraform.io/language/modules/sources)
+* [Genesys Cloud DevOps GitHub Repository](https://github.com/GenesysCloudDevOps)
+* [Genesys Cloud Blueprints](https://github.com/GenesysCloudBlueprints)
