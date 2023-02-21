@@ -13,7 +13,6 @@ Greetings, everyone, It is June 2022, the year is half over, and I hope everyone
 3. The Genesys Cloud DevOps Remote Module repository
 
 ## What is a Terraform module
-
 If you have done any work with **CX as Code** and , you know that you often start a project using a single Terraform file, for example, `main.tf`. However, as the project's size grows, your single Terraform configuration can quickly grow as you add more resource definitions to your project. Many DevOps engineers start decomposing their Terraform resources into multiple files that contain related resource definitions. 
 
 :::{"alert":"warning","title":"What is the right size for a CX as Code project?","autoCollapse":false}
@@ -167,11 +166,9 @@ While Terraform remote modules support the idea of versioning through source con
 :::
 
 ## Closing thoughts
-
 I am a huge fan of Terraform modules. They allow me to organize my Terraform code better, reuse configuration and accelerate how quickly I can build Terraform/CX as Code configuration. The Developer Engagement team continues to build our GenesysCloudDevOps remote module repositories. We currently have 21 remote modules in our GenesysCloudDevOps repositories but plan on releasing more over the next several months. I hope you find these remote modules valuable and can use them in your projects. As always, we welcome Pull Requests ([PR](https://github.com/GenesysCloudDevOps "Goes to the Genesys CLoud DevOps repository page")) in GitHub for new submissions.
 
 ## Additional resources
-
 * [How to begin your CX as Code Journey](/blog/2021-10-10-treating-contact-center-infrastructure-as-code/ "Goes to How to begin your CX as Code Journey repository page") in GitHub.
 * [Genesys Cloud CX as Code/DevOps best practices](/blog/2022-05-12-cx-as-code-devops-best-practices/ "Goes to the enesys Cloud CX as Code/DevOps best practices repository page") in GitHub.
 * [Modules](https://www.terraform.io/language/modules "Goes to the Modules page") on the Terraform website.
