@@ -13,7 +13,7 @@ Greetings, everyone, It is June 2022, the year is half over, and I hope everyone
 3. The Genesys Cloud DevOps Remote Module repository
 
 ## What is a Terraform module
-If you have done any work with **CX as Code** and , you know that you often start a project using a single Terraform file, for example, `main.tf`. However, as the project's size grows, your single Terraform configuration can quickly grow as you add more resource definitions to your project. Many DevOps engineers start decomposing their Terraform resources into multiple files that contain related resource definitions. 
+If you have done any work with **CX as Code** and, you know that you often start a project using a single Terraform file, for example, `main.tf`. However, as the project's size grows, your single Terraform configuration can quickly grow as you add more resource definitions to your project. Many DevOps engineers start decomposing their Terraform resources into multiple files that contain related resource definitions. 
 
 :::{"alert":"warning","title":"What is the right size for a CX as Code project?","autoCollapse":false}
 One of the common mistakes developers make with **CX as Code** and Terraform is that they try to manage their entire contact center infrastructure in a single Terraform project that reside in a single source control repository using a single backing state. A better approach is to decompose your contact center into major areas of functionality and break your Terraform projects into separate repositories and backing states. I recommend using your Genesys Cloud Architect flows to look for natural divisions within your contact center. However, even if you decompose to align with your Genesys Cloud Architect flows, your Terraform project files can become large because a single Architect flow can end up with dozens of dependencies that need to be deployed along with the flow. Terraform modules help you manage the size and complexity of these types of projects. 
@@ -21,7 +21,7 @@ One of the common mistakes developers make with **CX as Code** and Terraform is 
 For more information on best practices in building out your **CX as Code** projects, see [best practices](https://github.com/MyPureCloud/developer-center-blog/tree/master/source/2022-05-12-cx-as-code-devops-best-practices "Goes to the best practices repository page") in GitHub.
 :::
 
-There is nothing wrong with breaking your resources into multiple Terraform files. Still, there might be times when you want parameterize and reuse resource definitions within the same Terraform code base. For example, you might want to create multiple Genesys Cloud queues with slightly different values for each queue. As listed, you could define each queue individually:
+There is nothing wrong with breaking your resources into multiple Terraform files. Sometimes you want to parameterize and reuse resource definitions within the same Terraform code base. For example, you might want to create multiple Genesys Cloud queues with slightly different values for each queue. As listed, you could define each queue individually:
 
 ```hcl
 resource "genesyscloud_routing_queue" "401K_Queue" {
@@ -65,7 +65,7 @@ Terraform modules allow you to organize your resources better and reuse them thr
         └── module2/
 ```
 
-So let's write an example queue module using the previous structure. We begin with a `modules/queues/inputs.tf` file. This file defines the input values passed into the module. Modules act as containers around the resources defined within them. This means that a module can not reference a value outside of the module unless it is explicitly passed in as a Terraform input parameter, nor can values made by the module be accessed outside of the module without explicitly passing the value outside the module via a Terraform output variable.
+Let's write an example queue module using the previous structure. We begin with a `modules/queues/inputs.tf` file. This file defines the input values passed into the module. Modules act as containers around the resources defined within them. This means that a module can not reference a value outside of the module unless it is explicitly passed in as a Terraform input parameter, nor can values made by the module be accessed outside of the module without explicitly passing the value outside the module via a Terraform output variable.
 
 Here is a example implementation of our `inputs.tf` file.
 
