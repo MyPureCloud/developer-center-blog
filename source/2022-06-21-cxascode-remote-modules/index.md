@@ -150,7 +150,7 @@ As Genesys Cloud continues in its own Terraform journey, I am pleased to announc
 
 This GitHub repository includes remote modules for:
 
-1. Configuring Genesys Cloud to use an [AWS Event Bridge](https://github.com/GenesysCloudDevOps/aws-event-bridge-module "Goes to the AWS Event Bridge repository page") in GitHub.
+1. Configuring Genesys Cloud to use an [Amazon EventBridge](https://github.com/GenesysCloudDevOps/aws-event-bridge-module "Goes to the Amazon EventBridge repository page") in GitHub.
 2. Configuring AWS Lambdas with [Genesys Cloud Integrations](https://github.com/GenesysCloudDevOps/integration-lambda-module) and [Genesys Cloud Data Actions](https://github.com/GenesysCloudDevOps/data-action-lambda-module "Goes to the Genesys Cloud Data Actions repository page") in GitHub.
 3. Creating Genesys Cloud Data Actions for invoking various [Genesys Cloud APIs](https://github.com/GenesysCloudDevOps "Goes to the Genesys Cloud APIs repository page") in GitHub. Any repository that begins with the prefix `public-api-` is a data action that wrappers a Genesys Cloud public API call. 
 
