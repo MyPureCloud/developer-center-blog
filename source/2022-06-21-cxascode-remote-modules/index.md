@@ -6,7 +6,7 @@ author: john.carnell
 category: 6
 ---
 
-Greetings, everyone, It is June 2022, the year is half over, and I hope everyone is enjoying the summer months. I know it is hot and humid here in Raleigh, North Carolina. The heat will not stop until October. Today, I want to introduce you to Terraform modules and how you can use them from within your own **CX as Code** projects. Terraform modules allow you to make your Terraform flows more organized and reusable. In this blog post, we cover three major topics:
+Greetings, everyone, It is June 2022, the year is half over, and I hope everyone is enjoying the summer months. I know it is hot and humid here in Raleigh, North Carolina. The heat does not stop until October. Today, I want to introduce you to Terraform modules and how you can use them from within your own **CX as Code** projects. Terraform modules allow you to make your Terraform flows more organized and reusable. In this blog post, we cover three major topics:
 
 1. What is a Terraform module
 2. What is a Terraform remote module
