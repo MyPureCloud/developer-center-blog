@@ -6,33 +6,34 @@ date: 01/11/2023
 category: 4
 ---
 
-Hello, developers! 2023 is underway, and today's blog entry is an introduction to priority and skill modification for in-queue interactions. In the past, it wasn't possible to update these while an interaction sat in the queue, but now it can be done using either the Genesys Cloud API or built-in tools provided by Genesys Cloud Architect's In-Queue call flows.
+Hello, developers! 2023 is underway, and today's blog entry introduces priority and skill modification for in-queue interactions. It wasn't possible to update these in the past while an interaction sat in the queue, but now it can be done using either the Genesys Cloud API or built-in tools provided by Genesys Cloud Architect's In-Queue call flows.
 
-To demonstrate the utility of this, lets look at two scenarios:
+To demonstrate the utility of this, let's look at two scenarios:
 
-1. An organization has identified hold times as an area for improvement. The new target states that if hold time exceeds 15 minutes, the call's priority should be increased to 50.
-2. An organization's clients are mostly native Spanish speakers, but many also have English as a second language. When a customer selects Spanish, the inbound flow transfers the call to the queue with the language skill set to Spanish. Makes sense so far, but what if there aren't any Spanish speaking agents available at the time? To remedy this, the organization decides that after a call sits in the queue for 15 minutes, the language skill should be set to English.
+1. An organization has identified the hold times as an area for improvement. The new target states that if hold time exceeds 15 minutes, the call's priority should be increased to 50.
+
+2. An organization's clients are primarily native Spanish speakers, but many also have English as a second language. When a customer selects Spanish, the inbound flow transfers the call to the queue with the language skill set to Spanish. Makes sense so far, but what if there aren't any Spanish-speaking agents available then? To remedy this, the organization decides that after a call sits in the queue for 15 minutes, the language skill should be set to English.
 
 :::primary
-Note: The queue used for this testing example used Standard Routing as its routing method and All Skills Matching as its evaluation method. These are relevant considerations, but not mandatory.
+Note: The queue used for this testing example used Standard Routing as its routing method and All Skills Matching as its evaluation method. These are relevant considerations but not mandatory.
 :::
 
 :::primary
-Note: Regarding the API approach, the aim of this post is not to demonstrate a fully-implemented client application, rather it highlights the use of the relevant API resources, and outlines any other steps needed to complete the solution.
+Note: Regarding the API approach, this post aims not to demonstrate a fully-implemented client application, rather it highlights the use of the relevant API resources and outlines any other steps needed to complete the solution.
 :::
 
-With Architect's tools for In-Queue call flows, or using the API for a custom approach, the solution is here.
+The solution is here with Architect's tools for In-Queue call flows or using the API for a custom approach.
 
 ## Architect approach
 
 ### Inbound call flow
-When opting to use solely Architect for the implementation, the In-Queue call flow will differ from that of the API approach. However, the inbound call flow won't change in this case.
+The In-Queue call flow differs from the API approach when opting to use Architect solely for the implementation. However, the inbound call flow won't change in this case.
 
-To direct the inbound calls appropriately, set up the DTMF menu.  First, configure the audio the customer will be greeted with using an audio sequence.  
+To direct the inbound calls appropriately, set up the DTMF menu. First, configure the audio the customer is greeted with using an audio sequence.  
 
 ![Audio sequence](menu-audio-sequence.png "Audio sequence")  
 
-A separate DTMF task will be needed to handle each menu option. The tasks will look very similar in this case. The difference lies in which language skill gets set when the call is transferred to the queue.  Here's the handling of the "Spanish" option.  
+A separate DTMF task wis required to handle each menu option. The tasks will look very similar in this case. The difference lies in the language skills set when the call is transferred to the queue. Here's the handling of the "Spanish" option.  
 
 ![DTMF Spanish task](dtmf-task-2.png "DTMF Spanish task")  
 
@@ -46,21 +47,20 @@ However, you can also use the expression editor to do this.
 ![Spanish skill expression](language-skill-expression-spanish.png "Spanish skill expression")  
 
 ### In-Queue call flow
-The next step is to wait. The nice thing about Architect's hold music is that it also serves as a timer.  In this case, the timer is set for 15 minutes.  
+The next step is to wait. The nice thing about Architect's hold music is that it also serves as a timer. In this case, the timer is set for 15 minutes.  
 
 ![In-Queue call flow](in-queue-flow.png "In-Queue call flow")  
 
-After the wait period, the priority is boosted. If the language skill is currently set to Spanish, then it will be changed to English.
-The Architect actions to accomplish this can be found in the toolbox under the "Conversation" heading.  
+After the waiting period, the priority is boosted. If the language skill is currently set to Spanish, it will be changed to English.
+The Architect's actions to accomplish this can be found in the toolbox under the "Conversation" heading.  
 
 ![Actions navigation view](actions-nav-view.png "Actions navigation view")  
 
-Now, the Set Skills action is used to set the language skill, but this time the English skill is set. 
-Again, this can be done using the editor's literal mode or the expression mode.  The literal mode provides a dropdown.
+Now, the Set Skills action is used to set the language skill, but this time the English skill is set. This can be done using the editor's literal or expression modes.  The literal mode provides a dropdown.
 
 ![English skill literal](set-skills-literal.png "English skill literal")
 
-English speaking agents are now eligible to answer the call, so all that's left to do is play more hold music until the call is answered.
+English-speaking agents are now eligible to answer the call, so all that's left to do is play more hold music until the call is answered.
 
 ## API approach
 This approach is made possible first and foremost by this API resource:  
@@ -77,10 +77,10 @@ In addition, these auxillary resources are used for this example.
 The inbound call flow is identical to the one used in the Architect approach in this example.
 
 ### In-Queue call flow
-This approach doesn't require any custom handling for calls that are waiting in-queue.
+This approach doesn't require custom handling for calls waiting in the queue.
 
 ### Implementation
-For this step, implementation will depend on context. In this example, the Genesys Cloud CLI will be leveraged to get the job done.
+The Genesys Cloud CLI is leveraged to complete the job in this example.
 
 1. Obtain the IDs of the In-Queue flow and the Spanish language skill.
 
@@ -152,10 +152,10 @@ And the request body:
 }
 ```
 ## Other considerations
-When setting up your test environment, consider using a dedicated test queue with the tester as the sole member on queue. Configuring the queue with Standard routing and All Skills Matching evaluation will make for the most clear-cut testing process. Give the tester the English speaking skill, but not the Spanish speaking skill.  The incoming call with Spanish selected will sit in the queue until the language skill is switched back to English.  At that point, if the tester's status is set to On Queue, he or she will be assigned and receive an alert notification for the call.
+When setting up your test environment, consider using a dedicated test queue with the tester as the sole member on the queue. Configuring the queue with Standard routing and All Skills Matching evaluation will make for the most clear-cut testing process. Give the tester English but not Spanish-speaking skills. The incoming call with Spanish selected will sit in the queue until the language skill is switched back to English. At that point, if the tester's status is set to On Queue, they are assigned and will receive an alert notification for the call.
 
 ## Additional Resources
-Thanks for reading! If this piqued your interest or left you with unanswered questions, check out these links for more.
+Check out these links if this piqued your interest or left you with unanswered questions.
 
 1. [Priority and skill modification DevDrop](https://www.youtube.com/watch?v=RWeDL1IDrkE)
 2. [Resource Center - Set Priority action](https://help.mypurecloud.com/?p=260380)
