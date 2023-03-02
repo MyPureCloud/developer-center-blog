@@ -23,8 +23,8 @@ The automated pipeline, formally known as a [CI/CD pipeline](https://en.wikipedi
 The following are benefits of the automation pipeline:
 
 - Reducing the feedback loop from hours/days to seconds/minutes
-- Chatbots deployments and their dependencies that are identical across environments; if it works in UAT, it works in Prod.
-- Assurance of quality through automated tests. No matter the change, it is subjected to over 40 end-to-end tests, which take less than two minutes and run simultaneously.
+- Chatbots deployments and their dependencies that are identical across environments; if it works in UAT, it works in Prod
+- Assurance of quality through automated tests. No matter the change, it is subjected to over 40 end-to-end tests, which take less than two minutes and run simultaneously
 
 ## Implementation
 Let's break down the pipeline and examine each part.
