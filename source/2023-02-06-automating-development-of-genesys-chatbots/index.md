@@ -165,4 +165,4 @@ scenarios:
 ```
 
 ## Conclusion
-This article has provided enough pipeline information for you to get started. If you have any questions or want to share your implementation, contact [@SketchingDev](https://twitter.com/SketchingDev "Goes to Lucus' home page") on Twitter.
+This article has provided enough information about the automation pipeline for you to get started. If you have any questions or want to share your implementation, contact [@SketchingDev](https://twitter.com/SketchingDev "Goes to Lucus' home page") on Twitter.
