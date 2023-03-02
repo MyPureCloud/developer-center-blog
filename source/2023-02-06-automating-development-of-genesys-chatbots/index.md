@@ -27,7 +27,7 @@ The following are benefits of the automation pipeline:
 - Assurance of quality through automated tests. No matter the change, it is subjected to over 40 end-to-end tests, which take less than two minutes and run simultaneously
 
 ## Implementation
-Let's break down the pipeline and examine each part.
+Let's examine the automation pipeline.
 
 ### Source-control
 The flows, chatbots, dependencies, tests, and pipeline definition [GitHub](https://github.com/  "Goes to the GitHub page") is located in the GitHub repository.
