@@ -7,7 +7,7 @@ image: annotated-pipeline.png
 category: 6
 ---
 
-OVU uses automation to ensure quality is maintained. They aim to reduce the feedback loop when developing chatbots. A short feedback loop means that OVU quickly adapts to customers' responses. This article explains the automation pipeline and the creation process.
+OVO Tech uses automation to ensure quality is maintained. They aim to reduce the feedback loop when developing chatbots. A short feedback loop means that OVU quickly adapts to customers' responses. This article explains the automation pipeline process.
 
 ![Diagram of the pipeline annotated with technologies relevant to each step](annotated-pipeline.png)
 
@@ -81,7 +81,7 @@ workflows:
 ### Deploy using Terraform
 ![Pipeline with Terraform tasks highlighted](pipeline-terraform.png)
 
-[Terraform](https://www.terraform.io/) offers defined resources that you want to deploy declaratively. This way, you know that the deployments always match what is in the source-control.
+[Terraform](https://www.terraform.io/ "Goes to the Terraform page") offers defined resources that you want to deploy declaratively. This way, you know that the deployments always match what is in the source-control.
 
 Since many [Providers](https://registry.terraform.io/browse/providers "Goes to the Providers page"), must define everything in
 one place, from chatbots, flows, and data-actions to backend services. The following example is a Terraform definition:
@@ -140,11 +140,11 @@ resource "genesyscloud_webdeployments_deployment" "survey_deployment" {
 ### Automated testing
 ![Pipeline with automated testing tasks highlighted](pipeline-testing.png)
 
-OVO uses the following open-source tools for automated chatbot testing:
+OVO Tech uses the following open-source tools for automated chatbot testing:
 
 - [Web Messenger Tester](https://github.com/ovotech/genesys-web-messaging-tester "Goes to the Web Messenger Tester page") - Used for testing Inbound Message flows via a Web Messenger Deployment.
     - Since the WhatsApp integration uses Incoming Message Flows, you can test WhatsApp-specific chatbots for testing IVR flows using the [IVR Tester](https://github.com/SketchingDev/ivr-tester "Goes to the IVR Tester page") tool. 
-    - This tool can test our IVR-based chatbots flows by impersonating a customer calling OVO, interpreting what it hears, and responding accordingly to traverse the journey. Any unexpected response is flagged.
+    - This tool can test our IVR-based chatbots flows by impersonating a customer calling OVO Tech, interpreting what it hears, and responding accordingly to traverse the journey. Any unexpected response is flagged.
 
 Both tools define tests in files that can be stored alongside the chatbots in the source-control and act as living documentation:
 
