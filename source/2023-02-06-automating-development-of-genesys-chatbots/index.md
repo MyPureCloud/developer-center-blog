@@ -7,7 +7,7 @@ image: annotated-pipeline.png
 category: 6
 ---
 
-OVO Tech uses automation to ensure quality is maintained. They aim to reduce the feedback loop when developing chatbots. A short feedback loop means that OVU quickly adapts to customers' responses. This article explains the automation pipeline process.
+OVO Tech uses automation to ensure quality is maintained. They aim to reduce the feedback loop when developing chatbots. A short feedback loop means that OVO Tech quickly adapts to customers' responses. This article explains the automation pipeline process.
 
 ![Diagram of the pipeline annotated with technologies relevant to each step](annotated-pipeline.png)
 
