@@ -8,7 +8,7 @@ category: 6
 
 Greetings everyone! `POST /api/v2/analytics/conversations/details/query` is a valid API endpoint to view or monitor conversation details in an organization. It queries conversations extensively based on the desired metrics. Because of the nature of conversation data, the endpoint's responses may sometimes seem unusual. This article describes the irregular endpoint's behavior and suggests ways you can make effective API calls.
 
-For more information on the conversation details query endpoint, see the [conversations detail query](https://developer.genesys.cloud/analyticsdatamanagement/analytics/detail/conversation-query "Goes to the Conversation details query") page in the Genesys Cloud Developer Center.
+For more information on the conversation details query endpoint, see the [Conversations detail query](https://developer.genesys.cloud/analyticsdatamanagement/analytics/detail/conversation-query "Goes to the Conversation details query") page in the Genesys Cloud Developer Center.
 
 ## Obvious inconsistency of the Conversation Details Query endpoint
 
