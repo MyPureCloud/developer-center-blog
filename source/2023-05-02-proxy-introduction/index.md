@@ -6,8 +6,8 @@ author: hemanth.dogiparthi
 category: 6
 ---
 
-Greetings, everyone! In this blog, I'm going to introduce the new proxy configuration, which has been added to our [GO SDK] - (v96.0.0 & greater  https://developer.genesys.cloud/devapps/sdk/go), 
-[CLI tool] (66.0.0 & greater  https://developer.genesys.cloud/devapps/cli/) and [CX as code] (v1.15.0 & greater https://developer.genesys.cloud/devapps/cx-as-code/). With this configuration applied, you can make SDK platform calls ,use CLI and CX-as-code  via a proxy server.
+Greetings, everyone! In this blog, I'm going to introduce the new proxy configuration, which has been added to our [GO SDK (v96.0.0 & greater)](https://developer.genesys.cloud/devapps/sdk/go), 
+[CLI tool (66.0.0 & greater)](https://developer.genesys.cloud/devapps/cli/) and [CX as code(v1.15.0 & greater)](https://developer.genesys.cloud/devapps/cx-as-code/). With this configuration applied, you can make SDK platform calls and use our CLI tool & CX-as-Code via a proxy server.
 
 ## Usage
 
@@ -16,9 +16,11 @@ Greetings, everyone! In this blog, I'm going to introduce the new proxy configur
 In this scenario, let's say you want to access the platform API calls in SDK via a proxy server, it can be accomplished by setting the proxy settings on the configuration object.
 
 The `ProxyConfiguration` object has 3 properties that determine the URL for proxying.
-Port - Port of the Proxy server
-Host - Host Ip or DNS of the proxy server
-Protocol - Protocol required to connect to the Proxy (http or https)
+
+- Port - Port of the Proxy server
+- Host - Host Ip or DNS of the proxy server
+- Protocol - Protocol required to connect to the Proxy (http or https)
+
 
 The 'ProxyConfiguration' has another section which is an optional section. If the proxy requires authentication to connect to
 'Auth' needs to be mentioned under the 'ProxyConfiguration'.
@@ -41,7 +43,7 @@ Similar configuration can be applied for othe SDKs like Java , Javascript, Pytho
 
 ## 2. CX-as-code:
 
-If you want to access your CX as Code via a proxy server, while setting up the terraform provider you can provide this configuration so that underlying GO SDK use this setting for making the platform API calls for creating the Genesys Cloud configuration objects 
+If you want to access your CX as Code via a proxy server, while setting up the terraform provider you can provide this configuration so that underlying GO SDK uses this setting for making the platform API calls for creating the Genesys Cloud configuration objects 
 
 ```bash
 provider "genesyscloud" {
@@ -84,7 +86,7 @@ proxy_protocol = 'http'
 proxy_username = 'john_doe1'
 proxy_password = 'password'
 ```
-**Note:** The poxy username and password are optional params.
+**Note:** The proxy username and password are optional params.
 
 The new feature also allows you to setup the proxy using a gc cli command.
 
