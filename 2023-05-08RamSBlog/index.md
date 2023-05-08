@@ -6,6 +6,7 @@ Synoptia is a Genesys Cloud Service used in Genesys Agent Assist to automaticall
 ## Modeling Approach
 As we all know, since 2019, Transformers based approaches (such as OpenAI’s GPT, GPT-3 and now GPT-4) have taken the NLP world by storm. GPT-3 was built to handle back and forth conversations and cover a wide range of applications – writing a blog, an email, a song, and more. By putting a UI on top of GPT-3, OpenAI brought the power of Generative AI to the masses. .
 At a high level, Transformer architecture typically consists of an encoder and decoder. Encoder encodes the input text to a vector representation and can be thought of as an array of floating-point numbers. The decoder consumes these vectors to generate text again. Hence the name, Transformer, as we transform the input text to an output text for various purposes.
+
 This image shows how this Transformer architecture is applied to a translation use case:
 ![Translation via LLM](translate.png "Translation via LLM")
 
@@ -22,6 +23,7 @@ We chose a model specifically tuned for summarization. When evaluating which mod
 The code was adapted to our needs and only known and vetted data was used during training.
 
 The following diagram shows how the service works:
+
 ![Synoptia Service](Syntopia.png "Synoptia Service")
  
 ## Pre/Post Processing
