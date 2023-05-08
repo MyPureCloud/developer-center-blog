@@ -22,7 +22,7 @@ We chose a model specifically tuned for summarization. When evaluating which mod
 The code was adapted to our needs and only known and vetted data was used during training.
 
 The following diagram shows how the service works:
-![](../Syntopia.png)
+![Synoptia Service](syntopia.png "Synoptia Service")
  
 ## Pre/Post Processing
 Preprocessing and post processing are very important to ensure we extract maximum accuracy from the model. Some of what agents and customers type during a conversation would confuse the model. Some words and concepts have multiple meanings and while we cannot guarantee 100% accuracy, processing the data before it’s fed into the model and after it’s returned by the model helps. Some of the processing steps include
