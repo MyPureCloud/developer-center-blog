@@ -17,7 +17,6 @@ At a high level, Transformer architecture typically consists of an encoder and d
 This image shows how this Transformer architecture is applied to a translation use case:
 ![Translation via LLM](translate.png "Translation via LLM")
 
-
 In some NLP applications like text classification, sentiment analysis, question answering, typically only the encoder is used. In those applications, there is no need to formulate a response through the model. The response is based on the output of the encoder with additional layers as output. For applications that produce alternative text both the encoder and decoder are used. The class of models that are used for summarization are called Seq2SeqLM models, since the input is text and output is also text. There are transformer models where the input is text, and the output is an image.
 
 Syntopia uses Seq2Seq modeling adapted and customized based on an open-source model from HuggingFace, a respected open-source community that enterprise developers commonly use. We chose HuggingFace because training a Generative AI model from scratch is costly from a time and data perspective and using open-source models to reduce time to market is a common practice. 
