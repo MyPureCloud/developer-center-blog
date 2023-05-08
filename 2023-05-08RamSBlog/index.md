@@ -1,4 +1,4 @@
-Making of Synoptia: New Genesys Cloud Service for Generative AI
+# Making of Synoptia: New Genesys Cloud Service for Generative AI
 
 Introduction
 Synoptia,is a Genesys Cloud Service used in Genesys Agent Assist to automatically summarize conversations between customers and agents. The service processes the entire conversation in near real time as part of the agent After Call Work (ACW). The first version supports English only, additional languages are being considered. This service is the first Generative AI component built by the Genesys Cloud team.
