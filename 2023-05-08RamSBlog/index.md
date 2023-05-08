@@ -1,3 +1,12 @@
+---
+title: Making of Synoptia - New Genesys Cloud Service for Generative AI
+tags: ai, generativeAI
+date: 2023-05-08
+author: ram.sundaram
+category: 0
+---
+
+
 # Making of Synoptia: New Genesys Cloud Service for Generative AI
 
 ## Introduction
