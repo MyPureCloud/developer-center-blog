@@ -45,13 +45,14 @@ We are working on adding additional processing such as ensuring gender neutralit
 We need to be careful and control the kind of text the model generates. We know this is data that is likely to be part of the record for the customer and used by supervisors and other stakeholders. Most of the commercially available models have little built-in constraint and they generate whatever content the algorithms produce with no filter. Models have to be trained specifically to recognize and deal with offensive language. This is true especially if the input conversation contains swear words, racial slurs, and other offensive content. The model will summarize that content verbatim.
 
 Given the role these summaries play for our customers, we wanted to avoid that. As part of the process that generates the summary, we suppress a global list of swear/offensive words. This list will be enhanced as we learn more about how this feature is being used.
-Architecture and Flow
+
+## Architecture and Flow
 
 This service uses several components that are already part of Genesys Cloud. Here is a quick description of how the service works:
 
 1. Once the agent ends the conversation in the UI, the Generative AI service receives the conversation details
 2. Conversation transcripts are then fetched for processing
-3. The conversation is preprocessed using standard NLP Techniques
+3. The conversation is pre-processed using standard NLP Techniques
 4. The core engine leverages **seq2seq** modeling approach to summarize the conversation
 5. The output is post-processed
 6. After all processes are complete, we let the consuming services know that the summary is available
