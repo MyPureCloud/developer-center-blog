@@ -34,7 +34,7 @@ The following diagram shows how the service works:
 ![Genesys Agent Assist Generative AI Service](GenerativeAIService.png "Genesys Agent Assist Generative AI Service")
  
 ## Pre/Post Processing
-Preprocessing and post processing are very important to ensure we extract maximum accuracy from the model. Some of what agents and customers type during a conversation would confuse the model. Some words and concepts have multiple meanings and while we cannot guarantee 100% accuracy, processing the data before it’s fed into the model and after it’s returned by the model helps. Some of the processing steps include
+Preprocessing and post processing are very important to ensure we extract maximum accuracy from the model. Some of what agents and customers type during a conversation would confuse the model. Some words and concepts have multiple meanings and while we cannot guarantee 100% accuracy, processing the data before it’s fed into the model and after it’s returned by the model helps. Some of the processing steps include:
 
 - Removing emojis from the text
 - Text normalization
