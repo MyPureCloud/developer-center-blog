@@ -5,7 +5,7 @@ The Genesys Cloud Developer Center Blog repository, https://developer.genesys.cl
 # Contributing
 
 1. Fork the Genesys Cloud Developer Center Blog repository to your GitHub account
-2. Create a New folder for your article using the following format `YYYY-MM-DD-blog-post-title`
+2. Create a new folder for your article in the `source` directory using the following format `YYYY-MM-DD-blog-post-title`
     1. The title in the folder name should be kept to 5 words or less, must not contain spaces, and should use lowercase letters, numbers, and dashes only
     2. The index file and all images must reside directly in this folder; no subfolders are permitted
 4. Within the new folder, create an `index.md` file and write your article in this file
