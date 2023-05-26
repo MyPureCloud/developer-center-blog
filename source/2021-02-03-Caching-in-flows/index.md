@@ -65,14 +65,14 @@ Knowledge is power, so familiarize yourself with Genesys Cloud's rate limits her
 
 ### Additional rate limits to be aware of
 If you use the Genesys Cloud Data Actions integration to enhance your flow with data actions that invoke the Genesys Cloud Platform API, keep the following default Genesys Cloud rate limits in mind:
-* 15 concurrent data action executions
-* 900 data action executions per minute
+* 50 concurrent data action executions
+* 2500 data action executions per minute
 * 300 platform API requests per OAuth2 token per minute
 
 **Important:** Exceeding these limits will cause data action executions to fail, and without proper handling, your flow could also fail.
 
 :::{"alert":"info","title":"Rate Limits with Call Flows, Data Actions and Platform APIs","autoCollapse":false}
-While you can perform 900 data actions executions per minute, if you are using a data action to call a Genesys Cloud API, you can only make 300 requests per OAuth2 token before the platform API starts rate limiting requests from that token.  
+While you can perform 2500 data actions executions per minute, if you are using a data action to call a Genesys Cloud API, you can only make 300 requests per OAuth2 token before the platform API starts rate limiting requests from that token.  
 
 Some developers try to get around these rate limits by having multiple OAuth2 clients or generating additional OAuth2 client tokens. In Genesys Cloud, hitting rate limits is a signal that you are not using our APIs correctly. For example, you are not using caching, or you are doing excessive polling.
 
