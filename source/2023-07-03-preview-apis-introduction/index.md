@@ -15,6 +15,9 @@ For questions, comments, concerns, or help with these APIs, SDKs or CLI, please 
 ## Usage
 Usage of a preview method is no different to the usage of a regular method in the SDKs and CLI. Below is an example usage of a preview API using the Javascript SDK.
 
+:::warning
+ At the time of writing `POST /api/v2/taskmanagement/workitems` was a preview endpoint. This endpoint will eventually become public so the link below will be broken. If this happens then the endpoint example will be available [here](https://developer.genesys.cloud/devapps/api-explorer) 
+:::
 [POST /api/v2/taskmanagement/workitems](/platform/preview-apis#post-api-v2-taskmanagement-workitems)
 
 ```js
@@ -46,7 +49,7 @@ apiInstance.postTaskmanagementWorkitems(body)
  The Preview API resources are available in a limited capacity as a preview of resources that are intended to be released publicly at some point in the future. Access to these resources is often restricted by feature toggles enabled on a per-org basis. Preview APIs are subject to both breaking and non-breaking changes at any time without notice. This includes, but is not limited to, changing resource names, paths, contracts, documentation, and removing resources entirely.
 :::
 
-All preview methods will be marked in the documentation and source code as preview. Ensure you are aware of any preview methods you are using to be ready in the event of changes to the method. 
+All preview methods will be marked in the documentation and source code as preview. Ensure you are aware of any preview methods you are using to be ready in the event of changes to the method. It's recommended to always use the latest SDK version, which will contain the latest endpoint and contract definitions; the latest SDK version is the only version that is a 100% match with the deployed Platform API.
 
 ## Closing thoughts
 While a helpful addition to the Genesys Cloud SDK and CLI, the preview APIs can cause problems if not used correctly so ensure to use them wisely.
