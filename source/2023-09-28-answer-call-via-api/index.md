@@ -112,8 +112,10 @@ The ability to [maintain a persistent connection](https://help.mypurecloud.com/a
 
 ![Persistent](persistent-connection.gif)
 
-What it means is that the agent's phone remains connected to Genesys Cloud once the call with the customer is completed -> when the agent requests to end the conversation via Genesys Cloud Desktop or Platform API, when the customer hangs up.  
+What it means is that the agent's phone remains connected to Genesys Cloud once the call with the customer is completed: when the agent requests to end the conversation via Genesys Cloud Desktop or Platform API, or when the customer hangs up.  
 From a Platform API perspective, there is no active "conversation (if the logged in user invokes [GET /api/v2/conversations](/devapps/api-explorer#get-api-v2-conversations), no Genesys Cloud conversation context will be returned). But from a telephony standpoint, there is still an active call/session between Genesys Cloud and the agent's phone.
+
+***Note that the connection will be terminated if no new conversation is received before the Persistent Connection timeout elapses.***
 
 
 ## By Phone Type and settings
@@ -207,18 +209,18 @@ POST /api/v2/conversations/calls
 
 ***With Genesys Cloud WebRTC Phone:***
 
-The following settings are required to support answering a call or placing a call using Platform API:
-- Enable "Maintain Persistent Connection" at phone or phone base settings level (Genesys Cloud centralized configuration)
-- Allow "Placing calls with another app" (Genesys Cloud Desktop - local/cookie setting)
-- Periodically generate calls (it can be to a destination that will disconnect almost immediately - e.g. an Architect Inbound Call flow) to maintain a persistent connection active.
+The following settings and behavior are required to support answering a call or placing a call using Platform API:
+- User's Phone/Phone Base Settings: Enable "Maintain Persistent Connection" at the phone or the phone base settings level (Genesys Cloud centralized configuration)
+- User's Genesys Cloud Desktop Web: Allow "Placing calls with another app" (Genesys Cloud Desktop - local/cookie setting)
+- Custom code: Periodically generate calls (it can be to a destination that will disconnect almost immediately - e.g. an Architect Inbound Call flow) to maintain a persistent connection active.
 
 ***With Managed Phone and Generic SIP Phone (with broadsoft extensions support):***
 
-Answering a call or placing a call using Platform API **is fully supported**, regardless of the setting to "Maintain Persistent Connection" (supported in both cases).
+Answering a call or placing a call using Platform API **is fully supported**, regardless of the setting to "Maintain Persistent Connection" (Enabled or Disabled).
 
 ***With Remote Phone and Generic SIP Phone (no remote answer support):***
 
-Answering a call using Platform API **is not supported**.  
+Answering a call using Platform API **is not supported** (to be more specific - it is only supported while a persistent connection is active - not supported otherwise).  
 Placing a call using Platform API is supported but will require the agent to manually answer the incoming call on the phone (Two-way call generated from Genesys Cloud).
 
 
