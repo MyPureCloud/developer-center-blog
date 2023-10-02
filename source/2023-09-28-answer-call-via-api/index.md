@@ -11,6 +11,8 @@ Greetings everyone! It had been a while since I posted an article.
 
 Recently, as these questions were periodically popping up on the Genesys Cloud Developer forum, I have thought that it would be good to clarify *what we exactly support and what happens when trying to answer a voice call using the Platform API* (same when initiating a voice call using the Platform API).
 
+In this article, we will consider two possible Contact Center Agent's user interfaces: [**Genesys Cloud Web or Desktop app**](https://help.mypurecloud.com/?p=49607) and [**Genesys Cloud Embeddable Framework**](https://help.mypurecloud.com/?p=196909).
+
 ![Simplified view of Agent phone and desktop](phone-api-diagram.png)
 
 ## What's available in the Platform API?
@@ -28,6 +30,23 @@ Recently, as these questions were periodically popping up on the Genesys Cloud D
 **Note:** The fact that an API endpoint exists (e.g. to request a call to be answered) doesn't automatically imply that this request will be processed successfully in all possible scenario (e.g. with a remote phone). This will be described in more details later in this article.
 :::
 
+### Specific to Genesys Cloud Embeddable Framework:
+
+Genesys Cloud Embeddable Framework implements another interface that you can use to answer calls or to initiate calls programmatically.
+
+***Answer Call:***
+[`Interaction.updateState`](/platform/embeddable-framework/actions/Interaction/Interaction.updateState) updates the state of an interaction.  
+Using `action=pickup` on an alerting interaction will trigger a request to answer the call.
+
+***Make Call:***
+[`clickToDial`](/platform/embeddable-framework/actions/clickToDial) initiates a phone call, an SMS message, or an email.  
+Using `type=call` will initiate a phone call.
+
+:::{"alert":"primary","autoCollapse":false}
+What is important to understand with Genesys Cloud Embeddable Framework actions is that they are equivalent to the user clicking on answer call or initiating a call from the user interface.  
+I.e. An `Interaction.updateState(action=pickup)` is equivalent to a "manual" answer in Genesys Cloud Embeddable Framework.
+:::
+
 ## Factors influencing Answer Call and Make Call via Platform API
 
 One important thing to understand is that there are different factors which influence how and if calls can be answered or initiated via Platform API:
@@ -36,10 +55,12 @@ One important thing to understand is that there are different factors which infl
 3. for Unmanaged Phones (Generic SIP), if the phones support Broadsoft Extensions SIP Event Package for remote talk/hold (*SIP NOTIFY - Event: talk/hold*).
 4. if the phone is configured to [maintain a Persistent Connection (Genesys Cloud feature)](https://help.mypurecloud.com/?p=134672) or not.
 
+And if you are using Genesys Cloud Embeddable Framework as user interface, this will provide more programmatic options using the available Interaction.updateState and clickToDial actions.
 
-**OAuth Authorization Type:**
 
-Why is it important?
+### OAuth Authorization Type:
+
+***Why is it important?***
 
 Because **only the user** who is associated with the phone (the phone receiving the call) can invoke the Platform API Answer Call or Make Call.
 
@@ -54,9 +75,9 @@ It is not possible to invoke these Platform API endpoints using a OAuth Client C
 Invoking the Platform API Answer Call and Make Call will result in an HTTP Error (400).
 :::
 
-**Phone Type:**
+### Phone Type:
 
-Why does the phone type matter?
+***Why does the phone type matter?***
 
 This is because answering a call remotely is not something trivial and is not supported by design and by default on all phones and on all types of networks (PSTN/PLMN, SIP).
 
@@ -91,36 +112,46 @@ A phone can advertise support for remote answer in the 180 Ringing, adding "Allo
 If a custom application requests the server to answer the call, the server will request the phone to go off-hook sending a SIP NOTIFY with "Event: talk" header.  
 ***The Genesys Cloud Managed Phones support the Broadsoft Extensions for remote talk.***
 
-**Make Call:**  
+**Initiate Two-Way Call:**  
 ![Make Call](3pcc-broadsoft-make-call-diagram.png)
 
 When requesting to create a two-way call, the server will create a leg to the agent's phone first, sending a SIP NOTIFY with "Event: talk" automatically on 180 Ringing.
 
 :::{"alert":"primary","autoCollapse":false}
 Genesys Cloud WebRTC Phone is a specific case. WebRTC does not include and define a protocol for the management of sessions (to create, maintain or terminate a session between users).
-The approach for answering call via API will be a combination of interacting with the phone directly (as it is embedded in Genesys Cloud Desktop) and with the server.
+The approach for answering call via API will be a combination of interacting with the phone directly (as it is embedded in Genesys Cloud Web/Desktop app) and with the server.
 :::
 
 
-**Maintain Persistent Connection:**
+### Maintain Persistent Connection:
 
-The ability to [maintain a persistent connection](https://help.mypurecloud.com/articles/terminate-persistent-connection-genesys-cloud-webrtc-phone/) is a Genesys Cloud feature that can be enabled at the phone (or phone base setttings) level.
+The ability to [maintain a persistent connection](https://help.mypurecloud.com/articles/terminate-persistent-connection-genesys-cloud-webrtc-phone/) is a Genesys Cloud feature that can be enabled at the phone (or phone base settings) level.
 
 ![Persistent Connection Setting](setting-persistent-connection.png)
 
 *"The persistent connection feature is designed to improve Genesys Cloud’s ability to process subsequent calls. More specifically, when a call comes in to an agent, Genesys Cloud establishes a connection to the agent’s Genesys Cloud WebRTC phone and then passes the call to the agent. Once the call is complete and the agent hangs up, Genesys Cloud terminates the call, but leaves the connection to the agent’s WebRTC phone intact."*
 
-![Persistent](persistent-connection.gif)
-
-What it means is that the agent's phone remains connected to Genesys Cloud once the call with the customer is completed: when the agent requests to end the conversation via Genesys Cloud Desktop or Platform API, or when the customer hangs up.  
-From a Platform API perspective, there is no active "conversation (if the logged in user invokes [GET /api/v2/conversations](/devapps/api-explorer#get-api-v2-conversations), no Genesys Cloud conversation context will be returned). But from a telephony standpoint, there is still an active call/session between Genesys Cloud and the agent's phone.
+What it means is that the agent's phone remains connected to Genesys Cloud once the conversation with the customer is completed (i.e. when the agent requests to end the conversation via Genesys Cloud Web/Desktop app or Platform API, or when the customer hangs up).   
+From a Platform API perspective, there is no active "conversation (if the logged in user invokes [GET /api/v2/conversations](/devapps/api-explorer#get-api-v2-conversations), no Genesys Cloud conversation context will be returned).  
+But from a telephony standpoint, there is still an active call/session between Genesys Cloud and the agent's phone.
 
 ***Note that the connection will be terminated if no new conversation is received before the Persistent Connection timeout elapses.***
 
 
+:::{"alert":"warning","autoCollapse":false}
+Unfortunately, at this time, there is no Platform API endpoint which allows retrieving the status of a persistent connection for a given phone.
+:::
+
+Please note that although the ability to maintain a persistent conection was developped with the use of WebRTC endpoints in mind, this feature is also available when using other phone types: Managed Phone, Remote Phone, Generic SIP Phone (Unmanaged).
+
+When using a Genesys Cloud WebRTC Phone with Genesys Cloud Web app or with Genesys Cloud Embeddable Framework, the ability to terminate a persistent connection is made available in the user interface.
+
+![Persistent](stop-persistent-connection.png)
+
+
 ## By Phone Type and settings
 
-The tables presented below describe what happens when Platform API is used but also what happens with other mode of answer (e.g. answer in Genesys Cloud Desktop, answer on the phone, [Auto-Answer enabled for the agent (Genesys Cloud feature)](https://help.mypurecloud.com/?p=84007), ...).
+The tables presented below describe what happens when Platform API is used but also what happens with other mode of answer (e.g. answer in Genesys Cloud Web/Desktop app, answer on the phone, [Auto-Answer enabled for the agent (Genesys Cloud feature)](https://help.mypurecloud.com/?p=84007), ...).
 
 ### With Genesys Cloud WebRTC Phones
 
@@ -131,12 +162,12 @@ The tables presented below describe what happens when Platform API is used but a
 #### Make Call
 
 :::{"alert":"warning","autoCollapse":false}
-***When using the Genesys Cloud WebRTC Phone*** and initiating a call via Platform API (from a custom application), it is required to [allow the user to place calls with another app](https://help.mypurecloud.com/articles/allow-apps-to-place-calls/).  
+***When using the Genesys Cloud Web/Desktop app along with a Genesys Cloud WebRTC Phone*** and initiating a call via Platform API (from a custom application), it is required to [allow the user to place calls with another app](https://help.mypurecloud.com/articles/allow-apps-to-place-calls/).  
 :::
 
 ![Place Call](placing-calls-app.png)
 
-This setting is not managed centrally using the Genesys Cloud Admin UI. Each user must enable this setting from his Genesys Cloud Desktop.  
+This setting is not managed centrally using the Genesys Cloud Admin UI. Each user must enable this setting from his Genesys Cloud Web/Desktop app.  
 Please also note that the setting is saved in browser's cookies. It will remain set (until/unless the cookie expire or is removed).
 
 
@@ -211,8 +242,10 @@ POST /api/v2/conversations/calls
 
 The following settings and behavior are required to support answering a call or placing a call using Platform API:
 - User's Phone/Phone Base Settings: Enable "Maintain Persistent Connection" at the phone or the phone base settings level (Genesys Cloud centralized configuration)
-- User's Genesys Cloud Desktop Web: Allow "Placing calls with another app" (Genesys Cloud Desktop - local/cookie setting)
+- User's Genesys Cloud Web/Desktop app: Allow "Placing calls with another app" (Genesys Cloud Web/Desktop app - local/cookie setting)
 - Custom code: Periodically generate calls (it can be to a destination that will disconnect almost immediately - e.g. an Architect Inbound Call flow) to maintain a persistent connection active.
+
+*If you are using Genesys Cloud Embeddable Framework, it is recommended to leverage `Interaction.updateState(action=pickup)` and `clickToDial(type=call)` actions, as this will provide full support for programmatic answer call or make call.*
 
 ***With Managed Phone and Generic SIP Phone (with broadsoft extensions support):***
 
