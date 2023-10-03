@@ -55,7 +55,8 @@ One important thing to understand is that there are different factors which infl
 3. for Unmanaged Phones (Generic SIP), if the phones support Broadsoft Extensions SIP Event Package for remote talk/hold (*SIP NOTIFY - Event: talk/hold*).
 4. if the phone is configured to [maintain a Persistent Connection (Genesys Cloud feature)](https://help.mypurecloud.com/?p=134672) or not.
 
-And if you are using Genesys Cloud Embeddable Framework as user interface, this will provide more programmatic options using the available Interaction.updateState and clickToDial actions.
+The type of user interface used by the Contact Center Agents - Genesys Cloud Web/Desktop app or Genesys Cloud Embeddable Framework - also matters.  
+Indeed, if your agents are using Genesys Cloud Embeddable Framework as user interface, the Interaction.updateState and clickToDial actions will provide additional programmatic possibilities.
 
 
 ### OAuth Authorization Type:
