@@ -43,7 +43,7 @@ Using `action=pickup` on an alerting interaction will trigger a request to answe
 Using `type=call` will initiate a phone call.
 
 :::{"alert":"primary","autoCollapse":false}
-What is important to understand with Genesys Cloud Embeddable Framework actions is that they are equivalent to the user clicking on answer call or initiating a call from the user interface.  
+Genesys Cloud Embeddable Framework actions are equivalent to the user clicking on answer call or initiating a call from the user interface.  
 I.e. An `Interaction.updateState(action=pickup)` is equivalent to a "manual" answer in Genesys Cloud Embeddable Framework.
 :::
 
