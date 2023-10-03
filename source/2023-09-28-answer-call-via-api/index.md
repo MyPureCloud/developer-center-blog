@@ -72,8 +72,9 @@ The access token, used in the Platform API request, must be obtained via an [Imp
 :::
 
 :::{"alert":"warning","autoCollapse":false}
-It is not possible to invoke these Platform API endpoints using a OAuth Client Credentials Grant token.  
-Invoking the Platform API Answer Call and Make Call will result in an HTTP Error (400).
+**It is NOT possible to invoke these Platform API endpoints using an OAuth Client Credentials Grant token.**  
+Invoking the Platform API Answer Call and Make Call will result in an HTTP Error (400).  
+It means: **it is NOT possible to answer the call or to make a call, through a [Genesys Cloud Data Action](https://help.mypurecloud.com/?p=144553) invoked in a [Script](https://help.mypurecloud.com/?p=54284).** The Genesys Cloud Data Actions can only leverage an OAuth Client Credentials Grant type.
 :::
 
 ### Phone Type:
@@ -159,6 +160,11 @@ The tables presented below describe what happens when Platform API is used but a
 #### Answer Call
 
 ![WebRTC Answer](webrtc-answer.png)
+
+If "*Maintain Persistent Connection*" setting is **disabled**, it will **NOT** be possible to answer a call using the Platform API (when the endpoint is the embedded Genesys Cloud WebRTC Phone).
+
+If "*Maintain Persistent Connection*" setting is **enabled**, answering a call using the Plaform API is **only** possible while there is an active persistent connection (i.e. the WebRTC Phone is already connected to Genesys Cloud over a voice session). Trying to answer the call outside of an active persistent connection will also fail.  
+A workaround to reduce the possibility that a user does not have an active persistent connection would to be periodically and programmatically generate calls (when the user is not involved on an ACD voice conversation/when the user is inactive on voice channel). The call would be generated to a destination than answers and automatically disconnects the call (so the user side program only needs to care about creating a call periodically). This is explained in more details below with the use of the "*ForceDisconnect*" Architect sample flow.
 
 #### Make Call
 
