@@ -8,6 +8,10 @@ category: 6
 
 The Web Services Data Dip (WSDD) connector integrates your interaction flows (voice IVRs, scripts, and future implementations) with a web service that you create that implements the web services data dip connector API. Your web service can call any third-party system that stores data, such as a customer relationship management (CRM) database. This blog post will cover implementing both standard and custom WSDD operations in a node.js web service.
 
+:::{"alert":"warning","title":"Content Outdated","collapsible":false,"autoCollapse":false}
+The Genesys Cloud Bridge integrations were deprecated on January 16, 2019 and decommisioned on June 15, 2022. See the [official deprecation announcement](https://help.mypurecloud.com/articles/deprecation-genesys-cloud-bridge-integrations/ "bridge integration announcement") for details. This blog post is no longer relevant to current Genesys Cloud offerings, but is being left in place for historical purposes. Many of the links in this blog post will no longer work as the documentation for bridge integrations has been removed.
+:::
+
 ## Resources
 
 ### Things you'll need
