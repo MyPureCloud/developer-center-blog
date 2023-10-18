@@ -9,11 +9,23 @@ image: phone-api-diagram.png
 
 Greetings everyone! It had been a while since I posted an article.
 
-Recently, as these questions were periodically popping up on the Genesys Cloud Developer forum, I have thought that it would be good to clarify *what we exactly support and what happens when trying to answer a voice call using the Platform API* (same when initiating a voice call using the Platform API).
+Recently, due to recurring questions on the Genesys Cloud Developer forum, I realized the importance of clarifying what exactly we support and what occurs when attempting to answer a voice call using the Platform API, as well as when initiating a voice call using the same API.
 
-In this article, we will consider two possible Contact Center Agent's user interfaces: [**Genesys Cloud Web or Desktop app**](https://help.mypurecloud.com/?p=49607) and [**Genesys Cloud Embeddable Framework**](https://help.mypurecloud.com/?p=196909).
+In this article, we will consider two possible Contact Center Agent's user interfaces:
+1. [**Genesys Cloud Web or Desktop app**](https://help.mypurecloud.com/?p=49607)
+2. [**Genesys Cloud Embeddable Framework**](https://help.mypurecloud.com/?p=196909)
+
+The diagram below illustrates the use of a standalone phone [1] and of a WebRTC Phone [2] (embedded in the Agent's Genesys Cloud Web or Desktop app) in Genesys Cloud. Custom applications leveraging Platform API can run inside the Agent's Web Browser [a] (as a [Custom Client App](/platform/integrations/client-apps/)) or as a separate application [b] (client-side or server-side).
 
 ![Simplified view of Agent phone and desktop](phone-api-diagram.png)
+
+*As an illustration, here are few examples where you could need to you need to programmatically initiate a call or answer a call.*
+- *You want to provide the ability to click-to-call from a specific interface (e.g.: static calling list page, in-house CRM, ...)*
+- *You want to initiate the call, assigning specific properties automatically ([UUI data](https://help.mypurecloud.com/articles/user-to-user-information-uui-overview/), id of an external contact, priority, ...)*
+- *You need to expose an Answer button in a specific application (user interface)*
+- *You need to automatically answer specific calls based on their queue origin and participant data (e.g. `CustomerType: "Platinium"`)*
+- *You need to trigger a set of actions (outside of Genesys Cloud) as soon as the Agent requests to answer the call*
+
 
 ***Table of Contents***:
 * [What's available in the Platform API?](#whats-available-in-the-platform-api)
@@ -72,10 +84,10 @@ I.e. An `Interaction.updateState(action=pickup)` is equivalent to a "manual" ans
 ## Factors influencing Answer Call and Make Call via Platform API
 
 One important thing to understand is that there are different factors which influence how and if calls can be answered or initiated via Platform API:
-1. the type of [OAuth 2 Authorization Grant flow](/authorization/platform-auth/#authorization-types) which will be used to request an access token (for the Platform API requests). You'll need to [create the corresponding OAuth client](https://help.mypurecloud.com/?p=188023) in the Genesys Cloud configuration.
-2. the type of phone used by the Contact Center Agent: [Genesys Cloud WebRTC Phone, Managed Phone (SIP), Remote Phone, Unmanaged Phone (Generic SIP)](https://help.mypurecloud.com/?p=76409)
-    - for Unmanaged Phones (Generic SIP), if the phones support Broadsoft Extensions SIP Event Package for remote talk/hold (*SIP NOTIFY - Event: talk/hold*).
-3. if the phone is configured to [maintain a Persistent Connection (Genesys Cloud feature)](https://help.mypurecloud.com/?p=134672) or not.
+1. The type of [OAuth 2 Authorization Grant flow](/authorization/platform-auth/#authorization-types) which will be used to request an access token (for the Platform API requests). You'll need to [create the corresponding OAuth client](https://help.mypurecloud.com/?p=188023) in the Genesys Cloud configuration.
+2. The type of phone used by the Contact Center Agent: [Genesys Cloud WebRTC Phone, Managed Phone (SIP), Remote Phone, Unmanaged Phone (Generic SIP)](https://help.mypurecloud.com/?p=76409)
+    - For Unmanaged Phones (Generic SIP), if the phones support Broadsoft Extensions SIP Event Package for remote talk/hold (*SIP NOTIFY - Event: talk/hold*).
+3. If the phone is configured to [maintain a Persistent Connection (Genesys Cloud feature)](https://help.mypurecloud.com/?p=134672) or not.
 
 The type of user interface used by the Contact Center Agents - Genesys Cloud Web/Desktop app or Genesys Cloud Embeddable Framework - also matters.  
 Indeed, if your agents are using Genesys Cloud Embeddable Framework as user interface, the Interaction.updateState and clickToDial actions will provide additional programmatic possibilities.
@@ -183,10 +195,17 @@ Please also note that the setting is saved in browser's cookies. It will remain 
 
 If "*Maintain Persistent Connection*" setting is **disabled**, it will **NOT** be possible to answer a call using the Platform API (when the endpoint is the embedded Genesys Cloud WebRTC Phone).
 
-If "*Maintain Persistent Connection*" setting is **enabled**, answering a call using the Plaform API is **only** possible while there is an active persistent connection (i.e. the WebRTC Phone is already connected to Genesys Cloud over a voice session). Trying to answer the call outside of an active persistent connection will also fail.  
+If "*Maintain Persistent Connection*" setting is **enabled**, answering a call using the Plaform API is **only** possible while there is an active persistent connection (i.e. the WebRTC Phone is already connected to Genesys Cloud over a voice session).  
+**Trying to answer the call using Platform API outside of an active persistent connection will fail.**  
+This issue can occur with the "*first call of the day*", when the Contact Center Agent has just logged in Genesys Cloud Web or Desktop app.  
+It can also occur if telephony hasn't been used for too long (configuration of the Persistent Connection timer - *The maximum length of time that a persistent connection may remain idle before being closed automatically*) - when the Contact Center Agent has taken a break (e.g. lunch) or has been working on digital conversations only.  
+
 A workaround to reduce the possibility that a user does not have an active persistent connection would to be periodically and programmatically generate calls (when the user is not involved on an ACD voice conversation/when the user is inactive on voice channel). The call would be generated to a destination than answers and automatically disconnects the call (so the user side program only needs to care about creating a call periodically).  
 
-This is explained in more details below with the [use of the "*FrceDisconnect*" Architect sample flow](#appendix-a-sample-forcedisconnect-architect-inbound-call-flow).
+This is explained in more details below with the [use of the "*ForceDisconnect*" Architect sample flow](#appendix-a-sample-forcedisconnect-architect-inbound-call-flow).
+
+**Note:** To be clear, this constraint is only present when using Genesys Cloud WebRTC Phone and requesting to answer a call using Platform API.  
+If you are using Genesys Coud Embeddable Framework with Genesys Cloud WebRTC Phone, you have alternatives, leveraging `Interaction.updateState(action=pickup)` and `clickToDial(type=call)` actions, which are fully supported (regardless of the status of a persistent connection).
 
 3. Support
 
@@ -196,7 +215,6 @@ The following settings and behavior are required to support answering a call or 
 - Custom code: Periodically generate calls (it can be to a destination that will disconnect almost immediately - e.g. an Architect Inbound Call flow) to maintain a persistent connection active.
 
 If you are using **Genesys Cloud Embeddable Framework**, it is strongly recommended to leverage `Interaction.updateState(action=pickup)` and `clickToDial(type=call)` actions, as this **will provide full support for programmatic answer call or make call** (*"Maintain Persistent Connection" setting can be Enabled or Disabled*).
-
 
 ### Using Managed SIP Phones or Generic SIP Phones (with Broadsoft Extensions support)
 
@@ -248,6 +266,103 @@ POST /api/v2/conversations/calls
 {
     "phoneNumber":"ForceDisconnect@localhost"
 }
+```
+
+You can find the YAML export of the "*ForceDiconnect*" Architect Inbound Call flow below:
+***["ForceDisconnect" (YAML):](ForceDisconnect_v7-0.yaml)***
+```{"language": "yaml"}
+inboundCall:
+  name: ForceDisconnect
+  division: Home
+  startUpRef: "/inboundCall/tasks/task[DisconnectTask_12]"
+  defaultLanguage: en-us
+  supportedLanguages:
+    en-us:
+      defaultLanguageSkill:
+        noValue: true
+      textToSpeech:
+        defaultEngine:
+          voice: Jill
+  initialGreeting:
+    exp: AudioPlaybackOptions(ToAudioBlank(3000), true)
+  settingsActionDefaults:
+    playAudioOnSilence:
+      timeout:
+        lit:
+          seconds: 40
+    detectSilence:
+      timeout:
+        lit:
+          seconds: 40
+    callData:
+      processingPrompt:
+        noValue: true
+    collectInput:
+      noEntryTimeout:
+        lit:
+          seconds: 5
+    dialByExtension:
+      interDigitTimeout:
+        lit:
+          seconds: 6
+    transferToUser:
+      connectTimeout:
+        noValue: true
+    transferToNumber:
+      connectTimeout:
+        noValue: true
+    transferToGroup:
+      connectTimeout:
+        noValue: true
+    transferToFlowSecure:
+      connectTimeout:
+        lit:
+          seconds: 15
+  settingsErrorHandling:
+    errorHandling:
+      disconnect:
+        none: true
+    preHandlingAudio:
+      tts: Sorry, an error occurred. Please try your call again.
+  settingsMenu:
+    extensionDialingMaxDelay:
+      lit:
+        seconds: 1
+    listenForExtensionDialing:
+      lit: true
+    menuSelectionTimeout:
+      lit:
+        seconds: 10
+    repeatCount:
+      lit: 3
+  settingsPrompts:
+    ensureAudioInPrompts: false
+    promptMediaToValidate:
+      - mediaType: audio
+      - mediaType: tts
+  settingsSpeechRec:
+    completeMatchTimeout:
+      lit:
+        ms: 100
+    incompleteMatchTimeout:
+      lit:
+        ms: 1500
+    maxSpeechLengthTimeout:
+      lit:
+        seconds: 20
+    minConfidenceLevel:
+      lit: 50
+    asrCompanyDir: none
+    asrEnabledOnFlow: false
+    suppressRecording: false
+  tasks:
+    - task:
+        name: DisconnectTask
+        refId: DisconnectTask_12
+        actions:
+          - disconnect:
+              name: Disconnect
+
 ```
 
 ---
