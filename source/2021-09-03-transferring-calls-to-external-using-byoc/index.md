@@ -265,7 +265,7 @@ You can find a description of these in the [UUI data formats](https://help.mypur
 In your Architect Inbound Call flow, you can use the ***[Set UUI Data](https://help.mypurecloud.com/?p=130397)*** action (Outgoing UUI Data = For Transfers) to set the data you want to send. You don't need to encode it in hexadecimal (if this is the encoding format you have defined for your BYOC Cloud trunk configuration). Genesys Cloud will take care of this.
 
 You can then use a ***[Transfer to Number](https://help.mypurecloud.com/?p=3786)*** action to trigger the transfer to your external device.  
-***Do Not Transfer the call via a Platform API request (through a Data Action) if you want to pass data to your device.***  
+_**Do Not Transfer the call via a Platform API request (through a Data Action) if you want to pass data to your device.**_  
 If the transfer is made via a Platform API request, while the call is in the Architect Inbound Call flow, the data you have set via ***Set UUI Data*** action will be ignored.
 
 Note that you can also trigger the transfer while the call is connected to a Contact Center Agent (Blind Transfer to Number).  
