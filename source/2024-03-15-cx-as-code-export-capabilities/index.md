@@ -1,0 +1,69 @@
+title: Introducing Genesys Cloud TF export in CX as Code
+tags: Genesys Cloud, Developer Engagement, CX as Code
+date: 2024-03-15
+author: jenissa.barrera
+category: 6
+---
+
+Greetings, everyone! The Developer Engagement team has been tirelessy working on improving CX as Code functionalities, recently the team have added significant amount of new functionality which is the developer export capabilities. With this feature, you can selectively export specific resources from your Genesys Cloud organization. Let's explore how it works.
+
+
+## Usage
+
+1. In your Terraform configuration, you can specify which resources you want to export. For instance, if you’re interested in queues ending in “dev” or “test,” you can include them in your export.
+2. The syntax for specifying resources is flexible. You can export all resources of a single type (e.g., users) or even filter resources by name using regular expressions.
+
+```hcl
+
+resource "genesyscloud_tf_export" "export" {
+  directory = "./terraform"
+  include_filter_resources = ["genesyscloud_user", "genesyscloud_routing_queue"]
+  include_state_file       = true
+  exclude_attributes       = ["genesyscloud_user.skills"]
+}
+
+```
+
+The above configuration exports resources related to users and queues. The include_filter_resources parameter specifies the resource types and filters based on regular expressions. You can also choose to include the state file (include_state_file) and exclude specific attributes (exclude_attributes).
+
+### Resource Filtering with Regular Expressions
+
+
+In your Terraform configuration, you can use regular expressions to selectively include or exclude specific resources. Here’s how you can achieve this concisely:
+
+#### Include Filter:
+
+To include resources that start or end with “dev” or “test,” use the following syntax:
+
+```hcl
+
+resource "genesyscloud_tf_export" "include-filter" {
+  directory = "./genesyscloud/include-filter"
+  export_as_hcl = true
+  log_permission_errors = true
+  include_filter_resources = ["genesyscloud_group::.*(?:dev|test)$"]
+}
+```
+
+In the above example, the include_filter_resources parameter specifies that we want to export resources of type “genesyscloud_group” where the name matches the regular expression .*(?:dev|test)$.
+
+#### Exclude Filter:
+If you want to exclude certain resources, you can use a similar approach:
+
+```hcl
+resource "genesyscloud_tf_export" "exclude-filter" {
+  directory = "./genesyscloud/exclude-filter"
+  export_as_hcl = true
+  log_permission_errors = true
+  exclude_filter_resources = ["genesyscloud_routing_queue"]
+}
+
+```
+
+The exclude_filter_resources parameter ensures that resources of type “genesyscloud_routing_queue” are excluded from the export. In your Terraform configuration, you can use regular expressions to selectively include or exclude specific resources. Here’s how you can achieve this concisely:
+
+
+
+---add replace with data source
+
+Remember to experiment with different regular expressions to match your specific use case. Happy exporting!
