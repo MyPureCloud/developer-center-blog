@@ -10,8 +10,9 @@ Greetings, everyone! The Developer Engagement team has been tirelessy working on
 
 ## Usage
 
-1. In your Terraform configuration, you can specify which resources you want to export. For instance, if you’re interested in queues ending in “dev” or “test,” you can include them in your export.
-2. The syntax for specifying resources is flexible. You can export all resources of a single type (e.g., users) or even filter resources by name using regular expressions.
+
+1. The syntax for specifying resources is flexible. You can export all resources of a single type (e.g., users) or even filter resources by name using regular expressions.
+2. In your Terraform configuration, you can specify which resources you want to export. For instance, if you’re interested in queues ending in “dev” or “test,” you can include them in your export.
 
 ```hcl
 
@@ -60,10 +61,38 @@ resource "genesyscloud_tf_export" "exclude-filter" {
 
 ```
 
-The exclude_filter_resources parameter ensures that resources of type “genesyscloud_routing_queue” are excluded from the export. In your Terraform configuration, you can use regular expressions to selectively include or exclude specific resources. Here’s how you can achieve this concisely:
+The exclude_filter_resources parameter ensures that resources of type “genesyscloud_routing_queue” are excluded from the export. In your Terraform configuration, you can use regular expressions to selectively include or exclude specific resources. 
+
+
+For both include and exclude filters, directory is where the config and state files will be exported. Defaults will go to ```./genesyscloud```
+
+#### Replace Data source:
+
+If you want to export a specific data source instead of a resource, you may do so using this sample:
+
+```hcl
+resource "genesyscloud_tf_export" "export" {
+  directory = "./genesyscloud/datasource"
+
+  replace_with_datasource = [
+    "genesyscloud_group::Test_Group"
+  ]
+
+  include_state_file     = true
+  export_as_hcl          = true
+  log_permission_errors  = true
+  enable_flow_depends_on = false
+}
+```
 
 
 
----add replace with data source
+
+To export existing resources, you may refer to this [documentation](https://registry.terraform.io/providers/MyPureCloud/genesyscloud/latest/docs/guides/export)
+
+
 
 Remember to experiment with different regular expressions to match your specific use case. Happy exporting!
+
+# Additional Resources
+1. [genesys_cloud_tf_export](https://registry.terraform.io/providers/MyPureCloud/genesyscloud/latest/docs/resources/tf_export#replace_with_datasource)
