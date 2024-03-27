@@ -5,7 +5,15 @@ author: jenissa.barrera
 category: 6
 ---
 
-Greetings, everyone! The Developer Engagement team has been tirelessy working on improving CX as Code functionalities, recently the team have added significant amount of new functionality which is the developer export capabilities. With this feature, you can selectively export specific resources from your Genesys Cloud organization. Let's explore how it works.
+Greetings, everyone! The Developer Engagement team has been tirelessy working on improving CX as Code functionalities, recently the team have added significant amount of new functionality which is the developer export capabilities. With this feature, you can selectively export specific resources from your Genesys Cloud organization. 
+
+Here are some reasons why individuals might utilize the export capabilities:
+
+1. Export can be used to bring a non-terraform app into Terraform management.
+2. It provides a means to back up a current configuration. This is extremely useful when you are about to do some kind of mass update via script and you need to have a mechanism to catch the data.
+3. Exporting configuration to promote to another environment.
+
+Let's explore how it works.
 
 
 ## Usage
@@ -63,12 +71,26 @@ resource "genesyscloud_tf_export" "exclude-filter" {
 
 The exclude_filter_resources parameter ensures that resources of type “genesyscloud_routing_queue” are excluded from the export. In your Terraform configuration, you can use regular expressions to selectively include or exclude specific resources. 
 
+Please take note that the resources include_filter and exclude_filter cannot be used simultaneously. They are mutually exclusive in the same export operation.
+
 
 For both include and exclude filters, directory is where the config and state files will be exported. Defaults will go to ```./genesyscloud```
 
-#### Replace Data source:
+#### Supported Formats for Export:
 
-If you want to export a specific data source instead of a resource, you may do so using this sample:
+
+When ```export_as_hcl ``` is set to ```true```,the export format will be HCL. Conversely, if this is set to ```false```, the format will be JSON. This setting allows you to control whether everything is exported as a single large file or divided into smaller files. 
+
+
+#### Replace Data Source:
+
+If you want to replace an exported resource as a data source. There are several scenarios that might necessitate this approach.
+
+1. You have multiple Terraform projects each with their own backing state. You might need to look up a resource to reference in your project, but you don't want to export the reference object. Instead you want to convert it to a data source.
+
+2. You need to reference an item in your export that you don't want to export but still need to reference.
+
+ You may do so using this sample:
 
 ```hcl
 resource "genesyscloud_tf_export" "export" {
@@ -81,9 +103,11 @@ resource "genesyscloud_tf_export" "export" {
   include_state_file     = true
   export_as_hcl          = true
   log_permission_errors  = true
-  enable_flow_depends_on = false
+  enable_dependency_resolution = false
 }
 ```
+
+Take note that in this code sample, genesyscloud_group refers to the exported resource ID.
 
 
 
