@@ -109,7 +109,11 @@ resource "genesyscloud_tf_export" "export" {
 
 Take note that in this code sample, genesyscloud_group refers to the exported resource ID.
 
+#### Enable Dependency Resolution:
 
+By default, Terraform exports only the dependencies explicitly listed in your configuration. For example, if you export a queue that references a skill, Terraform will include the queue but only reference the GUID of the dependent skill group.
+
+To export additional dependencies automatically, set ```enable_dependency_resolution ``` to ```true```. When turned on, Terraform will export not only the queue but also the associated skill group.  Terraform also considers static dependencies associated with an architecture flow. These are exported automatically when ```enable_dependency_resolution ``` is active.  Sometimes you need to exclude specific fields from an export. For instance, if you want to omit division references, use the ```exclude_attributes``` option.
 
 
 To export existing resources, you may refer to this [documentation](https://registry.terraform.io/providers/MyPureCloud/genesyscloud/latest/docs/guides/export)
