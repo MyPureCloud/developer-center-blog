@@ -110,13 +110,6 @@ In preparation for the AWS EventBridge release, we have been building new conten
 3. [Blueprint - AWS EventBridge: Write user presence updates to DynamoDB](/blueprints/aws-eventbridge-user-presence-update-blueprint/)
 4. [CX as Code Remote Module - AWS EventBridge](https://github.com/GenesysCloudDevOps/aws-event-bridge-module)
 
-## Coming Soon: Genesys Cloud Event Triggers
-
-Genesys is continuing to build out the Genesys Cloud event processing capabilities. Currently, Genesys Cloud allows you to consume messages with your own external integrations via a WebSocket or AWS EventBridge. The Genesys Cloud development teams are currently working on a mechanism to consume Genesys Cloud events and process them without having to leave Genesys Cloud. This new capability, called Genesys Cloud Event Triggers, is currently in beta with a target release date of Q1 2022. With the Event Triggers feature you can invoke an Architect Workflow when an event for a particular topic you are subscribed occurs.
-
-The Genesys Cloud EventBridge and the Genesys Cloud Event Triggers features are properly thought of as opposite sides of the same coin; similar functionality but for very different use cases. Event Triggers are intended to invoke workflows within Genesys Cloud in order to react to events that occur within Genesys Cloud; EventBridge is a high throughput messaging bus that can be used to archive information in an external system or the creation of your own process automation flows within your AWS infrastructure. As a message bus, AWS EventBridge has robust message queuing and retry logic. The Genesys Cloud Event Triggers feature does not have the same level of service level guarantees, message retries, etc. that are crucial for something like a BI pipeline, while EventBridge was specifically built to service these sorts of use case.
-
-If you are interested in finding out more about the Genesys Cloud Event Triggers feature please reach out to Richard Schott (richard.schott@genesys.com) for more information. In addition, if you would like browse the Event Trigger's APIs they are in preview status on the [Genesys Cloud Developer Center](/api/rest/v2/previewapis/). The Event Trigger's APIs will begin with the `/api/v2/processautomation/triggers/` prefix.
 
 ## Closing Thoughts
 
@@ -125,8 +118,6 @@ Event-based integration is incredibly powerful because it allows for real-time c
 1. **Notification Service using WebSockets**. This works best for real-time UI integrations like dashboards and agent applications. This was originally the only mechanism that could be used for back-end integration, but had severe limitations around message durability. It also a complicated programming model that pushes many core resiliency and scalability responsibilities to the developer.
 
 2. **Notification Service using AWS EventBridge**. An enterprise messaging bus suitable for real-time backend data integrations. While it can only be used within the context of a customer's AWS account, it has a much higher level of message durability and retry-ability then the Notification Service using WebSockets. It is currently in beta and should be available in December 2021. If you are interested in more information or want to participate in the last stages of the beta, please reach out to Becky Powell, the product manager for the AWS Eventbridge Integration. (becky.powell@genesys.com)
-
-3. **Genesys Cloud Event Triggers**. This a feature currently in beta and is expected to be released Q1 of 2022. Genesys Cloud Event Triggers will allow you to execute Architect workflows based on event-based triggers directly within Genesys Cloud. Event Triggers are geared towards building sophisticated business workflows that react to events within your Genesys Cloud environment. If you are interested in more information or want to participate in the last stages of the beta, please reach out to Richard Schott, the product manager for the AWS Genesys Cloud Event Triggers feature. (richard.schott@genesys.com)
 
 ## Additional Resources
 
