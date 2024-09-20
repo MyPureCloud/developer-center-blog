@@ -9,7 +9,7 @@ category: 9
 
 Hello everyone! It's been a while since I last posted a blog.
 
-It came to our attention that using the Agentless SMS API can be a little difficult to understand. This blog will show you how you can send an SMS via the Platform SDK.
+This blog aims to explain how to send an SMS via the Platform SDK.
 
 ## Overview
 ![Flowchart](flowchart.png "Flowchart")
@@ -32,14 +32,14 @@ The request body consists of the following:
 - **toAddressMessengerType** *(required)* - The messaging address messenger type. In this case, `SMS`.
 - **useExistingConversation** - An override to use an existing conversation. If set to true, an existing conversation will be used if there is one within the conversation window. If set to false, create request fails if there is a conversation within the conversation window.
 
-  ```json
-  {
-    "queueId": "a1b23c4d-ab12-1abc-1234-1a23b4c56789",
-    "toAddress": "+631234567890",
-    "toAddressMessengerType": "sms",
-    "useExistingConversation": true
-  }
-  ```
+```json
+{
+   "queueId": "a1b23c4d-ab12-1abc-1234-1a23b4c56789",
+   "toAddress": "+631234567890",
+   "toAddressMessengerType": "sms",
+   "useExistingConversation": true
+}
+```
 
 #### Response
 A response will be as follows:
@@ -50,7 +50,9 @@ A response will be as follows:
   "selfUri": "/api/v2/conversations/messages/a1b23c4d-ab12-1abc-1234-1a23b4c56789"
 }
 ```
-:::{"alert":"warning","title":"Return status","autoCollapse":false} If the SMS message is sent, it returns a 202. A data action does not expose a 200 or 202.  It just returns successful. :::
+:::{"alert":"warning","title":"Return status","autoCollapse":false}
+If the SMS message is sent, it returns a 202. A data action does not expose a 200 or 202.  It just returns successful.
+:::
 
 ### Get conversation details using *GET /api/v2/conversations/messages/{conversationId}*
 To check the status of the conversation or SMS message, you can check the conversation using this API. The `conversationId` is the ID returned in the previous API endpoint.
@@ -119,4 +121,6 @@ The message will transition through several statuses.
 2. **Sent** - The message is sent to the carrier.
 3. **Delivery-success/failure** - The final state of that message.
 
-:::The time between Queued and Sent is typically seconds. The time between Sent and Delivery-success/failure can be minutes, hours or days. Every status is published publicly to a notification topic, as well as being visible directly with a GET conversation request. Delivery-failures also show an error body to help explain why it failed. :::
+:::info
+The time between Queued and Sent is typically seconds. The time between Sent and Delivery-success/failure can be minutes, hours or days. Every status is published publicly to a notification topic, as well as being visible directly with a GET conversation request. Delivery-failures also show an error body to help explain why it failed.
+:::
