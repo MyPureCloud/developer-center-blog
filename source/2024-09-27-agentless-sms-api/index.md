@@ -18,7 +18,7 @@ This blog aims to explain how to send an SMS via the Platform SDK.
 Before you can use APIs to send SMS messages, you'll need these first:
 1. **SMS Number** - You have to purchase an SMS number from Genesys.
 2. **Register SMS** - You need to register the SMS number. Read more about it [here](https://help.mypurecloud.com/articles/required-regulatory-documentation-for-sms-number-purchase/).
-3. **OAuth** - You need to authenticate as a user using Implicit Grant or Authorization Code Grant.
+3. **OAuth** - If you wish to send SMS via API, you need to authenticate as a user using Implicit Grant or Authorization Code Grant. If you wish to send SMS via a data action, a Client Credentisla grant type is needed.
 
 ## What APIs can I use?
 
@@ -122,5 +122,9 @@ The message will transition through several statuses.
 3. **Delivery-success/failure** - The final state of that message.
 
 :::info
-The time between Queued and Sent is typically seconds. The time between Sent and Delivery-success/failure can be minutes, hours or days. Every status is published publicly to a notification topic, as well as being visible directly with a GET conversation request. Delivery-failures also show an error body to help explain why it failed.
+The time between Queued and Sent is typically seconds. The time between Sent and Delivery-success/failure can be minutes, hours or days. Every status is published publicly to notification topic `v2.users.{id}.conversations` or `v2.users.{id}.conversations.messages`, as well as being visible directly with a GET conversation request. Delivery-failures also show an error body to help explain why it failed.
 :::
+
+## Additional resources 
+1. [API Explorer](/devapps/api-explorer-standalone)
+2. [Genesys Cloud SDK](/devapps/sdk/)
