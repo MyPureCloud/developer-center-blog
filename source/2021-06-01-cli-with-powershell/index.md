@@ -14,12 +14,12 @@ Earlier this year, we announced the Genesys Cloud CLI which is a tool used to pe
 :::
 
 :::primary
-**GC-CLI version**: CLI beta version 11.0.0 is used at the time of writing. Some commands may be different if you're using another version. To determine which one you're using, run `gc.exe version`. For the latest version, go to our [CLI documentation](/api/rest/command-line-interface/).
+**GC-CLI version**: CLI beta version 11.0.0 is used at the time of writing. Some commands may be different if you're using another version. To determine which one you're using, run `gc.exe version`. For the latest version, go to our [CLI documentation](https://mypurecloud.github.io/platform-client-sdk-cli/).
 :::
 
 ## Download the Genesys Cloud CLI
 
-First we need to download the executable from this [page](/api/rest/command-line-interface/). If you are using Windows, then you have to manually place the file in a folder on your PATH.
+First we need to download the executable from this [page](https://mypurecloud.github.io/platform-client-sdk-cli/). If you are using Windows, then you have to manually place the file in a folder on your PATH.
 
 If you're unsure how to do the latter, then you can follow these steps to setting up the CLI:
 
@@ -103,7 +103,7 @@ lastUri    : /api/v2/users?pageSize=25&pageNumber=2
 pageCount  : 2
 ```
 
-In the above example, we used the CLI to ask for a list of users. Once the result is available, we pipe it into `ConvertFrom-Json` in order to convert the JSON to a PSCustomObject. If this is your first time working with the Genesys Cloud API, then you might notice that the result we got has pagination data. This is the default result of the API. If you want to learn more about the expected format of API results then you can read more on the [Platform API](/api/rest/) documentation.
+In the above example, we used the CLI to ask for a list of users. Once the result is available, we pipe it into `ConvertFrom-Json` in order to convert the JSON to a PSCustomObject. If this is your first time working with the Genesys Cloud API, then you might notice that the result we got has pagination data. This is the default result of the API. If you want to learn more about the expected format of API results then you can read more on the [Platform API](/platform/api/) documentation.
 
 If you want to get the entities themselves, in this case the first 25 users, then you can use the `ExpandProperty` flag of the `Select-Object` cmdlet:
 
@@ -118,7 +118,7 @@ gc.exe users list -a | ConvertFrom-Json
 ```
 
 :::primary
-**Note**: The `-a` flag means to autopaginate results. To learn more about different flags and options, consult the [gc-cli](/api/rest/command-line-interface/go-cli/) documentation.
+**Note**: The `-a` flag means to autopaginate results. To learn more about different flags and options, consult the [gc-cli](https://mypurecloud.github.io/platform-client-sdk-cli/) documentation.
 :::
 
 ### ConvertFrom-Json and JSON Arrays
@@ -194,7 +194,7 @@ gc.exe users list -a | jq '.[].id'
 
 ## Streaming Output from Notifications API
 
-The `gc.exe notifications channel listen` command is special, in that instead of a singular JSON response, the CLI indefinitely prints JSON events through the specified channel's websocket, into the standard output. If you are not familiar with the Notifications API or websockets in general, then you may want to read this [article](/api/rest/v2/notifications/notification_service.html) if you plan on using notifications for Genesys Cloud.
+The `gc.exe notifications channel listen` command is special, in that instead of a singular JSON response, the CLI indefinitely prints JSON events through the specified channel's websocket, into the standard output. If you are not familiar with the Notifications API or websockets in general, then you may want to read this [article](/notificationsalerts/notifications/) if you plan on using notifications for Genesys Cloud.
 
 For PowerShell 5.1, we run once again into a quirk. Take the following simple command:
 
@@ -263,7 +263,7 @@ Thanks!
 
 ## Additional Resources
 
-1. [Genesys Cloud CLI](/api/rest/command-line-interface/)
+1. [Genesys Cloud CLI](https://mypurecloud.github.io/platform-client-sdk-cli/)
 2. [Genesys Cloud CLI Recipes](https://github.com/MyPureCloud/quick-hits-cli)
 3. [Genesys Cloud CLI Developer Drop](https://www.youtube.com/watch?v=OnYDs5NsLpU&list=PL01cVFOkuN70Rk8xgI8pk_tKMcTW4FesF)
 4. [jq](https://stedolan.github.io/jq/)
