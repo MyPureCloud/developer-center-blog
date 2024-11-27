@@ -9,6 +9,9 @@ category: 0
 
 Hello everyone! Did you know you can setup Agent Copilot via API? This way, you can build your own Agent Assist where you can use Genesys to do the base and customize information with additional context from other LLMs.
 
+## Overview
+![Flowchart](flowchart.png "Flowchart")
+
 ## Prerequisites
 - **Add-ons and License:** Genesys Cloud CX 1, Genesys Cloud CX 1 Digital Add-on II, Genesys Cloud CX 1 WEM Add-on II, Genesys Cloud CX 2, Genesys Cloud CX 2 Digital, Genesys Cloud CX 2 WEM Add-on I, Genesys Cloud CX 3, or Genesys Cloud CX 3 Digital license
 - **Role:** Agent Copilot Admin
@@ -57,6 +60,11 @@ Hello everyone! Did you know you can setup Agent Copilot via API? This way, you 
 :::primary
 Although we don’t send data to scripter (e.g. for form fill) on the ui yet, the above suggestions make it available to use entity recognition as well.
 :::
+
+### Demo
+See Agent Copilot in action in the demo below:
+
+<video src="images/demo.mp4" controls></video>
 
 ## Additional resources 
 1. [API Explorer](/devapps/api-explorer-standalone)
