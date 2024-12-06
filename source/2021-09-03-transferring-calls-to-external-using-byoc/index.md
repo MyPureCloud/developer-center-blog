@@ -126,13 +126,13 @@ As we want calls that are transferred to your SIP device to be bridged via Genes
 
 8. If you have decided to leverage Digest Authentication, under ***Outbound***, enable ***Digest Authentication*** and set the values for ***Realm***, ***User Name*** and ***Password***.
 
-9. Under ***Outbound***, in ***Calling***, set ***Address Override Method*** to ***Unassigned DID***.
+9. Under ***Outbound***, in ***Caller ID***, set ***Call Source (Queue / Campaign / User DID)*** as the highest priority for ***Prioritized Caller Selection***.
 
   This is to preserve the ANI/CLI of the caller when transferring his call from Genesys Cloud to your device (From header).
   
-  You will also need to define a ***Caller ID*** value (e.g. an E.164 number - +19999990000) which will be used as a default value if the ANI/CLI of the caller can't be propagated to your system (e.g. a Genesys Cloud Contact Center Agent, with no assigned number, makes a call to your device).
+  You will also need to define a ***Caller Address*** value (e.g. an E.164 number - +19999990000) which will be used as a default value if the ANI/CLI of the caller can't be propagated to your system (e.g. a Genesys Cloud Contact Center Agent, with no assigned number, makes a call to your device).
 
-![Trunk step 02](Trunk02.png)
+![Trunk step 02](Trunk02-new.png)
 
 10. Under ***SIP Access Control***, define the list of IP or CIDR addresses that your device uses for SIP (e.g. 10.34.12.16)
 
