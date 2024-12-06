@@ -36,7 +36,7 @@ _**Table of Contents:**_
     - [3. Maintain Persistent Connection setting](#3--maintain-persistent-connection-setting-)
 * [Support by Phone Type and User Interface](#support-by-phone-type-and-user-interface)
     - [Using Genesys Cloud WebRTC Phones](#using-genesys-cloud-webrtc-phones)
-    - [Using Managed SIP Phones or Generic SIP Phones (with Broadsoft Extensions support)](#using-managed-sip-phones-or-generic-sip-phones--with-broadsoft-extensions-support-)
+    - [Using Managed SIP Phones or Generic SIP Phones (with Broadsoft Extensions support and SIP Alert-Info Header support)](#using-managed-sip-phones-or-generic-sip-phones--with-broadsoft-extensions-support-and-sip-alert--info-header-support-)
     - [Using Remote Phones or Generic SIP Phones (no remote answer support)](#using-remote-phones-or-generic-sip-phones--no-remote-answer-support-)
 * [Closing Thoughts](#closing-thoughts)
 * [Appendix A: Sample "ForceDisconnect" Architect Inbound Call flow](#appendix-a--sample--forcedisconnect--architect-inbound-call-flow)
@@ -44,7 +44,7 @@ _**Table of Contents:**_
     - [With Genesys Cloud WebRTC Phones](#with-genesys-cloud-webrtc-phones)
     - [With Managed Phones (SIP)](#with-managed-phones--sip-)
     - [With Remote Phones](#with-remote-phones)
-    - [With Generic SIP Phone (Unmanaged) supporting of Broadsoft Extensions](#with-generic-sip-phone--unmanaged--supporting-of-broadsoft-extensions)
+    - [With Generic SIP Phone (Unmanaged) supporting Broadsoft Extensions and SIP Alert-Info Header](#with-generic-sip-phone--unmanaged--supporting-broadsoft-extensions-and-sip-alert--info-header)
     - [With Generic SIP Phone (Unmanaged)](#with-generic-sip-phone--unmanaged-)
 
 
@@ -84,7 +84,8 @@ I.e. An `Interaction.updateState(action=pickup)` is equivalent to a "manual" ans
 One important thing to understand is that there are different factors which influence how and if calls can be answered or initiated via Platform API:
 1. The type of [OAuth 2 Authorization Grant flow](/authorization/platform-auth/#authorization-types) which will be used to request an access token (for the Platform API requests). You'll need to [create the corresponding OAuth client](https://help.mypurecloud.com/?p=188023) in the Genesys Cloud configuration.
 2. The type of phone used by the Contact Center Agent: [Genesys Cloud WebRTC Phone, Managed Phone (SIP), Remote Phone, Unmanaged Phone (Generic SIP)](https://help.mypurecloud.com/?p=76409)
-    - For Unmanaged Phones (Generic SIP), if the phones support Broadsoft Extensions SIP Event Package for remote talk/hold (*SIP NOTIFY - Event: talk/hold*).
+    - Answer call via Platform API is supported with Unmanaged Phones (Generic SIP) if the phones support Broadsoft Extensions SIP Event Package for remote talk/hold (*SIP NOTIFY - `Event: talk`*).
+    - Make call via Platform API benefits from a better user experience with Unmanaged Phones (Generic SIP) if the phones support the use of SIP Alert-Info header (*SIP INVITE - `Alert-Info: <http://localhost/AutoAnswer>;delay=0;info=alert-autoanswer`*).
 3. If the phone is configured to [maintain a Persistent Connection (Genesys Cloud feature)](https://help.mypurecloud.com/?p=134672) or not.
 
 The type of user interface used by the Contact Center Agents - Genesys Cloud Web/Desktop app or Genesys Cloud Embeddable Framework - also matters.  
@@ -127,19 +128,20 @@ This sounds great in principle. But that doesn’t mean it is implemented and po
 
 _**So beyond theory, how would this work with Genesys Cloud?**_
 
-When it comes to SIP Phones, Genesys Cloud supports the Broadsoft Extensions SIP Event Package for remote talk/hold.
+When it comes to SIP Phones, Genesys Cloud supports the Broadsoft Extensions SIP Event Package for remote talk, and leverages SIP Alert-Info Header for auto-answer in a two-way call scenario.
 
 **Answer Call:**  
 ![Answer Call](3pcc-broadsoft-answer-call-diagram.png)
 
 A phone can advertise support for remote answer in the 180 Ringing, adding "Allow-Events: talk" header.
-If a custom application requests the server to answer the call, the server will request the phone to go off-hook sending a SIP NOTIFY with "Event: talk" header.  
+If a custom application requests the server to answer the call, the server will request the phone to go off-hook sending a SIP NOTIFY with "Event: talk" header. If the phone supports Broadsoft Extensions for remote talk, the phone will automatically go off-hook.  
 _**The Genesys Cloud Managed Phones support the Broadsoft Extensions for remote talk.**_
 
 **Initiate Two-Way Call:**  
-![Make Call](3pcc-broadsoft-make-call-diagram.png)
+![Make Call](3pcc-alert-info-make-call-diagram.png)
 
-When requesting to create a two-way call, the server will create a leg to the agent's phone first, sending a SIP NOTIFY with "Event: talk" automatically on 180 Ringing.
+When requesting to create a two-way call, the server will create a leg to the agent's phone first, sending a SIP INVITE with `Alert-Info: <http://localhost/AutoAnswer>;delay=0;info=alert-autoanswer`. If the phone supports the use of Alert-Info header for auto-answer, the phone will automatically go off-hook.  
+Support of the SIP Alert-Info Header is not mandatory to intiate a call via Platform API. But it will enhance the user's experience (of the caller).
 
 :::{"alert":"primary","autoCollapse":false}
 Genesys Cloud WebRTC Phone is a specific case. WebRTC does not include and define a protocol for the management of sessions (to create, maintain or terminate a session between users).
@@ -211,7 +213,7 @@ The following settings and behavior are required to support answering a call or 
 
 If you are using **Genesys Cloud Embeddable Framework**, it is strongly recommended to leverage `Interaction.updateState(action=pickup)` and `clickToDial(type=call)` actions, as this **will provide full support for programmatic answer call or make call** (*"Maintain Persistent Connection" setting can be Enabled or Disabled*).
 
-### Using Managed SIP Phones or Generic SIP Phones (with Broadsoft Extensions support)
+### Using Managed SIP Phones or Generic SIP Phones (with Broadsoft Extensions support and SIP Alert-Info Header support)
 
 Answering a call or placing a call using Platform API **is fully supported** (*"Maintain Persistent Connection" setting can be Enabled or Disabled*).  
 This is applicable to Genesys Cloud Embeddable Framework and to Genesys Cloud Web/Desktop app.
@@ -404,7 +406,7 @@ This is explained in more details below with the [use of the "*ForceDisconnect*"
 ![Remote Phone Dial](remote-dial.png)
 
 
-### With Generic SIP Phone (Unmanaged) supporting of Broadsoft Extensions
+### With Generic SIP Phone (Unmanaged) supporting Broadsoft Extensions and SIP Alert-Info Header
 
 #### Answer Call
 
