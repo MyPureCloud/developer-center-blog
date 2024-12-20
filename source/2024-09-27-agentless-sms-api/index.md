@@ -1,5 +1,5 @@
 ---
-title: Send an Agentless SMS via API
+title: Send an SMS via API
 tags: SMS, Platform API
 date: 2024-09-27
 author: agnes.corpuz
@@ -101,8 +101,12 @@ To get the message text and status, you will need this endpoint. The `messageId`
 }
 ```
 
-### Send outbound SMS message using *POST /api/v2/conversations/messages/{conversationId}/communications/{communicationId}/messages*
+### Send outbound SMS message with user context using *POST /api/v2/conversations/messages/{conversationId}/communications/{communicationId}/messages*
 To send an outbound SMS message, to the customer, use this API endpoint. The `communicationId` can be found in the get conversation details API endpoint in the `peer` value under the customer participant.
+
+:::primary
+Use this endpoint if you are using Implicit Grant type as this endpoint needs a user context.
+:::
 
 #### Request body
 
@@ -111,6 +115,24 @@ To send an outbound SMS message, to the customer, use this API endpoint. The `co
   "toAddressMessengerType": "sms",
   "toAddress": "+631234567890",
   "queueId": "a1b23c4d-ab12-1abc-1234-1a23b4c56789",
+  "textBody": "Hello world!"
+}
+```
+
+### Send outbound SMS message without user context using *POST /api/v2/conversations/messages/agentless*
+To send an outbound SMS message, to the customer, use this API endpoint.
+
+:::primary
+Use this endpoint if you are using Client Credentials grant type.
+:::
+
+#### Request body
+
+```json
+{
+  "toAddressMessengerType": "sms",
+  "toAddress": "+631234567890",
+  "fromAddress": "+11234567890",
   "textBody": "Hello world!"
 }
 ```
