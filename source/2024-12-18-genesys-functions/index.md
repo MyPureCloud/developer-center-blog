@@ -44,7 +44,7 @@ You may already be familiar with one of [the Genesys Cloud Data Actions integrat
 
 *So what is different with the Genesys Cloud Functions integration?*
 
-Genesys Cloud customers can now save, invoke and **run their own function code** (NodeJs at the time of this blog post), in their Genesys Cloud environment, using the standard Data Action mecanisms (invoked from an Architect Flow, from a Script, or via API).  
+Genesys Cloud customers can now save, invoke and **run their own function code** (NodeJs at the time of this blog post), in their Genesys Cloud environment, using the standard Data Action mechanisms (invoked from an Architect Flow, from a Script, or via API).  
 This is achieved using AWS Lambda to run such code. **The Genesys Cloud customers do not need to have their own AWS account to run the Genesys Cloud Functions. This is transparently managed in your Genesys Cloud Environment.**
 
 You can therefore do a lot with them - encryption/decryption, access to a 3rd party Web Services and reformating XML response or managing errors in the lambda function code, sending multiple requests to a 3rd party via a single Genesys Cloud Function invocation, ...  
