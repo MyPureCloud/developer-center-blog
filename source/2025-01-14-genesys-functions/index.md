@@ -1,7 +1,7 @@
 ---
 title: Welcome Genesys Cloud Functions!
 tags: data-actions
-date: 2025-01-08
+date: 2025-01-14
 author: jerome.saint-marc
 image: genesys-functions-tile.png
 category: 6
