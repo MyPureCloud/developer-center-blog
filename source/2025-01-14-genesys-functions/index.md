@@ -9,11 +9,11 @@ category: 6
 
 Hello everyone! Something really cool and pretty useful is about to be released in January - Genesys Cloud Functions!!!
 
-This blog aims to introduce you to this new Genesys Cloud Functions integration and a couple of [Genesys Function examples we have made available for you this github repo](https://github.com/MyPureCloud/quick-hits-javascript/genesys-functions).
+This blog aims to introduce you to this new Genesys Cloud Functions integration and a couple of [Genesys Function examples we have made available for you this github repo](https://github.com/MyPureCloud/quick-hits-javascript/tree/main/genesys-functions).
 
 _**Table of Contents:**_
 * [What is this new Genesys Cloud Functions integration?](#what-is-this-new-genesys-cloud-functions-integration-)
-* [Pre-requisites](#pre--requisites)
+* [Pre-requisites](#pre-requisites)
 * [Starting integration setup](#starting-integration-setup)
 * [Enable access to Genesys Cloud Function Data Actions](#enable-access-to-genesys-cloud-function-data-actions)
 * [Constraints and Limits](#constraints-and-limits)
@@ -33,7 +33,7 @@ _**Table of Contents:**_
     - [Finalize Data Action Function Configuration](#finalize-data-action-function-configuration)
     - [Upload the function zip](#upload-the-function-zip)
     - [Ready to test your new Data Action](#ready-to-test-your-new-data-action)
-    - [JWE Encrypt and Decrypt - Variation with Status](#jwe-encrypt-and-decrypt--variation-with-status)
+    - [JWE Encrypt and Decrypt - Variation with Status](#jwe-encrypt-and-decrypt---variation-with-status)
 * [Closing thoughts](#closing-thoughts)
 * [Additional resources and references](#additional-resources-and-references)
 
@@ -52,7 +52,7 @@ Some limits are still imposed when using such functions - maximum execution time
 
 ## Pre-requisites
 
-***Genesys Cloud Knowledge***
+_**Genesys Cloud Knowledge**_
 
 Persons wishing to use Function Data Actions should be familiar with Data Actions, and the mechanisms for creating and managing them. Function Data Actions are an extension of Data Actions implemented very similar to Data Actions using the Lambda integration.
 
@@ -67,7 +67,8 @@ We also have a pretty cool set of videos on this topic if you prefer to listen t
 * [DevDrop 33: Uploading your Genesys Cloud Function](https://www.youtube.com/watch?v=2m92ZJ6HYUE)
 * [DevDrop 34: Testing a Genesys Cloud Function](https://www.youtube.com/watch?v=w-4MZfGrNkQ)
 
-***Genesys Cloud Organization (Account) Requirements***
+
+_**Genesys Cloud Organization (Account) Requirements**_
 
 The customer organization must have a GC1, GC2, or GC3 plan to access the Data Actions.
 
@@ -89,7 +90,7 @@ We first need to add a new integration, looking for "Function Data Actions" tile
 
 ![Give a name to the Genesys Cloud Functions integration](add-integration-3.png)
 
-***What else can we do at the integration's configuration level?***
+_**What else can we do at the integration's configuration level?**_
 
 Function Data Action integrations allow custom credentials to be defined at the integration level, and made available to all child Data Actions.
 
@@ -113,7 +114,7 @@ In most regards a Function Data Action is configured and executed just like all 
 
 ## Enable access to Genesys Cloud Function Data Actions
 
-***Required Permissions***
+_**Required Permissions**_
 
 The following permissions must be set for any role used to create/edit actions in the organization.  
 This is done in the Admin user interface Roles editing.
@@ -142,7 +143,7 @@ These new permissions are required to use CRUD paths for functions.
 NodeJS 18 and 20 are currently supported.  
 New runtimes will be supported and old ones deprecated over time.
 
-***Determining Current Runtime Support***
+_**Determining Current Runtime Support**_
 
 The status of supported runtimes is available via Public API endpoint: `GET /api/v2/integrations/actions/functions/runtimes`.
 
@@ -169,7 +170,7 @@ Example Function Runtimes:
 ]
 ```
 
-***Runtime Deprecation Policy***
+_**Runtime Deprecation Policy**_
 
 We will mark a runtime deprecated 3 months before AWS starts their Phase 1 deprecation ([AWS lambda deprecation policy](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)).
 
@@ -203,13 +204,13 @@ The resulting function will be a set of source files in a directory structure al
 
 ### Function Security
 
-***Networking***
+_**Networking**_
 
 Functions will be able to make outbound requests over the public internet.  
 They will have no special access back to the Genesys Cloud platform except via the Genesys Cloud Public API.  
 Functions do not provide static outbound IPs.
 
-***Security***
+_**Security**_
 
 Functions are explicitly denied implicit (IAM) access to all AWS resources.  
 Authentication to third parties must be handled by function code.
@@ -217,8 +218,7 @@ Authentication to third parties must be handled by function code.
 ### API Rate Limits
 
 :::{"alert":"warning","autoCollapse":false}
-Genesys Cloud Function Data Actions are subject to rate limits.  
-You can find a list of limits applicable to Data Actions on the [Limits page](/organization/organization/limits#data-actions).
+Genesys Cloud Function Data Actions are subject to rate limits. You can find a list of limits applicable to Data Actions on the [Limits page](/organization/organization/limits#data-actions).
 :::
 
 Some limits are specific to the Genesys Cloud Functions:
@@ -318,7 +318,7 @@ The function service will also add several default value and the headers configu
 }
 ```
 
-***Common Client Context Attributes***
+_**Common Client Context Attributes**_
 
 Values that would normally be sent to web request based data actions as headers are passed to function invocations as the "clientContext".
 
@@ -327,7 +327,8 @@ Values that would normally be sent to web request based data actions as headers 
 * **ININ-Home-Organization-id** - Home organization. Usually same as inin-organization-id, but may be different if there organization delegation in use.
 * **ININ-User-Id** - If the invocation has a user context within the system it will be reflected with this value. This value may not be present for many of the invocation because there is no "end user" context when running via many of the internal mechanisms that run data actions.
 
-***Header based Client Context Attributes***
+
+_**Header based Client Context Attributes**_
 
 Any headers defined in the Data Actions Request Configuration (config.request.headers) will passed in the context.clientContext.
 
@@ -384,11 +385,11 @@ Any throw() or callback() of an error in the handlers will result in a HTTP 500 
 
 Now that we have created a Genesys Cloud Function integration with custom credentials (storing PUBLIC_KEY and PRIVATE_KEY), that we are familiar with constrains and limits, we can continue with the configuration and the coding of the Data Action and its associated function.
 
-The sample we are discussing below is the [JWE encrypt-decrypt example](https://github.com/MyPureCloud/https://github.com/MyPureCloud/quick-hits-javascript/genesys-functions/jwe-encrypt-decrypt/encrypt-decrypt).
+The sample we are discussing below is the [JWE encrypt-decrypt example](https://github.com/MyPureCloud/quick-hits-javascript/tree/main/genesys-functions/jwe-encrypt-decrypt/encrypt-decrypt).
 
 The repository contains different samples related to JWE Encrypt or Decrypt (*encrypt-only*, *decrypt-only*, *encrypt-decrypt*, *encrypt-decrypt-with-status*). You are not obliged to create a function that does both encrypt and decrypt. You can implement separate Data Action functions or only use the encrypt or decrypt functions based on your needs.
 
-The repository also contains a variation of this example in [JWE encrypt-decrypt-with-status](https://github.com/MyPureCloud/https://github.com/MyPureCloud/quick-hits-javascript/genesys-functions/jwe-encrypt-decrypt/encrypt-decrypt-with-status). This is to illustrate the fact that instead of raising an error in the function code (or invoking the callback function) and getting an error back in your Data Action invocation, you can also "intercept" and manage these errors in your code, and send a successful response back to Genesys Cloud, along with custom fields that give the status of the request and an error message.
+The repository also contains a variation of this example in [JWE encrypt-decrypt-with-status](https://github.com/MyPureCloud/quick-hits-javascript/tree/main/genesys-functions/jwe-encrypt-decrypt/encrypt-decrypt-with-status). This is to illustrate the fact that instead of raising an error in the function code (or invoking the callback function) and getting an error back in your Data Action invocation, you can also "intercept" and manage these errors in your code, and send a successful response back to Genesys Cloud, along with custom fields that give the status of the request and an error message.
 
 ### Create and prepare the data action (contract and configuration)
 
@@ -444,7 +445,7 @@ You can omit the *requestUrlTemplate* or include it with any value. It is not im
 
 The Function Data Actions still displays an Invalid state. It is expected as we have not defined the Function Configuration yet.
 
-***Input and Output contracts***
+_**Input and Output contracts**_
 
 We have already seen that *jweAction* and *textInput* are defined in the Input contract as input parameters.
 ```json
@@ -490,7 +491,7 @@ In the output contract, we define a *textOutput* property - which will contain t
 
 In this Genesys Cloud function,if an error occurs in the code (missing or unset parameters, wrong keys, ...), the code will throw an exception - interepreted as a Data Action failure (HTTP 500) as we have seen earlier in this blog (Error Handling paragraph).
 
-***Request and Response configurations***
+_**Request and Response configurations**_
 
 Let's now have a look at the example Request and Response configurations.
 
@@ -539,7 +540,7 @@ Note: JSONPath expressionns and the [Velocity macros](https://help.mypurecloud.c
 
 ### Create your code, test it and package it
 
-Let's now have a look at the function code we will upload for this Data Action, and what is also available in the [JWE encrypt-decrypt directory](https://github.com/MyPureCloud/https://github.com/MyPureCloud/quick-hits-javascript/genesys-functions/jwe-encrypt-decrypt/encrypt-decrypt).
+Let's now have a look at the function code we will upload for this Data Action, and what is also available in the [JWE encrypt-decrypt directory](https://github.com/MyPureCloud/quick-hits-javascript/tree/main/genesys-functions/jwe-encrypt-decrypt/encrypt-decrypt).
 
 `encrypt-decrypt` directory contains:
 * *genesysFunctionActionJWEEncryptDecrypt.json* - Data Action contract and configuration
@@ -634,9 +635,9 @@ With the current JWE Encrypt and Decrypt example, I have defined "aliases" in th
 
 ### Explaining example
 
-***The function handler and the function inputs***
+_**The function handler and the function inputs**_
 
-Below is the function handler and the gathering of the function inputs in [JWE encrypt-decrypt example](https://github.com/MyPureCloud/https://github.com/MyPureCloud/quick-hits-javascript/genesys-functions/jwe-encrypt-decrypt/encrypt-decrypt).
+Below is the function handler and the gathering of the function inputs in [JWE encrypt-decrypt example](https://github.com/MyPureCloud/quick-hits-javascript/tree/main/genesys-functions/jwe-encrypt-decrypt/encrypt-decrypt).
 
 In the javascript version of the example, we can declare the function handler with *event*, *context* and *callback* - even if we are only going to leverage the *event*.  
 All of the necessary inputs of the JWE Encrypt and Decrypt example are sent via the *event*, as we defined them in the Data Action's Request Configuration. That is what we retrieve at the beginning of the function handler (*jweKey*, *jweAction* and *textInput*).
@@ -657,7 +658,7 @@ export const handler: Handler = async (event) => {
     let textToProcess = event.textInput;
 ```
 
-***Successful Processing***
+_**Successful Processing**_
 
 The example then leverages the methods to encrypt or to decrypt the text content which has been sent via *event*.
 
@@ -673,7 +674,7 @@ return {
 };
 ```
 
-***Reporting Error***
+_**Reporting Error**_
 
 If you want to report a Data Action failure (HTTP 500), you can either throw an error. Or you can invoke the *callback* method. This is equivalent.
 
@@ -753,9 +754,9 @@ If all went fine, the page will display that the *Action successfully run*.
 
 ### JWE Encrypt and Decrypt - Variation with Status
 
-The repository also contains a variation of the example - [JWE encrypt-decrypt-with-status](https://github.com/MyPureCloud/https://github.com/MyPureCloud/quick-hits-javascript/genesys-functions/jwe-encrypt-decrypt/encrypt-decrypt-with-status).
+The repository also contains a variation of the example - [JWE encrypt-decrypt-with-status](https://github.com/MyPureCloud/quick-hits-javascript/tree/main/genesys-functions/jwe-encrypt-decrypt/encrypt-decrypt-with-status).
 
-***What is different with this example?***
+_**What is different with this example?**_
 
 As I mentionned earlier in this blog, if you have a need for this, you could report errors in your function using a successful Data Action response, instead of raising an error (or invoking the callback method).  
 Indeed, when a Data Actions fails (HTTP 500), you don't always have access to the error message and reason from an Architect flow or from a Script.  
