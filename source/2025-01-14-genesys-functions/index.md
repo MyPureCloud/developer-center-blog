@@ -140,7 +140,7 @@ These new permissions are required to use CRUD paths for functions.
 
 ### Supported Runtimes
 
-NodeJS 18 and 20 are currently supported.  
+NodeJS 20 and 22 are currently supported.  
 New runtimes will be supported and old ones deprecated over time.
 
 _**Determining Current Runtime Support**_
@@ -151,22 +151,28 @@ Example Function Runtimes:
 
 ```json
 [
-    {
-        "name": "nodejs20.x",
-        "description": "AWS provided Node.js 20.x runtime",
-        "status": "Available"
-    },
-    {
-        "name": "nodejs18.x",
-        "description": "AWS provided Node.js 18.x runtime",
-        "status": "Available"
-    },
-    {
-        "name": "nodejs16.x",
-        "description": "AWS provided Node.js 16.x runtime",
-        "status": "Deprecated",
-        "dateEndOfLife": "2024-06-12"
-    }
+  {
+    "name": "nodejs22.x",
+    "description": "AWS provided Node.js 22.x runtime",
+    "status": "Available"
+  },
+  {
+    "name": "nodejs20.x",
+    "description": "AWS provided Node.js 20.x runtime",
+    "status": "Available"
+  },
+  {
+    "name": "nodejs18.x",
+    "description": "AWS provided Node.js 18.x runtime",
+    "status": "Available",
+    "dateEndOfLife": "2025-01-15"
+  },
+  {
+    "name": "nodejs16.x",
+    "description": "AWS provided Node.js 16.x runtime",
+    "status": "Deprecated",
+    "dateEndOfLife": "2025-01-15"
+  }
 ]
 ```
 
