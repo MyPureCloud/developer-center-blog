@@ -161,18 +161,7 @@ Example Function Runtimes:
     "description": "AWS provided Node.js 20.x runtime",
     "status": "Available"
   },
-  {
-    "name": "nodejs18.x",
-    "description": "AWS provided Node.js 18.x runtime",
-    "status": "Available",
-    "dateEndOfLife": "2025-01-15"
-  },
-  {
-    "name": "nodejs16.x",
-    "description": "AWS provided Node.js 16.x runtime",
-    "status": "Deprecated",
-    "dateEndOfLife": "2025-01-15"
-  }
+  ...
 ]
 ```
 
