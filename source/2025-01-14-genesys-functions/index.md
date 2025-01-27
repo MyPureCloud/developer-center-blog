@@ -187,6 +187,8 @@ All functions must conform to the AWS Lambda interface requirements for serverle
 
 The resulting function will be a set of source files in a directory structure along with dependencies. The function file directory must be packaged into a ZIP file that will allow it to be deployed and executed. The package will have a module and function that is the handler for the invocation.
 
+The AWS Lambda's Developer Guide provides additional information on [Creating a .zip deployment package with dependencies](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-package.html#nodejs-package-create-dependencies).
+
 ### Function Restrictions
 
 **The implementation of the environment used to execute the functions impose restriction on the operation of the functions.**
@@ -556,28 +558,79 @@ Let's now have a look at the function code we will upload for this Data Action, 
 Developping your function code in javascript or in typescript, is up to you. Your preference.
 
 #### Example package.json
-In order to package the code into a zip file that fits AWS lambda needs, we are leveraging the [Serverless Framework (3rd party)](https://www.serverless.com/framework/docs/providers/aws/guide/intro/).  
-It is included as a dev dependency in the package.json file. If you prefer to install Serverless Framework globally, it is of course also possible. Again, your preference.
+The package.json file contains the definition of the dependencies and devDependencies necessary to build and to run the project's example code.
+
+Note that **devDependencies (node modules) do not need to be included in the function's zip package that will be uploaded to Genesys Cloud**. They are not necessary at runtime (of the AWS Lambda). You can use `npm install --omit=dev` before creating the zip package of the function, to only keep node modules defined as dependencies.
+
+Similarly, when working with a typescript project, you only need to upload the built javascript source code. The `build` script alias included in the package.json file will transpile typescript to javascript using `tsc`.
+
+#### Method 1 - Build your code, Create Package and Test with zip command
+The AWS Lambda's Developer Guide provides additional information on [Creating a .zip deployment package with dependencies](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-package.html#nodejs-package-create-dependencies).
+
+The javascript source and the necessary node modules (dependencies) will be packaged using the `zip` command (that should be available on your Linux, Mac or Windows computer).
+* `zip -r function-gc-active-conversations-action.zip src/ node_modules/`
+* `npm install --omit=dev && zip -r function-gc-active-conversations-action.zip src/ node_modules/ && npm install` (`npm install --omit=dev` is run first to only keep dependencies and to remove devDependencies)
+
+In order to test the function handler with data, some javascript files have been added in the different `test` subdirectories to facilitate this testing (test_function_js.mjs, test_function_ts.mjs, ...).
+* `node ../test/test_function_js.mjs ../test/data1.json ../test/context.json`
+* `node ../test/test_function_ts.mjs ../test/data1.json ../test/context.json`
+
+_**Example Steps**_
+
+Steps for *function_js*:
+* Make sure that you are using NodeJS 20 runtime (the code was built with this runtime version)
+* Navigate to the *function_js* directory
+* Type: `npm install`
+* To package the code and create the zip, type: `npm run zip` or `npm run zipnodev`
+Both aliases will invoke the zip command to package the source directory and the node modules directory (`zip -r function-gc-active-conversations-action.zip src/ node_modules/`).  
+If you have devDependencies defined in your package.json file, you can use the `npm run zipnodev`. This will invoke `npm install --omit=dev` again prior to the `zip` command (to only keep node module dependencies).
+
+Steps for *function_ts*:
+* Make sure that you are using NodeJS 20 runtime (the code was built with this runtime version)
+* Navigate to the *function_ts* directory
+* Type: `npm install`
+* To build: `npm run build`
+* To package the code and create the zip, type: `npm run zip` or `npm run zipnodev`
+Both aliases will invoke the zip command to package the source directory and the node modules directory (`zip -r function-gc-active-conversations-action.zip dist/ node_modules/`).  
+If you have devDependencies defined in your package.json file, you can use the `npm run zipnodev`. This will invoke `npm install --omit=dev` again prior to the `zip` command (to only keep node module dependencies).
+
+This will create a zip and will store it in the project's directory. This is the file you will need to upload in Genesys Cloud.
+
+_**Testing function locally**_
+
+In order to test the function handler with sample data, some javascript files have been added in the different `test` subdirectories to facilitate this testing (test_function_js.mjs, test_function_ts.mjs, ...).  
+Testing locally will be much easier to troubleshoot errors in the function code.
+
+The test javascript files take two input parameters: a sample **Event** and a sample **Context** for the function (you can have a look at the package.json to see how the command is invoked).  
+The Json files which are included in the `test` subdirectory contain sample values for **Context** and **Event**.  
+I have included commands in the package.json so you can test your function with the *context.json* and *data.json*.
+
+With the current JWE Encrypt and Decrypt example, I have defined "aliases" in the package.json so you can run:
+* To Encrypt: `npm run localtest1` (an alias to invoke: *node ../test/test_function_js.mjs ../test/data1.json ../test/context.json*)
+* To Decrypt: `npm run localtest2` (an alias to invoke: *node ../test/test_function_js.mjs ../test/data2.json ../test/context.json*)
+
+#### Method 2 - Build your code, Create Package and Test with Serverless Framework
+In order to package the code into a zip file that fits AWS lambda needs, you can also leverage the [Serverless Framework (3rd party)](https://www.serverless.com/framework/docs/providers/aws/guide/intro/).  
+
+:::{"alert":"warning","autoCollapse":false}
+The Serverless Framework CLI V3 did not require any account or subscription but it is now EOL (End of Life). [The Serverless Framework CLI V.4+ is free, except for organizations earning over $2 million annually, which require a paid subscription](https://www.serverless.com/pricing).  
+If you are still using v3 of the Serverless Framework, or if you have a free or a paid subscription to use v4, you can follow the steps below.
+:::
+
+You can install it as a dev dependency in the package.json file or you install Serverless Framework globally. Again, your preference.
 
 A couple of npm commands are also included in the package.json file, to create the package (the zip) or to test your code.  
 `sls package` and `sls invoke local` are commands related to the Serverless Framework.
 
-In package.json:
-```json
-  "devDependencies": {
-    "serverless": "^3.39.0"
-  }
-```
-
 Installing Serverless globally:
-`npm install -g serverless@3`
+`npm install -g serverless`
 
 :::{"alert":"info","autoCollapse":false}
 Don't be worried about the Serverless Framework if you are not familiar with it. We are only using it as a tool to create the zip package, that AWS and the Genesys Cloud Functions expect. If you already know how to create such zip for AWS Lambda, without using the Serverless Framework, you can continue to use your preferred method.  
 The Serverless Framework is not used inside the Genesys Cloud Function code. This is why you do not need to know a lot about it - only the fact that `sls package` and `sls invoke local` are commands you can use to create the package or test the function locally (given that you have created a serverless.yml file which is leveraged by the Serverless Framework).
 :::
 
-#### Example serverless.yml
+_**Example serverless.yml**_
 The serverless.yml file is necessary for the Serverless Framework package process.  
 These settings are not leveraged on Genesys Cloud side (you will define them later through the Genesys Desktop Admin UI) but are necessary to create the package. They are also of use when testing the function code locally using the Serverless Framework (`sls invoke local`).
 
@@ -601,13 +654,13 @@ functions:
     runtime: nodejs20.x
 ```
 
-#### Example Steps
+_**Example Steps**_
 
 Steps for *function_js*:
 * Make sure that you are using NodeJS 20 runtime (the code was built with this runtime version)
 * Navigate to the *function_js* directory
 * Type: `npm install`
-* To package the code and create the zip, type: `npm run package`
+* To package the code and create the zip, type: `npm run slspackage`
 This will invoke `sls package`as defined in my package.json file.
 
 Steps for *function_ts*:
@@ -615,13 +668,13 @@ Steps for *function_ts*:
 * Navigate to the *function_ts* directory
 * Type: `npm install`
 * To build: `npm run build`
-* To package the code and create the zip, type: `npm run package`
+* To package the code and create the zip, type: `npm run slspackage`
 This will invoke `sls package`as defined in my package.json file.
 
 Serverless Framework will create a zip and will store it in a `.serverless` subdirectory. This is the file you will need to upload in Genesys Cloud.  
 On MAC ".serverless" might will be a hidden directory, use "ls -al" to see in terminal, or (shift-cmd-period) to see in finder.
 
-#### Testing function locally with Serverless Framework
+_**Testing function locally with Serverless Framework**_
 
 The Serverless Framework has a `sls invoke local` command, allowing to test your function locally (on your computer), before you create the package and upload it. Testing locally will be much easier to troubleshoot errors in the function code.
 
@@ -630,8 +683,8 @@ The Json files which are included in the `test` subdirectory contain sample valu
 I have included commands in the package.json so you can test your function with the *context.json* and *data.json*.
 
 With the current JWE Encrypt and Decrypt example, I have defined "aliases" in the package.json so you can run:
-* To Encrypt: `npm run localtest1` (an alias to invoke: *sls invoke local --function echo --path ../test/data1.json --contextPath ../test/context.json*)
-* To Decrypt: `npm run localtest2` (an alias to invoke: *sls invoke local --function echo --path ../test/data2.json --contextPath ../test/context.json*)
+* To Encrypt: `npm run slslocaltest1` (an alias to invoke: *sls invoke local --function echo --path ../test/data1.json --contextPath ../test/context.json*)
+* To Decrypt: `npm run slslocaltest2` (an alias to invoke: *sls invoke local --function echo --path ../test/data2.json --contextPath ../test/context.json*)
 
 ### Explaining example
 
@@ -722,7 +775,7 @@ Set the Data Action timeout: 15 seconds is the maximum allowed (at the time of t
 
 ### Upload the function zip
 
-You can then upload the zip file which has been created using the Serverless Framework package command (`sls package` - zip file created in ".serverless" project's subdirectory).
+You can then upload the zip file which has been created using the zip command (`zip -r` - zip file created in project's directory) or the Serverless Framework package command (`sls package` - zip file created in ".serverless" project's subdirectory).
 
 *Click on the Upload zip button (Function Configuration) and select the function's zip package you have just created.*
 
@@ -828,5 +881,6 @@ Enjoy!!!
 1. [API Explorer](/devapps/api-explorer-standalone)
 2. [Genesys Cloud SDK](/devapps/sdk/)
 3. [AWS Lambda Function Handler in Node.js](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-handler.html)
-4. [Serverless Framework Intro](https://www.serverless.com/framework/docs/providers/aws/guide/intro/)
-5. [Serverless CLI reference](https://www.serverless.com/framework/docs/providers/aws/cli-reference)
+4. [AWS Lambda Deployment Package in Node.js](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-package.html#nodejs-package-create-dependencies)
+5. [Serverless Framework Intro](https://www.serverless.com/framework/docs/providers/aws/guide/intro/)
+6. [Serverless CLI reference](https://www.serverless.com/framework/docs/providers/aws/cli-reference)
