@@ -13,7 +13,7 @@ category: 11
 - [The Problem](#the-problem)
 - [Features](#features)
 - [How It Works](#how-it-works)
-  - [Manifest JSON – The Blueprint 🗂️](#manifest-json--the-blueprint-)
+  - [Manifest JSON – The Template 🗂️](#manifest-json--the-template-)
   - [Popup Interface – The Frontend 🎨](#popup-interface--the-frontend-)
   - [Data Extraction Logic – The Backbone 🧠](#data-extraction-logic--the-backbone-)
   - [Content Script – Page Button 🖱️](#content-script--page-button-)
@@ -53,9 +53,9 @@ Check out a Raw Evaluation
 
 Here’s the nerdy bit. EvalExtractor is built on the following components:
 
-### Manifest JSON – The Blueprint 🗂️
+### Manifest JSON – The Template 🗂️
 
-Every Chrome extension begins with the `manifest.json` file. It serves as the configuration blueprint, defining the extension's identity, permissions, and behavior. This file is essential for informing Chrome about the extension's purpose, capabilities, and resource requirements, ensuring seamless integration with the browser.
+Every Chrome extension begins with the `manifest.json` file. It serves as the configuration Template, defining the extension's identity, permissions, and behavior. This file is essential for informing Chrome about the extension's purpose, capabilities, and resource requirements, ensuring seamless integration with the browser.
 
 ```json
 {
