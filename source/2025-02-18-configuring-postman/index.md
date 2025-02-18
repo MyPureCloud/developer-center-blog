@@ -7,7 +7,7 @@ image: configure-postman-tile.png
 category: 0
 ---
 
-Last week, I received a new computer, as the one I had was showing signs of weakness. Lucky me!!  
+Last week, I received a new computer, as the one I had was showing signs of weakness. Lucky me!  
 Because of this, I had to install and to configure a set of tools and IDEs that I sometimes use for my work.
 
 Among these, there is [Postman](https://www.postman.com/). I realized it had changed quite a lot, compared to the rather old version I was still using on my computer... As I went through its setup to connect to a Genesys Cloud organization to send Platform API requests, I thought I could share the "how to" in this blog, if this can save time for some of you.
@@ -40,7 +40,7 @@ We'll then *Sign In*.
 ## Import Environment
 
 The first step will be to download the environment file (the [*genesyscloud.postman_environment* file](https://developer-content.genesys.cloud/data/postman/genesyscloud.postman_environment) listed under [the *Addtional Resources* section](/platform/api/postman).  
-You can then import it in Postman, clicking on the *Import*"* button and browsing to the file.  
+You can then import it in Postman, clicking on the *Import* button and browsing to the file.  
 This will create a new *Environment* named **GenesysCloud v2**. It contains a list of the variables, used in the different Platform API endpoints. You can preset any of the variables' value in the Environment.
 
 ![Postman Environment](postman-environment-1.png)
@@ -60,7 +60,7 @@ _**When you want to use a specific Postman Environment, don't forget to select i
 The second step will be to download the description of the Platform API endpoints, made available as a Postman collection.  
 You can download the [*full collection* file](https://developer-content.genesys.cloud/data/postman/collections/full.json) listed under [the *Addtional Resources* section](/platform/api/postman) or an *API Group* depending on the requests you want to trigger.
 
-Through this blog, I am going to import the Platform API collection 3 times. It is of course not necessary to import it these many times. But I would like to show 3 possibilities for their Authorization's configuration:
+Through this blog, I am going to import the Platform API collection three times. It is of course not necessary to import it these many times. But I would like to show three possibilities for their Authorization's configuration:
 - using [OAuth Client Credentials Grant](/authorization/platform-auth/use-client-credentials) (*server context*)
 - using [OAuth Implicit Grant](/authorization/platform-auth/use-implicit-grant) (*user context*)
 - or using [OAuth PKCE Grant](/authorization/platform-auth/use-pkce) (*user context*)
@@ -100,7 +100,7 @@ Make sure to enable the necessary roles/divisions in your OAuth Client configura
 
 ![OAuth Client Credentials Grant](oauth-client-credentials-2.png)
 
-Click *Save* and _**take note of the Client ID and Client Secret**_. We will need them while configuring Postman.
+Click *Save* and _**note the Client ID and Client Secret**_. We will need them while configuring Postman.
 
 #### Postman Configuration
 
@@ -113,8 +113,8 @@ In *Add auth data to*, keep/set `Request Headers`.
 
 ![Postman Client Credentials Grant](postman-clientcreds-2.png)
 
-We'll define a token name. This is not related to OAuth 2.0 but to Postman user interface. You can name it as you want.  
-I'll use `GC Client Credentials Grant token`as the *Token Name*.
+We'll define a *Token Name*: `GC Client Credentials Grant token`  
+*This is not related to OAuth 2.0 but to Postman user interface. You can name it as you want.*
 
 Set *Grant Type* to `Client Credentials`.
 
@@ -196,7 +196,7 @@ Make sure to enable the necessary [scopes in your OAuth Client configuration](ht
 
 ![OAuth Implicit Grant](oauth-implicit-3.png)
 
-Click *Save* and _**take note of the Client ID**_ (Client Secret is not needed in an OAuth Implicit Grant flow). We will need them while configuring Postman. 
+Click *Save* and _**note the Client ID**_ (Client Secret is not needed in an OAuth Implicit Grant flow). We will need them while configuring Postman. 
 
 #### Postman Configuration
 
@@ -209,8 +209,8 @@ In *Add auth data to*, keep/set `Request Headers`.
 
 ![Postman Implicit Grant](postman-implicit-2.png)
 
-We'll define a token name. This is not related to OAuth 2.0 but to Postman user interface. You can name it as you want.  
-I'll use `GC Implicit Grant token`as the *Token Name*.
+We'll define a *Token Name*: `GC Implicit Grant token`  
+*This is not related to OAuth 2.0 but to Postman user interface. You can name it as you want.*
 
 Set *Grant Type* to `Implicit`.
 
@@ -273,7 +273,7 @@ Make sure to enable the necessary [scopes in your OAuth Client configuration](ht
 
 ![OAuth PKCE Grant](oauth-pkce-3.png)
 
-Click *Save* and _**take note of the Client ID**_ (Client Secret is not needed in an OAuth PKCE Grant flow). We will need them while configuring Postman.
+Click *Save* and _**note the Client ID**_ (Client Secret is not needed in an OAuth PKCE Grant flow). We will need them while configuring Postman.
 
 #### Postman Configuration
 
@@ -286,8 +286,8 @@ In *Add auth data to*, keep/set `Request Headers`.
 
 ![Postman PKCE Grant](postman-pkce-2.png)
 
-We'll define a token name. This is not related to OAuth 2.0 but to Postman user interface. You can name it as you want.  
-I'll use `GC PKCE Grant token`as the *Token Name*.
+We'll define a *Token Name*: `GC PKCE Grant token`  
+*This is not related to OAuth 2.0 but to Postman user interface. You can name it as you want.*
 
 Set *Grant Type* to `Authorization Code (With PKCE)`.
 
@@ -338,7 +338,7 @@ You are now ready to select an API endpoint in the Collection and *Send* a reque
 
 ## Closing thoughts
 
-You should be ready now to use Postman to send Platform API requests to Genesys Cloud, using any of the Authorization Grant flows we have configured in this blog (Client Credentials, Implicit, PKCE).
+You should now be ready to use Postman to send Platform API requests to Genesys Cloud, using any of the Authorization Grant flows we have configured in this blog (Client Credentials, Implicit, PKCE).
 
 Have fun!!!
 
