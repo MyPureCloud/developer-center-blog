@@ -8,11 +8,11 @@ category: 0
 ---
 
 Last week, I received a new computer, as the one I had was showing signs of weakness. Lucky me!  
-Because of this, I had to install and to configure a set of tools and IDEs that I sometimes use for my work.
+As a result, I had to install and configure various tools and IDEs I occasionally use for work.
 
-Among these, there is [Postman](https://www.postman.com/). I realized it had changed quite a lot, compared to the rather old version I was still using on my computer... As I went through its setup to connect to a Genesys Cloud organization to send Platform API requests, I thought I could share the "how to" in this blog, if this can save time for some of you.
+Among these, there is [Postman](https://www.postman.com/). I realized it had changed significantly compared to the older version I had been using... While setting up Postman to connect to a Genesys Cloud organization and send Platform API requests, I realized the process had changed. I thought sharing a "how-to" guide might save some of you time.
 
-To be clear, I am not specifically advocating for the use of Postman with Genesys Cloud to test Platform API. I personally prefer to use [our Developer Tools API Explorer](/devapps/api-explorer) as the API is always up to date, as I don't need to worry about Authentication and OAuth Clients, ...  
+To be clear, I'm not necessarily advocating for using Postman with Genesys Cloud for Platform API testing. I personally prefer to use [our Developer Tools API Explorer](/devapps/api-explorer) as the API is always up to date, as I don't need to worry about Authentication and OAuth Clients, ...  
 But if you are a Postman user and prefer to use this tool, here is the "how to".
 
 _**Table of Contents:**_
@@ -47,9 +47,9 @@ This will create a new *Environment* named **GenesysCloud v2**. It contains a li
 
 ![Postman Environment](postman-environment-1.png)
 
-But the only one which matters for us at this stage is `environment`. This will define the Genesys Cloud region to use for Platform API requests - e.g. `mypurecloud.com` for Americas (US East), `mypurecloud.ie` for EMEA(Dublin), ... You can find [the list of Genesys Cloud regions in the Resource Center](https://help.mypurecloud.com/?p=162751) and on the [Developer Center](/platform/api/).
+However, the only one that matters at this stage is `environment`. This will define the Genesys Cloud region to use for Platform API requests - e.g. `mypurecloud.com` for Americas (US East), `mypurecloud.ie` for EMEA(Dublin), ... You can find [the list of Genesys Cloud regions in the Resource Center](https://help.mypurecloud.com/?p=162751) and on the [Developer Center](/platform/api/).
 
-I'll set the *environment* to `mypurecloud.ie` as my Genesys Cloud org is in the EMEA(Dublin) region. And I'll save the changes.
+I'll set the *environment* to `mypurecloud.ie` as my Genesys Cloud org is in the EMEA(Dublin) region. Then, I'll save the changes.
 
 ![Postman Environment Genesys Cloud Region](postman-environment-2.png)
 
@@ -57,7 +57,7 @@ _**When you want to use a specific Postman Environment, don't forget to select i
 
 ![Postman Select Environment](postman-environment-3.png)
 
-With our environment in place, the next step is to import the API collection.
+Now that the environment is set up, let’s move on to importing the API collection.
 
 ## Import API Collection
 
@@ -65,9 +65,9 @@ The second step will be to download the description of the Platform API endpoint
 You can download the [*full collection* file](https://developer-content.genesys.cloud/data/postman/collections/full.json) listed under [the *Addtional Resources* section](/platform/api/postman) or an *API Group* depending on the requests you want to trigger.
 
 Throughout this blog post, I am going to import the Platform API collection three times. It is of course not necessary to import it these many times. But I would like to show three possibilities for their Authorization's configuration:
-- using [OAuth Client Credentials Grant](/authorization/platform-auth/use-client-credentials) (*server context*)
-- using [OAuth Implicit Grant](/authorization/platform-auth/use-implicit-grant) (*user context*)
-- or using [OAuth PKCE Grant](/authorization/platform-auth/use-pkce) (*user context*)
+- [OAuth Client Credentials Grant](/authorization/platform-auth/use-client-credentials): Used for server-to-server authentication (i.e. *server context*)
+- [OAuth Implicit Grant](/authorization/platform-auth/use-implicit-grant): Requires user authentication through a browser (i.e. *user context*)
+- [OAuth PKCE Grant](/authorization/platform-auth/use-pkce): Secure user authentication, through a browser, without a client secret (i.e. *user context*)
 
 As I mentioned earlier in this blog, when it comes to authenticating as a user and sending Platform API requests, I prefer to use [our Developer Tools API Explorer](/devapps/api-explorer). The API Explorer will leverage the logged-in user's account and permissions (i.e. *user context*).
 
@@ -198,7 +198,7 @@ Select `Token Implicit Grant` as *Grant Type*.
 ![OAuth Implicit Grant](oauth-implicit-1.png)
 
 When Postman is configured to *Authorize using browser* (see in next section), it currently uses `https://oauth.pstmn.io/v1/callback` as Redirect Url. Add this url in *Authorized Redirect Uris* in your OAuth Client configuration.  
-If Postman uses a different url in the future, make sure to change it in your Genesys Cloud OAuth Client's configuration as well.
+If Postman changes the URL in the future, update it in your Genesys Cloud OAuth Client's configuration accordingly.
 
 ![OAuth Implicit Grant](oauth-implicit-2.png)
 
@@ -277,7 +277,7 @@ Select `Code Authorization/PKCE` as *Grant Type*.
 ![OAuth PKCE Grant](oauth-pkce-1.png)
 
 When Postman is configured to *Authorize using browser* (see in next section), it currently uses `https://oauth.pstmn.io/v1/callback` as Redirect Url. Add this url in *Authorized Redirect Uris* in your OAuth Client configuration.  
-If Postman uses a different url in the future, make sure to change it in your Genesys Cloud OAuth Client's configuration as well.
+If Postman changes the URL in the future, update it in your Genesys Cloud OAuth Client's configuration accordingly.
 
 ![OAuth PKCE Grant](oauth-pkce-2.png)
 
@@ -352,7 +352,7 @@ Now that we've covered the various authorization methods, let's wrap up with som
 
 ## Closing thoughts
 
-You should now be prepared to use Postman to send Platform API requests to Genesys Cloud, using any of the Authorization Grant flows we have configured in this blog (Client Credentials, Implicit, PKCE).
+You should now be ready to use Postman to send Platform API requests to Genesys Cloud using any of the Authorization Grant flows covered in this blog (Client Credentials, Implicit, PKCE).
 
 Have fun!!!
 
