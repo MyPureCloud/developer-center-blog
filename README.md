@@ -1,3 +1,13 @@
+# THIS REPO IS DEPRECATED/ARCHIVED
+
+Please contact the Developer Engagement team for guidance publishing blog posts. 
+
+---
+
+---
+
+---
+
 # Genesys Cloud Developer Center blog
 
 The Genesys Cloud Developer Center Blog repository, https://developer.genesys.cloud/blog/, contains blog content; new blogs are accepted through pull requests.
